@@ -1,4 +1,3 @@
-import { set, delete as del } from 'vue'
 import {
   rgb2hex,
   hex2rgb,
@@ -34,7 +33,7 @@ import OpacityInput from 'src/components/opacity_input/opacity_input.vue'
 import ShadowControl from 'src/components/shadow_control/shadow_control.vue'
 import FontControl from 'src/components/font_control/font_control.vue'
 import ContrastRatio from 'src/components/contrast_ratio/contrast_ratio.vue'
-import TabSwitcher from 'src/components/tab_switcher/tab_switcher.js'
+import TabSwitcher from 'src/components/tab_switcher/tab_switcher.jsx'
 import Checkbox from 'src/components/checkbox/checkbox.vue'
 import Select from 'src/components/select/select.vue'
 
@@ -96,11 +95,11 @@ export default {
 
       ...Object.keys(SLOT_INHERITANCE)
         .map(key => [key, ''])
-        .reduce((acc, [key, val]) => ({ ...acc, [ key + 'ColorLocal' ]: val }), {}),
+        .reduce((acc, [key, val]) => ({ ...acc, [key + 'ColorLocal']: val }), {}),
 
       ...Object.keys(OPACITIES)
         .map(key => [key, ''])
-        .reduce((acc, [key, val]) => ({ ...acc, [ key + 'OpacityLocal' ]: val }), {}),
+        .reduce((acc, [key, val]) => ({ ...acc, [key + 'OpacityLocal']: val }), {}),
 
       shadowSelected: undefined,
       shadowsLocal: {},
@@ -213,12 +212,12 @@ export default {
     currentColors () {
       return Object.keys(SLOT_INHERITANCE)
         .map(key => [key, this[key + 'ColorLocal']])
-        .reduce((acc, [key, val]) => ({ ...acc, [ key ]: val }), {})
+        .reduce((acc, [key, val]) => ({ ...acc, [key]: val }), {})
     },
     currentOpacity () {
       return Object.keys(OPACITIES)
         .map(key => [key, this[key + 'OpacityLocal']])
-        .reduce((acc, [key, val]) => ({ ...acc, [ key ]: val }), {})
+        .reduce((acc, [key, val]) => ({ ...acc, [key]: val }), {})
     },
     currentRadii () {
       return {
@@ -280,6 +279,9 @@ export default {
             opacity
           )
 
+          // Temporary patch for null-y value errors
+          if (layers.flat().some(v => v == null)) return acc
+
           return {
             ...acc,
             ...textColors.reduce((acc, textColorKey) => {
@@ -301,6 +303,7 @@ export default {
         return Object.entries(ratios).reduce((acc, [k, v]) => { acc[k] = hints(v); return acc }, {})
       } catch (e) {
         console.warn('Failure computing contrasts', e)
+        return {}
       }
     },
     previewRules () {
@@ -320,9 +323,9 @@ export default {
       },
       set (val) {
         if (val) {
-          set(this.shadowsLocal, this.shadowSelected, this.currentShadowFallback.map(_ => Object.assign({}, _)))
+          this.shadowsLocal[this.shadowSelected] = this.currentShadowFallback.map(_ => Object.assign({}, _))
         } else {
-          del(this.shadowsLocal, this.shadowSelected)
+          delete this.shadowsLocal[this.shadowSelected]
         }
       }
     },
@@ -334,7 +337,7 @@ export default {
         return this.shadowsLocal[this.shadowSelected]
       },
       set (v) {
-        set(this.shadowsLocal, this.shadowSelected, v)
+        this.shadowsLocal[this.shadowSelected] = v
       }
     },
     themeValid () {
@@ -378,6 +381,10 @@ export default {
         // To separate from other random JSON files and possible future source formats
         _pleroma_theme_version: 2, theme, source
       }
+    },
+    isActive () {
+      const tabSwitcher = this.$parent
+      return tabSwitcher ? tabSwitcher.isActive('theme') : false
     }
   },
   components: {
@@ -557,7 +564,7 @@ export default {
         .filter(_ => _.endsWith('ColorLocal') || _.endsWith('OpacityLocal'))
         .filter(_ => !v1OnlyNames.includes(_))
         .forEach(key => {
-          set(this.$data, key, undefined)
+          this.$data[key] = undefined
         })
     },
 
@@ -565,7 +572,7 @@ export default {
       Object.keys(this.$data)
         .filter(_ => _.endsWith('RadiusLocal'))
         .forEach(key => {
-          set(this.$data, key, undefined)
+          this.$data[key] = undefined
         })
     },
 
@@ -573,7 +580,7 @@ export default {
       Object.keys(this.$data)
         .filter(_ => _.endsWith('OpacityLocal'))
         .forEach(key => {
-          set(this.$data, key, undefined)
+          this.$data[key] = undefined
         })
     },
 

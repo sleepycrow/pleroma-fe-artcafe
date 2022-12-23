@@ -1,13 +1,21 @@
 import { mapGetters } from 'vuex'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
+import {
+  faStar,
+  faPlus,
+  faMinus,
+  faCheck
+} from '@fortawesome/free-solid-svg-icons'
 import {
   faStar as faStarRegular
 } from '@fortawesome/free-regular-svg-icons'
 
 library.add(
   faStar,
-  faStarRegular
+  faStarRegular,
+  faPlus,
+  faMinus,
+  faCheck
 )
 
 const FavoriteButton = {
@@ -31,7 +39,10 @@ const FavoriteButton = {
     }
   },
   computed: {
-    ...mapGetters(['mergedConfig'])
+    ...mapGetters(['mergedConfig']),
+    remoteInteractionLink () {
+      return this.$store.getters.remoteInteractionLink({ statusId: this.status.id })
+    }
   }
 }
 

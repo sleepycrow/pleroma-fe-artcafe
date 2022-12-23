@@ -1,12 +1,18 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import routes from './routes'
+import { createApp } from 'vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import vClickOutside from 'click-outside-vue3'
+
+import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
+
 import App from '../App.vue'
-import { windowWidth } from '../services/window_utils/window_utils'
+import routes from './routes'
+import VBodyScrollLock from 'src/directives/body_scroll_lock'
+
+import { windowWidth, windowHeight } from '../services/window_utils/window_utils'
 import { getOrCreateApp, getClientToken } from '../services/new_api/oauth.js'
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 import { CURRENT_VERSION } from '../services/theme_data/theme_data.service.js'
-import { applyTheme } from '../services/style_setter/style_setter.js'
+import { applyTheme, applyConfig } from '../services/style_setter/style_setter.js'
 import FaviconService from '../services/favicon_service/favicon_service.js'
 
 let staticInitialResults = null
@@ -115,6 +121,7 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
   copyInstanceOption('nsfwCensorImage')
   copyInstanceOption('background')
   copyInstanceOption('hidePostStats')
+  copyInstanceOption('hideBotIndication')
   copyInstanceOption('hideUserStats')
   copyInstanceOption('hideFilteredStatuses')
   copyInstanceOption('logo')
@@ -149,7 +156,7 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
   copyInstanceOption('hideSitename')
   copyInstanceOption('sidebarRight')
 
-  return store.dispatch('setTheme', config['theme'])
+  return store.dispatch('setTheme', config.theme)
 }
 
 const getTOS = async ({ store }) => {
@@ -190,7 +197,7 @@ const getStickers = async ({ store }) => {
       const stickers = (await Promise.all(
         Object.entries(values).map(async ([name, path]) => {
           const resPack = await window.fetch(path + 'pack.json')
-          var meta = {}
+          let meta = {}
           if (resPack.ok) {
             meta = await resPack.json()
           }
@@ -244,6 +251,7 @@ const getNodeInfo = async ({ store }) => {
       store.dispatch('setInstanceOption', { name: 'pleromaChatMessagesAvailable', value: features.includes('pleroma_chat_messages') })
       store.dispatch('setInstanceOption', { name: 'gopherAvailable', value: features.includes('gopher') })
       store.dispatch('setInstanceOption', { name: 'pollsAvailable', value: features.includes('polls') })
+      store.dispatch('setInstanceOption', { name: 'editingAvailable', value: features.includes('editing') })
       store.dispatch('setInstanceOption', { name: 'pollLimits', value: metadata.pollLimits })
       store.dispatch('setInstanceOption', { name: 'mailerEnabled', value: metadata.mailerEnabled })
 
@@ -312,6 +320,7 @@ const setConfig = async ({ store }) => {
 }
 
 const checkOAuthToken = async ({ store }) => {
+  // eslint-disable-next-line no-async-promise-executor
   return new Promise(async (resolve, reject) => {
     if (store.getters.getUserToken()) {
       try {
@@ -325,8 +334,8 @@ const checkOAuthToken = async ({ store }) => {
 }
 
 const afterStoreSetup = async ({ store, i18n }) => {
-  const width = windowWidth()
-  store.dispatch('setMobileLayout', width <= 800)
+  store.dispatch('setLayoutWidth', windowWidth())
+  store.dispatch('setLayoutHeight', windowHeight())
 
   FaviconService.initFaviconService()
 
@@ -352,6 +361,8 @@ const afterStoreSetup = async ({ store, i18n }) => {
     console.error('Failed to load any theme!')
   }
 
+  applyConfig(store.state.config)
+
   // Now we can try getting the server settings and logging in
   // Most of these are preloaded into the index.html so blocking is minimized
   await Promise.all([
@@ -363,28 +374,39 @@ const afterStoreSetup = async ({ store, i18n }) => {
 
   // Start fetching things that don't need to block the UI
   store.dispatch('fetchMutes')
+  store.dispatch('startFetchingAnnouncements')
   getTOS({ store })
   getStickers({ store })
 
-  const router = new VueRouter({
-    mode: 'history',
+  const router = createRouter({
+    history: createWebHistory(),
     routes: routes(store),
     scrollBehavior: (to, _from, savedPosition) => {
       if (to.matched.some(m => m.meta.dontScroll)) {
         return false
       }
-      return savedPosition || { x: 0, y: 0 }
+      return savedPosition || { left: 0, top: 0 }
     }
   })
 
-  /* eslint-disable no-new */
-  return new Vue({
-    router,
-    store,
-    i18n,
-    el: '#app',
-    render: h => h(App)
-  })
+  const app = createApp(App)
+
+  app.use(router)
+  app.use(store)
+  app.use(i18n)
+
+  app.use(vClickOutside)
+  app.use(VBodyScrollLock)
+
+  app.component('FAIcon', FontAwesomeIcon)
+  app.component('FALayers', FontAwesomeLayers)
+
+  // remove after vue 3.3
+  app.config.unwrapInjectedRef = true
+
+  app.mount('#app')
+
+  return app
 }
 
 export default afterStoreSetup

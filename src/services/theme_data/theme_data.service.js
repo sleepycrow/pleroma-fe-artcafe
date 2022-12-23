@@ -39,7 +39,7 @@ import { LAYERS, DEFAULT_OPACITY, SLOT_INHERITANCE } from './pleromafe.js'
 export const CURRENT_VERSION = 3
 
 export const getLayersArray = (layer, data = LAYERS) => {
-  let array = [layer]
+  const array = [layer]
   let parent = data[layer]
   while (parent) {
     array.unshift(parent)
@@ -138,6 +138,7 @@ export const topoSort = (
     if (depsA === depsB || (depsB !== 0 && depsA !== 0)) return ai - bi
     if (depsA === 0 && depsB !== 0) return -1
     if (depsB === 0 && depsA !== 0) return 1
+    return 0 // failsafe, shouldn't happen?
   }).map(({ data }) => data)
 }
 

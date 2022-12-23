@@ -25,7 +25,7 @@ export const buildFakeMessage = ({ content, chatId, attachments, userId, idempot
     chat_id: chatId,
     created_at: new Date(),
     id: `${new Date().getTime()}`,
-    attachments: attachments,
+    attachments,
     account_id: userId,
     idempotency_key: idempotencyKey,
     emojis: [],

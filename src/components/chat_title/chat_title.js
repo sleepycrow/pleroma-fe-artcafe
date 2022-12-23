@@ -1,11 +1,13 @@
-import Vue from 'vue'
-import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import UserAvatar from '../user_avatar/user_avatar.vue'
+import RichContent from 'src/components/rich_content/rich_content.jsx'
+import { defineAsyncComponent } from 'vue'
 
-export default Vue.component('chat-title', {
+export default {
   name: 'ChatTitle',
   components: {
-    UserAvatar
+    UserAvatar,
+    RichContent,
+    UserPopover: defineAsyncComponent(() => import('../user_popover/user_popover.vue'))
   },
   props: [
     'user', 'withAvatar'
@@ -17,10 +19,5 @@ export default Vue.component('chat-title', {
     htmlTitle () {
       return this.user ? this.user.name_html : ''
     }
-  },
-  methods: {
-    getUserProfileLink (user) {
-      return generateProfileLink(user.id, user.screen_name)
-    }
   }
-})
+}

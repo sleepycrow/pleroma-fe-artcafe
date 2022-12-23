@@ -1,6 +1,4 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 
 import 'custom-event-polyfill'
 import './lib/event_target_polyfill.js'
@@ -8,9 +6,12 @@ import './lib/event_target_polyfill.js'
 import interfaceModule from './modules/interface.js'
 import instanceModule from './modules/instance.js'
 import statusesModule from './modules/statuses.js'
+import listsModule from './modules/lists.js'
 import usersModule from './modules/users.js'
 import apiModule from './modules/api.js'
 import configModule from './modules/config.js'
+import serverSideConfigModule from './modules/serverSideConfig.js'
+import serverSideStorageModule from './modules/serverSideStorage.js'
 import shoutModule from './modules/shout.js'
 import oauthModule from './modules/oauth.js'
 import authFlowModule from './modules/auth_flow.js'
@@ -19,36 +20,24 @@ import oauthTokensModule from './modules/oauth_tokens.js'
 import reportsModule from './modules/reports.js'
 import pollsModule from './modules/polls.js'
 import postStatusModule from './modules/postStatus.js'
-import chatsModule from './modules/chats.js'
+import editStatusModule from './modules/editStatus.js'
+import statusHistoryModule from './modules/statusHistory.js'
 
-import VueI18n from 'vue-i18n'
+import chatsModule from './modules/chats.js'
+import announcementsModule from './modules/announcements.js'
+
+import { createI18n } from 'vue-i18n'
 
 import createPersistedState from './lib/persisted_state.js'
 import pushNotifications from './lib/push_notifications_plugin.js'
 
 import messages from './i18n/messages.js'
 
-import VueClickOutside from 'v-click-outside'
-import PortalVue from 'portal-vue'
-import VBodyScrollLock from './directives/body_scroll_lock'
-
-import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
-
 import afterStoreSetup from './boot/after_store.js'
 
 const currentLocale = (window.navigator.language || 'en').split('-')[0]
 
-Vue.use(Vuex)
-Vue.use(VueRouter)
-Vue.use(VueI18n)
-Vue.use(VueClickOutside)
-Vue.use(PortalVue)
-Vue.use(VBodyScrollLock)
-
-Vue.component('FAIcon', FontAwesomeIcon)
-Vue.component('FALayers', FontAwesomeLayers)
-
-const i18n = new VueI18n({
+const i18n = createI18n({
   // By default, use the browser locale, we will update it if neccessary
   locale: 'en',
   fallbackLocale: 'en',
@@ -59,6 +48,7 @@ messages.setLanguage(i18n, currentLocale)
 
 const persistedStateOptions = {
   paths: [
+    'serverSideStorage.cache',
     'config',
     'users.lastLoginName',
     'oauth'
@@ -75,19 +65,23 @@ const persistedStateOptions = {
     console.error(e)
     storageError = true
   }
-  const store = new Vuex.Store({
+  const store = createStore({
     modules: {
       i18n: {
         getters: {
-          i18n: () => i18n
+          i18n: () => i18n.global
         }
       },
       interface: interfaceModule,
       instance: instanceModule,
-      statuses: statusesModule,
+      // TODO refactor users/statuses modules, they depend on each other
       users: usersModule,
+      statuses: statusesModule,
+      lists: listsModule,
       api: apiModule,
       config: configModule,
+      serverSideConfig: serverSideConfigModule,
+      serverSideStorage: serverSideStorageModule,
       shout: shoutModule,
       oauth: oauthModule,
       authFlow: authFlowModule,
@@ -96,7 +90,10 @@ const persistedStateOptions = {
       reports: reportsModule,
       polls: pollsModule,
       postStatus: postStatusModule,
-      chats: chatsModule
+      editStatus: editStatusModule,
+      statusHistory: statusHistoryModule,
+      chats: chatsModule,
+      announcements: announcementsModule
     },
     plugins,
     strict: false // Socket modifies itself, let's ignore this for now.

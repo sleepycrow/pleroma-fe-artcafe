@@ -28,7 +28,7 @@ const WhoToFollow = {
     getWhoToFollow () {
       const credentials = this.$store.state.users.currentUser.credentials
       if (credentials) {
-        apiService.suggestions({ credentials: credentials })
+        apiService.suggestions({ credentials })
           .then((reply) => {
             this.showWhoToFollow(reply)
           })

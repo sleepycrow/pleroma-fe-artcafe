@@ -3,7 +3,7 @@ import UserCard from '../user_card/user_card.vue'
 import FollowCard from '../follow_card/follow_card.vue'
 import Timeline from '../timeline/timeline.vue'
 import Conversation from '../conversation/conversation.vue'
-import TabSwitcher from 'src/components/tab_switcher/tab_switcher.js'
+import TabSwitcher from 'src/components/tab_switcher/tab_switcher.jsx'
 import RichContent from 'src/components/rich_content/rich_content.jsx'
 import List from '../list/list.vue'
 import withLoadMore from '../../hocs/with_load_more/with_load_more'
@@ -39,15 +39,16 @@ const UserProfile = {
     return {
       error: false,
       userId: null,
-      tab: defaultTabKey
+      tab: defaultTabKey,
+      footerRef: null
     }
   },
   created () {
     const routeParams = this.$route.params
-    this.load(routeParams.name || routeParams.id)
+    this.load({ name: routeParams.name, id: routeParams.id })
     this.tab = get(this.$route, 'query.tab', defaultTabKey)
   },
-  destroyed () {
+  unmounted () {
     this.stopFetching()
   },
   computed: {
@@ -78,6 +79,9 @@ const UserProfile = {
     }
   },
   methods: {
+    setFooterRef (el) {
+      this.footerRef = el
+    },
     load (userNameOrId) {
       const startFetchingTimeline = (timeline, userId) => {
         // Clear timeline only if load another user's profile
@@ -102,12 +106,17 @@ const UserProfile = {
       this.userId = null
       this.error = false
 
+      const maybeId = userNameOrId.id
+      const maybeName = userNameOrId.name
+
       // Check if user data is already loaded in store
-      const user = this.$store.getters.findUser(userNameOrId)
+      const user = maybeId ? this.$store.getters.findUser(maybeId) : this.$store.getters.findUserByName(maybeName)
       if (user) {
         loadById(user.id)
       } else {
-        this.$store.dispatch('fetchUser', userNameOrId)
+        (maybeId
+          ? this.$store.dispatch('fetchUser', maybeId)
+          : this.$store.dispatch('fetchUserByName', maybeName))
           .then(({ id }) => loadById(id))
           .catch((reason) => {
             const errorMessage = get(reason, 'error.error')
@@ -146,12 +155,12 @@ const UserProfile = {
   watch: {
     '$route.params.id': function (newVal) {
       if (newVal) {
-        this.switchUser(newVal)
+        this.switchUser({ id: newVal })
       }
     },
     '$route.params.name': function (newVal) {
       if (newVal) {
-        this.switchUser(newVal)
+        this.switchUser({ name: newVal })
       }
     },
     '$route.query': function (newVal) {

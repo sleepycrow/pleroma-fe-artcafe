@@ -5,7 +5,7 @@
     placement="bottom"
     :bound-to="{ x: 'container' }"
   >
-    <template v-slot:content>
+    <template #content>
       <div class="dropdown-menu">
         <button
           class="button-default dropdown-item"
@@ -61,10 +61,19 @@
             :class="{ 'menu-checkbox-checked': filters.moves }"
           />{{ $t('settings.notification_visibility_moves') }}
         </button>
+        <button
+          class="button-default dropdown-item"
+          @click="toggleNotificationFilter('polls')"
+        >
+          <span
+            class="menu-checkbox"
+            :class="{ 'menu-checkbox-checked': filters.polls }"
+          />{{ $t('settings.notification_visibility_polls') }}
+        </button>
       </div>
     </template>
-    <template v-slot:trigger>
-      <button class="button-unstyled">
+    <template #trigger>
+      <button class="filter-trigger-button button-unstyled">
         <FAIcon icon="filter" />
       </button>
     </template>
@@ -100,23 +109,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-
-.NotificationFilters {
-  align-self: stretch;
-
-  > button {
-    font-size: 1.2em;
-    padding-left: 0.7em;
-    padding-right: 0.2em;
-    line-height: 100%;
-    height: 100%;
-  }
-
-  .dropdown-item {
-    margin: 0;
-  }
-}
-
-</style>

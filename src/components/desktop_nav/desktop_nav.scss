@@ -1,9 +1,12 @@
 @import '../../_variables.scss';
 
 .DesktopNav {
-  height: 50px;
   width: 100%;
-  position: fixed;
+  z-index: var(--ZI_navbar);
+
+  input {
+    color: var(--inputTopbarText, var(--inputText));
+  }
 
   a {
     color: var(--topBarLink, $fallback--link);
@@ -11,7 +14,7 @@
 
   .inner-nav {
     display: grid;
-    grid-template-rows: 50px;
+    grid-template-rows: var(--navbar-height);
     grid-template-columns: 2fr auto 2fr;
     grid-template-areas: "sitename logo actions";
     box-sizing: border-box;
@@ -20,7 +23,27 @@
     max-width: 980px;
   }
 
-  &.-logoLeft {
+  &.-column-stretch .inner-nav {
+    --miniColumn: 25rem;
+    --maxiColumn: 45rem;
+    --columnGap: 1em;
+    max-width: calc(
+      var(--sidebarColumnWidth, var(--miniColumn)) +
+      var(--contentColumnWidth, var(--maxiColumn)) +
+      var(--columnGap)
+    );
+  }
+
+  &.-column-stretch.-wide .inner-nav {
+    max-width: calc(
+      var(--sidebarColumnWidth, var(--miniColumn)) +
+      var(--contentColumnWidth, var(--maxiColumn)) +
+      var(--notifsColumnWidth, var(--miniColumn)) +
+      var(--columnGap)
+    );
+  }
+
+  &.-logoLeft .inner-nav {
     grid-template-columns: auto 2fr 2fr;
     grid-template-areas: "logo sitename actions";
   }
@@ -77,7 +100,7 @@
 
     img {
       display: inline-block;
-      height: 50px;
+      height: var(--navbar-height);
     }
   }
 
@@ -103,8 +126,8 @@
 
   .item {
     flex: 1;
-    line-height: 50px;
-    height: 50px;
+    line-height: var(--navbar-height);
+    height: var(--navbar-height);
     overflow: hidden;
     display: flex;
     flex-wrap: wrap;
@@ -113,5 +136,9 @@
       justify-content: flex-end;
       text-align: right;
     }
+  }
+
+  .spacer {
+    width: 1em;
   }
 }

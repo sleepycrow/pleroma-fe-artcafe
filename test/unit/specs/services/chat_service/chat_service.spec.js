@@ -24,23 +24,23 @@ describe('chatService', () => {
   describe('.add', () => {
     it("Doesn't add duplicates", () => {
       const chat = chatService.empty()
-      chatService.add(chat, { messages: [ message1 ] })
-      chatService.add(chat, { messages: [ message1 ] })
+      chatService.add(chat, { messages: [message1] })
+      chatService.add(chat, { messages: [message1] })
       expect(chat.messages.length).to.eql(1)
 
-      chatService.add(chat, { messages: [ message2 ] })
+      chatService.add(chat, { messages: [message2] })
       expect(chat.messages.length).to.eql(2)
     })
 
     it('Updates minId and lastMessage and newMessageCount', () => {
       const chat = chatService.empty()
 
-      chatService.add(chat, { messages: [ message1 ] })
+      chatService.add(chat, { messages: [message1] })
       expect(chat.maxId).to.eql(message1.id)
       expect(chat.minId).to.eql(message1.id)
       expect(chat.newMessageCount).to.eql(1)
 
-      chatService.add(chat, { messages: [ message2 ] })
+      chatService.add(chat, { messages: [message2] })
       expect(chat.maxId).to.eql(message2.id)
       expect(chat.minId).to.eql(message1.id)
       expect(chat.newMessageCount).to.eql(2)
@@ -50,7 +50,7 @@ describe('chatService', () => {
       expect(chat.lastSeenMessageId).to.eql(message2.id)
 
       // Add message with higher id
-      chatService.add(chat, { messages: [ message3 ] })
+      chatService.add(chat, { messages: [message3] })
       expect(chat.newMessageCount).to.eql(1)
     })
   })
@@ -59,9 +59,9 @@ describe('chatService', () => {
     it('Updates minId and lastMessage', () => {
       const chat = chatService.empty()
 
-      chatService.add(chat, { messages: [ message1 ] })
-      chatService.add(chat, { messages: [ message2 ] })
-      chatService.add(chat, { messages: [ message3 ] })
+      chatService.add(chat, { messages: [message1] })
+      chatService.add(chat, { messages: [message2] })
+      chatService.add(chat, { messages: [message3] })
 
       expect(chat.maxId).to.eql(message3.id)
       expect(chat.minId).to.eql(message1.id)
@@ -80,9 +80,9 @@ describe('chatService', () => {
     it('Inserts date separators', () => {
       const chat = chatService.empty()
 
-      chatService.add(chat, { messages: [ message1 ] })
-      chatService.add(chat, { messages: [ message2 ] })
-      chatService.add(chat, { messages: [ message3 ] })
+      chatService.add(chat, { messages: [message1] })
+      chatService.add(chat, { messages: [message2] })
+      chatService.add(chat, { messages: [message3] })
 
       const view = chatService.getView(chat)
       expect(view.map(i => i.type)).to.eql(['date', 'message', 'message', 'date', 'message'])

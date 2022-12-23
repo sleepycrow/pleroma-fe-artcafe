@@ -5,20 +5,44 @@ const StillImage = {
     'mimetype',
     'imageLoadError',
     'imageLoadHandler',
-    'alt'
+    'alt',
+    'height',
+    'width',
+    'dataSrc'
   ],
   data () {
     return {
+      // for lazy loading, see loadLazy()
+      realSrc: this.src,
       stopGifs: this.$store.getters.mergedConfig.stopGifs
     }
   },
   computed: {
     animated () {
-      return this.stopGifs && (this.mimetype === 'image/gif' || this.src.endsWith('.gif'))
+      if (!this.realSrc) {
+        return false
+      }
+
+      return this.stopGifs && (this.mimetype === 'image/gif' || this.realSrc.endsWith('.gif'))
+    },
+    style () {
+      const appendPx = (str) => /\d$/.test(str) ? str + 'px' : str
+      return {
+        height: this.height ? appendPx(this.height) : null,
+        width: this.width ? appendPx(this.width) : null
+      }
     }
   },
   methods: {
+    loadLazy () {
+      if (this.dataSrc) {
+        this.realSrc = this.dataSrc
+      }
+    },
     onLoad () {
+      if (!this.realSrc) {
+        return
+      }
       const image = this.$refs.src
       if (!image) return
       this.imageLoadHandler && this.imageLoadHandler(image)
@@ -32,6 +56,14 @@ const StillImage = {
     },
     onError () {
       this.imageLoadError && this.imageLoadError()
+    }
+  },
+  watch: {
+    src () {
+      this.realSrc = this.src
+    },
+    dataSrc () {
+      this.$el.removeAttribute('data-loaded')
     }
   }
 }

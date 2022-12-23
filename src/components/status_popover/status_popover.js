@@ -1,6 +1,7 @@
 import { find } from 'lodash'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import { defineAsyncComponent } from 'vue'
 
 library.add(
   faCircleNotch
@@ -22,8 +23,8 @@ const StatusPopover = {
     }
   },
   components: {
-    Status: () => import('../status/status.vue'),
-    Popover: () => import('../popover/popover.vue')
+    Status: defineAsyncComponent(() => import('../status/status.vue')),
+    Popover: defineAsyncComponent(() => import('../popover/popover.vue'))
   },
   methods: {
     enter () {
@@ -35,6 +36,13 @@ const StatusPopover = {
         this.$store.dispatch('fetchStatus', this.statusId)
           .then(data => (this.error = false))
           .catch(e => (this.error = true))
+      }
+    }
+  },
+  watch: {
+    status (newStatus, oldStatus) {
+      if (newStatus !== oldStatus) {
+        this.$nextTick(() => this.$refs.popover.updateStyles())
       }
     }
   }

@@ -1,13 +1,15 @@
 @import '../../_variables.scss';
 
+$emoji-picker-header-height: 36px;
+$emoji-picker-header-picture-width: 32px;
+$emoji-picker-header-picture-height: 32px;
+$emoji-picker-emoji-size: 32px;
+
 .emoji-picker {
+  width: 25em;
+  max-width: 100vw;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  right: 0;
-  left: 0;
-  margin: 0 !important;
-  z-index: 1;
   background-color: $fallback--bg;
   background-color: var(--popover, $fallback--bg);
   color: $fallback--link;
@@ -17,6 +19,23 @@
   --faintLink: var(--popoverFaintLink, $fallback--faint);
   --lightText: var(--popoverLightText, $fallback--lightText);
   --icon: var(--popoverIcon, $fallback--icon);
+
+  &-header-image {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: $emoji-picker-header-picture-width;
+    max-width: $emoji-picker-header-picture-width;
+    height: $emoji-picker-header-picture-height;
+    max-height: $emoji-picker-header-picture-height;
+    .still-image {
+      max-width: 100%;
+      max-height: 100%;
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
 
   .keep-open,
   .too-many-emoji {
@@ -36,7 +55,6 @@
 
   .heading {
     display: flex;
-    height: 32px;
     padding: 10px 7px 5px;
   }
 
@@ -49,6 +67,10 @@
 
   .emoji-tabs {
     flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
   }
 
   .emoji-groups {
@@ -56,6 +78,8 @@
   }
 
   .additional-tabs {
+    display: flex;
+    flex: 1;
     border-left: 1px solid;
     border-left-color: $fallback--icon;
     border-left-color: var(--icon, $fallback--icon);
@@ -65,20 +89,26 @@
 
   .additional-tabs,
   .emoji-tabs {
-    display: block;
-    min-width: 0;
     flex-basis: auto;
-    flex-shrink: 1;
+    display: flex;
+    align-content: center;
 
     &-item {
       padding: 0 7px;
       cursor: pointer;
-      font-size: 24px;
+      font-size: 1.85em;
+      width: $emoji-picker-header-picture-width;
+      max-width: $emoji-picker-header-picture-width;
+      height: $emoji-picker-header-picture-height;
+      max-height: $emoji-picker-header-picture-height;
+      display: flex;
+      align-items: center;
 
       &.disabled {
         opacity: 0.5;
         pointer-events: none;
       }
+
       &.active {
         border-bottom: 4px solid;
 
@@ -151,9 +181,10 @@
       justify-content: left;
 
       &-title {
-        font-size: 12px;
+        font-size: 0.85em;
         width: 100%;
         margin: 0;
+
         &.disabled {
           display: none;
         }
@@ -161,21 +192,25 @@
     }
 
     &-item {
-      width: 32px;
-      height: 32px;
+      width: $emoji-picker-emoji-size;
+      height: $emoji-picker-emoji-size;
       box-sizing: border-box;
       display: flex;
-      font-size: 32px;
+      line-height: $emoji-picker-emoji-size;
       align-items: center;
       justify-content: center;
       margin: 4px;
 
       cursor: pointer;
 
-      img {
+      .emoji-picker-emoji.-custom {
         object-fit: contain;
         max-width: 100%;
         max-height: 100%;
+      }
+      .emoji-picker-emoji.-unicode {
+        font-size: 24px;
+        overflow: hidden;
       }
     }
 

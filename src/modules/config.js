@@ -1,6 +1,9 @@
-import { set, delete as del } from 'vue'
-import { setPreset, applyTheme } from '../services/style_setter/style_setter.js'
+import Cookies from 'js-cookie'
+import { setPreset, applyTheme, applyConfig } from '../services/style_setter/style_setter.js'
 import messages from '../i18n/messages'
+import localeService from '../services/locale/locale.service.js'
+
+const BACKEND_LANGUAGE_COOKIE_NAME = 'userLanguage'
 
 const browserLocale = (window.navigator.language || 'en').split('-')[0]
 
@@ -11,10 +14,15 @@ const browserLocale = (window.navigator.language || 'en').split('-')[0]
  */
 export const multiChoiceProperties = [
   'postContentType',
-  'subjectLineBehavior'
+  'subjectLineBehavior',
+  'conversationDisplay', // tree | linear
+  'conversationOtherRepliesButton', // below | inside
+  'mentionLinkDisplay', // short | full_for_remote | full
+  'userPopoverAvatarAction' // close | zoom | open
 ]
 
 export const defaultState = {
+  expertLevel: 0, // used to track which settings to show and hide
   colors: {},
   theme: undefined,
   customTheme: undefined,
@@ -24,6 +32,9 @@ export const defaultState = {
   hideShoutbox: false,
   // bad name: actually hides posts of muted USERS
   hideMutedPosts: undefined, // instance default
+  hideMutedThreads: undefined, // instance default
+  hideWordFilteredPosts: undefined, // instance default
+  muteBotStatuses: undefined, // instance default
   collapseMessageWithSubject: undefined, // instance default
   padEmoji: true,
   hideAttachments: false,
@@ -38,8 +49,9 @@ export const defaultState = {
   alwaysShowNewPostButton: false,
   autohideFloatingPostButton: false,
   pauseOnUnfocused: true,
-  stopGifs: false,
+  stopGifs: true,
   replyVisibility: 'all',
+  thirdColumnMode: 'notifications',
   notificationVisibility: {
     follows: true,
     mentions: true,
@@ -48,7 +60,9 @@ export const defaultState = {
     moves: true,
     emojiReactions: true,
     followRequest: true,
-    chatMention: true
+    reports: true,
+    chatMention: true,
+    polls: true
   },
   webPushNotifications: false,
   muteWords: [],
@@ -66,12 +80,33 @@ export const defaultState = {
   hideFilteredStatuses: undefined, // instance default
   playVideosInModal: false,
   useOneClickNsfw: false,
-  useContainFit: false,
+  useContainFit: true,
+  disableStickyHeaders: false,
+  showScrollbars: false,
+  userPopoverAvatarAction: 'open',
+  userPopoverOverlay: false,
+  sidebarColumnWidth: '25rem',
+  contentColumnWidth: '45rem',
+  notifsColumnWidth: '25rem',
+  navbarColumnStretch: false,
   greentext: undefined, // instance default
+  useAtIcon: undefined, // instance default
+  mentionLinkDisplay: undefined, // instance default
+  mentionLinkShowTooltip: undefined, // instance default
+  mentionLinkShowAvatar: undefined, // instance default
+  mentionLinkFadeDomain: undefined, // instance default
+  mentionLinkShowYous: undefined, // instance default
+  mentionLinkBoldenYou: undefined, // instance default
   hidePostStats: undefined, // instance default
+  hideBotIndication: undefined, // instance default
   hideUserStats: undefined, // instance default
   virtualScrolling: undefined, // instance default
-  sensitiveByDefault: undefined // instance default
+  sensitiveByDefault: undefined, // instance default
+  conversationDisplay: undefined, // instance default
+  conversationTreeAdvanced: undefined, // instance default
+  conversationOtherRepliesButton: undefined, // instance default
+  conversationTreeFadeAncestors: undefined, // instance default
+  maxDepthInThread: undefined // instance default
 }
 
 // caching the instance default properties
@@ -102,14 +137,14 @@ const config = {
   },
   mutations: {
     setOption (state, { name, value }) {
-      set(state, name, value)
+      state[name] = value
     },
     setHighlight (state, { user, color, type }) {
       const data = this.state.config.highlight[user]
       if (color || type) {
-        set(state.highlight, user, { color: color || data.color, type: type || data.type })
+        state.highlight[user] = { color: color || data.color, type: type || data.type }
       } else {
-        del(state.highlight, user)
+        delete state.highlight[user]
       }
     }
   },
@@ -118,7 +153,7 @@ const config = {
       const knownKeys = new Set(Object.keys(defaultState))
       const presentKeys = new Set(Object.keys(data))
       const intersection = new Set()
-      for (let elem of presentKeys) {
+      for (const elem of presentKeys) {
         if (knownKeys.has(elem)) {
           intersection.add(elem)
         }
@@ -131,11 +166,16 @@ const config = {
     setHighlight ({ commit, dispatch }, { user, color, type }) {
       commit('setHighlight', { user, color, type })
     },
-    setOption ({ commit, dispatch }, { name, value }) {
+    setOption ({ commit, dispatch, state }, { name, value }) {
       commit('setOption', { name, value })
       switch (name) {
         case 'theme':
           setPreset(value)
+          break
+        case 'sidebarColumnWidth':
+        case 'contentColumnWidth':
+        case 'notifsColumnWidth':
+          applyConfig(state)
           break
         case 'customTheme':
         case 'customThemeSource':
@@ -143,6 +183,11 @@ const config = {
           break
         case 'interfaceLanguage':
           messages.setLanguage(this.getters.i18n, value)
+          dispatch('loadUnicodeEmojiData', value)
+          Cookies.set(BACKEND_LANGUAGE_COOKIE_NAME, localeService.internalToBackendLocale(value))
+          break
+        case 'thirdColumnMode':
+          dispatch('setLayoutWidth', undefined)
           break
       }
     }

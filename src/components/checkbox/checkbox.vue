@@ -6,9 +6,9 @@
     <input
       type="checkbox"
       :disabled="disabled"
-      :checked="checked"
-      :indeterminate.prop="indeterminate"
-      @change="$emit('change', $event.target.checked)"
+      :checked="modelValue"
+      :indeterminate="indeterminate"
+      @change="$emit('update:modelValue', $event.target.checked)"
     >
     <i class="checkbox-indicator" />
     <span
@@ -22,15 +22,12 @@
 
 <script>
 export default {
-  model: {
-    prop: 'checked',
-    event: 'change'
-  },
   props: [
-    'checked',
+    'modelValue',
     'indeterminate',
     'disabled'
-  ]
+  ],
+  emits: ['update:modelValue']
 }
 </script>
 

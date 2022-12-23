@@ -1,15 +1,16 @@
-
 import Status from '../status/status.vue'
 import List from '../list/list.vue'
 import Checkbox from '../checkbox/checkbox.vue'
 import Modal from '../modal/modal.vue'
+import UserLink from '../user_link/user_link.vue'
 
 const UserReportingModal = {
   components: {
     Status,
     List,
     Checkbox,
-    Modal
+    Modal,
+    UserLink
   },
   data () {
     return {
@@ -21,14 +22,17 @@ const UserReportingModal = {
     }
   },
   computed: {
+    reportModal () {
+      return this.$store.state.reports.reportModal
+    },
     isLoggedIn () {
       return !!this.$store.state.users.currentUser
     },
     isOpen () {
-      return this.isLoggedIn && this.$store.state.reports.modalActivated
+      return this.isLoggedIn && this.reportModal.activated
     },
     userId () {
-      return this.$store.state.reports.userId
+      return this.reportModal.userId
     },
     user () {
       return this.$store.getters.findUser(this.userId)
@@ -37,10 +41,10 @@ const UserReportingModal = {
       return !this.user.is_local && this.user.screen_name.substr(this.user.screen_name.indexOf('@') + 1)
     },
     statuses () {
-      return this.$store.state.reports.statuses
+      return this.reportModal.statuses
     },
     preTickedIds () {
-      return this.$store.state.reports.preTickedIds
+      return this.reportModal.preTickedIds
     }
   },
   watch: {

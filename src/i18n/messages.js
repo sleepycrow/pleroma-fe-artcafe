@@ -7,46 +7,27 @@
 // sed -i -e "s/'//gm" -e 's/"/\\"/gm' -re 's/^( +)(.+?): ((.+?))?(,?)(\{?)$/\1"\2": "\4"/gm' -e 's/\"\{\"/{/g' -e 's/,"$/",/g' file.json
 // There's only problem that apostrophe character ' gets replaced by \\ so you have to fix it manually, sorry.
 
-const loaders = {
-  ar: () => import('./ar.json'),
-  ca: () => import('./ca.json'),
-  cs: () => import('./cs.json'),
-  de: () => import('./de.json'),
-  eo: () => import('./eo.json'),
-  es: () => import('./es.json'),
-  et: () => import('./et.json'),
-  eu: () => import('./eu.json'),
-  fi: () => import('./fi.json'),
-  fr: () => import('./fr.json'),
-  ga: () => import('./ga.json'),
-  he: () => import('./he.json'),
-  hu: () => import('./hu.json'),
-  it: () => import('./it.json'),
-  ja: () => import('./ja_pedantic.json'),
-  ja_easy: () => import('./ja_easy.json'),
-  ko: () => import('./ko.json'),
-  nb: () => import('./nb.json'),
-  nl: () => import('./nl.json'),
-  oc: () => import('./oc.json'),
-  pl: () => import('./pl.json'),
-  pt: () => import('./pt.json'),
-  ro: () => import('./ro.json'),
-  ru: () => import('./ru.json'),
-  te: () => import('./te.json'),
-  uk: () => import('./uk.json'),
-  zh: () => import('./zh.json'),
-  zh_Hant: () => import('./zh_Hant.json')
+import { languages, langCodeToJsonName } from './languages.js'
+
+const hasLanguageFile = (code) => languages.includes(code)
+
+const loadLanguageFile = (code) => {
+  return import(
+    /* webpackInclude: /\.json$/ */
+    /* webpackChunkName: "i18n/[request]" */
+    `./${langCodeToJsonName(code)}.json`
+  )
 }
 
 const messages = {
-  languages: ['en', ...Object.keys(loaders)],
+  languages,
   default: {
-    en: require('./en.json')
+    en: require('./en.json').default
   },
   setLanguage: async (i18n, language) => {
-    if (loaders[language]) {
-      let messages = await loaders[language]()
-      i18n.setLocaleMessage(language, messages)
+    if (hasLanguageFile(language)) {
+      const messages = await loadLanguageFile(language)
+      i18n.setLocaleMessage(language, messages.default)
     }
     i18n.locale = language
   }

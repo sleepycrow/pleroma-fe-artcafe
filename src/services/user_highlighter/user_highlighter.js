@@ -36,7 +36,7 @@ const highlightStyle = (prefs) => {
         'linear-gradient(to right,',
         `${solidColor} ,`,
         `${solidColor} 2px,`,
-        `transparent 6px`
+        'transparent 6px'
       ].join(' '),
       backgroundPosition: '0 0',
       ...customProps

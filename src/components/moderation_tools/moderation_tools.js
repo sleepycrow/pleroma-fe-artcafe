@@ -41,13 +41,25 @@ const ModerationTools = {
     tagsSet () {
       return new Set(this.user.tags)
     },
-    hasTagPolicy () {
-      return this.$store.state.instance.tagPolicyAvailable
+    canGrantRole () {
+      return this.user.is_local && !this.user.deactivated && this.$store.state.users.currentUser.role === 'admin'
+    },
+    canChangeActivationState () {
+      return this.privileged('users_manage_activation_state')
+    },
+    canDeleteAccount () {
+      return this.privileged('users_delete')
+    },
+    canUseTagPolicy () {
+      return this.$store.state.instance.tagPolicyAvailable && this.privileged('users_manage_tags')
     }
   },
   methods: {
     hasTag (tagName) {
       return this.tagsSet.has(tagName)
+    },
+    privileged (privilege) {
+      return this.$store.state.users.currentUser.privileges.includes(privilege)
     },
     toggleTag (tag) {
       const store = this.$store

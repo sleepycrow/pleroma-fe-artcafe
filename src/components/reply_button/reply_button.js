@@ -1,7 +1,15 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faReply } from '@fortawesome/free-solid-svg-icons'
+import {
+  faReply,
+  faPlus,
+  faTimes
+} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faReply)
+library.add(
+  faReply,
+  faPlus,
+  faTimes
+)
 
 const ReplyButton = {
   name: 'ReplyButton',
@@ -9,6 +17,9 @@ const ReplyButton = {
   computed: {
     loggedIn () {
       return !!this.$store.state.users.currentUser
+    },
+    remoteInteractionLink () {
+      return this.$store.getters.remoteInteractionLink({ statusId: this.status.id })
     }
   }
 }

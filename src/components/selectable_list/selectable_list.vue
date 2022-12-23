@@ -6,9 +6,9 @@
     >
       <div class="selectable-list-checkbox-wrapper">
         <Checkbox
-          :checked="allSelected"
+          :model-value="allSelected"
           :indeterminate="someSelected"
-          @change="toggleAll"
+          @update:model-value="toggleAll"
         >
           {{ $t('selectable_list.select_all') }}
         </Checkbox>
@@ -24,15 +24,15 @@
       :items="items"
       :get-key="getKey"
     >
-      <template v-slot:item="{item}">
+      <template #item="{item}">
         <div
           class="selectable-list-item-inner"
           :class="{ 'selectable-list-item-selected-inner': isSelected(item) }"
         >
           <div class="selectable-list-checkbox-wrapper">
             <Checkbox
-              :checked="isSelected(item)"
-              @change="checked => toggle(checked, item)"
+              :model-value="isSelected(item)"
+              @update:model-value="checked => toggle(checked, item)"
             />
           </div>
           <slot
@@ -41,7 +41,7 @@
           />
         </div>
       </template>
-      <template v-slot:empty>
+      <template #empty>
         <slot name="empty" />
       </template>
     </List>

@@ -25,8 +25,8 @@ describe('fileSizeFormat', () => {
       }
     ]
 
-    var res = []
-    for (var value in values) {
+    const res = []
+    for (const value in values) {
       res.push(fileSizeFormatService.fileSizeFormat(values[value]))
     }
     expect(res).to.eql(expected)

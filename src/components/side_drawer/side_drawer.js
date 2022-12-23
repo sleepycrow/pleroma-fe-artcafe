@@ -2,6 +2,7 @@ import { mapState, mapGetters } from 'vuex'
 import UserCard from '../user_card/user_card.vue'
 import { unseenNotificationsFromStore } from '../../services/notification_utils/notification_utils'
 import GestureService from '../../services/gesture_service/gesture_service'
+import { USERNAME_ROUTES } from 'src/components/navigation/navigation.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faSignInAlt,
@@ -14,7 +15,9 @@ import {
   faSearch,
   faTachometerAlt,
   faCog,
-  faInfoCircle
+  faInfoCircle,
+  faCompass,
+  faList
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -28,11 +31,13 @@ library.add(
   faSearch,
   faTachometerAlt,
   faCog,
-  faInfoCircle
+  faInfoCircle,
+  faCompass,
+  faList
 )
 
 const SideDrawer = {
-  props: [ 'logout' ],
+  props: ['logout'],
   data: () => ({
     closed: true,
     closeGesture: undefined
@@ -49,7 +54,7 @@ const SideDrawer = {
     currentUser () {
       return this.$store.state.users.currentUser
     },
-    shout () { return this.$store.state.shout.channel.state === 'joined' },
+    shout () { return this.$store.state.shout.joined },
     unseenNotifications () {
       return unseenNotificationsFromStore(this.$store)
     },
@@ -78,15 +83,22 @@ const SideDrawer = {
       return this.$store.state.instance.federating
     },
     timelinesRoute () {
+      let name
       if (this.$store.state.interface.lastTimeline) {
-        return this.$store.state.interface.lastTimeline
+        name = this.$store.state.interface.lastTimeline
       }
-      return this.currentUser ? 'friends' : 'public-timeline'
+      name = this.currentUser ? 'friends' : 'public-timeline'
+      if (USERNAME_ROUTES.has(name)) {
+        return { name, params: { username: this.currentUser.screen_name } }
+      } else {
+        return { name }
+      }
     },
     ...mapState({
-      pleromaChatMessagesAvailable: state => state.instance.pleromaChatMessagesAvailable
+      pleromaChatMessagesAvailable: state => state.instance.pleromaChatMessagesAvailable,
+      supportsAnnouncements: state => state.announcements.supportsAnnouncements
     }),
-    ...mapGetters(['unreadChatCount'])
+    ...mapGetters(['unreadChatCount', 'unreadAnnouncementCount'])
   },
   methods: {
     toggleDrawer () {

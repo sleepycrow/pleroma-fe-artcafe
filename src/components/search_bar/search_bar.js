@@ -16,7 +16,7 @@ const SearchBar = {
     error: false
   }),
   watch: {
-    '$route': function (route) {
+    $route: function (route) {
       if (route.name === 'search') {
         this.searchTerm = route.query.query
       }

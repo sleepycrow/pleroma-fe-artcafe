@@ -1,9 +1,11 @@
+import utf8 from 'utf8'
+
 export const newExporter = ({
   filename = 'data',
   getExportedObject
 }) => ({
   exportData () {
-    const stringified = JSON.stringify(getExportedObject(), null, 2) // Pretty-print and indent with 2 spaces
+    const stringified = utf8.encode(JSON.stringify(getExportedObject(), null, 2)) // Pretty-print and indent with 2 spaces
 
     // Create an invisible link with a data url and simulate a click
     const e = document.createElement('a')

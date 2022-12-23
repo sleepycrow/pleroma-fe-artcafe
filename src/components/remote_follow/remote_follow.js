@@ -1,5 +1,5 @@
 export default {
-  props: [ 'user' ],
+  props: ['user'],
   computed: {
     subscribeUrl () {
       // eslint-disable-next-line no-undef

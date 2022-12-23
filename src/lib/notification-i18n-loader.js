@@ -3,8 +3,8 @@
 // meant to be used to load the partial i18n we need for
 // the service worker.
 module.exports = function (source) {
-  var object = JSON.parse(source)
-  var smol = {
+  const object = JSON.parse(source)
+  const smol = {
     notifications: object.notifications || {}
   }
 

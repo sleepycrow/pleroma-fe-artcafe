@@ -1,6 +1,6 @@
 import { reduce } from 'lodash'
 
-const MASTODON_PASSWORD_RESET_URL = `/auth/password`
+const MASTODON_PASSWORD_RESET_URL = '/auth/password'
 
 const resetPassword = ({ instance, email }) => {
   const params = { email }

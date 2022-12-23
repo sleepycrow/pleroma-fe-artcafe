@@ -2,8 +2,11 @@ var path = require('path')
 var config = require('../config')
 var utils = require('./utils')
 var projectRoot = path.resolve(__dirname, '../')
-var ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin')
+var ServiceWorkerWebpackPlugin = require('serviceworker-webpack5-plugin')
 var CopyPlugin = require('copy-webpack-plugin');
+var { VueLoaderPlugin } = require('vue-loader')
+var ESLintPlugin = require('eslint-webpack-plugin');
+
 
 var env = process.env.NODE_ENV
 // check env & config/index.js to decide weither to enable CSS Sourcemaps for the
@@ -21,7 +24,8 @@ module.exports = {
   output: {
     path: config.build.assetsRoot,
     publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
-    filename: '[name].js'
+    filename: '[name].js',
+    chunkFilename: '[name].js'
   },
   optimization: {
     splitChunks: {
@@ -29,38 +33,47 @@ module.exports = {
     }
   },
   resolve: {
-    extensions: ['.js', '.vue'],
+    extensions: ['.mjs', '.js', '.jsx', '.vue'],
     modules: [
       path.join(__dirname, '../node_modules')
     ],
     alias: {
-      'vue$': 'vue/dist/vue.runtime.common',
       'static': path.resolve(__dirname, '../static'),
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
-      'components': path.resolve(__dirname, '../src/components')
+      'components': path.resolve(__dirname, '../src/components'),
+      'vue-i18n': 'vue-i18n/dist/vue-i18n.runtime.esm-bundler.js'
+    },
+    fallback: {
+      'querystring': require.resolve('querystring-es3'),
+      'url': require.resolve('url/')
     }
   },
   module: {
     noParse: /node_modules\/localforage\/dist\/localforage.js/,
     rules: [
       {
-        enforce: 'pre',
-        test: /\.(js|vue)$/,
-        include: projectRoot,
-        exclude: /node_modules/,
-        use: {
-          loader: 'eslint-loader',
-          options: {
-            formatter: require('eslint-friendly-formatter'),
-            sourceMap: config.build.productionSourceMap,
-            extract: true
-          }
-        }
+        enforce: 'post',
+        test: /\.(json5?|ya?ml)$/, // target json, json5, yaml and yml files
+        type: 'javascript/auto',
+        loader: '@intlify/vue-i18n-loader',
+        include: [ // Use `Rule.include` to specify the files of locale messages to be pre-compiled
+          path.resolve(__dirname, '../src/i18n')
+        ]
       },
       {
         test: /\.vue$/,
-        use: 'vue-loader'
+        loader: 'vue-loader',
+        options: {
+          compilerOptions: {
+            isCustomElement(tag) {
+              if (tag === 'pinch-zoom') {
+                return true
+              }
+              return false
+            }
+          }
+        }
       },
       {
         test: /\.jsx?$/,
@@ -70,24 +83,23 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            name: utils.assetsPath('img/[name].[hash:7].[ext]')
-          }
+        type: 'asset',
+        generator: {
+          filename: utils.assetsPath('img/[name].[hash:7][ext]')
         }
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-          }
+        type: 'asset',
+        generator: {
+          filename: utils.assetsPath('fonts/[name].[hash:7][ext]')
         }
       },
+      {
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: 'javascript/auto'
+      }
     ]
   },
   plugins: [
@@ -95,13 +107,17 @@ module.exports = {
       entry: path.join(__dirname, '..', 'src/sw.js'),
       filename: 'sw-pleroma.js'
     }),
+    new ESLintPlugin({
+      extensions: ['js', 'vue'],
+      formatter: require('eslint-formatter-friendly')
+    }),
+    new VueLoaderPlugin(),
     // This copies Ruffle's WASM to a directory so that JS side can access it
     new CopyPlugin({
       patterns: [
         {
-          from: "node_modules/ruffle-mirror/*",
-          to: "static/ruffle",
-          flatten: true
+          from: "node_modules/@ruffle-rs/ruffle/**/*",
+          to: "static/ruffle/[name][ext]"
         },
       ],
       options: {

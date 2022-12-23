@@ -42,7 +42,8 @@ const mediaUpload = {
         .then((fileData) => {
           self.$emit('uploaded', fileData)
           self.decreaseUploadCount()
-        }, (error) => { // eslint-disable-line handle-callback-err
+        }, (error) => {
+          console.error('Error uploading file', error)
           self.$emit('upload-failed', 'default')
           self.decreaseUploadCount()
         })
@@ -73,7 +74,7 @@ const mediaUpload = {
     'disabled'
   ],
   watch: {
-    'dropFiles': function (fileInfos) {
+    dropFiles: function (fileInfos) {
       if (!this.uploading) {
         this.multiUpload(fileInfos)
       }

@@ -6,9 +6,9 @@ function showWhoToFollow (panel, reply) {
   const shuffled = shuffle(reply)
 
   panel.usersToFollow.forEach((toFollow, index) => {
-    let user = shuffled[index]
-    let img = user.avatar || this.$store.state.instance.defaultAvatar
-    let name = user.acct
+    const user = shuffled[index]
+    const img = user.avatar || this.$store.state.instance.defaultAvatar
+    const name = user.acct
 
     toFollow.img = img
     toFollow.name = name
@@ -24,12 +24,12 @@ function showWhoToFollow (panel, reply) {
 }
 
 function getWhoToFollow (panel) {
-  var credentials = panel.$store.state.users.currentUser.credentials
+  const credentials = panel.$store.state.users.currentUser.credentials
   if (credentials) {
     panel.usersToFollow.forEach(toFollow => {
       toFollow.name = 'Loading...'
     })
-    apiService.suggestions({ credentials: credentials })
+    apiService.suggestions({ credentials })
       .then((reply) => {
         showWhoToFollow(panel, reply)
       })

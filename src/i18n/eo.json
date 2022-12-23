@@ -11,7 +11,8 @@
     "title": "Funkcioj",
     "who_to_follow": "Kiun aboni",
     "pleroma_chat_messages": "Babilejo de Pleroma",
-    "upload_limit": "Limo de alŝutoj"
+    "upload_limit": "Limo de alŝutoj",
+    "shout": "Kriujo"
   },
   "finder": {
     "error_fetching_user": "Eraris alporto de uzanto",
@@ -42,7 +43,21 @@
     },
     "flash_content": "Klaku por montri enhavon de Flash per Ruffle. (Eksperimente, eble ne funkcios.)",
     "flash_security": "Sciu, ke tio povas esti danĝera, ĉar la enhavo de Flash ja estas arbitra programo.",
-    "flash_fail": "Malsukcesis enlegi enhavon de Flash; vidu detalojn en konzolo."
+    "flash_fail": "Malsukcesis enlegi enhavon de Flash; vidu detalojn en konzolo.",
+    "scope_in_timeline": {
+      "direct": "Persona",
+      "private": "Nur abonantoj",
+      "public": "Publika",
+      "unlisted": "Nelistigita"
+    },
+    "generic_error_message": "Eraris: {0}",
+    "never_show_again": "Neniam remontri",
+    "undo": "Malfari",
+    "yes": "Jes",
+    "no": "Ne",
+    "unpin": "Malfiksi eron",
+    "pin": "Fiksi eron",
+    "scroll_to_top": "Rulumi supren"
   },
   "image_cropper": {
     "crop_picture": "Tondi bildon",
@@ -70,7 +85,9 @@
   },
   "media_modal": {
     "previous": "Antaŭa",
-    "next": "Sekva"
+    "next": "Sekva",
+    "counter": "{current} / {total}",
+    "hide": "Fermi vidilon de vidaŭdaĵoj"
   },
   "nav": {
     "about": "Pri",
@@ -79,9 +96,9 @@
     "friend_requests": "Petoj pri abono",
     "mentions": "Mencioj",
     "dms": "Rektaj mesaĝoj",
-    "public_tl": "Publika historio",
+    "public_tl": "Loka historio",
     "timeline": "Historio",
-    "twkn": "Konata reto",
+    "twkn": "Federa historio",
     "user_search": "Serĉi uzantojn",
     "who_to_follow": "Kiun aboni",
     "preferences": "Agordoj",
@@ -91,7 +108,11 @@
     "administration": "Administrado",
     "bookmarks": "Legosignoj",
     "timelines": "Historioj",
-    "home_timeline": "Hejma historio"
+    "home_timeline": "Hejma historio",
+    "edit_pinned": "Redakti fiksitajn erojn",
+    "lists": "Listoj",
+    "edit_nav_mobile": "Adapti navigan breton",
+    "edit_finish": "Fini redakton"
   },
   "notifications": {
     "broken_favorite": "Nekonata stato, serĉante ĝin…",
@@ -105,7 +126,9 @@
     "reacted_with": "reagis per {0}",
     "migrated_to": "migris al",
     "follow_request": "volas vin aboni",
-    "error": "Eraris akirado de sciigoj: {0}"
+    "error": "Eraris akirado de sciigoj: {0}",
+    "submitted_report": "sendis raporton",
+    "poll_ended": "enketo finiĝis"
   },
   "post_status": {
     "new_status": "Afiŝi novan staton",
@@ -129,7 +152,7 @@
       "unlisted": "Nelistigita – ne afiŝi al publikaj historioj"
     },
     "scope_notice": {
-      "unlisted": "Ĉi tiu afiŝo ne estos videbla en la Publika historio kaj La tuta konata reto",
+      "unlisted": "Ĉi tiu afiŝo ne estos videbla en la Loka historio kaj la Federa historio",
       "private": "Ĉi tiu afiŝo estos videbla nur al viaj abonantoj",
       "public": "Ĉi tiu afiŝo estos videbla al ĉiuj"
     },
@@ -140,7 +163,10 @@
     "direct_warning_to_first_only": "Ĉi tiu afiŝo estas nur videbla al uzantoj menciitaj je la komenco de la mesaĝo.",
     "direct_warning_to_all": "Ĉi tiu afiŝo estos videbla al ĉiuj menciitaj uzantoj.",
     "media_description": "Priskribo de vidaŭdaĵo",
-    "post": "Afiŝo"
+    "post": "Afiŝo",
+    "edit_remote_warning": "Aliaj foraj nodoj eble ne subtenas redaktadon, kaj ne povos ricevi pli novan version de via afiŝo.",
+    "edit_unsupported_warning": "Pleroma ne subtenas redaktadon de mencioj aŭ enketoj.",
+    "edit_status": "Stato de redakto"
   },
   "registration": {
     "bio": "Priskribo",
@@ -164,7 +190,10 @@
     },
     "reason_placeholder": "Ĉi-node oni aprobas registriĝojn permane.\nSciigu la administrantojn kial vi volas registriĝi.",
     "reason": "Kialo registriĝi",
-    "register": "Registriĝi"
+    "register": "Registriĝi",
+    "bio_optional": "Prio (malnepra)",
+    "email_optional": "Retpoŝtadreso (malnepra)",
+    "email_language": "En kiu lingvo vi volus ricevi retleterojn de la servilo?"
   },
   "settings": {
     "app_name": "Nomo de aplikaĵo",
@@ -553,7 +582,87 @@
     },
     "right_sidebar": "Montri flankan breton dekstre",
     "save": "Konservi ŝanĝojn",
-    "hide_shoutbox": "Kaŝi kriujon de nodo"
+    "hide_shoutbox": "Kaŝi kriujon de nodo",
+    "always_show_post_button": "Ĉiam montri ŝvebantan butonon por nova afiŝo",
+    "mentions_new_style": "Pli mojosaj menciligiloj",
+    "mentions_new_place": "Meti menciojn sur apartan linion",
+    "lists_navigation": "Montri listojn en navigiloj",
+    "account_backup": "Savkopio de konto",
+    "account_backup_description": "Ĉi tio povigas vin elŝuti arĥivon de viaj afiŝoj kaj ĉiuj informoj pri via konto, sed ili ne jam povas enportiĝi en konton de Pleroma.",
+    "list_aliases_error": "Eraris akirado de kromnomoj: {error}",
+    "move_account_notes": "Se vi volas movi la konton aliloken, vi devas iri al via celata konto, kaj aldoni kromnomon ligitan al tie ĉi.",
+    "navbar_column_stretch": "Etendi navigan breton laŭ larĝeco de kolumnoj",
+    "posts": "Afiŝoj",
+    "notification_visibility_polls": "Finoj de enketoj kun via voĉo",
+    "conversation_display": "Aspekto de interparoloj",
+    "disable_sticky_headers": "Ne alglui kapojn de kolumnoj al supro de la ekrano",
+    "conversation_display_linear_quick": "Linia vido",
+    "use_websockets": "Uzi teĥnikaron «websockets» (tuja ĝisdatigo)",
+    "mention_link_display_full_for_remote": "plene nur je uzantoj foraj (ekz. {'@'}zozo{'@'}ekzemplo.org)",
+    "expert_mode": "Montri altnivelajn",
+    "setting_server_side": "Ĉi tiu agordo estas ligita al via profilo, kaj efektiviĝon en ĉiuj viaj salutoj kaj klientoj",
+    "post_look_feel": "Aspekto de afiŝoj",
+    "mention_links": "Menciaj ligiloj",
+    "email_language": "Lingvo de leteroj ricevotaj de la servilo",
+    "account_backup_table_head": "Savkopio",
+    "download_backup": "Elŝuti",
+    "backup_not_ready": "Ĉi tiu savkopio ne jam pretas.",
+    "remove_backup": "Forigi",
+    "list_backups_error": "Eraris akirado de listo de savkopioj: {error}",
+    "add_backup": "Fari novan savkopion",
+    "added_backup": "Aldonis novan savkopion.",
+    "add_backup_error": "Eraris aldono de nova savkopio: {error}",
+    "account_alias": "Kromnomoj de konto",
+    "account_alias_table_head": "Kromnomo",
+    "hide_list_aliases_error_action": "Fermi",
+    "remove_alias": "Forigi ĉi tiun kromnomon",
+    "new_alias_target": "Aldoni novan kromnomon (ekz. {example})",
+    "added_alias": "Kromnomo estas aldonita.",
+    "add_alias_error": "Eraris aldono de kromnomo: {error}",
+    "move_account": "Movi konton",
+    "move_account_target": "Celata konto (ekz. {example})",
+    "moved_account": "Konto moviĝis.",
+    "move_account_error": "Eraris movado de konto: {error}",
+    "wordfilter": "Vortofiltrado",
+    "word_filter_and_more": "Vortofiltrado kaj pli…",
+    "mute_bot_posts": "Silentigi afiŝojn de robotoj",
+    "hide_bot_indication": "Kaŝi markon de roboteco en afiŝoj",
+    "hide_wordfiltered_statuses": "Kaŝi vorte filtritajn statojn",
+    "hide_muted_threads": "Kaŝi silentigitajn fadenojn",
+    "account_privacy": "Privateco",
+    "user_profiles": "Profiloj de uzantoj",
+    "hide_favorites_description": "Ne montri liston de miaj ŝatatoj (oni tamen sciiĝas)",
+    "conversation_display_tree": "Arba stilo",
+    "conversation_display_tree_quick": "Arba vido",
+    "show_scrollbars": "Montri rulumajn bretojn de flankaj kolumnoj",
+    "third_column_mode_none": "Neniam montri trian kolumnon",
+    "third_column_mode_notifications": "Kolumno de sciigoj",
+    "columns": "Kolumnoj",
+    "column_sizes": "Grandeco de kolumnoj",
+    "column_sizes_sidebar": "Flanka breto",
+    "column_sizes_content": "Enhavo",
+    "column_sizes_notifs": "Sciigoj",
+    "tree_advanced": "Permesi pli flekseblan navigadon en arba vido",
+    "conversation_display_linear": "Linia stilo",
+    "conversation_other_replies_button": "Montri la butonon «aliaj respondoj»",
+    "conversation_other_replies_button_below": "Sub statoj",
+    "conversation_other_replies_button_inside": "En statoj",
+    "max_depth_in_thread": "Maksimuma nombro de niveloj implicite montrataj en fadeno",
+    "auto_update": "Montri novajn afiŝojn memage",
+    "use_at_icon": "Montri simbolon {'@'} kiel bildon anstataŭ teksto",
+    "mention_link_display": "Montri menciajn ligilojn",
+    "mention_link_display_short": "ĉiam mallonge (ekz. {'@'}zozo)",
+    "mention_link_display_full": "ĉiam plene (ekz. {'@'}zozo{'@'}ekzemplo.org)",
+    "mention_link_show_avatar": "Montri profilbildon de uzanto apud la ligilo",
+    "mention_link_show_avatar_quick": "Montri profilbildon de uzanto apud mencioj",
+    "mention_link_fade_domain": "Malvigligi retnomojn (ekz. {'@'}ekzemplo.org en {'@'}zozo{'@'}ekzemplo.org)",
+    "mention_link_bolden_you": "Emfazi vian mencion, se vi estas menciita",
+    "mention_link_use_tooltip": "Montri karton de uzanto per klako al mencia ligilo",
+    "user_popover_avatar_action_close": "Fermi la ŝprucaĵon",
+    "user_popover_avatar_action_open": "Malfermi la profilon",
+    "user_popover_avatar_overlay": "Aperigi ŝprucaĵon pri uzanto sur profilbildo",
+    "show_yous": "Montri la markon «(Vi)»",
+    "user_popover_avatar_action_zoom": "Zomi la profilbildon"
   },
   "timeline": {
     "collapse": "Maletendi",
@@ -603,7 +712,6 @@
     "mention": "Mencio",
     "hidden": "Kaŝita",
     "admin_menu": {
-      "delete_user_confirmation": "Ĉu vi tute certas? Ĉi tiu ago ne estas malfarebla.",
       "delete_user": "Forigi uzanton",
       "quarantine": "Malpermesi federadon de afiŝoj de uzanto",
       "disable_any_subscription": "Malpermesi ĉian abonadon al uzanto",
@@ -619,7 +727,8 @@
       "grant_moderator": "Nomumi reguligiston",
       "revoke_admin": "Malnomumi administranton",
       "grant_admin": "Nomumi administranton",
-      "moderation": "Reguligado"
+      "moderation": "Reguligado",
+      "delete_user_data_and_deactivate_confirmation": "Tio ĉi por ĉiam forigos datumojn de tiu ĉi konto, kaj malaktivigos ĝin. Ĉu vi plene certas?"
     },
     "show_repeats": "Montri ripetojn",
     "hide_repeats": "Kaŝi ripetojn",
@@ -631,7 +740,11 @@
       "striped": "Stria fono",
       "solid": "Unueca fono",
       "disabled": "Senemfaze"
-    }
+    },
+    "edit_profile": "Redakti profilon",
+    "deactivated": "Malaktiva",
+    "follow_cancel": "Nuligi peton",
+    "remove_follower": "Forigi abonanton"
   },
   "user_profile": {
     "timeline_title": "Historio de uzanto",
@@ -677,7 +790,19 @@
     "load_all": "Enlegante ĉiujn {emojiAmount} bildosignojn",
     "load_all_hint": "Enlegis la {saneAmount} unuajn bildosignojn; enlego de ĉiuj povus kaŭzi problemojn pri efikeco.",
     "unicode": "Unikoda bildosigno",
-    "custom": "Propra bildosigno"
+    "custom": "Propra bildosigno",
+    "unicode_groups": {
+      "activities": "Agado",
+      "animals-and-nature": "Bestoj kaj naturo",
+      "flags": "Flagoj",
+      "food-and-drink": "Manĝaĵoj kaj trinkaĵoj",
+      "objects": "Aĵoj",
+      "people-and-body": "Homoj kaj korpo",
+      "smileys-and-emotion": "Mienbildoj kaj sentoj",
+      "symbols": "Simboloj",
+      "travel-and-places": "Vojaĝoj kaj lokoj"
+    },
+    "regional_indicator": "Regiona marko {letter}"
   },
   "polls": {
     "not_enough_options": "Tro malmultaj unikaj elektebloj en la enketo",
@@ -718,7 +843,7 @@
         "media_nsfw": "Devige marki vidaŭdaĵojn konsternaj",
         "media_removal_desc": "Ĉi tiu nodo forigas vidaŭdaĵojn de afiŝoj el la jenaj nodoj:",
         "media_removal": "Forigo de vidaŭdaĵoj",
-        "ftl_removal": "Forigo el la historio de «Konata reto»",
+        "ftl_removal": "Forigo el la «Federa historio»",
         "quarantine_desc": "Ĉi tiu nodo sendos nur publikajn aﬁŝojn al la jenaj nodoj:",
         "quarantine": "Kvaranteno",
         "reject_desc": "Ĉi tiu nodo ne akceptos mesaĝojn de la jenaj nodoj:",
@@ -726,14 +851,16 @@
         "accept_desc": "Ĉi tiu nodo nur akceptas mesaĝojn de la jenaj nodoj:",
         "accept": "Akcepti",
         "simple_policies": "Specialaj politikoj de la nodo",
-        "ftl_removal_desc": "Ĉi tiu nodo forigas la jenajn nodojn el la historio de «Konata reto»:"
+        "ftl_removal_desc": "Ĉi tiu nodo forigas la jenajn nodojn el la «Federa historio»:",
+        "instance": "Nodo",
+        "reason": "Kialo"
       },
       "mrf_policies": "Ŝaltis politikon de Mesaĝa ŝanĝilaro (MRF)",
       "keyword": {
         "is_replaced_by": "→",
         "replace": "Anstataŭigi",
         "reject": "Rifuzi",
-        "ftl_removal": "Forigo el la historio de «La tuta konata reto»",
+        "ftl_removal": "Forigo el la historio de la «Federa historio»",
         "keyword_policies": "Politiko pri ĉefvortoj"
       },
       "federation": "Federado",
@@ -752,7 +879,9 @@
     "load_older": "Enlegi pli malnovajn interagojn",
     "moves": "Migrado de uzantoj",
     "follows": "Novaj abonoj",
-    "favs_repeats": "Ripetoj kaj ŝatoj"
+    "favs_repeats": "Ripetoj kaj ŝatoj",
+    "emoji_reactions": "Bildosignaj reagoj",
+    "reports": "Raportoj"
   },
   "errors": {
     "storage_unavailable": "Pleroma ne povis aliri deponejon de la foliumilo. Via saluto kaj viaj lokaj agordoj ne estos konservitaj, kaj vi eble renkontos neatenditajn problemojn. Provu permesi kuketojn."
@@ -782,7 +911,35 @@
     "status_deleted": "Ĉi tiu afiŝo foriĝis",
     "nsfw": "Konsterna",
     "expand": "Etendi",
-    "external_source": "Ekstera fonto"
+    "external_source": "Ekstera fonto",
+    "mentions": "Mencioj",
+    "you": "(Vi)",
+    "plus_more": "+{number} pli",
+    "show_all_attachments": "Montri ĉiujn kunsendaĵojn",
+    "collapse_attachments": "Kaŝi iujn kunsendaĵojn",
+    "many_attachments": "Afiŝo havas {number} kunsendaĵo(j)n",
+    "show_attachment_in_modal": "Montri en vidilo de vidaŭdaĵoj",
+    "edit": "Redakti afiŝon",
+    "replies_list_with_others": "Respondoj (+{numReplies} alia): | Respondoj (+{numReplies} aliaj):",
+    "thread_show": "Malkaŝi ĉi tiun fadenon",
+    "thread_show_full": "Montri ĉion en ĉi tiu fadeno ({numStatus} afiŝon sume, maksimume en profundeco {depth}) | Montri ĉion en ĉi tiu fadeno ({numStatus} afiŝojn sume, maksimume en profundeco {depth})",
+    "show_all_conversation": "Montri plenan interparolon ({numStatus} alian afiŝon) | Montri plenan interparolon ({numStatus} aliajn afiŝojn)",
+    "edited_at": "(lastafoje redaktita je {time})",
+    "remove_attachment": "Forigi kunsendaĵon",
+    "show_attachment_description": "Antaŭvidi priskribon (malfermu kunsendaĵon por vidi plenan priskribon)",
+    "hide_attachment": "Kaŝi kunsendaĵon",
+    "attachment_stop_flash": "Ĉesigi ludilon de [Flash]",
+    "move_up": "Ŝovi kunsendaĵon antaŭen",
+    "move_down": "Ŝovi kunsendaĵon posten",
+    "thread_hide": "Kaŝi ĉi tiun fadenon",
+    "thread_show_full_with_icon": "{icon} {text}",
+    "thread_follow": "Montri ceteron de ĉi tiu fadeno ({numStatus} afiŝon sume) | Montri ceteron de ĉi tiu fadeno ({numStatus} afiŝojn sume)",
+    "thread_follow_with_icon": "{icon} {text}",
+    "ancestor_follow": "Vidi {numReplies} alian respondon sub ĉi tiu afiŝo | Vidi {numReplies} aliajn respondojn sub ĉi tiu afiŝo",
+    "ancestor_follow_with_icon": "{icon} {text}",
+    "show_all_conversation_with_icon": "{icon} {text}",
+    "show_only_conversation_under_this": "Montri nur respondojn al ĉi tiu afiŝo",
+    "status_history": "Historio de afiŝo"
   },
   "time": {
     "years_short": "{0}j",
@@ -816,7 +973,23 @@
     "days_short": "{0}t",
     "day_short": "{0}t",
     "days": "{0} tagoj",
-    "day": "{0} tago"
+    "day": "{0} tago",
+    "unit": {
+      "days": "{0} tago | {0} tagoj",
+      "minutes": "{0} minuto | {0} minutoj",
+      "days_short": "{0}t",
+      "hours": "{0} horo | {0} horoj",
+      "hours_short": "{0}h",
+      "minutes_short": "{0}min",
+      "months": "{0} monato | {0} monatoj",
+      "months_short": "{0}mo",
+      "seconds": "{0} sekundo | {0} sekundoj",
+      "seconds_short": "{0}sek",
+      "weeks": "{0} semajno | {0} semajnoj",
+      "weeks_short": "{0}sem",
+      "years": "{0} jaro | {0} jaroj",
+      "years_short": "{0}j"
+    }
   },
   "search": {
     "people": "Personoj",
@@ -870,5 +1043,68 @@
   },
   "shoutbox": {
     "title": "Kriujo"
+  },
+  "report": {
+    "reporter": "Raportinto:",
+    "reported_user": "Raportito:",
+    "reported_statuses": "Raportitaj statoj:",
+    "notes": "Notoj:",
+    "state": "Stato:",
+    "state_open": "Malfermita",
+    "state_closed": "Fermita",
+    "state_resolved": "Solvita"
+  },
+  "lists": {
+    "editing_list": "Redaktado de listo {listTitle}",
+    "lists": "Listoj",
+    "new": "Nova listo",
+    "title": "Nomo de listo",
+    "search": "Serĉi uzantojn",
+    "create": "Krei",
+    "save": "Konservi ŝanĝojn",
+    "delete": "Forigi liston",
+    "following_only": "Limigi al abonatoj",
+    "manage_lists": "Mastrumi listojn",
+    "manage_members": "Mastrumi listanojn",
+    "add_members": "Serĉi pliajn uzantojn",
+    "remove_from_list": "Forigi de listo",
+    "add_to_list": "Aldoni al listo",
+    "is_in_list": "Jam en listo",
+    "creating_list": "Kreado de nova listo",
+    "update_title": "Konservi nomon",
+    "really_delete": "Ĉu vi certe volas forigi la liston?",
+    "error": "Eraris umado je listoj: {0}"
+  },
+  "update": {
+    "big_update_content": "Ni longe ne eldonis novan version, kaj tial aferoj eble aspektos iom malsame, ol antaŭe.",
+    "update_bugs": "Bonvolu raporti problemojn kaj erarojn ĉe {pleromaGitlab}, ĉar ni ŝanĝis multon, kaj kvankam ni zorge testas kaj mem uzas la prilaboratajn versiojn, ni tamen povas preteratenti ion. Ni bonvenigas viajn rimarkojn kaj proponojn pri renkontitaj eraroj aŭ proponoj plibonigi Pleromon.",
+    "big_update_title": "Bonvolu pacienci",
+    "update_bugs_gitlab": "GitLab de Pleroma",
+    "update_changelog": "Por legi detalojn pri ŝanĝoj, vidu {theFullChangelog}.",
+    "update_changelog_here": "la plenan ŝanĝaron",
+    "art_by": "Arto de {linkToArtist}"
+  },
+  "unicode_domain_indicator": {
+    "tooltip": "Ĉi tiu retnomo enhavas signojn ekster ASCII."
+  },
+  "announcements": {
+    "all_day_prompt": "Ĉi tio estas tuttaga okazo",
+    "page_header": "Anoncoj",
+    "title": "Anonco",
+    "mark_as_read_action": "Marki legita",
+    "post_placeholder": "Entajpu vian anoncon tie ĉi…",
+    "post_action": "Afiŝi",
+    "post_error": "Eraro: {error}",
+    "close_error": "Fermi",
+    "delete_action": "Forigi",
+    "start_time_prompt": "Komenca tempo: ",
+    "end_time_prompt": "Fina tempo: ",
+    "published_time_display": "Publikigita je {time}",
+    "start_time_display": "Komenciĝas je {time}",
+    "end_time_display": "Finiĝas je {time}",
+    "edit_action": "Redakti",
+    "submit_edit_action": "Afiŝi",
+    "cancel_edit_action": "Nuligi",
+    "inactive_message": "Ĉi tiu anonco estas neaktiva"
   }
 }

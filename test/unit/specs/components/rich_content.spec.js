@@ -1,27 +1,44 @@
-import { mount, shallowMount, createLocalVue } from '@vue/test-utils'
+import { mount, shallowMount } from '@vue/test-utils'
 import RichContent from 'src/components/rich_content/rich_content.jsx'
 
-const localVue = createLocalVue()
 const attentions = []
+const global = {
+  mocks: {
+    $store: {
+      state: {},
+      getters: {
+        mergedConfig: () => ({
+          mentionLinkShowTooltip: true
+        }),
+        findUserByUrl: () => null
+      }
+    }
+  },
+  stubs: {
+    FAIcon: true
+  }
+}
 
-const makeMention = (who) => {
+const makeMention = (who, noClass) => {
   attentions.push({ statusnet_profile_url: `https://fake.tld/@${who}` })
-  return `<span class="h-card"><a class="u-url mention" href="https://fake.tld/@${who}">@<span>${who}</span></a></span>`
+  return noClass
+    ? `<span><a href="https://fake.tld/@${who}">@<span>${who}</span></a></span>`
+    : `<span class="h-card"><a class="u-url mention" href="https://fake.tld/@${who}">@<span>${who}</span></a></span>`
 }
 const p = (...data) => `<p>${data.join('')}</p>`
 const compwrap = (...data) => `<span class="RichContent">${data.join('')}</span>`
 const mentionsLine = (times) => [
-  '<mentionsline-stub mentions="',
+  '<mentions-line-stub mentions="',
   new Array(times).fill('[object Object]').join(','),
-  '"></mentionsline-stub>'
+  '"></mentions-line-stub>'
 ].join('')
 
 describe('RichContent', () => {
   it('renders simple post without exploding', () => {
     const html = p('Hello world!')
     const wrapper = shallowMount(RichContent, {
-      localVue,
-      propsData: {
+      global,
+      props: {
         attentions,
         handleLinks: true,
         greentext: true,
@@ -30,7 +47,7 @@ describe('RichContent', () => {
       }
     })
 
-    expect(wrapper.html()).to.eql(compwrap(html))
+    expect(wrapper.html().replace(/\n/g, '')).to.eql(compwrap(html))
   })
 
   it('unescapes everything as needed', () => {
@@ -43,8 +60,8 @@ describe('RichContent', () => {
       'Testing \'em all'
     ].join('')
     const wrapper = shallowMount(RichContent, {
-      localVue,
-      propsData: {
+      global,
+      props: {
         attentions,
         handleLinks: true,
         greentext: true,
@@ -53,7 +70,7 @@ describe('RichContent', () => {
       }
     })
 
-    expect(wrapper.html()).to.eql(compwrap(expected))
+    expect(wrapper.html().replace(/\n/g, '')).to.eql(compwrap(expected))
   })
 
   it('replaces mention with mentionsline', () => {
@@ -62,8 +79,8 @@ describe('RichContent', () => {
       ' how are you doing today?'
     )
     const wrapper = shallowMount(RichContent, {
-      localVue,
-      propsData: {
+      global,
+      props: {
         attentions,
         handleLinks: true,
         greentext: true,
@@ -72,7 +89,7 @@ describe('RichContent', () => {
       }
     })
 
-    expect(wrapper.html()).to.eql(compwrap(p(
+    expect(wrapper.html().replace(/\n/g, '')).to.eql(compwrap(p(
       mentionsLine(1),
       ' how are you doing today?'
     )))
@@ -93,17 +110,17 @@ describe('RichContent', () => {
       ),
       // TODO fix this extra line somehow?
       p(
-        '<mentionsline-stub mentions="',
+        '<mentions-line-stub mentions="',
         '[object Object],',
         '[object Object],',
         '[object Object]',
-        '"></mentionsline-stub>'
+        '"></mentions-line-stub>'
       )
     ].join('')
 
     const wrapper = shallowMount(RichContent, {
-      localVue,
-      propsData: {
+      global,
+      props: {
         attentions,
         handleLinks: true,
         greentext: true,
@@ -112,7 +129,7 @@ describe('RichContent', () => {
       }
     })
 
-    expect(wrapper.html()).to.eql(compwrap(expected))
+    expect(wrapper.html().replace(/\n/g, '')).to.eql(compwrap(expected))
   })
 
   it('Does not touch links if link handling is disabled', () => {
@@ -124,14 +141,24 @@ describe('RichContent', () => {
       ].join(''),
       [
         makeMention('John'),
-        makeMention('Josh'),
-        makeMention('Jeremy')
+        makeMention('Josh'), makeMention('Jeremy')
+      ].join('')
+    ].join('\n')
+    const strippedHtml = [
+      [
+        makeMention('Jack', true),
+        'let\'s meet up with ',
+        makeMention('Janet', true)
+      ].join(''),
+      [
+        makeMention('John', true),
+        makeMention('Josh', true), makeMention('Jeremy', true)
       ].join('')
     ].join('\n')
 
     const wrapper = shallowMount(RichContent, {
-      localVue,
-      propsData: {
+      global,
+      props: {
         attentions,
         handleLinks: false,
         greentext: true,
@@ -140,7 +167,7 @@ describe('RichContent', () => {
       }
     })
 
-    expect(wrapper.html()).to.eql(compwrap(html))
+    expect(wrapper.html()).to.eql(compwrap(strippedHtml))
   })
 
   it('Adds greentext and cyantext to the post', () => {
@@ -154,8 +181,8 @@ describe('RichContent', () => {
     ].join('\n')
 
     const wrapper = shallowMount(RichContent, {
-      localVue,
-      propsData: {
+      global,
+      props: {
         attentions,
         handleLinks: false,
         greentext: true,
@@ -174,8 +201,8 @@ describe('RichContent', () => {
     ].join('\n')
 
     const wrapper = shallowMount(RichContent, {
-      localVue,
-      propsData: {
+      global,
+      props: {
         attentions,
         handleLinks: false,
         greentext: false,
@@ -191,12 +218,12 @@ describe('RichContent', () => {
     const html = p('Ebin :DDDD :spurdo:')
     const expected = p(
       'Ebin :DDDD ',
-      '<anonymous-stub alt=":spurdo:" src="about:blank" title=":spurdo:" class="emoji img"></anonymous-stub>'
+      '<anonymous-stub src="about:blank" alt=":spurdo:" class="emoji img" title=":spurdo:"></anonymous-stub>'
     )
 
     const wrapper = shallowMount(RichContent, {
-      localVue,
-      propsData: {
+      global,
+      props: {
         attentions,
         handleLinks: false,
         greentext: false,
@@ -205,15 +232,15 @@ describe('RichContent', () => {
       }
     })
 
-    expect(wrapper.html()).to.eql(compwrap(expected))
+    expect(wrapper.html().replace(/\n/g, '')).to.eql(compwrap(expected))
   })
 
   it('Doesn\'t add nonexistent emoji to post', () => {
     const html = p('Lol :lol:')
 
     const wrapper = shallowMount(RichContent, {
-      localVue,
-      propsData: {
+      global,
+      props: {
         attentions,
         handleLinks: false,
         greentext: false,
@@ -222,7 +249,7 @@ describe('RichContent', () => {
       }
     })
 
-    expect(wrapper.html()).to.eql(compwrap(html))
+    expect(wrapper.html().replace(/\n/g, '')).to.eql(compwrap(html))
   })
 
   it('Greentext + last mentions', () => {
@@ -240,8 +267,8 @@ describe('RichContent', () => {
     ].join('\n')
 
     const wrapper = shallowMount(RichContent, {
-      localVue,
-      propsData: {
+      global,
+      props: {
         attentions,
         handleLinks: true,
         greentext: true,
@@ -272,8 +299,8 @@ describe('RichContent', () => {
     ].join('<br>')
 
     const wrapper = shallowMount(RichContent, {
-      localVue,
-      propsData: {
+      global,
+      props: {
         attentions,
         handleLinks: true,
         greentext: true,
@@ -282,7 +309,7 @@ describe('RichContent', () => {
       }
     })
 
-    expect(wrapper.html()).to.eql(compwrap(expected))
+    expect(wrapper.html().replace(/\n/g, '')).to.eql(compwrap(expected))
   })
 
   it('buggy example/hashtags', () => {
@@ -300,16 +327,16 @@ describe('RichContent', () => {
       '<p>',
       '<a href="http://macrochan.org/images/N/H/NHCMDUXJPPZ6M3Z2CQ6D2EBRSWGE7MZY.jpg" target="_blank">',
       'NHCMDUXJPPZ6M3Z2CQ6D2EBRSWGE7MZY.jpg</a>',
-      ' <hashtaglink-stub url="https://shitposter.club/tag/nou" content="#nou" tag="nou">',
-      '</hashtaglink-stub>',
-      ' <hashtaglink-stub url="https://shitposter.club/tag/screencap" content="#screencap" tag="screencap">',
-      '</hashtaglink-stub>',
+      ' <hashtag-link-stub url="https://shitposter.club/tag/nou" content="#nou" tag="nou">',
+      '</hashtag-link-stub>',
+      ' <hashtag-link-stub url="https://shitposter.club/tag/screencap" content="#screencap" tag="screencap">',
+      '</hashtag-link-stub>',
       ' </p>'
     ].join('')
 
     const wrapper = shallowMount(RichContent, {
-      localVue,
-      propsData: {
+      global,
+      props: {
         attentions,
         handleLinks: true,
         greentext: true,
@@ -318,7 +345,7 @@ describe('RichContent', () => {
       }
     })
 
-    expect(wrapper.html()).to.eql(compwrap(expected))
+    expect(wrapper.html().replace(/\n/g, '')).to.eql(compwrap(expected))
   })
 
   it('rich contents of a mention are handled properly', () => {
@@ -342,7 +369,7 @@ describe('RichContent', () => {
       p(
         '<span class="MentionsLine">',
         '<span class="MentionLink mention-link">',
-        '<a href="lol" target="_blank" class="original">',
+        '<a href="lol" class="original" target="_blank">',
         '<span>',
         'https://</span>',
         '<span>',
@@ -350,10 +377,7 @@ describe('RichContent', () => {
         '<span>',
         '</span>',
         '</a>',
-        ' ',
-        '<!---->', // v-if placeholder, mentionlink's "new" (i.e. rich) display
         '</span>',
-        '<!---->', // v-if placeholder, mentionsline's extra mentions and stuff
         '</span>'
       ),
       p(
@@ -362,8 +386,8 @@ describe('RichContent', () => {
     ].join('')
 
     const wrapper = mount(RichContent, {
-      localVue,
-      propsData: {
+      global,
+      props: {
         attentions,
         handleLinks: true,
         greentext: true,
@@ -372,7 +396,75 @@ describe('RichContent', () => {
       }
     })
 
-    expect(wrapper.html()).to.eql(compwrap(expected))
+    expect(wrapper.html().replace(/\n/g, '').replace(/<!--.*?-->/g, '')).to.eql(compwrap(expected))
+  })
+
+  it('rich contents of nested mentions are handled properly', () => {
+    attentions.push({ statusnet_profile_url: 'lol' })
+    const html = [
+      '<span class="poast-style">',
+      '<a href="lol" class="mention">',
+      '<span>',
+      'https://</span>',
+      '<span>',
+      'lol.tld/</span>',
+      '<span>',
+      '</span>',
+      '</a>',
+      ' ',
+      '<a href="lol" class="mention">',
+      '<span>',
+      'https://</span>',
+      '<span>',
+      'lol.tld/</span>',
+      '<span>',
+      '</span>',
+      '</a>',
+      ' ',
+      '</span>',
+      'Testing'
+    ].join('')
+    const expected = [
+      '<span>',
+      '<span class="MentionsLine">',
+      '<span class="MentionLink mention-link">',
+      '<a href="lol" class="original" target="_blank">',
+      '<span>',
+      'https://</span>',
+      '<span>',
+      'lol.tld/</span>',
+      '<span>',
+      '</span>',
+      '</a>',
+      '</span>',
+      '<span class="MentionLink mention-link">',
+      '<a href="lol" class="original" target="_blank">',
+      '<span>',
+      'https://</span>',
+      '<span>',
+      'lol.tld/</span>',
+      '<span>',
+      '</span>',
+      '</a>',
+      '</span>',
+      '</span>',
+      ' ',
+      '</span>',
+      'Testing'
+    ].join('')
+
+    const wrapper = mount(RichContent, {
+      global,
+      props: {
+        attentions,
+        handleLinks: true,
+        greentext: true,
+        emoji: [],
+        html
+      }
+    })
+
+    expect(wrapper.html().replace(/\n/g, '').replace(/<!--.*?-->/g, '')).to.eql(compwrap(expected))
   })
 
   it('rich contents of a link are handled properly', () => {
@@ -406,8 +498,8 @@ describe('RichContent', () => {
     ].join('')
 
     const wrapper = shallowMount(RichContent, {
-      localVue,
-      propsData: {
+      global,
+      props: {
         attentions,
         handleLinks: true,
         greentext: true,
@@ -416,7 +508,7 @@ describe('RichContent', () => {
       }
     })
 
-    expect(wrapper.html()).to.eql(compwrap(expected))
+    expect(wrapper.html().replace(/\n/g, '')).to.eql(compwrap(expected))
   })
 
   it.skip('[INFORMATIVE] Performance testing, 10 000 simple posts', () => {
@@ -453,8 +545,8 @@ describe('RichContent', () => {
       const t0 = performance.now()
 
       const wrapper = mount(TestComponent, {
-        localVue,
-        propsData: {
+        global,
+        props: {
           attentions,
           handleLinks,
           vhtml

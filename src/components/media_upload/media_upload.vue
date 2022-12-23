@@ -17,21 +17,25 @@
     />
     <input
       v-if="uploadReady"
+      class="hidden-input-file"
       :disabled="disabled"
       type="file"
-      style="position: fixed; top: -100em"
       multiple="true"
       @change="change"
     >
   </label>
 </template>
 
-<script src="./media_upload.js" ></script>
+<script src="./media_upload.js"></script>
 
 <style lang="scss">
 @import '../../_variables.scss';
 
 .media-upload {
-  cursor: pointer;
+  cursor: pointer; // We use <label> for interactivity... i wonder if it's fine
+
+  .hidden-input-file {
+    display: none;
+  }
 }
  </style>

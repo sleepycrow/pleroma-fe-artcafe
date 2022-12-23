@@ -5,6 +5,7 @@ var webpack = require('webpack')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var env = process.env.NODE_ENV === 'testing'
     ? require('../config/test.env')
@@ -19,12 +20,16 @@ var webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, extract: true })
   },
-  devtool: config.build.productionSourceMap ? '#source-map' : false,
+  devtool: config.build.productionSourceMap ? 'source-map' : false,
   optimization: {
     minimize: true,
     splitChunks: {
       chunks: 'all'
-    }
+    },
+    minimizer: [
+      `...`,
+      new CssMinimizerPlugin()
+    ]
   },
   output: {
     path: config.build.assetsRoot,
@@ -36,7 +41,9 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env,
       'COMMIT_HASH': JSON.stringify(commitHash),
-      'DEV_OVERRIDES': JSON.stringify(undefined)
+      'DEV_OVERRIDES': JSON.stringify(undefined),
+      '__VUE_OPTIONS_API__': true,
+      '__VUE_PROD_DEVTOOLS__': false
     }),
     // extract css into its own file
     new MiniCssExtractPlugin({
@@ -58,9 +65,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         ignoreCustomComments: [/server-generated-meta/]
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
-      },
-      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency'
+      }
     }),
     // split vendor js into its own file
     // extract webpack runtime and module manifest to its own file in order to

@@ -709,6 +709,14 @@ export const SLOT_INHERITANCE = {
     textColor: 'bw'
   },
 
+  badgeNeutral: '--cGreen',
+  badgeNeutralText: {
+    depends: ['text', 'badgeNeutral'],
+    layer: 'badge',
+    variant: 'badgeNeutral',
+    textColor: 'bw'
+  },
+
   chatBg: {
     depends: ['bg']
   },

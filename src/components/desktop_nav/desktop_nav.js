@@ -46,23 +46,27 @@ export default {
     enableMask () { return this.supportsMask && this.$store.state.instance.logoMask },
     logoStyle () {
       return {
-        'visibility': this.enableMask ? 'hidden' : 'visible'
+        visibility: this.enableMask ? 'hidden' : 'visible'
       }
     },
     logoMaskStyle () {
-      return this.enableMask ? {
-        'mask-image': `url(${this.$store.state.instance.logo})`
-      } : {
-        'background-color': this.enableMask ? '' : 'transparent'
-      }
+      return this.enableMask
+        ? {
+            'mask-image': `url(${this.$store.state.instance.logo})`
+          }
+        : {
+            'background-color': this.enableMask ? '' : 'transparent'
+          }
     },
     logoBgStyle () {
       return Object.assign({
-        'margin': `${this.$store.state.instance.logoMargin} 0`,
+        margin: `${this.$store.state.instance.logoMargin} 0`,
         opacity: this.searchBarHidden ? 1 : 0
-      }, this.enableMask ? {} : {
-        'background-color': this.enableMask ? '' : 'transparent'
-      })
+      }, this.enableMask
+        ? {}
+        : {
+            'background-color': this.enableMask ? '' : 'transparent'
+          })
     },
     logo () { return this.$store.state.instance.logo },
     sitename () { return this.$store.state.instance.name },

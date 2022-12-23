@@ -47,6 +47,8 @@
           class="cancel-icon fa-scale-110 fa-old-padding"
         />
       </button>
+      <span class="spacer" />
+      <span class="spacer" />
     </template>
   </div>
 </template>

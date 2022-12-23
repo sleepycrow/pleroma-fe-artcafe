@@ -245,7 +245,7 @@ describe('Statuses module', () => {
     it('increments count in existing reaction', () => {
       const state = defaultState()
       const status = makeMockStatus({ id: '1' })
-      status.emoji_reactions = [ { name: '😂', count: 1, accounts: [] } ]
+      status.emoji_reactions = [{ name: '😂', count: 1, accounts: [] }]
 
       mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
       mutations.addOwnReaction(state, { id: '1', emoji: '😂', currentUser: { id: 'me' } })
@@ -269,7 +269,7 @@ describe('Statuses module', () => {
     it('decreases count in existing reaction', () => {
       const state = defaultState()
       const status = makeMockStatus({ id: '1' })
-      status.emoji_reactions = [ { name: '😂', count: 2, accounts: [{ id: 'me' }] } ]
+      status.emoji_reactions = [{ name: '😂', count: 2, accounts: [{ id: 'me' }] }]
 
       mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
       mutations.removeOwnReaction(state, { id: '1', emoji: '😂', currentUser: { id: 'me' } })

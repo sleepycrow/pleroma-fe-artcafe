@@ -46,7 +46,7 @@ export const convertHtmlToLines = (html = '') => {
   // All block-level elements that aren't empty elements, i.e. not <hr>
   const nonEmptyElements = new Set(visualLineElements)
   // Difference
-  for (let elem of emptyElements) {
+  for (const elem of emptyElements) {
     nonEmptyElements.delete(elem)
   }
 
@@ -56,7 +56,7 @@ export const convertHtmlToLines = (html = '') => {
     ...emptyElements.values()
   ])
 
-  let buffer = [] // Current output buffer
+  const buffer = [] // Current output buffer
   const level = [] // How deep we are in tags and which tags were there
   let textBuffer = '' // Current line content
   let tagBuffer = null // Current tag buffer, if null = we are not currently reading a tag

@@ -34,11 +34,11 @@
         <search-bar
           v-if="currentUser || !privateMode"
           @toggled="onSearchBarToggled"
-          @click.stop.native
+          @click.stop
         />
         <button
           class="button-unstyled nav-icon"
-          @click.stop="openSettingsModal"
+          @click="openSettingsModal"
         >
           <FAIcon
             fixed-width
@@ -52,6 +52,7 @@
           href="/pleroma/admin/#/login-pleroma"
           class="nav-icon"
           target="_blank"
+          @click.stop
         >
           <FAIcon
             fixed-width
@@ -60,6 +61,7 @@
             :title="$t('nav.administration')"
           />
         </a>
+        <span class="spacer" />
         <button
           v-if="currentUser"
           class="button-unstyled nav-icon"

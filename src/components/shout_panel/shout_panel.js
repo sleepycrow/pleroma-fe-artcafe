@@ -11,7 +11,7 @@ library.add(
 )
 
 const shoutPanel = {
-  props: [ 'floating' ],
+  props: ['floating'],
   data () {
     return {
       currentMessage: '',

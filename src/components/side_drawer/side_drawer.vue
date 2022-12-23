@@ -47,12 +47,24 @@
           v-if="currentUser || !privateMode"
           @click="toggleDrawer"
         >
-          <router-link :to="{ name: timelinesRoute }">
+          <router-link :to="timelinesRoute">
             <FAIcon
               fixed-width
               class="fa-scale-110 fa-old-padding"
               icon="home"
             /> {{ $t("nav.timelines") }}
+          </router-link>
+        </li>
+        <li
+          v-if="currentUser"
+          @click="toggleDrawer"
+        >
+          <router-link :to="{ name: 'lists' }">
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="list"
+            /> {{ $t("nav.lists") }}
           </router-link>
         </li>
         <li
@@ -180,6 +192,38 @@
           </a>
         </li>
         <li
+          v-if="currentUser && supportsAnnouncements"
+          @click="toggleDrawer"
+        >
+          <router-link
+            :to="{ name: 'announcements' }"
+          >
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="bullhorn"
+            /> {{ $t("nav.announcements") }}
+            <span
+              v-if="unreadAnnouncementCount"
+              class="badge badge-notification"
+            >
+              {{ unreadAnnouncementCount }}
+            </span>
+          </router-link>
+        </li>
+        <li
+          v-if="currentUser"
+          @click="toggleDrawer"
+        >
+          <router-link :to="{ name: 'edit-navigation' }">
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="compass"
+            /> {{ $t("nav.edit_nav_mobile") }}
+          </router-link>
+        </li>
+        <li
           v-if="currentUser"
           @click="toggleDrawer"
         >
@@ -204,14 +248,14 @@
   </div>
 </template>
 
-<script src="./side_drawer.js" ></script>
+<script src="./side_drawer.js"></script>
 
 <style lang="scss">
 @import '../../_variables.scss';
 
 .side-drawer-container {
   position: fixed;
-  z-index: 1000;
+  z-index: var(--ZI_navbar);
   top: 0;
   left: 0;
   width: 100%;

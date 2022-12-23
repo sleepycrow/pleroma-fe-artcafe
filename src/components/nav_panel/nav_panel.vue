@@ -1,96 +1,105 @@
 <template>
   <div class="NavPanel">
     <div class="panel panel-default">
-      <ul>
-        <li v-if="currentUser || !privateMode">
-          <button
-            class="button-unstyled menu-item"
-            @click="toggleTimelines"
-          >
-            <FAIcon
-              fixed-width
-              class="fa-scale-110"
-              icon="stream"
-            />{{ $t("nav.timelines") }}
-            <FAIcon
-              class="timelines-chevron"
-              fixed-width
-              :icon="showTimelines ? 'chevron-up' : 'chevron-down'"
+      <div
+        v-if="!forceExpand"
+        class="panel-heading nav-panel-heading"
+      >
+        <NavigationPins :limit="6" />
+        <div class="spacer" />
+        <button
+          class="button-unstyled"
+          @click="toggleCollapse"
+        >
+          <FAIcon
+            class="navigation-chevron"
+            fixed-width
+            :icon="collapsed ? 'chevron-down' : 'chevron-up'"
+          />
+        </button>
+      </div>
+      <ul
+        v-if="!collapsed || forceExpand"
+        class="panel-body"
+      >
+        <NavigationEntry
+          v-if="currentUser || !privateMode"
+          :show-pin="false"
+          :item="{ icon: 'stream', label: 'nav.timelines' }"
+          :aria-expanded="showTimelines ? 'true' : 'false'"
+          @click="toggleTimelines"
+        >
+          <FAIcon
+            class="timelines-chevron"
+            fixed-width
+            :icon="showTimelines ? 'chevron-up' : 'chevron-down'"
+          />
+        </NavigationEntry>
+        <div
+          v-show="showTimelines"
+          class="timelines-background"
+        >
+          <div class="timelines">
+            <NavigationEntry
+              v-for="item in timelinesItems"
+              :key="item.name"
+              :show-pin="editMode || forceEditMode"
+              :item="item"
             />
-          </button>
-          <div
-            v-show="showTimelines"
-            class="timelines-background"
-          >
-            <TimelineMenuContent class="timelines" />
           </div>
-        </li>
-        <li v-if="currentUser">
+        </div>
+        <NavigationEntry
+          v-if="currentUser"
+          :show-pin="false"
+          :item="{ icon: 'list', label: 'nav.lists' }"
+          :aria-expanded="showLists ? 'true' : 'false'"
+          @click="toggleLists"
+        >
           <router-link
-            class="menu-item"
-            :to="{ name: 'interactions', params: { username: currentUser.screen_name } }"
+            :title="$t('lists.manage_lists')"
+            class="extra-button"
+            :to="{ name: 'lists' }"
+            @click.stop
           >
             <FAIcon
+              class="extra-button"
               fixed-width
-              class="fa-scale-110"
-              icon="bell"
-            />{{ $t("nav.interactions") }}
+              icon="wrench"
+            />
           </router-link>
-        </li>
-        <li v-if="currentUser && pleromaChatMessagesAvailable">
-          <router-link
-            class="menu-item"
-            :to="{ name: 'chats', params: { username: currentUser.screen_name } }"
-          >
-            <div
-              v-if="unreadChatCount"
-              class="badge badge-notification"
-            >
-              {{ unreadChatCount }}
-            </div>
-            <FAIcon
-              fixed-width
-              class="fa-scale-110"
-              icon="comments"
-            />{{ $t("nav.chats") }}
-          </router-link>
-        </li>
-        <li v-if="currentUser && currentUser.locked">
-          <router-link
-            class="menu-item"
-            :to="{ name: 'friend-requests' }"
-          >
-            <FAIcon
-              fixed-width
-              class="fa-scale-110"
-              icon="user-plus"
-            />{{ $t("nav.friend_requests") }}
-            <span
-              v-if="followRequestCount > 0"
-              class="badge badge-notification"
-            >
-              {{ followRequestCount }}
-            </span>
-          </router-link>
-        </li>
-        <li>
-          <router-link
-            class="menu-item"
-            :to="{ name: 'about' }"
-          >
-            <FAIcon
-              fixed-width
-              class="fa-scale-110"
-              icon="info-circle"
-            />{{ $t("nav.about") }}
-          </router-link>
-        </li>
+          <FAIcon
+            class="timelines-chevron"
+            fixed-width
+            :icon="showLists ? 'chevron-up' : 'chevron-down'"
+          />
+        </NavigationEntry>
+        <div
+          v-show="showLists"
+          class="timelines-background"
+        >
+          <ListsMenuContent
+            :show-pin="editMode || forceEditMode"
+            class="timelines"
+          />
+        </div>
+        <NavigationEntry
+          v-for="item in rootItems"
+          :key="item.name"
+          :show-pin="editMode || forceEditMode"
+          :item="item"
+        />
+        <NavigationEntry
+          v-if="!forceEditMode && currentUser"
+          :show-pin="false"
+          :item="{ label: editMode ? $t('nav.edit_finish') : $t('nav.edit_pinned'), icon: editMode ? 'check' : 'wrench' }"
+          @click="toggleEditMode"
+        />
       </ul>
     </div>
   </div>
 </template>
 
-<script src="./nav_panel.js" ></script>
+<script src="./nav_panel.js"></script>
 
 <style lang="scss">
 @import '../../_variables.scss';
@@ -112,8 +121,9 @@
     border-bottom: 1px solid;
     border-color: $fallback--border;
     border-color: var(--border, $fallback--border);
-    padding: 0;
+  }
 
+  > li {
     &:first-child .menu-item {
       border-top-right-radius: $fallback--panelRadius;
       border-top-right-radius: var(--panelRadius, $fallback--panelRadius);
@@ -133,42 +143,10 @@
     border: none;
   }
 
-  .menu-item {
-    display: block;
-    box-sizing: border-box;
-    height: 3.5em;
-    line-height: 3.5em;
-    padding: 0 1em;
-    width: 100%;
-    color: $fallback--link;
-    color: var(--link, $fallback--link);
-
-    &:hover {
-      background-color: $fallback--lightBg;
-      background-color: var(--selectedMenu, $fallback--lightBg);
-      color: $fallback--link;
-      color: var(--selectedMenuText, $fallback--link);
-      --faint: var(--selectedMenuFaintText, $fallback--faint);
-      --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
-      --lightText: var(--selectedMenuLightText, $fallback--lightText);
-      --icon: var(--selectedMenuIcon, $fallback--icon);
-    }
-
-    &.router-link-active {
-      font-weight: bolder;
-      background-color: $fallback--lightBg;
-      background-color: var(--selectedMenu, $fallback--lightBg);
-      color: $fallback--text;
-      color: var(--selectedMenuText, $fallback--text);
-      --faint: var(--selectedMenuFaintText, $fallback--faint);
-      --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
-      --lightText: var(--selectedMenuLightText, $fallback--lightText);
-      --icon: var(--selectedMenuIcon, $fallback--icon);
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
+  .navigation-chevron {
+    margin-left: 0.8em;
+    margin-right: 0.8em;
+    font-size: 1.1em;
   }
 
   .timelines-chevron {
@@ -180,7 +158,7 @@
     padding: 0 0 0 0.6em;
     background-color: $fallback--lightBg;
     background-color: var(--selectedMenu, $fallback--lightBg);
-    border-top: 1px solid;
+    border-bottom: 1px solid;
     border-color: $fallback--border;
     border-color: var(--border, $fallback--border);
   }
@@ -190,14 +168,9 @@
     background-color: var(--bg, $fallback--bg);
   }
 
-  .fa-scale-110 {
-    margin-right: 0.8em;
-  }
-
-  .badge {
-    position: absolute;
-    right: 0.6rem;
-    top: 1.25em;
+  .nav-panel-heading {
+   // breaks without a unit
+   --panel-heading-height-padding: 0em;
   }
 }
 </style>

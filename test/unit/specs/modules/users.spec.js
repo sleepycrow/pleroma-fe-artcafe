@@ -57,30 +57,64 @@ describe('The users module', () => {
   })
 
   describe('findUser', () => {
-    it('returns user with matching screen_name', () => {
+    it('does not return user with matching screen_name', () => {
       const user = { screen_name: 'Guy', id: '1' }
       const state = {
         usersObject: {
-          1: user,
+          1: user
+        },
+        usersByNameObject: {
           guy: user
         }
       }
       const name = 'Guy'
-      const expected = { screen_name: 'Guy', id: '1' }
-      expect(getters.findUser(state)(name)).to.eql(expected)
+      expect(getters.findUser(state)(name)).to.eql(undefined)
     })
 
     it('returns user with matching id', () => {
       const user = { screen_name: 'Guy', id: '1' }
       const state = {
         usersObject: {
-          1: user,
+          1: user
+        },
+        usersByNameObject: {
           guy: user
         }
       }
       const id = '1'
       const expected = { screen_name: 'Guy', id: '1' }
       expect(getters.findUser(state)(id)).to.eql(expected)
+    })
+  })
+
+  describe('findUserByName', () => {
+    it('returns user with matching screen_name', () => {
+      const user = { screen_name: 'Guy', id: '1' }
+      const state = {
+        usersObject: {
+          1: user
+        },
+        usersByNameObject: {
+          guy: user
+        }
+      }
+      const name = 'Guy'
+      const expected = { screen_name: 'Guy', id: '1' }
+      expect(getters.findUserByName(state)(name)).to.eql(expected)
+    })
+
+    it('does not return user with matching id', () => {
+      const user = { screen_name: 'Guy', id: '1' }
+      const state = {
+        usersObject: {
+          1: user
+        },
+        usersByNameObject: {
+          guy: user
+        }
+      }
+      const id = '1'
+      expect(getters.findUserByName(state)(id)).to.eql(undefined)
     })
   })
 })

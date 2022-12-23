@@ -2,7 +2,7 @@
  * suggest - generates a suggestor function to be used by emoji-input
  * data: object providing source information for specific types of suggestions:
  * data.emoji - optional, an array of all emoji available i.e.
- *   (state.instance.emoji + state.instance.customEmoji)
+ *   (getters.standardEmojiList + state.instance.customEmoji)
  * data.users - optional, an array of all known users
  * updateUsersList - optional, a function to search and append to users
  *
@@ -13,10 +13,10 @@
 export default data => {
   const emojiCurry = suggestEmoji(data.emoji)
   const usersCurry = data.store && suggestUsers(data.store)
-  return input => {
+  return (input, nameKeywordLocalizer) => {
     const firstChar = input[0]
     if (firstChar === ':' && data.emoji) {
-      return emojiCurry(input)
+      return emojiCurry(input, nameKeywordLocalizer)
     }
     if (firstChar === '@' && usersCurry) {
       return usersCurry(input)
@@ -25,34 +25,34 @@ export default data => {
   }
 }
 
-export const suggestEmoji = emojis => input => {
+export const suggestEmoji = emojis => (input, nameKeywordLocalizer) => {
   const noPrefix = input.toLowerCase().substr(1)
   return emojis
-    .filter(({ displayText }) => displayText.toLowerCase().match(noPrefix))
-    .sort((a, b) => {
-      let aScore = 0
-      let bScore = 0
+    .map(emoji => ({ ...emoji, ...nameKeywordLocalizer(emoji) }))
+    .filter((emoji) => (emoji.names.concat(emoji.keywords)).filter(kw => kw.toLowerCase().match(noPrefix)).length)
+    .map(k => {
+      let score = 0
 
       // An exact match always wins
-      aScore += a.displayText.toLowerCase() === noPrefix ? 200 : 0
-      bScore += b.displayText.toLowerCase() === noPrefix ? 200 : 0
+      score += Math.max(...k.names.map(name => name.toLowerCase() === noPrefix ? 200 : 0), 0)
 
       // Prioritize custom emoji a lot
-      aScore += a.imageUrl ? 100 : 0
-      bScore += b.imageUrl ? 100 : 0
+      score += k.imageUrl ? 100 : 0
 
       // Prioritize prefix matches somewhat
-      aScore += a.displayText.toLowerCase().startsWith(noPrefix) ? 10 : 0
-      bScore += b.displayText.toLowerCase().startsWith(noPrefix) ? 10 : 0
+      score += Math.max(...k.names.map(kw => kw.toLowerCase().startsWith(noPrefix) ? 10 : 0), 0)
 
       // Sort by length
-      aScore -= a.displayText.length
-      bScore -= b.displayText.length
+      score -= k.displayText.length
 
+      k.score = score
+      return k
+    })
+    .sort((a, b) => {
       // Break ties alphabetically
       const alphabetically = a.displayText > b.displayText ? 0.5 : -0.5
 
-      return bScore - aScore + alphabetically
+      return b.score - a.score + alphabetically
     })
 }
 
@@ -116,11 +116,12 @@ export const suggestUsers = ({ dispatch, state }) => {
 
       return diff + nameAlphabetically + screenNameAlphabetically
       /* eslint-disable camelcase */
-    }).map(({ screen_name, screen_name_ui, name, profile_image_url_original }) => ({
-      displayText: screen_name_ui,
-      detailText: name,
-      imageUrl: profile_image_url_original,
-      replacement: '@' + screen_name + ' '
+    }).map((user) => ({
+      user,
+      displayText: user.screen_name_ui,
+      detailText: user.name,
+      imageUrl: user.profile_image_url_original,
+      replacement: '@' + user.screen_name + ' '
     }))
     /* eslint-enable camelcase */
 

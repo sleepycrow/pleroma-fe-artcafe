@@ -3,18 +3,90 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## 2.5.0 - 23.12.2022
+### Fixed
+- UI no longer lags when switching between mobile and desktop mode
+- Popovers no longer constrained by DOM hierarchy, shouldn't be cut off by anything
+- Emoji autocomplete popover and picker popover stick to the text cursor.
+- Attachments are ALWAYS in same order as user uploaded, no more "videos first"
+- Pinned statuses no longer appear at bottom of user timeline (still appear as part of the timeline when fetched deep enough)
+- Fixed many many bugs related to new mentions, including spacing and alignment issues
+- Links in profile bios now properly open in new tabs
+- "Always show mobile button" is working now
+- Inline images now respect their intended width/height attributes
+- Links with `&` in them work properly now
+- Attachment description is prefilled with backend-provided default when uploading
+- Proper visual feedback that next image is loading when browsing
+- Additional HTML sanitization on frontend side in case backend sanitization fails
+- Interaction list popovers now properly emojify names
+- AdminFE button no longer scrolls page to top when clicked
+- User handles with non-ascii domains now have less intrusive indicator for the domain name
+- Completely hidden posts still no longer have 1px border
+- A lot of accessibility improvements
+
+### Changed
+- Using Vue 3 now
+- A lot of internal dependencies updated
+- "(You)s" are optional (opt-in) now, bolding your nickname is also optional (opt-out)
+- User highlight background now also covers the `@`
+- Reverted back to textual `@`, svg version is opt-in.
+- Settings window has been thoroughly rearranged to make more sense and make navigation settings easier.
+- Uploaded attachments are uniform with displayed attachments
+- Flash is watchable in media-modal (takes up nearly full screen though due to sizing issues)
+- Notifications about likes/repeats/emoji reacts are now minimized so they always take up same amount of space irrelevant to size of post. (You can expand them to full if need be)
+- Slight width/spacing adjustments
+- More sizing stuff is font-size dependent now
+- Scrollbars are styled/colorized now
+- Scrollbars are toggleable (for stuff that didn't have visible scrollbars before) (opt-in)
+- Updated localization files
+- Top bar is more useful in mobile mode now.
+- "Show new" button is way more compact in mobile mode
+- Slightly adjusted placement and spacing of the topbar buttons so it's less easy to accidentally log yourself out
+
+### Added
+- 3 column mode: only enables when there's space for it (opt-out, customizable)
+- Apologetic pleroma-tan
+- New button on timeline header to change some of the new and often-used settings
+- Support for lists
+- Added ability to edit posts and view post edit history etc.
+- Added ability to add personal note to users
+- Added initial support for admin announcements
+- Added ui for account migration
+- Added ui for backups
+- Added ability to force-unfollow a user from you
+- Emoji are now grouped by pack
+- Ability to pin navigation items and collapse the navigation menu
+- Ability to rearrange order of attachments when uploading
+- Ability to scroll column (or page) to top via panel header button
+- Options to show domains in mentions
+- Option to show user avatars in mention links (opt-in)
+- Option to disable the tooltip for mentions
+- Option to completely hide muted threads
+- Option to customize what clicking user avatar does in user popover
+- Notifications for poll results
+- "Favorites" link in navigation
+- Very early and somewhat experimental system for automatic settings sync (used only for pinned navigation and apologetic pleroma-tan)
+- Implemented remote interaction with statuses for anon visitors
+- Ability to open videos in modal even if you disabled that feature, via an icon button
+- New button on attachment that indicates that attachment has a description and shows a bar filled with description
+- Attachments are truncated just like post contents
+- Media modal now also displays description and counter position in gallery (i.e. 1/5)
+- Enabled users to zoom and pan images in media viewer with mouse and touch
+- Timelines/panels and conversations have sticky headers now (a bit glitchy on some browsers like safari) (opt-out)
+
+
 ## [2.4.2] - 2022-01-09
-### Added 
+### Added
 - Added Apply and Reset buttons to the bottom of theme tab to minimize UI travel
 - Implemented user option to always show floating New Post button (normally mobile-only)
-- Display reasons for instance specific policies 
+- Display reasons for instance specific policies
 - Added functionality to cancel follow request
 
 ### Fixed
 - Fixed link to external profile not working on user profiles
-- Fixed mobile shoutbox display 
+- Fixed mobile shoutbox display
 - Fixed favicon badge not working in Chrome
-- Escape html more properly in subject/display name 
+- Escape html more properly in subject/display name
 
 
 ## [2.4.0] - 2021-08-08

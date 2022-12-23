@@ -6,7 +6,7 @@
     v-else
     class="chat-list panel panel-default"
   >
-    <div class="panel-heading">
+    <div class="panel-heading -sticky">
       <span class="title">
         {{ $t("chats.chats") }}
       </span>
@@ -23,7 +23,7 @@
         class="timeline"
       >
         <List :items="sortedChatList">
-          <template v-slot:item="{item}">
+          <template #item="{item}">
             <ChatListItem
               :key="item.id"
               :compact="false"

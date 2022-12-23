@@ -72,6 +72,7 @@
           :max="maxExpirationInCurrentUnit"
           @change="expiryAmountChange"
         >
+        {{ ' ' }}
         <Select
           v-model="expiryUnit"
           unstyled="true"
@@ -83,7 +84,7 @@
             :key="unit"
             :value="unit"
           >
-            {{ $t(`time.${unit}_short`, ['']) }}
+            {{ $tc(`time.unit.${unit}_short`, expiryAmount, ['']) }}
           </option>
         </Select>
       </div>

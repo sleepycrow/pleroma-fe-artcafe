@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="column-inner">
     <instance-specific-panel v-if="showInstanceSpecificPanel" />
     <staff-panel />
     <terms-of-service-panel />
@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script src="./about.js" ></script>
+<script src="./about.js"></script>
 
 <style lang="scss">
 </style>

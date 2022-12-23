@@ -4,24 +4,19 @@
 //   https://github.com/webpack/karma-webpack
 
 // var path = require('path')
-var merge = require('webpack-merge')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var baseConfig = require('../../build/webpack.base.conf')
-var utils = require('../../build/utils')
-var webpack = require('webpack')
+const merge = require('webpack-merge')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const baseConfig = require('../../build/webpack.base.conf')
+const utils = require('../../build/utils')
+const webpack = require('webpack')
 // var projectRoot = path.resolve(__dirname, '../../')
 
-var webpackConfig = merge(baseConfig, {
+const webpackConfig = merge(baseConfig, {
   // use inline sourcemap for karma-sourcemap-loader
   module: {
     rules: utils.styleLoaders()
   },
-  devtool: '#inline-source-map',
-  // vue: {
-  //   loaders: {
-  //     js: 'isparta'
-  //   }
-  // },
+  devtool: 'inline-source-map',
   plugins: [
     new webpack.DefinePlugin({
       'process.env': require('../../config/test.env')
@@ -37,22 +32,6 @@ var webpackConfig = merge(baseConfig, {
 // no need for app entry during tests
 delete webpackConfig.entry
 
-// make sure isparta loader is applied before eslint
-// webpackConfig.module.preLoaders = webpackConfig.module.preLoaders || []
-// webpackConfig.module.preLoaders.unshift({
-//   test: /\.js$/,
-//   loader: 'isparta',
-//   include: path.resolve(projectRoot, 'src')
-// })
-
-// // only apply babel for test files when using isparta
-// webpackConfig.module.loaders.some(function (loader, i) {
-//   if (loader.loader === 'babel') {
-//     loader.include = path.resolve(projectRoot, 'test/unit')
-//     return true
-//   }
-// })
-
 module.exports = function (config) {
   config.set({
     // to run in additional browsers:
@@ -63,7 +42,7 @@ module.exports = function (config) {
     frameworks: ['mocha', 'sinon-chai'],
     reporters: ['mocha'],
     customLaunchers: {
-      'FirefoxHeadless': {
+      FirefoxHeadless: {
         base: 'Firefox',
         flags: [
           '-headless'

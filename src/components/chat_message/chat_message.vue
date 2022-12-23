@@ -14,16 +14,16 @@
         v-if="!isCurrentUser"
         class="avatar-wrapper"
       >
-        <router-link
+        <UserPopover
           v-if="chatViewItem.isHead"
-          :to="userProfileLink"
+          :user-id="author.id"
         >
           <UserAvatar
             :compact="true"
             :better-shadow="betterShadow"
             :user="author"
           />
-        </router-link>
+        </UserPopover>
       </div>
       <div class="chat-message-inner">
         <div
@@ -44,13 +44,13 @@
               <Popover
                 trigger="click"
                 placement="top"
-                :bound-to-selector="isCurrentUser ? '' : '.scrollable-message-list'"
+                bound-to-selector=".chat-view-inner"
                 :bound-to="{ x: 'container' }"
                 :margin="popoverMarginStyle"
                 @show="menuOpened = true"
                 @close="menuOpened = false"
               >
-                <template v-slot:content>
+                <template #content>
                   <div class="dropdown-menu">
                     <button
                       class="button-default dropdown-item dropdown-item-icon"
@@ -60,7 +60,7 @@
                     </button>
                   </div>
                 </template>
-                <template v-slot:trigger>
+                <template #trigger>
                   <button
                     class="button-default menu-icon"
                     :title="$t('chats.more')"
@@ -75,7 +75,7 @@
               :status="messageForStatusContent"
               :full-content="true"
             >
-              <template v-slot:footer>
+              <template #footer>
                 <span
                   class="created-at"
                 >
@@ -96,7 +96,7 @@
   </div>
 </template>
 
-<script src="./chat_message.js" ></script>
+<script src="./chat_message.js"></script>
 <style lang="scss">
 @import './chat_message.scss';
 

@@ -76,17 +76,21 @@
     >
       <div class="alert error">
         {{ error }}
-        <FAIcon
-          class="fa-scale-110 fa-old-padding"
-          icon="times"
+        <button
+          class="button-unstyled"
           @click="clearError"
-        />
+        >
+          <FAIcon
+            class="fa-scale-110 fa-old-padding"
+            icon="times"
+          />
+        </button>
       </div>
     </div>
   </div>
 </template>
 
-<script src="./login_form.js" ></script>
+<script src="./login_form.js"></script>
 
 <style lang="scss">
 @import '../../_variables.scss';
@@ -97,7 +101,7 @@
   padding: 0.6em;
 
   .btn {
-    min-height: 28px;
+    min-height: 2em;
     width: 10em;
   }
 

@@ -6,7 +6,7 @@
       :bound-to="{ x: 'container' }"
       remove-padding
     >
-      <template v-slot:content>
+      <template #content>
         <div class="dropdown-menu">
           <template v-if="relationship.following">
             <button
@@ -28,6 +28,14 @@
               class="dropdown-divider"
             />
           </template>
+          <UserListMenu :user="user" />
+          <button
+            v-if="relationship.followed_by"
+            class="btn button-default btn-block dropdown-item"
+            @click="removeUserFromFollowers"
+          >
+            {{ $t('user_card.remove_follower') }}
+          </button>
           <button
             v-if="relationship.blocking"
             class="btn button-default btn-block dropdown-item"
@@ -57,7 +65,7 @@
           </button>
         </div>
       </template>
-      <template v-slot:trigger>
+      <template #trigger>
         <button class="button-unstyled ellipsis-button">
           <FAIcon
             class="icon"
@@ -74,10 +82,6 @@
 <style lang="scss">
 @import '../../_variables.scss';
 .AccountActions {
-  button.dropdown-item {
-    margin-left: 0;
-  }
-
   .ellipsis-button {
     width: 2.5em;
     margin: -0.5em 0;

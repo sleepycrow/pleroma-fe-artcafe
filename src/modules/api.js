@@ -15,6 +15,9 @@ const api = {
     mastoUserSocketStatus: null,
     followRequests: []
   },
+  getters: {
+    followRequestCount: state => state.followRequests.length
+  },
   mutations: {
     setBackendInteractor (state, backendInteractor) {
       state.backendInteractor = backendInteractor
@@ -98,6 +101,13 @@ const api = {
                   statuses: [message.status],
                   userId: false,
                   showImmediately: timelineData.visibleStatuses.length === 0,
+                  timeline: 'friends'
+                })
+              } else if (message.event === 'status.update') {
+                dispatch('addNewStatuses', {
+                  statuses: [message.status],
+                  userId: false,
+                  showImmediately: message.status.id in timelineData.visibleStatusesObject,
                   timeline: 'friends'
                 })
               } else if (message.event === 'delete') {
@@ -191,12 +201,13 @@ const api = {
     startFetchingTimeline (store, {
       timeline = 'friends',
       tag = false,
-      userId = false
+      userId = false,
+      listId = false
     }) {
       if (store.state.fetchers[timeline]) return
 
       const fetcher = store.state.backendInteractor.startFetchingTimeline({
-        timeline, store, userId, tag
+        timeline, store, userId, listId, tag
       })
       store.commit('addFetcher', { fetcherName: timeline, fetcher })
     },
@@ -205,7 +216,7 @@ const api = {
       if (!fetcher) return
       store.commit('removeFetcher', { fetcherName: timeline, fetcher })
     },
-    fetchTimeline (store, timeline, { ...rest }) {
+    fetchTimeline (store, { timeline, ...rest }) {
       store.state.backendInteractor.fetchTimeline({
         store,
         timeline,
@@ -233,7 +244,7 @@ const api = {
 
     // Follow requests
     startFetchingFollowRequests (store) {
-      if (store.state.fetchers['followRequests']) return
+      if (store.state.fetchers.followRequests) return
       const fetcher = store.state.backendInteractor.startFetchingFollowRequests({ store })
 
       store.commit('addFetcher', { fetcherName: 'followRequests', fetcher })
@@ -244,8 +255,20 @@ const api = {
       store.commit('removeFetcher', { fetcherName: 'followRequests', fetcher })
     },
     removeFollowRequest (store, request) {
-      let requests = store.state.followRequests.filter((it) => it !== request)
+      const requests = store.state.followRequests.filter((it) => it !== request)
       store.commit('setFollowRequests', requests)
+    },
+
+    // Lists
+    startFetchingLists (store) {
+      if (store.state.fetchers.lists) return
+      const fetcher = store.state.backendInteractor.startFetchingLists({ store })
+      store.commit('addFetcher', { fetcherName: 'lists', fetcher })
+    },
+    stopFetchingLists (store) {
+      const fetcher = store.state.fetchers.lists
+      if (!fetcher) return
+      store.commit('removeFetcher', { fetcherName: 'lists', fetcher })
     },
 
     // Pleroma websocket

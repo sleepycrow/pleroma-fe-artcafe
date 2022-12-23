@@ -3,12 +3,10 @@
 import localForage from 'localforage'
 import { parseNotification } from './services/entity_normalizer/entity_normalizer.service.js'
 import { prepareNotificationObject } from './services/notification_utils/notification_utils.js'
-import Vue from 'vue'
-import VueI18n from 'vue-i18n'
+import { createI18n } from 'vue-i18n'
 import messages from './i18n/service_worker_messages.js'
 
-Vue.use(VueI18n)
-const i18n = new VueI18n({
+const i18n = createI18n({
   // By default, use the browser locale, we will update it if neccessary
   locale: 'en',
   fallbackLocale: 'en',
@@ -59,8 +57,8 @@ self.addEventListener('notificationclick', (event) => {
   event.notification.close()
 
   event.waitUntil(getWindowClients().then((list) => {
-    for (var i = 0; i < list.length; i++) {
-      var client = list[i]
+    for (let i = 0; i < list.length; i++) {
+      const client = list[i]
       if (client.url === '/' && 'focus' in client) { return client.focus() }
     }
 

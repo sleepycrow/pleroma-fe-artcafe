@@ -15,7 +15,8 @@
     "title": "Fonctionnalités",
     "who_to_follow": "Suggestions de suivis",
     "pleroma_chat_messages": "Chat Pleroma",
-    "upload_limit": "Limite de téléversement"
+    "upload_limit": "Limite de téléversement",
+    "shout": "Shoutbox"
   },
   "finder": {
     "error_fetching_user": "Erreur lors de la recherche du compte",
@@ -44,9 +45,23 @@
       "moderator": "Modo'",
       "admin": "Admin"
     },
-    "flash_content": "Clique pour afficher le contenu Flash avec Ruffle (Expérimental, peut ne pas fonctionner).",
+    "flash_content": "Cliquer pour afficher le contenu Flash avec Ruffle (Expérimental, peut ne pas fonctionner).",
     "flash_security": "Cela reste potentiellement dangereux, Flash restant du code arbitraire.",
-    "flash_fail": "Échec de chargement du contenu Flash, voir la console pour les détails."
+    "flash_fail": "Échec de chargement du contenu Flash, voir la console pour les détails.",
+    "scope_in_timeline": {
+      "direct": "Direct",
+      "public": "Publique",
+      "private": "Abonné⋅e⋅s seulement",
+      "unlisted": "Non-listé"
+    },
+    "undo": "Défaire",
+    "yes": "Oui",
+    "no": "Non",
+    "unpin": "Dégrafer l'élément",
+    "scroll_to_top": "Défiler au début",
+    "pin": "Agrafer l'élément",
+    "generic_error_message": "Une erreur est apparue : {0}",
+    "never_show_again": "Ne plus afficher"
   },
   "image_cropper": {
     "crop_picture": "Rogner l'image",
@@ -79,7 +94,9 @@
   },
   "media_modal": {
     "previous": "Précédent",
-    "next": "Suivant"
+    "next": "Suivant",
+    "counter": "{current} / {total}",
+    "hide": "Fermer le visualiseur multimédia"
   },
   "nav": {
     "about": "À propos",
@@ -100,7 +117,14 @@
     "chats": "Chats",
     "bookmarks": "Marques-Pages",
     "timelines": "Flux",
-    "home_timeline": "Flux personnel"
+    "home_timeline": "Flux personnel",
+    "edit_nav_mobile": "Personnaliser la barre de navigation",
+    "mobile_notifications": "Ouvrir les notifications (il y en a de nouvelles)",
+    "lists": "Listes",
+    "edit_pinned": "Éditer les éléments agrafés",
+    "edit_finish": "Édition terminée",
+    "mobile_sidebar": "(Dés)activer le panneau latéral",
+    "mobile_notifications_close": "Fermer les notifications"
   },
   "notifications": {
     "broken_favorite": "Message inconnu, recherche en cours…",
@@ -114,13 +138,17 @@
     "migrated_to": "a migré à",
     "reacted_with": "a réagi avec {0}",
     "follow_request": "veut vous suivre",
-    "error": "Erreur de chargement des notifications : {0}"
+    "error": "Erreur de chargement des notifications : {0}",
+    "poll_ended": "Sondage terminé",
+    "submitted_report": "Rapport envoyé"
   },
   "interactions": {
     "favs_repeats": "Partages et favoris",
     "follows": "Nouveaux suivis",
     "load_older": "Chargez d'anciennes interactions",
-    "moves": "Migrations de comptes"
+    "moves": "Migrations de comptes",
+    "emoji_reactions": "Émoticônes de réaction",
+    "reports": "Rapports"
   },
   "post_status": {
     "new_status": "Poster un nouveau statut",
@@ -154,7 +182,10 @@
     "preview_empty": "Vide",
     "preview": "Prévisualisation",
     "media_description": "Description de la pièce-jointe",
-    "post": "Post"
+    "post": "Post",
+    "edit_status": "Éditer le status",
+    "edit_remote_warning": "Des instances distantes pourraient ne pas supporter l'édition et seront incapables de recevoir la nouvelle version de votre post.",
+    "edit_unsupported_warning": "Pleroma ne supporte pas l'édition de mentions ni de sondages."
   },
   "registration": {
     "bio": "Biographie",
@@ -178,7 +209,10 @@
     },
     "reason_placeholder": "Cette instance modère les inscriptions manuellement.\nExpliquer ce qui motive votre inscription à l'administration.",
     "reason": "Motivation d'inscription",
-    "register": "Enregistrer"
+    "register": "Enregistrer",
+    "email_language": "Dans quelle langue voulez-vous recevoir les emails du server ?",
+    "bio_optional": "Biographie (optionnelle)",
+    "email_optional": "Courriel (optionnel)"
   },
   "selectable_list": {
     "select_all": "Tout selectionner"
@@ -267,8 +301,8 @@
     "import_theme": "Charger le thème",
     "inputRadius": "Champs de texte",
     "checkboxRadius": "Cases à cocher",
-    "instance_default": "(default : {value})",
-    "instance_default_simple": "(default)",
+    "instance_default": "(défaut : {value})",
+    "instance_default_simple": "(défaut)",
     "interface": "Interface",
     "interfaceLanguage": "Langue de l'interface",
     "invalid_theme_imported": "Le fichier sélectionné n'est pas un thème Pleroma pris en charge. Aucun changement n'a été apporté à votre thème.",
@@ -570,7 +604,87 @@
       "restore_settings": "Restaurer les paramètres depuis un fichier"
     },
     "hide_shoutbox": "Cacher la shoutbox de l'instance",
-    "right_sidebar": "Afficher le paneau latéral à droite"
+    "right_sidebar": "Afficher le paneau latéral à droite",
+    "expert_mode": "Préférences Avancées",
+    "post_look_feel": "Affichage des messages",
+    "mention_links": "Liens des mentions",
+    "email_language": "Langue pour recevoir les emails du server",
+    "account_backup_table_head": "Sauvegarde",
+    "download_backup": "Télécharger",
+    "backup_not_ready": "La sauvegarde n'est pas encore prête.",
+    "remove_backup": "Supprimer",
+    "list_backups_error": "Erreur d'obtention de la liste des sauvegardes : {error}",
+    "add_backup": "Créer une nouvelle sauvegarde",
+    "added_backup": "Ajouter une nouvelle sauvegarde.",
+    "account_alias": "Alias du compte",
+    "account_alias_table_head": "Alias",
+    "list_aliases_error": "Erreur à l'obtention des alias : {error}",
+    "hide_list_aliases_error_action": "Fermer",
+    "remove_alias": "Supprimer cet alias",
+    "new_alias_target": "Ajouter un nouvel alias (ex. {example})",
+    "added_alias": "L'alias à été ajouté.",
+    "add_alias_error": "Erreur à l'ajout de l'alias : {error}",
+    "move_account_target": "Compte cible (ex. {example})",
+    "moved_account": "Compte déplacé.",
+    "move_account_error": "Erreur au déplacement du compte : {error}",
+    "wordfilter": "Filtrage de mots",
+    "mute_bot_posts": "Masquer les messages des robots",
+    "hide_bot_indication": "Cacher l'indication d'un robot avec les messages",
+    "always_show_post_button": "Toujours montrer le bouton flottant Nouveau Message",
+    "hide_muted_threads": "Cacher les fils masqués",
+    "account_privacy": "Intimité",
+    "posts": "Messages",
+    "disable_sticky_headers": "Ne pas coller les en-têtes des colonnes en haut de l'écran",
+    "show_scrollbars": "Montrer les ascenseurs des colonnes",
+    "third_column_mode_none": "Jamais afficher la troisième colonne",
+    "third_column_mode_notifications": "Colonne de notifications",
+    "third_column_mode_postform": "Édition de messages et navigation",
+    "tree_advanced": "Permettre une navigation plus flexible dans l'arborescence",
+    "conversation_display_linear": "Style linéaire",
+    "conversation_other_replies_button": "Montrer le bouton \"autres réponses\"",
+    "conversation_other_replies_button_below": "En-dessous des messages",
+    "conversation_other_replies_button_inside": "Dans les messages",
+    "max_depth_in_thread": "Profondeur maximum à afficher par défaut dans un fil",
+    "mention_link_display": "Afficher les mentions",
+    "mention_link_display_full_for_remote": "complet pour les comptes distants (ex. {'@'}foo{'@'}example.org)",
+    "mention_link_display_full": "toujours complet (ex. {'@'}foo{'@'}example.org)",
+    "mention_link_show_avatar": "Afficher les avatars à coté du lien",
+    "mention_link_fade_domain": "Estomper les domaines (ex. {'@'}example.org en {'@'}foo{'@'}example.org)",
+    "mention_link_bolden_you": "Surligner les mentions qui vous sont destinées",
+    "show_yous": "Afficher (Vous)",
+    "setting_server_side": "Cette préférence est liée au profile et affecte toutes les sessions et clients",
+    "account_backup": "Sauvegarde de compte",
+    "account_backup_description": "Ceci permet de télécharger une archive des informations du compte et vos messages, mais ils ne peuvent pas actuellement être importé dans un compte Pleroma.",
+    "add_backup_error": "Erreur à l'ajout d'une nouvelle sauvegarde : {error}",
+    "move_account": "Déplacer le compte",
+    "move_account_notes": "Si vous voulez déplacer le compte ailleurs, vous devez aller sur votre compte cible et y créer un alias pointant ici.",
+    "hide_wordfiltered_statuses": "Cacher les messages filtré par un mot",
+    "user_profiles": "Profils des utilisateur⋅ice⋅s",
+    "notification_visibility_polls": "Fins de sondage auquel vous avez voté·e",
+    "hide_favorites_description": "Ne pas montrer ma liste de favoris (les personnes sont quand même notifiés)",
+    "conversation_display": "Style d'affichage des conversations",
+    "conversation_display_tree": "Arborescence",
+    "third_column_mode": "Quand il-y-a assez d'espace, afficher une troisième colonne avec",
+    "tree_fade_ancestors": "Montrer les parents du message courant en texte léger",
+    "use_at_icon": "Montrer le symbole {'@'} comme une icône au lieu de textuelle",
+    "mention_link_display_short": "toujours raccourcies (ex. {'@'}foo)",
+    "mention_link_show_tooltip": "Montrer le nom complet pour les comptes distants dans une info-bulle",
+    "lists_navigation": "Afficher les listes dans la navigation",
+    "word_filter_and_more": "Filtrer par mots et plus ...",
+    "columns": "Colonnes",
+    "auto_update": "Afficher automatiquement les nouveaux posts",
+    "mention_link_use_tooltip": "Montrer le profil utilisateur en cliquant sur les liens de mentions",
+    "mention_link_show_avatar_quick": "Afficher l'avatar de l'utilisateur à côté des mentions",
+    "navbar_column_stretch": "Élargir la barre de navigation à la taille des colonnes",
+    "column_sizes": "Taille des colonnes",
+    "column_sizes_sidebar": "Panneau latéral",
+    "column_sizes_content": "Contenu",
+    "column_sizes_notifs": "Notifications",
+    "conversation_display_linear_quick": "Vue linéaire",
+    "use_websockets": "Utiliser les websockets (mises à jour en temps réel)",
+    "user_popover_avatar_action_zoom": "Zoomer sur l'avatar",
+    "user_popover_avatar_action_open": "Ouvrir le profil",
+    "conversation_display_tree_quick": "Vue arborescente"
   },
   "timeline": {
     "collapse": "Fermer",
@@ -586,7 +700,9 @@
     "reload": "Recharger",
     "error": "Erreur lors de l'affichage du flux : {0}",
     "socket_broke": "Connexion temps-réel perdue : CloseEvent code {0}",
-    "socket_reconnected": "Connexion temps-réel établie"
+    "socket_reconnected": "Connexion temps-réel établie",
+    "quick_view_settings": "Afficher les réglages rapides",
+    "quick_filter_settings": "Afficher les filtres rapides"
   },
   "status": {
     "favorites": "Favoris",
@@ -613,7 +729,36 @@
     "thread_muted": "Fil de discussion masqué",
     "external_source": "Source externe",
     "unbookmark": "Supprimer des favoris",
-    "bookmark": "Ajouter aux favoris"
+    "bookmark": "Ajouter aux favoris",
+    "plus_more": "plus +{number}",
+    "many_attachments": "Message avec {number} pièce(s)-jointe(s)",
+    "collapse_attachments": "Réduire les pièces jointes",
+    "show_attachment_in_modal": "Montrer dans le visionneur de médias",
+    "hide_attachment": "Cacher la pièce jointe",
+    "you": "(Vous)",
+    "attachment_stop_flash": "Arrêter Flash Player",
+    "move_down": "Décaler la pièce-jointe à droite",
+    "thread_hide": "Cacher ce fil",
+    "thread_show": "Montrer ce fil",
+    "thread_show_full_with_icon": "{icon} {text}",
+    "thread_follow": "Montrer le reste du fil ({numStatus} message) | Montrer le reste du fil ({numStatus} messages)",
+    "thread_follow_with_icon": "{icon} {text}",
+    "ancestor_follow": "Monter les {numReplies} autres réponses après ce message | Monter les {numReplies} autres réponses après ce message",
+    "ancestor_follow_with_icon": "{icon} {text}",
+    "show_all_conversation_with_icon": "{icon} {text}",
+    "show_only_conversation_under_this": "Montrer uniquement les réponses à ce message",
+    "mentions": "Mentions",
+    "replies_list_with_others": "Réponses (+{numReplies} autres) : | Réponses (+{numReplies} autres) :",
+    "show_all_attachments": "Montrer toutes les pièces jointes",
+    "show_attachment_description": "Prévisualiser la description (ouvrir la pièce-jointe pour la description complète)",
+    "remove_attachment": "Enlever la pièce jointe",
+    "move_up": "Décaler la pièce-jointe à gauche",
+    "open_gallery": "Ouvrir la galerie",
+    "thread_show_full": "Montrer tout le fil ({numStatus} message, {depth} niveaux maximum) | Montrer tout le fil ({numStatus} messages, {depth} niveaux maximum)",
+    "show_all_conversation": "Montrer tout le fil ({numStatus} autre message) | Montrer tout le fil ({numStatus} autre messages)",
+    "edit": "Éditer le status",
+    "edited_at": "(dernière édition {time})",
+    "status_history": "Historique du status"
   },
   "user_card": {
     "approve": "Accepter",
@@ -644,11 +789,11 @@
     "unmute_progress": "Démasquage…",
     "mute_progress": "Masquage…",
     "admin_menu": {
-      "moderation": "Moderation",
+      "moderation": "Modération",
       "grant_admin": "Promouvoir Administrateur⋅ice",
-      "revoke_admin": "Dégrader Administrateur⋅ice",
+      "revoke_admin": "Dégrader L'administrateur⋅ice",
       "grant_moderator": "Promouvoir Modérateur⋅ice",
-      "revoke_moderator": "Dégrader Modérateur⋅ice",
+      "revoke_moderator": "Dégrader la·e modérateur⋅ice",
       "activate_account": "Activer le compte",
       "deactivate_account": "Désactiver le compte",
       "delete_account": "Supprimer le compte",
@@ -660,7 +805,7 @@
       "disable_any_subscription": "Interdir de s'abonner à l'utilisateur tout court",
       "quarantine": "Interdir les statuts de l'utilisateur à fédérer",
       "delete_user": "Supprimer l'utilisateur",
-      "delete_user_confirmation": "Êtes-vous absolument-sûr⋅e ? Cette action ne peut être annulée."
+      "delete_user_data_and_deactivate_confirmation": "Ceci va supprimer les données du compte de manière permanente et le désactivé. Êtes-vous vraiment sûr ?"
     },
     "mention": "Mention",
     "hidden": "Caché",
@@ -680,7 +825,10 @@
       "striped": "Fond rayé"
     },
     "bot": "Robot",
-    "edit_profile": "Éditer le profil"
+    "edit_profile": "Éditer le profil",
+    "deactivated": "Désactivé",
+    "follow_cancel": "Annuler la requête",
+    "remove_follower": "Retirer l'abonné·e"
   },
   "user_profile": {
     "timeline_title": "Flux du compte",
@@ -748,13 +896,16 @@
         "media_removal_desc": "Cette instance supprime le contenu multimédia des instances suivantes :",
         "media_nsfw": "Force le contenu multimédia comme sensible",
         "ftl_removal": "Supprimées du flux fédéré",
-        "media_nsfw_desc": "Cette instance force les pièce-jointes comme sensible pour les messages des instances suivantes :"
+        "media_nsfw_desc": "Cette instance force les pièce-jointes comme sensible pour les messages des instances suivantes :",
+        "reason": "Raison",
+        "not_applicable": "N/A",
+        "instance": "Instance"
       },
       "federation": "Fédération",
       "mrf_policies": "Politiques MRF actives",
       "mrf_policies_desc": "Les politiques MRF modifient la fédération entre les instances. Les politiques suivantes sont activées :"
     },
-    "staff": "Staff"
+    "staff": "Équipe"
   },
   "domain_mute_card": {
     "mute": "Masqué",
@@ -787,7 +938,19 @@
     "load_all": "Charger tout les {emojiAmount} émojis",
     "load_all_hint": "{saneAmount} émojis chargé, charger tout les émojis peuvent causer des problèmes de performances.",
     "stickers": "Stickers",
-    "keep_open": "Garder ouvert"
+    "keep_open": "Garder ouvert",
+    "unicode_groups": {
+      "activities": "Activités",
+      "animals-and-nature": "Animaux & nature",
+      "flags": "Drapeaux",
+      "food-and-drink": "Nourriture & boissons",
+      "objects": "Objets",
+      "people-and-body": "Personnes & Corps",
+      "smileys-and-emotion": "Emoticônes",
+      "symbols": "Symboles",
+      "travel-and-places": "Voyages & lieux"
+    },
+    "regional_indicator": "Indicateur régional {letter}"
   },
   "remote_user_resolver": {
     "error": "Non trouvé.",
@@ -826,14 +989,32 @@
     "year": "{0} année",
     "years": "{0} années",
     "year_short": "{0}a",
-    "years_short": "{0}a"
+    "years_short": "{0}a",
+    "unit": {
+      "years": "{0} année | {0} années",
+      "years_short": "{0}ans",
+      "days_short": "{0}j",
+      "hours": "{0} heure | {0} heures",
+      "hours_short": "{0}h",
+      "minutes": "{0} minute | {0} minutes",
+      "minutes_short": "{0}min",
+      "months_short": "{0}mois",
+      "seconds": "{0} seconde | {0} secondes",
+      "seconds_short": "{0}s",
+      "weeks": "{0} semaine | {0} semaines",
+      "days": "{0} jour | {0} jours",
+      "months": "{0} mois | {0} mois",
+      "weeks_short": "{0}semaine"
+    }
   },
   "search": {
     "people": "Comptes",
     "person_talking": "{count} personnes discutant",
     "hashtags": "Mot-dièses",
     "people_talking": "{count} personnes discutant",
-    "no_results": "Aucun résultats"
+    "no_results": "Aucun résultats",
+    "no_more_results": "Pas de résultats supplémentaires",
+    "load_more": "Charger plus de résultats"
   },
   "password_reset": {
     "forgot_password": "Mot de passe oublié ?",
@@ -874,5 +1055,47 @@
     "delete": "Effacer",
     "message_user": "Message à {nickname}",
     "you": "Vous :"
+  },
+  "lists": {
+    "new": "Nouvelle liste",
+    "title": "Titre de la liste",
+    "create": "Créer",
+    "save": "Sauvegarder les changements",
+    "delete": "Supprimer la liste",
+    "following_only": "Limiter aux abonné·e·s",
+    "manage_lists": "Gérer les listes",
+    "add_members": "Rechercher plus d'utilisateurs",
+    "remove_from_list": "Retirer de la liste",
+    "add_to_list": "Ajouter à la liste",
+    "is_in_list": "Déjà dans la liste",
+    "editing_list": "Édition de la liste {listTitle}",
+    "creating_list": "Création d'une nouvelle liste",
+    "really_delete": "Êtes-vous sûr·e de vouloir supprimer la liste ?",
+    "error": "Erreur en manipulant les listes : {0}",
+    "lists": "Listes",
+    "search": "Rechercher des utilisateurs",
+    "manage_members": "Gérer les membres des listes",
+    "update_title": "Sauvegarder le titre"
+  },
+  "update": {
+    "update_bugs_gitlab": "GitLab du projet Pleroma",
+    "update_changelog": "Pour plus de détails sur les changements, consultez {theFullChangelog}.",
+    "update_changelog_here": "Liste compète des changements",
+    "art_by": "Œuvre par {linkToArtist}",
+    "big_update_content": "Nous n'avons pas fait de nouvelle version depuis un moment, les choses peuvent vous paraitre différentes de vos habitudes.",
+    "update_bugs": "Veuillez rapporter les problèmes sur {pleromaGitlab}, comme beaucoup de changements on été fait, même si nous testons entièrement et utilisons la version de dévelopement nous-même, nous avons pu en louper. Les retours et suggestions sont bienvenues sur ce que vous avez pu rencontrer, ou sur comment améliorer Pleroma (BE) et Pleroma-FE."
+  },
+  "unicode_domain_indicator": {
+    "tooltip": "Ce domaine contient des caractères non ascii."
+  },
+  "report": {
+    "reporter": "Rapporteur·euse :",
+    "reported_user": "Compte rapporté :",
+    "reported_statuses": "Status rapportés :",
+    "notes": "Notes :",
+    "state": "Status :",
+    "state_open": "Ouvert",
+    "state_closed": "Fermé",
+    "state_resolved": "Résolut"
   }
 }

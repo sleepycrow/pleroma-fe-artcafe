@@ -5,9 +5,13 @@
   >
     <div class="user-reporting-panel panel">
       <div class="panel-heading">
-        <div class="title">
-          {{ $t('user_reporting.title', [user.screen_name_ui]) }}
-        </div>
+        <i18n-t
+          tag="div"
+          keypath="user_reporting.title"
+          class="title"
+        >
+          <UserLink :user="user" />
+        </i18n-t>
       </div>
       <div class="panel-body">
         <div class="user-reporting-panel-left">
@@ -45,7 +49,7 @@
         </div>
         <div class="user-reporting-panel-right">
           <List :items="statuses">
-            <template v-slot:item="{item}">
+            <template #item="{item}">
               <div class="status-fadein user-reporting-panel-sitem">
                 <Status
                   :in-conversation="false"
@@ -53,8 +57,8 @@
                   :statusoid="item"
                 />
                 <Checkbox
-                  :checked="isChecked(item.id)"
-                  @change="checked => toggleStatus(checked, item.id)"
+                  :model-value="isChecked(item.id)"
+                  @update:model-value="checked => toggleStatus(checked, item.id)"
                 />
               </div>
             </template>
@@ -76,17 +80,6 @@
   min-height: 20vh;
   max-height: 80vh;
 
-  .panel-heading {
-    .title {
-      text-align: center;
-      // TODO: Consider making these as default of panel
-      flex: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-  }
-
   .panel-body {
     display: flex;
     flex-direction: column-reverse;
@@ -98,7 +91,7 @@
 
   &-left {
     padding: 1.1em 0.7em 0.7em;
-    line-height: 1.4em;
+    line-height: var(--post-line-height);
     box-sizing: border-box;
 
     > div {

@@ -1,39 +1,43 @@
 <template>
   <div
-    id="app"
+    id="app-loaded"
     :style="bgStyle"
   >
     <div
       id="app_bg_wrapper"
       class="app-bg-wrapper"
     />
-    <MobileNav v-if="isMobileLayout" />
-    <DesktopNav v-else />
-    <div class="app-bg-wrapper app-container-wrapper" />
+    <MobileNav v-if="layoutType === 'mobile'" />
+    <DesktopNav
+      v-else
+      :class="navClasses"
+    />
+    <Notifications v-if="currentUser" />
     <div
       id="content"
-      class="container underlay"
+      class="app-layout container"
+      :class="classes"
     >
+      <div class="underlay" />
       <div
-        class="sidebar-flexer mobile-hidden"
-        :style="sidebarAlign"
+        id="sidebar"
+        class="column -scrollable"
+        :class="{ '-show-scrollbar': showScrollbars }"
       >
-        <div class="sidebar-bounds">
-          <div class="sidebar-scroller">
-            <div class="sidebar">
-              <user-panel />
-              <div v-if="!isMobileLayout">
-                <nav-panel />
-                <instance-specific-panel v-if="showInstanceSpecificPanel" />
-                <features-panel v-if="!currentUser && showFeaturesPanel" />
-                <who-to-follow-panel v-if="currentUser && suggestionsEnabled" />
-                <notifications v-if="currentUser" />
-              </div>
-            </div>
-          </div>
-        </div>
+        <user-panel />
+        <template v-if="layoutType !== 'mobile'">
+          <nav-panel />
+          <instance-specific-panel v-if="showInstanceSpecificPanel" />
+          <features-panel v-if="!currentUser && showFeaturesPanel" />
+          <who-to-follow-panel v-if="currentUser && suggestionsEnabled" />
+          <div id="notifs-sidebar" />
+        </template>
       </div>
-      <div class="main">
+      <main
+        id="main-scroller"
+        class="column main"
+        :class="{ '-full-height': isChats || isListEdit }"
+      >
         <div
           v-if="!currentUser"
           class="login-hint panel panel-default"
@@ -46,20 +50,28 @@
           </router-link>
         </div>
         <router-view />
-      </div>
-      <media-modal />
+      </main>
+      <div
+        id="notifs-column"
+        class="column -scrollable"
+        :class="{ '-show-scrollbar': showScrollbars }"
+      />
     </div>
+    <MediaModal />
     <shout-panel
       v-if="currentUser && shout && !hideShoutbox"
       :floating="true"
       class="floating-shout mobile-hidden"
-      :class="{ 'left': shoutboxPosition }"
+      :class="{ '-left': shoutboxPosition }"
     />
     <MobilePostStatusButton />
     <UserReportingModal />
     <PostStatusModal />
+    <EditStatusModal v-if="editingAvailable" />
+    <StatusHistoryModal v-if="editingAvailable" />
     <SettingsModal />
-    <portal-target name="modal" />
+    <UpdateNotification />
+    <div id="modal" />
     <GlobalNoticeList />
   </div>
 </template>

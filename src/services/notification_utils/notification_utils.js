@@ -14,11 +14,13 @@ export const visibleTypes = store => {
     rootState.config.notificationVisibility.follows && 'follow',
     rootState.config.notificationVisibility.followRequest && 'follow_request',
     rootState.config.notificationVisibility.moves && 'move',
-    rootState.config.notificationVisibility.emojiReactions && 'pleroma:emoji_reaction'
+    rootState.config.notificationVisibility.emojiReactions && 'pleroma:emoji_reaction',
+    rootState.config.notificationVisibility.reports && 'pleroma:report',
+    rootState.config.notificationVisibility.polls && 'poll'
   ].filter(_ => _))
 }
 
-const statusNotifications = ['like', 'mention', 'repeat', 'pleroma:emoji_reaction']
+const statusNotifications = ['like', 'mention', 'repeat', 'pleroma:emoji_reaction', 'poll']
 
 export const isStatusNotification = (type) => includes(statusNotifications, type)
 
@@ -97,6 +99,12 @@ export const prepareNotificationObject = (notification, i18n) => {
       break
     case 'follow_request':
       i18nString = 'follow_request'
+      break
+    case 'pleroma:report':
+      i18nString = 'submitted_report'
+      break
+    case 'poll':
+      i18nString = 'poll_ended'
       break
   }
 

@@ -32,8 +32,8 @@ const Mfa = {
   components: {
     'recovery-codes': RecoveryCodes,
     'totp-item': TOTP,
-    'qrcode': VueQrcode,
-    'confirm': Confirm
+    qrcode: VueQrcode,
+    confirm: Confirm
   },
   computed: {
     canSetupOTP () {
@@ -139,7 +139,7 @@ const Mfa = {
 
     // fetch settings from server
     async fetchSettings () {
-      let result = await this.backendInteractor.settingsMFA()
+      const result = await this.backendInteractor.settingsMFA()
       if (result.error) return
       this.settings = result.settings
       this.settings.available = true

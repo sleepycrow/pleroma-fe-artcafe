@@ -11,28 +11,28 @@
     </label>
     <Checkbox
       v-if="typeof fallback !== 'undefined' && showOptionalTickbox"
-      :checked="present"
+      :model-value="present"
       :disabled="disabled"
       class="opt"
-      @change="$emit('input', typeof value === 'undefined' ? fallback : undefined)"
+      @update:modelValue="$emit('update:modelValue', typeof modelValue === 'undefined' ? fallback : undefined)"
     />
     <div class="input color-input-field">
       <input
         :id="name + '-t'"
         class="textColor unstyled"
         type="text"
-        :value="value || fallback"
+        :value="modelValue || fallback"
         :disabled="!present || disabled"
-        @input="$emit('input', $event.target.value)"
+        @input="$emit('update:modelValue', $event.target.value)"
       >
       <input
         v-if="validColor"
         :id="name"
         class="nativeColor unstyled"
         type="color"
-        :value="value || fallback"
+        :value="modelValue || fallback"
         :disabled="!present || disabled"
-        @input="$emit('input', $event.target.value)"
+        @input="$emit('update:modelValue', $event.target.value)"
       >
       <div
         v-if="transparentColor"
@@ -46,7 +46,6 @@
     </div>
   </div>
 </template>
-<style lang="scss" src="./color_input.scss"></style>
 <script>
 import Checkbox from '../checkbox/checkbox.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
@@ -67,7 +66,7 @@ export default {
     },
     // Color value, should be required but vue cannot tell the difference
     // between "property missing" and "property set to undefined"
-    value: {
+    modelValue: {
       required: false,
       type: String,
       default: undefined
@@ -91,22 +90,24 @@ export default {
       default: true
     }
   },
+  emits: ['update:modelValue'],
   computed: {
     present () {
-      return typeof this.value !== 'undefined'
+      return typeof this.modelValue !== 'undefined'
     },
     validColor () {
-      return hex2rgb(this.value || this.fallback)
+      return hex2rgb(this.modelValue || this.fallback)
     },
     transparentColor () {
-      return this.value === 'transparent'
+      return this.modelValue === 'transparent'
     },
     computedColor () {
-      return this.value && this.value.startsWith('--')
+      return this.modelValue && this.modelValue.startsWith('--')
     }
   }
 }
 </script>
+<style lang="scss" src="./color_input.scss"></style>
 
 <style lang="scss">
 .color-control {

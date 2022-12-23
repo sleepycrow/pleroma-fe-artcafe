@@ -1,6 +1,7 @@
 import { filter, trim } from 'lodash'
 import BooleanSetting from '../helpers/boolean_setting.vue'
 import ChoiceSetting from '../helpers/choice_setting.vue'
+import IntegerSetting from '../helpers/integer_setting.vue'
 
 import SharedComputedObject from '../helpers/shared_computed_object.js'
 
@@ -17,7 +18,8 @@ const FilteringTab = {
   },
   components: {
     BooleanSetting,
-    ChoiceSetting
+    ChoiceSetting,
+    IntegerSetting
   },
   computed: {
     ...SharedComputedObject(),
@@ -36,15 +38,6 @@ const FilteringTab = {
   },
   // Updating nested properties
   watch: {
-    notificationVisibility: {
-      handler (value) {
-        this.$store.dispatch('setOption', {
-          name: 'notificationVisibility',
-          value: this.$store.getters.mergedConfig.notificationVisibility
-        })
-      },
-      deep: true
-    },
     replyVisibility () {
       this.$store.dispatch('queueFlushAll')
     }

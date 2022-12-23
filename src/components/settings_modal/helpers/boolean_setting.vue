@@ -1,11 +1,12 @@
 <template>
   <label
+    v-if="matchesExpertLevel"
     class="BooleanSetting"
   >
     <Checkbox
-      :checked="state"
+      :model-value="state"
       :disabled="disabled"
-      @change="update"
+      @update:modelValue="update"
     >
       <span
         v-if="!!$slots.default"
@@ -13,7 +14,12 @@
       >
         <slot />
       </span>
-      <ModifiedIndicator :changed="isChanged" />
+      {{ ' ' }}
+      <ModifiedIndicator
+        :changed="isChanged"
+        :onclick="reset"
+      />
+      <ServerSideIndicator :server-side="isServerSide" />
     </Checkbox>
   </label>
 </template>

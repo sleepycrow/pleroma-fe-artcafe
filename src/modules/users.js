@@ -1,7 +1,7 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
+import { windowWidth, windowHeight } from '../services/window_utils/window_utils'
 import oauthApi from '../services/new_api/oauth.js'
 import { compact, map, each, mergeWith, last, concat, uniq, isArray } from 'lodash'
-import { set } from 'vue'
 import { registerPushNotifications, unregisterPushNotifications } from '../services/push/push.js'
 
 // TODO: Unify with mergeOrAdd in statuses.js
@@ -15,10 +15,7 @@ export const mergeOrAdd = (arr, obj, item) => {
   } else {
     // This is a new item, prepare it
     arr.push(item)
-    set(obj, item.id, item)
-    if (item.screen_name && !item.screen_name.includes('@')) {
-      set(obj, item.screen_name.toLowerCase(), item)
-    }
+    obj[item.id] = item
     return { item, new: true }
   }
 }
@@ -51,6 +48,16 @@ const blockUser = (store, id) => {
 
 const unblockUser = (store, id) => {
   return store.rootState.api.backendInteractor.unblockUser({ id })
+    .then((relationship) => store.commit('updateUserRelationship', [relationship]))
+}
+
+const removeUserFromFollowers = (store, id) => {
+  return store.rootState.api.backendInteractor.removeUserFromFollowers({ id })
+    .then((relationship) => store.commit('updateUserRelationship', [relationship]))
+}
+
+const editUserNote = (store, { id, comment }) => {
+  return store.rootState.api.backendInteractor.editUserNote({ id, comment })
     .then((relationship) => store.commit('updateUserRelationship', [relationship]))
 }
 
@@ -103,23 +110,23 @@ export const mutations = {
     const user = state.usersObject[id]
     const tags = user.tags || []
     const newTags = tags.concat([tag])
-    set(user, 'tags', newTags)
+    user.tags = newTags
   },
   untagUser (state, { user: { id }, tag }) {
     const user = state.usersObject[id]
     const tags = user.tags || []
     const newTags = tags.filter(t => t !== tag)
-    set(user, 'tags', newTags)
+    user.tags = newTags
   },
   updateRight (state, { user: { id }, right, value }) {
     const user = state.usersObject[id]
-    let newRights = user.rights
+    const newRights = user.rights
     newRights[right] = value
-    set(user, 'rights', newRights)
+    user.rights = newRights
   },
   updateActivationStatus (state, { user: { id }, deactivated }) {
     const user = state.usersObject[id]
-    set(user, 'deactivated', deactivated)
+    user.deactivated = deactivated
   },
   setCurrentUser (state, user) {
     state.lastLoginName = user.screen_name
@@ -148,27 +155,34 @@ export const mutations = {
   clearFriends (state, userId) {
     const user = state.usersObject[userId]
     if (user) {
-      set(user, 'friendIds', [])
+      user.friendIds = []
     }
   },
   clearFollowers (state, userId) {
     const user = state.usersObject[userId]
     if (user) {
-      set(user, 'followerIds', [])
+      user.followerIds = []
     }
   },
   addNewUsers (state, users) {
     each(users, (user) => {
       if (user.relationship) {
-        set(state.relationships, user.relationship.id, user.relationship)
+        state.relationships[user.relationship.id] = user.relationship
       }
-      mergeOrAdd(state.users, state.usersObject, user)
+      const res = mergeOrAdd(state.users, state.usersObject, user)
+      const item = res.item
+      if (res.new && item.screen_name && !item.screen_name.includes('@')) {
+        state.usersByNameObject[item.screen_name.toLowerCase()] = item
+      }
     })
   },
   updateUserRelationship (state, relationships) {
     relationships.forEach((relationship) => {
-      set(state.relationships, relationship.id, relationship)
+      state.relationships[relationship.id] = relationship
     })
+  },
+  updateUserInLists (state, { id, inLists }) {
+    state.usersObject[id].inLists = inLists
   },
   saveBlockIds (state, blockIds) {
     state.currentUser.blockIds = blockIds
@@ -222,7 +236,7 @@ export const mutations = {
   },
   setColor (state, { user: { id }, highlighted }) {
     const user = state.usersObject[id]
-    set(user, 'highlight', highlighted)
+    user.highlight = highlighted
   },
   signUpPending (state) {
     state.signUpPending = true
@@ -239,12 +253,10 @@ export const mutations = {
 
 export const getters = {
   findUser: state => query => {
-    const result = state.usersObject[query]
-    // In case it's a screen_name, we can try searching case-insensitive
-    if (!result && typeof query === 'string') {
-      return state.usersObject[query.toLowerCase()]
-    }
-    return result
+    return state.usersObject[query]
+  },
+  findUserByName: state => query => {
+    return state.usersByNameObject[query.toLowerCase()]
   },
   findUserByUrl: state => query => {
     return state.users
@@ -263,6 +275,7 @@ export const defaultState = {
   currentUser: false,
   users: [],
   usersObject: {},
+  usersByNameObject: {},
   signUpPending: false,
   signUpErrors: [],
   relationships: {}
@@ -285,10 +298,23 @@ const users = {
           return user
         })
     },
+    fetchUserByName (store, name) {
+      return store.rootState.api.backendInteractor.fetchUserByName({ name })
+        .then((user) => {
+          store.commit('addNewUsers', [user])
+          return user
+        })
+    },
     fetchUserRelationship (store, id) {
       if (store.state.currentUser) {
         store.rootState.api.backendInteractor.fetchUserRelationship({ id })
           .then((relationships) => store.commit('updateUserRelationship', relationships))
+      }
+    },
+    fetchUserInLists (store, id) {
+      if (store.state.currentUser) {
+        store.rootState.api.backendInteractor.fetchUserInLists({ id })
+          .then((inLists) => store.commit('updateUserInLists', { id, inLists }))
       }
     },
     fetchBlocks (store) {
@@ -305,11 +331,17 @@ const users = {
     unblockUser (store, id) {
       return unblockUser(store, id)
     },
+    removeUserFromFollowers (store, id) {
+      return removeUserFromFollowers(store, id)
+    },
     blockUsers (store, ids = []) {
       return Promise.all(ids.map(id => blockUser(store, id)))
     },
     unblockUsers (store, ids = []) {
       return Promise.all(ids.map(id => unblockUser(store, id)))
+    },
+    editUserNote (store, args) {
+      return editUserNote(store, args)
     },
     fetchMutes (store) {
       return store.rootState.api.backendInteractor.fetchMutes()
@@ -393,7 +425,7 @@ const users = {
     toggleActivationStatus ({ rootState, commit }, { user }) {
       const api = user.deactivated ? rootState.api.backendInteractor.activateUser : rootState.api.backendInteractor.deactivateUser
       api({ user })
-        .then(({ deactivated }) => commit('updateActivationStatus', { user, deactivated }))
+        .then((user) => { const deactivated = !user.is_active; commit('updateActivationStatus', { user, deactivated }) })
     },
     registerPushNotifications (store) {
       const token = store.state.currentUser.credentials
@@ -457,17 +489,17 @@ const users = {
     async signUp (store, userInfo) {
       store.commit('signUpPending')
 
-      let rootState = store.rootState
+      const rootState = store.rootState
 
       try {
-        let data = await rootState.api.backendInteractor.register(
+        const data = await rootState.api.backendInteractor.register(
           { params: { ...userInfo } }
         )
         store.commit('signUpSuccess')
         store.commit('setToken', data.access_token)
         store.dispatch('loginUser', data.access_token)
       } catch (e) {
-        let errors = e.message
+        const errors = e.message
         store.commit('signUpFailure', errors)
         throw e
       }
@@ -502,11 +534,15 @@ const users = {
           store.dispatch('stopFetchingTimeline', 'friends')
           store.commit('setBackendInteractor', backendInteractorService(store.getters.getToken()))
           store.dispatch('stopFetchingNotifications')
+          store.dispatch('stopFetchingLists')
           store.dispatch('stopFetchingFollowRequests')
           store.commit('clearNotifications')
           store.commit('resetStatuses')
           store.dispatch('resetChats')
           store.dispatch('setLastTimeline', 'public-timeline')
+          store.dispatch('setLayoutWidth', windowWidth())
+          store.dispatch('setLayoutHeight', windowHeight())
+          store.commit('clearServerSideStorage')
         })
     },
     loginUser (store, accessToken) {
@@ -523,6 +559,7 @@ const users = {
               user.muteIds = []
               user.domainMutes = []
               commit('setCurrentUser', user)
+              commit('setServerSideStorage', user)
               commit('addNewUsers', [user])
 
               store.dispatch('fetchEmoji')
@@ -532,6 +569,7 @@ const users = {
 
               // Set our new backend interactor
               commit('setBackendInteractor', backendInteractorService(accessToken))
+              store.dispatch('pushServerSideStorage')
 
               if (user.token) {
                 store.dispatch('setWsToken', user.token)
@@ -551,8 +589,14 @@ const users = {
                 store.dispatch('startFetchingChats')
               }
 
+              store.dispatch('startFetchingLists')
+
+              if (user.locked) {
+                store.dispatch('startFetchingFollowRequests')
+              }
+
               if (store.getters.mergedConfig.useStreamingApi) {
-                store.dispatch('fetchTimeline', 'friends', { since: null })
+                store.dispatch('fetchTimeline', { timeline: 'friends', since: null })
                 store.dispatch('fetchNotifications', { since: null })
                 store.dispatch('enableMastoSockets', true).catch((error) => {
                   console.error('Failed initializing MastoAPI Streaming socket', error)
@@ -566,6 +610,9 @@ const users = {
 
               // Get user mutes
               store.dispatch('fetchMutes')
+
+              store.dispatch('setLayoutWidth', windowWidth())
+              store.dispatch('setLayoutHeight', windowHeight())
 
               // Fetch our friends
               store.rootState.api.backendInteractor.fetchFriends({ id: user.id })

@@ -7,19 +7,45 @@
       :title="$t('tool_tip.favorite')"
       @click.prevent="favorite()"
     >
-      <FAIcon
-        class="fa-scale-110 fa-old-padding"
-        :icon="[status.favorited ? 'fas' : 'far', 'star']"
-        :spin="animated"
-      />
+      <FALayers class="fa-scale-110 fa-old-padding-layer">
+        <FAIcon
+          class="fa-scale-110"
+          :icon="[status.favorited ? 'fas' : 'far', 'star']"
+          :spin="animated"
+        />
+        <FAIcon
+          v-if="status.favorited"
+          class="active-marker"
+          transform="shrink-6 up-9 right-12"
+          icon="check"
+        />
+        <FAIcon
+          v-if="!status.favorited"
+          class="focus-marker"
+          transform="shrink-6 up-9 right-12"
+          icon="plus"
+        />
+        <FAIcon
+          v-else
+          class="focus-marker"
+          transform="shrink-6 up-9 right-12"
+          icon="minus"
+        />
+      </FALayers>
     </button>
-    <span v-else>
+    <a
+      v-else
+      class="button-unstyled interactive"
+      target="_blank"
+      role="button"
+      :href="remoteInteractionLink"
+    >
       <FAIcon
         class="fa-scale-110 fa-old-padding"
         :title="$t('tool_tip.favorite')"
         :icon="['far', 'star']"
       />
-    </span>
+    </a>
     <span
       v-if="!mergedConfig.hidePostStats && status.fave_num > 0"
       class="action-counter"
@@ -29,10 +55,11 @@
   </div>
 </template>
 
-<script src="./favorite_button.js" ></script>
+<script src="./favorite_button.js"></script>
 
 <style lang="scss">
 @import '../../_variables.scss';
+@import '../../_mixins.scss';
 
 .FavoriteButton {
   display: flex;
@@ -56,6 +83,26 @@
     &.-favorited .svg-inline--fa {
       color: $fallback--cOrange;
       color: var(--cOrange, $fallback--cOrange);
+    }
+
+    @include unfocused-style {
+      .focus-marker {
+        visibility: hidden;
+      }
+
+      .active-marker {
+        visibility: visible;
+      }
+    }
+
+    @include focused-style {
+      .focus-marker {
+        visibility: visible;
+      }
+
+      .active-marker {
+        visibility: hidden;
+      }
     }
   }
 }

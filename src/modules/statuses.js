@@ -12,7 +12,6 @@ import {
   isArray,
   omitBy
 } from 'lodash'
-import { set } from 'vue'
 import {
   isStatusNotification,
   isValidNotification,
@@ -63,7 +62,8 @@ export const defaultState = () => ({
     friends: emptyTl(),
     tag: emptyTl(),
     dms: emptyTl(),
-    bookmarks: emptyTl()
+    bookmarks: emptyTl(),
+    list: emptyTl()
   }
 })
 
@@ -92,7 +92,7 @@ const mergeOrAdd = (arr, obj, item) => {
     // This is a new item, prepare it
     prepareStatus(item)
     arr.push(item)
-    set(obj, item.id, item)
+    obj[item.id] = item
     return { item, new: true }
   }
 }
@@ -131,7 +131,7 @@ const addStatusToGlobalStorage = (state, data) => {
     if (conversationsObject[conversationId]) {
       conversationsObject[conversationId].push(status)
     } else {
-      set(conversationsObject, conversationId, [status])
+      conversationsObject[conversationId] = [status]
     }
   }
   return result
@@ -246,10 +246,13 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 
   const processors = {
-    'status': (status) => {
+    status: (status) => {
       addStatus(status, showImmediately)
     },
-    'retweet': (status) => {
+    edit: (status) => {
+      addStatus(status, showImmediately)
+    },
+    retweet: (status) => {
       // RetweetedStatuses are never shown immediately
       const retweetedStatus = addStatus(status.retweeted_status, false, false)
 
@@ -271,7 +274,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
       retweet.retweeted_status = retweetedStatus
     },
-    'favorite': (favorite) => {
+    favorite: (favorite) => {
       // Only update if this is a new favorite.
       // Ignore our own favorites because we get info about likes as response to like request
       if (!state.favorites.has(favorite.id)) {
@@ -279,7 +282,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
         favoriteStatus(favorite)
       }
     },
-    'deletion': (deletion) => {
+    deletion: (deletion) => {
       const uri = deletion.uri
       const status = find(allStatuses, { uri })
       if (!status) {
@@ -293,10 +296,10 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
         remove(timelineObject.visibleStatuses, { uri })
       }
     },
-    'follow': (follow) => {
+    follow: (follow) => {
       // NOOP, it is known status but we don't do anything about it for now
     },
-    'default': (unknown) => {
+    default: (unknown) => {
       console.log('unknown status type')
       console.log(unknown)
     }
@@ -304,7 +307,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
   each(statuses, (status) => {
     const type = status.type
-    const processor = processors[type] || processors['default']
+    const processor = processors[type] || processors.default
     processor(status)
   })
 
@@ -337,11 +340,16 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
       notification.status = notification.status && addStatusToGlobalStorage(state, notification.status).item
     }
 
+    if (notification.type === 'pleroma:report') {
+      dispatch('addReport', notification.report)
+    }
+
     if (notification.type === 'pleroma:emoji_reaction') {
       dispatch('fetchEmojiReactionsBy', notification.status.id)
     }
 
     // Only add a new notification if we don't have one for the same action
+    // eslint-disable-next-line no-prototype-builtins
     if (!state.notifications.idStore.hasOwnProperty(notification.id)) {
       updateNotificationsMinMaxId(state, notification)
 
@@ -523,7 +531,7 @@ export const mutations = {
   },
   addEmojiReactionsBy (state, { id, emojiReactions, currentUser }) {
     const status = state.allStatusesObject[id]
-    set(status, 'emoji_reactions', emojiReactions)
+    status.emoji_reactions = emojiReactions
   },
   addOwnReaction (state, { id, emoji, currentUser }) {
     const status = state.allStatusesObject[id]
@@ -542,9 +550,9 @@ export const mutations = {
 
     // Update count of existing reaction if it exists, otherwise append at the end
     if (reactionIndex >= 0) {
-      set(status.emoji_reactions, reactionIndex, newReaction)
+      status.emoji_reactions[reactionIndex] = newReaction
     } else {
-      set(status, 'emoji_reactions', [...status.emoji_reactions, newReaction])
+      status.emoji_reactions = [...status.emoji_reactions, newReaction]
     }
   },
   removeOwnReaction (state, { id, emoji, currentUser }) {
@@ -563,9 +571,9 @@ export const mutations = {
     }
 
     if (newReaction.count > 0) {
-      set(status.emoji_reactions, reactionIndex, newReaction)
+      status.emoji_reactions[reactionIndex] = newReaction
     } else {
-      set(status, 'emoji_reactions', status.emoji_reactions.filter(r => r.name !== emoji))
+      status.emoji_reactions = status.emoji_reactions.filter(r => r.name !== emoji)
     }
   },
   updateStatusWithPoll (state, { id, poll }) {
@@ -600,6 +608,12 @@ const statuses = {
     fetchStatus ({ rootState, dispatch }, id) {
       return rootState.api.backendInteractor.fetchStatus({ id })
         .then((status) => dispatch('addNewStatuses', { statuses: [status] }))
+    },
+    fetchStatusSource ({ rootState, dispatch }, status) {
+      return apiService.fetchStatusSource({ id: status.id, credentials: rootState.users.currentUser.credentials })
+    },
+    fetchStatusHistory ({ rootState, dispatch }, status) {
+      return apiService.fetchStatusHistory({ status })
     },
     deleteStatus ({ rootState, commit }, status) {
       commit('setDeleted', { status })
@@ -747,8 +761,8 @@ const statuses = {
       rootState.api.backendInteractor.fetchRebloggedByUsers({ id })
         .then(rebloggedByUsers => commit('addRepeats', { id, rebloggedByUsers, currentUser: rootState.users.currentUser }))
     },
-    search (store, { q, resolve, limit, offset, following }) {
-      return store.rootState.api.backendInteractor.search2({ q, resolve, limit, offset, following })
+    search (store, { q, resolve, limit, offset, following, type }) {
+      return store.rootState.api.backendInteractor.search2({ q, resolve, limit, offset, following, type })
         .then((data) => {
           store.commit('addNewUsers', data.accounts)
           store.commit('addNewStatuses', { statuses: data.statuses })

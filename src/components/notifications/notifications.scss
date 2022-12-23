@@ -11,10 +11,6 @@
     color: var(--text, $fallback--text);
   }
 
-  .notifications-footer {
-    border: none;
-  }
-
   .notification {
     position: relative;
 
@@ -37,11 +33,6 @@
 
 .notification {
   box-sizing: border-box;
-  border-bottom: 1px solid;
-  border-color: $fallback--border;
-  border-color: var(--border, $fallback--border);
-  word-wrap: break-word;
-  word-break: break-word;
 
   &:hover .animated.Avatar {
     canvas {
@@ -50,6 +41,10 @@
     img {
       visibility: visible;
     }
+  }
+
+  &:last-child .Notification {
+    border-bottom: none;
   }
 
   .non-mention {
@@ -64,13 +59,13 @@
       height: 32px;
     }
 
-    --link: var(--faintLink);
-    --text: var(--faint);
+    .faint {
+      --link: var(--faintLink);
+      --text: var(--faint);
+    }
   }
 
   .follow-request-accept {
-    cursor: pointer;
-
     &:hover {
       color: $fallback--text;
       color: var(--text, $fallback--text);
@@ -78,8 +73,6 @@
   }
 
   .follow-request-reject {
-    cursor: pointer;
-
     &:hover {
       color: $fallback--cRed;
       color: var(--cRed, $fallback--cRed);
@@ -119,16 +112,26 @@
       min-width: 3em;
       text-align: right;
     }
+
+    .timeago-link {
+      margin-right: 0.2em;
+    }
+
+    .expand-icon {
+      .svg-inline--fa {
+        margin-left: 0.25em;
+      }
+    }
   }
 
   .emoji-reaction-emoji {
-    font-size: 16px;
+    font-size: 1.3em;
   }
 
   .notification-details {
-    min-width: 0px;
+    min-width: 0;
     word-wrap: break-word;
-    line-height:18px;
+    line-height: var(--post-line-height);
     position: relative;
     overflow: hidden;
     width: 100%;
@@ -151,7 +154,7 @@
     }
 
     .timeago {
-      margin-right: .2em;
+      margin-right: 0.2em;
     }
 
     .status-content {
@@ -164,7 +167,8 @@
       margin: 0 0 0.3em;
       padding: 0;
       font-size: 1em;
-      line-height:20px;
+      line-height: 1.5;
+
       small {
         font-weight: lighter;
       }

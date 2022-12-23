@@ -6,14 +6,14 @@
     <Popover
       trigger="hover"
     >
-      <template v-slot:trigger>
+      <template #trigger>
         &nbsp;
         <FAIcon
           icon="wrench"
           :aria-label="$t('settings.setting_changed')"
         />
       </template>
-      <template v-slot:content>
+      <template #content>
         <div class="modified-tooltip">
           {{ $t('settings.setting_changed') }}
         </div>
@@ -41,11 +41,11 @@ export default {
 .ModifiedIndicator {
   display: inline-block;
   position: relative;
+}
 
-  .modified-tooltip {
-    margin: 0.5em 1em;
-    min-width: 10em;
-    text-align: center;
-  }
+.modified-tooltip {
+  margin: 0.5em 1em;
+  min-width: 10em;
+  text-align: center;
 }
 </style>

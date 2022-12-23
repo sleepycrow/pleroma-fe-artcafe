@@ -6,8 +6,10 @@
     :offset="{ y: 5 }"
     :bound-to="{ x: 'container' }"
     remove-padding
+    @show="onShow"
+    @close="onClose"
   >
-    <template v-slot:content="{close}">
+    <template #content="{close}">
       <div class="dropdown-menu">
         <button
           v-if="canMute && !status.thread_muted"
@@ -51,27 +53,51 @@
             icon="thumbtack"
           /><span>{{ $t("status.unpin") }}</span>
         </button>
+        <template v-if="canBookmark">
+          <button
+            v-if="!status.bookmarked"
+            class="button-default dropdown-item dropdown-item-icon"
+            @click.prevent="bookmarkStatus"
+            @click="close"
+          >
+            <FAIcon
+              fixed-width
+              :icon="['far', 'bookmark']"
+            /><span>{{ $t("status.bookmark") }}</span>
+          </button>
+          <button
+            v-if="status.bookmarked"
+            class="button-default dropdown-item dropdown-item-icon"
+            @click.prevent="unbookmarkStatus"
+            @click="close"
+          >
+            <FAIcon
+              fixed-width
+              icon="bookmark"
+            /><span>{{ $t("status.unbookmark") }}</span>
+          </button>
+        </template>
         <button
-          v-if="!status.bookmarked"
+          v-if="ownStatus && editingAvailable"
           class="button-default dropdown-item dropdown-item-icon"
-          @click.prevent="bookmarkStatus"
+          @click.prevent="editStatus"
           @click="close"
         >
           <FAIcon
             fixed-width
-            :icon="['far', 'bookmark']"
-          /><span>{{ $t("status.bookmark") }}</span>
+            icon="pen"
+          /><span>{{ $t("status.edit") }}</span>
         </button>
         <button
-          v-if="status.bookmarked"
+          v-if="isEdited && editingAvailable"
           class="button-default dropdown-item dropdown-item-icon"
-          @click.prevent="unbookmarkStatus"
+          @click.prevent="showStatusHistory"
           @click="close"
         >
           <FAIcon
             fixed-width
-            icon="bookmark"
-          /><span>{{ $t("status.unbookmark") }}</span>
+            icon="history"
+          /><span>{{ $t("status.status_history") }}</span>
         </button>
         <button
           v-if="canDelete"
@@ -118,21 +144,36 @@
         </button>
       </div>
     </template>
-    <template v-slot:trigger>
-      <button class="button-unstyled popover-trigger">
-        <FAIcon
-          class="fa-scale-110 fa-old-padding"
-          icon="ellipsis-h"
-        />
-      </button>
+    <template #trigger>
+      <span class="button-unstyled popover-trigger">
+        <FALayers class="fa-old-padding-layer">
+          <FAIcon
+            class="fa-scale-110 "
+            icon="ellipsis-h"
+          />
+          <FAIcon
+            v-show="!expanded"
+            class="focus-marker"
+            transform="shrink-6 up-8 right-16"
+            icon="plus"
+          />
+          <FAIcon
+            v-show="expanded"
+            class="focus-marker"
+            transform="shrink-6 up-8 right-16"
+            icon="times"
+          />
+        </FALayers>
+      </span>
     </template>
   </Popover>
 </template>
 
-<script src="./extra_buttons.js" ></script>
+<script src="./extra_buttons.js"></script>
 
 <style lang="scss">
 @import '../../_variables.scss';
+@import '../../_mixins.scss';
 
 .ExtraButtons {
   /* override of popover internal stuff */
@@ -148,6 +189,21 @@
     &:hover .svg-inline--fa {
       color: $fallback--text;
       color: var(--text, $fallback--text);
+    }
+
+  }
+
+  .popover-trigger-button {
+    @include unfocused-style {
+      .focus-marker {
+        visibility: hidden;
+      }
+    }
+
+    @include focused-style {
+      .focus-marker {
+        visibility: visible;
+      }
     }
   }
 }

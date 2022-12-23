@@ -2,33 +2,40 @@ import SideDrawer from '../side_drawer/side_drawer.vue'
 import Notifications from '../notifications/notifications.vue'
 import { unseenNotificationsFromStore } from '../../services/notification_utils/notification_utils'
 import GestureService from '../../services/gesture_service/gesture_service'
+import NavigationPins from 'src/components/navigation/navigation_pins.vue'
 import { mapGetters } from 'vuex'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faTimes,
   faBell,
-  faBars
+  faBars,
+  faArrowUp,
+  faMinus
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
   faTimes,
   faBell,
-  faBars
+  faBars,
+  faArrowUp,
+  faMinus
 )
 
 const MobileNav = {
   components: {
     SideDrawer,
-    Notifications
+    Notifications,
+    NavigationPins
   },
   data: () => ({
     notificationsCloseGesture: undefined,
-    notificationsOpen: false
+    notificationsOpen: false,
+    notificationsAtTop: true
   }),
   created () {
     this.notificationsCloseGesture = GestureService.swipeGesture(
       GestureService.DIRECTION_RIGHT,
-      this.closeMobileNotifications,
+      () => this.closeMobileNotifications(true),
       50
     )
   },
@@ -47,7 +54,10 @@ const MobileNav = {
     isChat () {
       return this.$route.name === 'chat'
     },
-    ...mapGetters(['unreadChatCount'])
+    ...mapGetters(['unreadChatCount', 'unreadAnnouncementCount']),
+    chatsPinned () {
+      return new Set(this.$store.state.serverSideStorage.prefsStorage.collections.pinnedNavItems).has('chats')
+    }
   },
   methods: {
     toggleMobileSidebar () {
@@ -56,12 +66,14 @@ const MobileNav = {
     openMobileNotifications () {
       this.notificationsOpen = true
     },
-    closeMobileNotifications () {
+    closeMobileNotifications (markRead) {
       if (this.notificationsOpen) {
         // make sure to mark notifs seen only when the notifs were open and not
         // from close-calls.
         this.notificationsOpen = false
-        this.markNotificationsAsSeen()
+        if (markRead) {
+          this.markNotificationsAsSeen()
+        }
       }
     },
     notificationsTouchStart (e) {
@@ -73,14 +85,19 @@ const MobileNav = {
     scrollToTop () {
       window.scrollTo(0, 0)
     },
+    scrollMobileNotificationsToTop () {
+      this.$refs.mobileNotifications.scrollTo(0, 0)
+    },
     logout () {
       this.$router.replace('/main/public')
       this.$store.dispatch('logout')
     },
     markNotificationsAsSeen () {
-      this.$refs.notifications.markAsSeen()
+      // this.$refs.notifications.markAsSeen()
+      this.$store.dispatch('markNotificationsAsSeen')
     },
     onScroll ({ target: { scrollTop, clientHeight, scrollHeight } }) {
+      this.notificationsAtTop = scrollTop > 0
       if (scrollTop + clientHeight >= scrollHeight) {
         this.$refs.notifications.fetchOlderNotifications()
       }

@@ -12,6 +12,9 @@
 
 <script>
 export default {
+  provide: {
+    popoversZLayer: 'modals'
+  },
   props: {
     isOpen: {
       type: Boolean,
@@ -26,7 +29,7 @@ export default {
     classes () {
       return {
         'modal-background': !this.noBackground,
-        'open': this.isOpen
+        open: this.isOpen
       }
     }
   }
@@ -35,7 +38,7 @@ export default {
 
 <style lang="scss">
 .modal-view {
-  z-index: 1000;
+  z-index: var(--ZI_modals);
   position: fixed;
   top: 0;
   left: 0;

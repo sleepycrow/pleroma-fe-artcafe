@@ -10,3 +10,5 @@ Contributors of this project.
 - shpuld (shpuld@shitposter.club): CSS and styling
 - Vincent Guth (https://unsplash.com/photos/XrwVIFy6rTw): Background images.
 - hj (hj@shigusegubu.club): Code
+- Sean King (seanking@kazv.moe): Code
+- tusooa (tusooa@kazv.moe): Code

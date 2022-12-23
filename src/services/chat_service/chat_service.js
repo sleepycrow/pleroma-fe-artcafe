@@ -7,7 +7,7 @@ const empty = (chatId) => {
     messages: [],
     newMessageCount: 0,
     lastSeenMessageId: '0',
-    chatId: chatId,
+    chatId,
     minId: undefined,
     maxId: undefined
   }
@@ -101,7 +101,7 @@ const add = (storage, { messages: newMessages, updateMaxId = true }) => {
           storage.messages = storage.messages.filter(msg => msg.id !== message.id)
         }
         Object.assign(fakeMessage, message, { error: false })
-        delete fakeMessage['fakeId']
+        delete fakeMessage.fakeId
         storage.idIndex[fakeMessage.id] = fakeMessage
         delete storage.idIndex[message.fakeId]
 
@@ -178,7 +178,7 @@ const getView = (storage) => {
         id: date.getTime().toString()
       })
 
-      previousMessage['isTail'] = true
+      previousMessage.isTail = true
       currentMessageChainId = undefined
       afterDate = true
     }
@@ -193,15 +193,15 @@ const getView = (storage) => {
 
     // end a message chian
     if ((nextMessage && nextMessage.account_id) !== message.account_id) {
-      object['isTail'] = true
+      object.isTail = true
       currentMessageChainId = undefined
     }
 
     // start a new message chain
     if ((previousMessage && previousMessage.data && previousMessage.data.account_id) !== message.account_id || afterDate) {
       currentMessageChainId = _.uniqueId()
-      object['isHead'] = true
-      object['messageChainId'] = currentMessageChainId
+      object.isHead = true
+      object.messageChainId = currentMessageChainId
     }
 
     result.push(object)

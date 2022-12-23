@@ -6,7 +6,10 @@ import {
   faEyeSlash,
   faThumbtack,
   faShareAlt,
-  faExternalLinkAlt
+  faExternalLinkAlt,
+  faHistory,
+  faPlus,
+  faTimes
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faBookmark as faBookmarkReg,
@@ -21,13 +24,27 @@ library.add(
   faThumbtack,
   faShareAlt,
   faExternalLinkAlt,
-  faFlag
+  faFlag,
+  faHistory,
+  faPlus,
+  faTimes
 )
 
 const ExtraButtons = {
-  props: [ 'status' ],
+  props: ['status'],
   components: { Popover },
+  data () {
+    return {
+      expanded: false
+    }
+  },
   methods: {
+    onShow () {
+      this.expanded = true
+    },
+    onClose () {
+      this.expanded = false
+    },
     deleteStatus () {
       const confirmed = window.confirm(this.$t('status.delete_confirm'))
       if (confirmed) {
@@ -71,14 +88,32 @@ const ExtraButtons = {
     },
     reportStatus () {
       this.$store.dispatch('openUserReportingModal', { userId: this.status.user.id, statusIds: [this.status.id] })
+    },
+    editStatus () {
+      this.$store.dispatch('fetchStatusSource', { id: this.status.id })
+        .then(data => this.$store.dispatch('openEditStatusModal', {
+          statusId: this.status.id,
+          subject: data.spoiler_text,
+          statusText: data.text,
+          statusIsSensitive: this.status.nsfw,
+          statusPoll: this.status.poll,
+          statusFiles: [...this.status.attachments],
+          visibility: this.status.visibility,
+          statusContentType: data.content_type
+        }))
+    },
+    showStatusHistory () {
+      const originalStatus = { ...this.status }
+      const stripFieldsList = ['attachments', 'created_at', 'emojis', 'text', 'raw_html', 'nsfw', 'poll', 'summary', 'summary_raw_html']
+      stripFieldsList.forEach(p => delete originalStatus[p])
+      this.$store.dispatch('openStatusHistoryModal', originalStatus)
     }
   },
   computed: {
     currentUser () { return this.$store.state.users.currentUser },
     canDelete () {
       if (!this.currentUser) { return }
-      const superuser = this.currentUser.rights.moderator || this.currentUser.rights.admin
-      return superuser || this.status.user.id === this.currentUser.id
+      return this.currentUser.privileges.includes('messages_delete') || this.status.user.id === this.currentUser.id
     },
     ownStatus () {
       return this.status.user.id === this.currentUser.id
@@ -89,9 +124,16 @@ const ExtraButtons = {
     canMute () {
       return !!this.currentUser
     },
+    canBookmark () {
+      return !!this.currentUser
+    },
     statusLink () {
       return `${this.$store.state.instance.server}${this.$router.resolve({ name: 'conversation', params: { id: this.status.id } }).href}`
-    }
+    },
+    isEdited () {
+      return this.status.edited_at !== null
+    },
+    editingAvailable () { return this.$store.state.instance.editingAvailable }
   }
 }
 

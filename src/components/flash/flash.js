@@ -11,7 +11,7 @@ library.add(
 )
 
 const Flash = {
-  props: [ 'src' ],
+  props: ['src'],
   data () {
     return {
       player: false, // can be true, "hidden", false. hidden = element exists
@@ -39,12 +39,13 @@ const Flash = {
           this.player = 'error'
         })
         this.ruffleInstance = player
+        this.$emit('playerOpened')
       })
     },
     closePlayer () {
-      console.log(this.ruffleInstance)
-      this.ruffleInstance.remove()
+      this.ruffleInstance && this.ruffleInstance.remove()
       this.player = false
+      this.$emit('playerClosed')
     }
   }
 }

@@ -11,23 +11,14 @@
           {{ $t('settings.settings') }}
         </span>
         <transition name="fade">
-          <template v-if="currentSaveStateNotice">
-            <div
-              v-if="currentSaveStateNotice.error"
-              class="alert error"
-              @click.prevent
-            >
-              {{ $t('settings.saving_err') }}
-            </div>
-
-            <div
-              v-if="!currentSaveStateNotice.error"
-              class="alert transparent"
-              @click.prevent
-            >
-              {{ $t('settings.saving_ok') }}
-            </div>
-          </template>
+          <div
+            v-if="currentSaveStateNotice"
+            class="alert"
+            :class="{ transparent: !currentSaveStateNotice.error, error: currentSaveStateNotice.error}"
+            @click.prevent
+          >
+            {{ currentSaveStateNotice.error ? $t('settings.saving_err') : $t('settings.saving_ok') }}
+          </div>
         </transition>
         <button
           class="btn button-default"
@@ -53,7 +44,7 @@
       <div class="panel-body">
         <SettingsModalContent v-if="modalOpenedOnce" />
       </div>
-      <div class="panel-footer">
+      <div class="panel-footer settings-footer">
         <Popover
           class="export"
           trigger="click"
@@ -62,18 +53,19 @@
           :bound-to="{ x: 'container' }"
           remove-padding
         >
-          <template v-slot:trigger>
+          <template #trigger>
             <button
               class="btn button-default"
               :title="$t('general.close')"
             >
               <span>{{ $t("settings.file_export_import.backup_restore") }}</span>
+              {{ ' ' }}
               <FAIcon
                 icon="chevron-down"
               />
             </button>
           </template>
-          <template v-slot:content="{close}">
+          <template #content="{close}">
             <div class="dropdown-menu">
               <button
                 class="button-default dropdown-item dropdown-item-icon"
@@ -108,6 +100,17 @@
             </div>
           </template>
         </Popover>
+
+        <Checkbox
+          :model-value="!!expertLevel"
+          @update:modelValue="expertLevel = Number($event)"
+        >
+          {{ $t("settings.expert_mode") }}
+        </Checkbox>
+        <span
+          id="unscrolled-content"
+          class="extra-content"
+        />
       </div>
     </div>
   </Modal>

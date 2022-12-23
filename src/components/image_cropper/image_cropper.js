@@ -95,7 +95,7 @@ const ImageCropper = {
       const fileInput = this.$refs.input
       if (fileInput.files != null && fileInput.files[0] != null) {
         this.file = fileInput.files[0]
-        let reader = new window.FileReader()
+        const reader = new window.FileReader()
         reader.onload = (e) => {
           this.dataUrl = e.target.result
           this.$emit('open')
@@ -117,7 +117,7 @@ const ImageCropper = {
     const fileInput = this.$refs.input
     fileInput.addEventListener('change', this.readFile)
   },
-  beforeDestroy: function () {
+  beforeUnmount: function () {
     // remove the event listeners
     const trigger = this.getTriggerDOM()
     if (trigger) {

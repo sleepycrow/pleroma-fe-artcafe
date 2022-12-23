@@ -1,18 +1,19 @@
 # Pleroma-FE 
 
-> A single column frontend designed for Pleroma.
+> Highly-customizable frontend designed for Pleroma.
 
-![screenshot](/uploads/796c5ecf985ed1e2b0943ee0df131ed0/DJVqSJ0.png)
+![screenshot](./image-1.png)
 
 # For Translators
 
-To translate Pleroma-FE, add your language to [src/i18n/messages.js](https://git.pleroma.social/pleroma/pleroma-fe/blob/develop/src/i18n/messages.js). Pleroma-FE will set your language by your browser locale, but you can temporarily force it in the code by changing the locale in main.js.
+To translate Pleroma-FE, use our weblate server: https://translate.pleroma.social/. If you need to add your language it should be added as a json file in [src/i18n/](https://git.pleroma.social/pleroma/pleroma-fe/blob/develop/src/i18n/) folder and added in a list within [src/i18n/languages.js](https://git.pleroma.social/pleroma/pleroma-fe/blob/develop/src/i18n/languages.js). 
 
-# FOR ADMINS
+Pleroma-FE will set your language by your browser locale, but you can change language in settings.
 
-You don't need to build Pleroma-FE yourself. Those using the Pleroma backend will be able to use it out of the box.
+# For instance admins
+You don't need to build Pleroma-FE yourself. Those using the Pleroma backend will be able to use it out of the box. Information of customizing PleromaFE settings/defaults is in our [guide](https://docs-develop.pleroma.social/frontend/CONFIGURATION/) and in case you want to build your own custom version there's [another](https://docs-develop.pleroma.social/frontend/HACKING/)
 
-## Build Setup
+# Build Setup
 
 ``` bash
 # install dependencies
@@ -20,13 +21,13 @@ npm install -g yarn
 yarn
 
 # serve with hot reload at localhost:8080
-npm run dev
+yarn dev
 
 # build for production with minification
-npm run build
+yarn build
 
 # run unit tests
-npm run unit
+yarn unit
 ```
 
 # For Contributors:
@@ -40,10 +41,4 @@ FE Build process also leaves current commit hash in global variable `___pleromaf
 
 # Configuration
 
-Edit config.json for configuration.
-
-## Options
-
-### Login methods
-
-```loginMethod``` can be set to either ```password``` (the default) or ```token```, which will use the full oauth redirection flow, which is useful for SSO situations.
+Set configuration settings in AdminFE, additionally you can edit config.json. For more details see [documentation](https://docs-develop.pleroma.social/frontend/CONFIGURATION/).

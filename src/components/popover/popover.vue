@@ -1,30 +1,41 @@
 <template>
-  <div
+  <span
     @mouseenter="onMouseenter"
     @mouseleave="onMouseleave"
   >
     <button
       ref="trigger"
-      class="button-unstyled -fullwidth popover-trigger-button"
+      class="button-unstyled popover-trigger-button"
       type="button"
+      v-bind="triggerAttrs"
       @click="onClick"
     >
       <slot name="trigger" />
     </button>
-    <div
-      v-if="!hidden"
-      ref="content"
-      :style="styles"
-      class="popover"
-      :class="popoverClass || 'popover-default'"
+    <teleport
+      :disabled="!teleport"
+      to="#popovers"
     >
-      <slot
-        name="content"
-        class="popover-inner"
-        :close="hidePopover"
-      />
-    </div>
-  </div>
+      <transition name="fade">
+        <div
+          v-if="!hidden"
+          ref="content"
+          :style="styles"
+          class="popover"
+          :class="popoverClass || 'popover-default'"
+          @mouseenter="onMouseenterContent"
+          @mouseleave="onMouseleaveContent"
+          @click="onClickContent"
+        >
+          <slot
+            name="content"
+            class="popover-inner"
+            :close="hidePopover"
+          />
+        </div>
+      </transition>
+    </teleport>
+  </span>
 </template>
 
 <script src="./popover.js" />
@@ -33,20 +44,32 @@
 @import '../../_variables.scss';
 
 .popover-trigger-button {
-  display: block;
+  display: inline-block;
 }
 
 .popover {
-  z-index: 8;
-  position: absolute;
+  z-index: var(--ZI_popover_override, var(--ZI_popovers));
+  position: fixed;
   min-width: 0;
+  max-width: calc(100vw - 20px);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--popupShadow);
 }
 
 .popover-default {
-  transition: opacity 0.3s;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: var(--panelShadow);
+    pointer-events: none;
+  }
 
-  box-shadow: 1px 1px 4px rgba(0,0,0,.6);
-  box-shadow: var(--panelShadow);
   border-radius: $fallback--btnRadius;
   border-radius: var(--btnRadius, $fallback--btnRadius);
 
@@ -65,11 +88,11 @@
 .dropdown-menu {
   display: block;
   padding: .5rem 0;
-  font-size: 1rem;
+  font-size: 1em;
   text-align: left;
   list-style: none;
   max-width: 100vw;
-  z-index: 10;
+  z-index: var(--ZI_popover_override, var(--ZI_popovers));
   white-space: nowrap;
 
   .dropdown-divider {
@@ -82,9 +105,9 @@
 
   .dropdown-item {
     line-height: 21px;
-    overflow: auto;
+    overflow: hidden;
     display: block;
-    padding: .5em 0.75em;
+    padding: 0.5em 0.75em;
     clear: both;
     font-weight: 400;
     text-align: inherit;
@@ -107,17 +130,25 @@
       }
     }
 
+    &.-has-submenu {
+      .chevron-icon {
+        margin-right: 0.25rem;
+        margin-left: 2rem;
+      }
+    }
+
     &:active, &:hover {
       background-color: $fallback--lightBg;
       background-color: var(--selectedMenuPopover, $fallback--lightBg);
-      color: $fallback--link;
-      color: var(--selectedMenuPopoverText, $fallback--link);
+      box-shadow: none;
+      --btnText: var(--selectedMenuPopoverText, $fallback--link);
       --faint: var(--selectedMenuPopoverFaintText, $fallback--faint);
       --faintLink: var(--selectedMenuPopoverFaintLink, $fallback--faint);
       --lightText: var(--selectedMenuPopoverLightText, $fallback--lightText);
       --icon: var(--selectedMenuPopoverIcon, $fallback--icon);
       svg {
         color: var(--selectedMenuPopoverIcon, $fallback--icon);
+        --icon: var(--selectedMenuPopoverIcon, $fallback--icon);
       }
     }
 
@@ -142,12 +173,41 @@
         content: '✓';
       }
 
-      &.menu-checkbox-radio::after {
-        font-size: 2em;
-        content: '•';
+      &.-radio {
+        border-radius: 9999px;
+
+        &.menu-checkbox-checked::after {
+          font-size: 2em;
+          content: '•';
+        }
       }
     }
 
+  }
+
+  .button-default.dropdown-item {
+    &,
+    i[class*=icon-] {
+      color: $fallback--text;
+      color: var(--btnText, $fallback--text);
+    }
+
+    &:active {
+      background-color: $fallback--lightBg;
+      background-color: var(--selectedMenuPopover, $fallback--lightBg);
+      color: $fallback--link;
+      color: var(--selectedMenuPopoverText, $fallback--link);
+    }
+
+    &:disabled {
+      color: $fallback--text;
+      color: var(--btnDisabledText, $fallback--text);
+    }
+
+    &.toggled {
+      color: $fallback--text;
+      color: var(--btnToggledText, $fallback--text);
+    }
   }
 }
 </style>

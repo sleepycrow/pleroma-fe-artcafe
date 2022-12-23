@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import { unescape, flattenDeep } from 'lodash'
 import { getTagName, processTextForEmoji, getAttrs } from 'src/services/html_converter/utility.service.js'
 import { convertHtmlToTree } from 'src/services/html_converter/html_tree_converter.service.js'
@@ -27,8 +26,12 @@ import './rich_content.scss'
  *
  * Apart from that one small hiccup with emit in render this _should_ be vue3-ready
  */
-export default Vue.component('RichContent', {
+export default {
   name: 'RichContent',
+  components: {
+    MentionsLine,
+    HashtagLink
+  },
   props: {
     // Original html content
     html: {
@@ -58,7 +61,7 @@ export default Vue.component('RichContent', {
     }
   },
   // NEVER EVER TOUCH DATA INSIDE RENDER
-  render (h) {
+  render () {
     // Pre-process HTML
     const { newHtml: html } = preProcessPerLine(this.html, this.greentext)
     let currentMentions = null // Current chain of mentions, we group all mentions together
@@ -76,18 +79,19 @@ export default Vue.component('RichContent', {
 
     const renderImage = (tag) => {
       return <StillImage
-        {...{ attrs: getAttrs(tag) }}
+        {...getAttrs(tag)}
         class="img"
       />
     }
 
     const renderHashtag = (attrs, children, encounteredTextReverse) => {
-      const linkData = getLinkData(attrs, children, tagsIndex++)
+      const { index, ...linkData } = getLinkData(attrs, children, tagsIndex++)
       writtenTags.push(linkData)
       if (!encounteredTextReverse) {
         lastTags.push(linkData)
       }
-      return <HashtagLink {...{ props: linkData }}/>
+      const { url, tag, content } = linkData
+      return <HashtagLink url={url} tag={tag} content={content}/>
     }
 
     const renderMention = (attrs, children) => {
@@ -120,7 +124,8 @@ export default Vue.component('RichContent', {
           // don't include spaces when processing mentions - we'll include them
           // in MentionsLine
           lastSpacing = item
-          return currentMentions !== null ? item.trim() : item
+          // Don't remove last space in a container (fixes poast mentions)
+          return (index !== array.length - 1) && (currentMentions !== null) ? item.trim() : item
         }
 
         currentMentions = null
@@ -145,6 +150,7 @@ export default Vue.component('RichContent', {
       if (Array.isArray(item)) {
         const [opener, children, closer] = item
         const Tag = getTagName(opener)
+        const fullAttrs = getAttrs(opener, () => true)
         const attrs = getAttrs(opener)
         const previouslyMentions = currentMentions !== null
         /* During grouping of mentions we trim all the empty text elements
@@ -166,7 +172,7 @@ export default Vue.component('RichContent', {
             return ['', [mentionsLinePadding, renderImage(opener)], '']
           case 'a': // replace mentions with MentionLink
             if (!this.handleLinks) break
-            if (attrs['class'] && attrs['class'].includes('mention')) {
+            if (fullAttrs.class && fullAttrs.class.includes('mention')) {
               // Handling mentions here
               return renderMention(attrs, children)
             } else {
@@ -174,7 +180,7 @@ export default Vue.component('RichContent', {
               break
             }
           case 'span':
-            if (this.handleLinks && attrs['class'] && attrs['class'].includes('h-card')) {
+            if (this.handleLinks && fullAttrs.class && fullAttrs.class.includes('h-card')) {
               return ['', children.map(processItem), '']
             }
         }
@@ -208,23 +214,25 @@ export default Vue.component('RichContent', {
         const [opener, children] = item
         const Tag = opener === '' ? '' : getTagName(opener)
         switch (Tag) {
-          case 'a': // replace mentions with MentionLink
+          case 'a': { // replace mentions with MentionLink
             if (!this.handleLinks) break
-            const attrs = getAttrs(opener)
+            const fullAttrs = getAttrs(opener, () => true)
+            const attrs = getAttrs(opener, () => true)
             // should only be this
             if (
-              (attrs['class'] && attrs['class'].includes('hashtag')) || // Pleroma style
-                (attrs['rel'] === 'tag') // Mastodon style
+              (fullAttrs.class && fullAttrs.class.includes('hashtag')) || // Pleroma style
+                (fullAttrs.rel === 'tag') // Mastodon style
             ) {
               return renderHashtag(attrs, children, encounteredTextReverse)
             } else {
               attrs.target = '_blank'
               const newChildren = [...children].reverse().map(processItemReverse).reverse()
 
-              return <a {...{ attrs }}>
+              return <a {...attrs}>
                 { newChildren }
               </a>
             }
+          }
           case '':
             return [...children].reverse().map(processItemReverse).reverse()
         }
@@ -234,7 +242,7 @@ export default Vue.component('RichContent', {
           const newChildren = Array.isArray(children)
             ? [...children].reverse().map(processItemReverse).reverse()
             : children
-          return <Tag {...{ attrs: getAttrs(opener) }}>
+          return <Tag {...getAttrs(opener)}>
             { newChildren }
           </Tag>
         } else {
@@ -265,7 +273,7 @@ export default Vue.component('RichContent', {
 
     return result
   }
-})
+}
 
 const getLinkData = (attrs, children, index) => {
   const stripTags = (item) => {

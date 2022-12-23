@@ -1,6 +1,7 @@
 import { convert } from 'chromatism'
 import { rgb2hex, hex2rgb, rgba2css, getCssColor, relativeLuminance } from '../color_convert/color_convert.js'
 import { getColors, computeDynamicColor, getOpacitySlot } from '../theme_data/theme_data.service.js'
+import { defaultState } from '../../modules/config.js'
 
 export const applyTheme = (input) => {
   const { rules } = generatePreset(input)
@@ -13,10 +14,40 @@ export const applyTheme = (input) => {
   const styleSheet = styleEl.sheet
 
   styleSheet.toString()
-  styleSheet.insertRule(`body { ${rules.radii} }`, 'index-max')
-  styleSheet.insertRule(`body { ${rules.colors} }`, 'index-max')
-  styleSheet.insertRule(`body { ${rules.shadows} }`, 'index-max')
-  styleSheet.insertRule(`body { ${rules.fonts} }`, 'index-max')
+  styleSheet.insertRule(`:root { ${rules.radii} }`, 'index-max')
+  styleSheet.insertRule(`:root { ${rules.colors} }`, 'index-max')
+  styleSheet.insertRule(`:root { ${rules.shadows} }`, 'index-max')
+  styleSheet.insertRule(`:root { ${rules.fonts} }`, 'index-max')
+  body.classList.remove('hidden')
+}
+
+const configColumns = ({ sidebarColumnWidth, contentColumnWidth, notifsColumnWidth }) =>
+  ({ sidebarColumnWidth, contentColumnWidth, notifsColumnWidth })
+
+const defaultConfigColumns = configColumns(defaultState)
+
+export const applyConfig = (config) => {
+  const columns = configColumns(config)
+
+  if (columns === defaultConfigColumns) {
+    return
+  }
+
+  const head = document.head
+  const body = document.body
+  body.classList.add('hidden')
+
+  const rules = Object
+    .entries(columns)
+    .filter(([k, v]) => v)
+    .map(([k, v]) => `--${k}: ${v}`).join(';')
+
+  const styleEl = document.createElement('style')
+  head.appendChild(styleEl)
+  const styleSheet = styleEl.sheet
+
+  styleSheet.toString()
+  styleSheet.insertRule(`:root { ${rules} }`, 'index-max')
   body.classList.remove('hidden')
 }
 

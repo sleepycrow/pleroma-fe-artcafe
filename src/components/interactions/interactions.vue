@@ -22,6 +22,15 @@
         :label="$t('interactions.follows')"
       />
       <span
+        key="reactions"
+        :label="$t('interactions.emoji_reactions')"
+      />
+      <span
+        v-if="canSeeReports"
+        key="reports"
+        :label="$t('interactions.reports')"
+      />
+      <span
         v-if="!allowFollowingMove"
         key="moves"
         :label="$t('interactions.moves')"

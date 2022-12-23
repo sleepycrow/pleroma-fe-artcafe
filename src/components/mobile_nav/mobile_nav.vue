@@ -5,12 +5,13 @@
     <nav
       id="nav"
       class="mobile-nav"
-      :class="{ 'mobile-hidden': isChat }"
       @click="scrollToTop()"
     >
       <div class="item">
         <button
           class="button-unstyled mobile-nav-button"
+          :title="$t('nav.mobile_sidebar')"
+          :aria-expanaded="$refs.sideDrawer && !$refs.sideDrawer.closed"
           @click.stop.prevent="toggleMobileSidebar()"
         >
           <FAIcon
@@ -18,23 +19,16 @@
             icon="bars"
           />
           <div
-            v-if="unreadChatCount"
+            v-if="(unreadChatCount && !chatsPinned) || unreadAnnouncementCount"
             class="alert-dot"
           />
         </button>
-        <router-link
-          v-if="!hideSitename"
-          class="site-name"
-          :to="{ name: 'root' }"
-          active-class="home"
-        >
-          {{ sitename }}
-        </router-link>
-      </div>
-      <div class="item right">
+        <NavigationPins class="pins" />
+      </div> <div class="item right">
         <button
           v-if="currentUser"
           class="button-unstyled mobile-nav-button"
+          :title="unseenNotificationsCount ? $t('nav.mobile_notifications_unread_active') : $t('nav.mobile_notifications')"
           @click.stop.prevent="openMobileNotifications()"
         >
           <FAIcon
@@ -48,35 +42,48 @@
         </button>
       </div>
     </nav>
-    <div
+    <aside
       v-if="currentUser"
       class="mobile-notifications-drawer"
-      :class="{ 'closed': !notificationsOpen }"
+      :class="{ '-closed': !notificationsOpen }"
       @touchstart.stop="notificationsTouchStart"
       @touchmove.stop="notificationsTouchMove"
     >
       <div class="mobile-notifications-header">
         <span class="title">{{ $t('notifications.notifications') }}</span>
-        <a
-          class="mobile-nav-button"
-          @click.stop.prevent="closeMobileNotifications()"
+        <span class="spacer" />
+        <button
+          v-if="notificationsAtTop"
+          class="button-unstyled mobile-nav-button"
+          :title="$t('general.scroll_to_top')"
+          @click.stop.prevent="scrollMobileNotificationsToTop"
+        >
+          <FALayers class="fa-scale-110 fa-old-padding-layer">
+            <FAIcon icon="arrow-up" />
+            <FAIcon
+              icon="minus"
+              transform="up-7"
+            />
+          </FALayers>
+        </button>
+        <button
+          class="button-unstyled mobile-nav-button"
+          :title="$t('nav.mobile_notifications_close')"
+          @click.stop.prevent="closeMobileNotifications(true)"
         >
           <FAIcon
             class="fa-scale-110 fa-old-padding"
             icon="times"
           />
-        </a>
+        </button>
       </div>
       <div
+        id="mobile-notifications"
+        ref="mobileNotifications"
         class="mobile-notifications"
         @scroll="onScroll"
-      >
-        <Notifications
-          ref="notifications"
-          :no-heading="true"
-        />
-      </div>
-    </div>
+      />
+    </aside>
     <SideDrawer
       ref="sideDrawer"
       :logout="logout"
@@ -90,15 +97,19 @@
 @import '../../_variables.scss';
 
 .MobileNav {
+  z-index: var(--ZI_navbar);
+
   .mobile-nav {
     display: grid;
-    line-height: 50px;
-    height: 50px;
+    line-height: var(--navbar-height);
     grid-template-rows: 50px;
     grid-template-columns: 2fr auto;
     width: 100%;
-    position: fixed;
     box-sizing: border-box;
+
+    a {
+      color: var(--topBarLink, $fallback--link);
+    }
   }
 
   .mobile-inner-nav {
@@ -150,11 +161,12 @@
     transition-property: transform;
     transition-duration: 0.25s;
     transform: translateX(0);
-    z-index: 1001;
+    z-index: var(--ZI_navbar);
     -webkit-overflow-scrolling: touch;
 
-    &.closed {
+    &.-closed {
       transform: translateX(100%);
+      box-shadow: none;
     }
   }
 
@@ -162,7 +174,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 1;
+    z-index: calc(var(--ZI_navbar) + 100);
     width: 100%;
     height: 50px;
     line-height: 50px;
@@ -173,19 +185,30 @@
     box-shadow: 0px 0px 4px rgba(0,0,0,.6);
     box-shadow: var(--topBarShadow);
 
+    .spacer {
+      flex: 1;
+    }
+
     .title {
       font-size: 1.3em;
       margin-left: 0.6em;
     }
   }
 
+  .pins {
+    flex: 1;
+
+    .pinned-item {
+      flex-grow: 1;
+    }
+  }
+
   .mobile-notifications {
     margin-top: 50px;
     width: 100vw;
-    height: calc(100vh - 50px);
+    height: calc(100vh - var(--navbar-height));
     overflow-x: hidden;
     overflow-y: scroll;
-
     color: $fallback--text;
     color: var(--text, $fallback--text);
     background-color: $fallback--bg;
@@ -195,14 +218,17 @@
       padding: 0;
       border-radius: 0;
       box-shadow: none;
+
       .panel {
         border-radius: 0;
         margin: 0;
         box-shadow: none;
       }
-      .panel:after {
+
+      .panel::after {
         border-radius: 0;
       }
+
       .panel .panel-heading {
         border-radius: 0;
         box-shadow: none;

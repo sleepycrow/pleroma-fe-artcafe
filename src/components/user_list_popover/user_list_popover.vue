@@ -4,10 +4,10 @@
     placement="top"
     :offset="{ y: 5 }"
   >
-    <template v-slot:trigger>
+    <template #trigger>
       <slot />
     </template>
-    <template v-slot:content>
+    <template #content>
       <div class="user-list-popover">
         <template v-if="users.length">
           <div
@@ -22,9 +22,14 @@
             />
             <div class="user-list-names">
               <!-- eslint-disable vue/no-v-html -->
-              <span v-html="user.name_html" />
+              <RichContent
+                class="username"
+                :title="'@'+user.screen_name_ui"
+                :html="user.name_html"
+                :emoji="user.emoji"
+              />
               <!-- eslint-enable vue/no-v-html -->
-              <span class="user-list-screen-name">{{ user.screen_name_ui }}</span>
+              <span class="user-list-screen-name">{{ user.screen_name_ui }}</span><UnicodeDomainIndicator :user="user" />
             </div>
           </div>
         </template>
@@ -40,13 +45,15 @@
   </Popover>
 </template>
 
-<script src="./user_list_popover.js" ></script>
+<script src="./user_list_popover.js"></script>
 
 <style lang="scss">
 @import '../../_variables.scss';
 
 .user-list-popover {
   padding: 0.5em;
+
+  --emoji-size: 16px;
 
   .user-list-row {
     padding: 0.25em;
@@ -66,7 +73,7 @@
     }
 
     .user-list-screen-name {
-      font-size: 9px;
+      font-size: 0.65em;
     }
   }
 }

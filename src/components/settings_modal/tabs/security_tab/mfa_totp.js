@@ -10,7 +10,7 @@ export default {
     inProgress: false // progress peform request to disable otp method
   }),
   components: {
-    'confirm': Confirm
+    confirm: Confirm
   },
   computed: {
     isActivated () {

@@ -6,7 +6,7 @@ import Gallery from '../gallery/gallery.vue'
 import LinkPreview from '../link-preview/link-preview.vue'
 import StatusContent from '../status_content/status_content.vue'
 import ChatMessageDate from '../chat_message_date/chat_message_date.vue'
-import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
+import { defineAsyncComponent } from 'vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faTimes,
@@ -27,6 +27,7 @@ const ChatMessage = {
     'chatViewItem',
     'hoveredMessageChain'
   ],
+  emits: ['hover'],
   components: {
     Popover,
     Attachment,
@@ -34,7 +35,8 @@ const ChatMessage = {
     UserAvatar,
     Gallery,
     LinkPreview,
-    ChatMessageDate
+    ChatMessageDate,
+    UserPopover: defineAsyncComponent(() => import('../user_popover/user_popover.vue'))
   },
   computed: {
     // Returns HH:MM (hours and minutes) in local time.
@@ -47,9 +49,6 @@ const ChatMessage = {
     },
     message () {
       return this.chatViewItem.data
-    },
-    userProfileLink () {
-      return generateProfileLink(this.author.id, this.author.screen_name, this.$store.state.instance.restrictedNicknames)
     },
     isMessage () {
       return this.chatViewItem.type === 'message'

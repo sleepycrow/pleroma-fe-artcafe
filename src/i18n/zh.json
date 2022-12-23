@@ -15,7 +15,8 @@
     "title": "功能",
     "who_to_follow": "推荐关注",
     "pleroma_chat_messages": "Pleroma 聊天",
-    "upload_limit": "上传限制"
+    "upload_limit": "上传限制",
+    "shout": "留言板"
   },
   "finder": {
     "error_fetching_user": "获取用户时发生错误",
@@ -46,7 +47,13 @@
     },
     "flash_content": "点击以使用 Ruffle 显示 Flash 内容（实验性，可能无效）。",
     "flash_security": "注意这可能有潜在的危险，因为 Flash 内容仍然是任意的代码。",
-    "flash_fail": "Flash 内容加载失败，请在控制台查看详情。"
+    "flash_fail": "Flash 内容加载失败，请在控制台查看详情。",
+    "scope_in_timeline": {
+      "public": "公开",
+      "direct": "私讯",
+      "private": "仅关注者",
+      "unlisted": "列外"
+    }
   },
   "image_cropper": {
     "crop_picture": "裁剪图片",
@@ -79,7 +86,9 @@
   },
   "media_modal": {
     "previous": "往前",
-    "next": "往后"
+    "next": "往后",
+    "hide": "关闭媒体查看器",
+    "counter": "{current} / {total}"
   },
   "nav": {
     "about": "关于",
@@ -114,7 +123,8 @@
     "reacted_with": "作出了 {0} 的反应",
     "migrated_to": "迁移到了",
     "follow_request": "想要关注你",
-    "error": "取得通知时发生错误：{0}"
+    "error": "取得通知时发生错误：{0}",
+    "poll_ended": "投票结束了"
   },
   "polls": {
     "add_poll": "增加投票",
@@ -197,7 +207,8 @@
     },
     "reason_placeholder": "此实例的注册需要手动批准。\n请让管理员知道您为什么想要注册。",
     "reason": "注册理由",
-    "register": "注册"
+    "register": "注册",
+    "email_language": "你想从服务器收到什么语言的邮件？"
   },
   "selectable_list": {
     "select_all": "选择全部"
@@ -589,7 +600,38 @@
       "backup_restore": "设置备份"
     },
     "right_sidebar": "在右侧显示侧边栏",
-    "hide_shoutbox": "隐藏实例留言板"
+    "hide_shoutbox": "隐藏实例留言板",
+    "expert_mode": "显示高级",
+    "download_backup": "下载",
+    "mention_links": "提及链接",
+    "account_backup": "账号备份",
+    "account_backup_table_head": "备份",
+    "remove_backup": "移除",
+    "list_backups_error": "获取备份列表出错：{error}",
+    "add_backup": "创建一个新备份",
+    "added_backup": "创建了一个新备份。",
+    "account_alias": "账号别名",
+    "account_alias_table_head": "别名",
+    "list_aliases_error": "获取别名时出错：{error}",
+    "hide_list_aliases_error_action": "关闭",
+    "remove_alias": "移除这个别名",
+    "new_alias_target": "添加一个新别名（例如 {example}）",
+    "added_alias": "别名添加好了。",
+    "move_account": "移动账号",
+    "move_account_target": "目标账号（例如 {example}）",
+    "moved_account": "账号移动好了。",
+    "move_account_error": "移动账号时出错：{error}",
+    "setting_server_side": "这个设置是捆绑到你的个人资料的，能影响所有会话和客户端",
+    "post_look_feel": "文章的样子跟感受",
+    "email_language": "从服务器收邮件的语言",
+    "account_backup_description": "这个允许你下载一份账号信息和文章的存档，但是现在还不能导入到 Pleroma 账号里。",
+    "backup_not_ready": "备份还没准备好。",
+    "add_backup_error": "添加新备份时出错：{error}",
+    "add_alias_error": "添加别名时出错：{error}",
+    "move_account_notes": "如果你想把账号移动到别的地方，你必须去目标账号，然后加一个指向这里的别名。",
+    "wordfilter": "词语过滤器",
+    "user_profiles": "用户资料",
+    "third_column_mode_notifications": "消息栏"
   },
   "time": {
     "day": "{0} 天",
@@ -623,7 +665,23 @@
     "year": "{0} 年",
     "years": "{0} 年",
     "year_short": "{0}y",
-    "years_short": "{0}y"
+    "years_short": "{0}y",
+    "unit": {
+      "days_short": "{0} 天",
+      "hours": "{0} 小时",
+      "hours_short": "{0} 时",
+      "minutes": "{0} 分",
+      "minutes_short": "{0} 分",
+      "months": "{0} 个月",
+      "months_short": "{0} 月",
+      "seconds": "{0} 秒",
+      "seconds_short": "{0} 秒",
+      "weeks_short": "{0} 周",
+      "years": "{0} 年",
+      "years_short": "{0} 年",
+      "weeks": "{0} 周",
+      "days": "{0} 天"
+    }
   },
   "timeline": {
     "collapse": "折叠",
@@ -666,7 +724,32 @@
     "status_deleted": "该状态已被删除",
     "nsfw": "NSFW",
     "external_source": "外部来源",
-    "expand": "展开"
+    "expand": "展开",
+    "you": "（你）",
+    "plus_more": "还有 {number} 个",
+    "many_attachments": "文章有 {number} 个附件",
+    "collapse_attachments": "折起附件",
+    "show_all_attachments": "显示所有附件",
+    "show_attachment_description": "预览描述（打开附件能看完整描述）",
+    "hide_attachment": "隐藏附件",
+    "remove_attachment": "移除附件",
+    "attachment_stop_flash": "停止 Flash 播放器",
+    "move_up": "把附件左移",
+    "open_gallery": "打开图库",
+    "thread_hide": "隐藏这个线索",
+    "thread_show": "显示这个线索",
+    "thread_show_full_with_icon": "{icon} {text}",
+    "thread_follow": "查看这个线索的剩余部分（一共有 {numStatus} 个状态）",
+    "thread_follow_with_icon": "{icon} {text}",
+    "ancestor_follow": "查看这个状态下的别的 {numReplies} 个回复",
+    "ancestor_follow_with_icon": "{icon} {text}",
+    "show_all_conversation_with_icon": "{icon} {text}",
+    "show_all_conversation": "显示完整对话（还有 {numStatus} 个状态）",
+    "mentions": "提及",
+    "replies_list_with_others": "回复（另外 +{numReplies} 个）：",
+    "move_down": "把附件右移",
+    "thread_show_full": "显示这个线索下的所有东西（一共有 {numStatus} 个状态，最大深度 {depth}）",
+    "show_only_conversation_under_this": "只显示这个状态的回复"
   },
   "user_card": {
     "approve": "核准",
@@ -714,8 +797,7 @@
       "disable_remote_subscription": "禁止从远程实例关注用户",
       "disable_any_subscription": "完全禁止关注用户",
       "quarantine": "从联合实例中禁止用户帖子",
-      "delete_user": "删除用户",
-      "delete_user_confirmation": "你确定吗？此操作无法撤销。"
+      "delete_user": "删除用户"
     },
     "hidden": "已隐藏",
     "show_repeats": "显示转发",
@@ -825,7 +907,10 @@
         "media_nsfw": "强制设置媒体为敏感内容",
         "media_removal_desc": "本实例移除来自以下实例的媒体内容：",
         "ftl_removal_desc": "该实例在从“已知网络”时间线上移除了下列实例：",
-        "ftl_removal": "从“已知网络”时间线上移除"
+        "ftl_removal": "从“已知网络”时间线上移除",
+        "reason": "理由",
+        "not_applicable": "无",
+        "instance": "实例"
       },
       "mrf_policies_desc": "MRF 策略会影响本实例的互通行为。以下策略已启用：",
       "mrf_policies": "已启用的 MRF 策略",

@@ -1,20 +1,23 @@
 import merge from 'lodash.merge'
 import localforage from 'localforage'
-import { each, get, set } from 'lodash'
+import { each, get, set, cloneDeep } from 'lodash'
 
 let loaded = false
 
 const defaultReducer = (state, paths) => (
-  paths.length === 0 ? state : paths.reduce((substate, path) => {
-    set(substate, path, get(state, path))
-    return substate
-  }, {})
+  paths.length === 0
+    ? state
+    : paths.reduce((substate, path) => {
+      set(substate, path, get(state, path))
+      return substate
+    }, {})
 )
 
 const saveImmedeatelyActions = [
   'markNotificationsAsSeen',
   'clearCurrentUser',
   'setCurrentUser',
+  'setServerSideStorage',
   'setHighlight',
   'setOption',
   'setClientData',
@@ -30,7 +33,7 @@ export default function createPersistedState ({
   key = 'vuex-lz',
   paths = [],
   getState = (key, storage) => {
-    let value = storage.getItem(key)
+    const value = storage.getItem(key)
     return value
   },
   setState = (key, state, storage) => {
@@ -69,7 +72,7 @@ export default function createPersistedState ({
       subscriber(store)((mutation, state) => {
         try {
           if (saveImmedeatelyActions.includes(mutation.type)) {
-            setState(key, reducer(state, paths), storage)
+            setState(key, reducer(cloneDeep(state), paths), storage)
               .then(success => {
                 if (typeof success !== 'undefined') {
                   if (mutation.type === 'setOption' || mutation.type === 'setCurrentUser') {

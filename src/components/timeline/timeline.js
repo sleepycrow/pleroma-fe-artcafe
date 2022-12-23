@@ -1,29 +1,22 @@
 import Status from '../status/status.vue'
+import { mapState } from 'vuex'
 import timelineFetcher from '../../services/timeline_fetcher/timeline_fetcher.service.js'
 import Conversation from '../conversation/conversation.vue'
 import TimelineMenu from '../timeline_menu/timeline_menu.vue'
-import TimelineQuickSettings from './timeline_quick_settings.vue'
+import QuickFilterSettings from '../quick_filter_settings/quick_filter_settings.vue'
+import QuickViewSettings from '../quick_view_settings/quick_view_settings.vue'
 import { debounce, throttle, keyBy } from 'lodash'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCircleNotch, faCog } from '@fortawesome/free-solid-svg-icons'
+import { faCircleNotch, faCirclePlus, faCog, faMinus, faArrowUp, faCheck } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
   faCircleNotch,
-  faCog
+  faCog,
+  faMinus,
+  faArrowUp,
+  faCirclePlus,
+  faCheck
 )
-
-export const getExcludedStatusIdsByPinning = (statuses, pinnedStatusIds) => {
-  const ids = []
-  if (pinnedStatusIds && pinnedStatusIds.length > 0) {
-    for (let status of statuses) {
-      if (!pinnedStatusIds.includes(status.id)) {
-        break
-      }
-      ids.push(status.id)
-    }
-  }
-  return ids
-}
 
 const Timeline = {
   props: [
@@ -31,14 +24,17 @@ const Timeline = {
     'timelineName',
     'title',
     'userId',
+    'listId',
     'tag',
     'embedded',
     'count',
     'pinnedStatusIds',
-    'inProfile'
+    'inProfile',
+    'footerSlipgate' // reference to an element where we should put our footer
   ],
   data () {
     return {
+      showScrollTop: false,
       paused: false,
       unfocused: false,
       bottomedOut: false,
@@ -50,9 +46,16 @@ const Timeline = {
     Status,
     Conversation,
     TimelineMenu,
-    TimelineQuickSettings
+    QuickFilterSettings,
+    QuickViewSettings
   },
   computed: {
+    filteredVisibleStatuses () {
+      return this.timeline.visibleStatuses.filter(status => this.timelineName !== 'user' || (status.id >= this.timeline.minId && status.id <= this.timeline.maxId))
+    },
+    filteredPinnedStatusIds () {
+      return (this.pinnedStatusIds || []).filter(statusId => this.timeline.statusesObject[statusId])
+    },
     newStatusCount () {
       return this.timeline.newStatusCount
     },
@@ -66,35 +69,41 @@ const Timeline = {
         return `${this.$t('timeline.show_new')} (${this.newStatusCount})`
       }
     },
+    mobileLoadButtonString () {
+      if (this.timeline.flushMarker !== 0) {
+        return '+'
+      } else {
+        return this.newStatusCount > 99 ? '∞' : this.newStatusCount
+      }
+    },
     classes () {
-      let rootClasses = !this.embedded ? ['panel', 'panel-default'] : []
+      let rootClasses = !this.embedded ? ['panel', 'panel-default'] : ['-nonpanel']
       if (this.blockingClicks) rootClasses = rootClasses.concat(['-blocked', '_misclick-prevention'])
       return {
         root: rootClasses,
-        header: ['timeline-heading'].concat(!this.embedded ? ['panel-heading'] : []),
+        header: ['timeline-heading'].concat(!this.embedded ? ['panel-heading', '-sticky'] : []),
         body: ['timeline-body'].concat(!this.embedded ? ['panel-body'] : []),
         footer: ['timeline-footer'].concat(!this.embedded ? ['panel-footer'] : [])
       }
     },
     // id map of statuses which need to be hidden in the main list due to pinning logic
-    excludedStatusIdsObject () {
-      const ids = getExcludedStatusIdsByPinning(this.timeline.visibleStatuses, this.pinnedStatusIds)
-      // Convert id array to object
-      return keyBy(ids)
-    },
     pinnedStatusIdsObject () {
       return keyBy(this.pinnedStatusIds)
     },
     statusesToDisplay () {
       const amount = this.timeline.visibleStatuses.length
       const statusesPerSide = Math.ceil(Math.max(3, window.innerHeight / 80))
-      const min = Math.max(0, this.virtualScrollIndex - statusesPerSide)
-      const max = Math.min(amount, this.virtualScrollIndex + statusesPerSide)
+      const nonPinnedIndex = this.virtualScrollIndex - this.filteredPinnedStatusIds.length
+      const min = Math.max(0, nonPinnedIndex - statusesPerSide)
+      const max = Math.min(amount, nonPinnedIndex + statusesPerSide)
       return this.timeline.visibleStatuses.slice(min, max).map(_ => _.id)
     },
     virtualScrollingEnabled () {
       return this.$store.getters.mergedConfig.virtualScrolling
-    }
+    },
+    ...mapState({
+      mobileLayout: state => state.interface.layoutType === 'mobile'
+    })
   },
   created () {
     const store = this.$store
@@ -111,6 +120,7 @@ const Timeline = {
       timeline: this.timelineName,
       showImmediately,
       userId: this.userId,
+      listId: this.listId,
       tag: this.tag
     })
   },
@@ -122,13 +132,16 @@ const Timeline = {
     window.addEventListener('keydown', this.handleShortKey)
     setTimeout(this.determineVisibleStatuses, 250)
   },
-  destroyed () {
+  unmounted () {
     window.removeEventListener('scroll', this.handleScroll)
     window.removeEventListener('keydown', this.handleShortKey)
     if (typeof document.hidden !== 'undefined') document.removeEventListener('visibilitychange', this.handleVisibilityChange, false)
     this.$store.commit('setLoading', { timeline: this.timelineName, value: false })
   },
   methods: {
+    scrollToTop () {
+      window.scrollTo({ top: this.$el.offsetTop })
+    },
     stopBlockingClicks: debounce(function () {
       this.blockingClicks = false
     }, 1000),
@@ -153,6 +166,7 @@ const Timeline = {
         this.$store.commit('showNewStatuses', { timeline: this.timelineName })
         this.paused = false
       }
+      window.scrollTo({ top: 0 })
     },
     fetchOlderStatuses: throttle(function () {
       const store = this.$store
@@ -165,6 +179,7 @@ const Timeline = {
         older: true,
         showImmediately: true,
         userId: this.userId,
+        listId: this.listId,
         tag: this.tag
       }).then(({ statuses }) => {
         if (statuses && statuses.length === 0) {
@@ -226,6 +241,7 @@ const Timeline = {
       }
     },
     handleScroll: throttle(function (e) {
+      this.showScrollTop = this.$el.offsetTop < window.scrollY
       this.determineVisibleStatuses()
       this.scrollLoad(e)
     }, 200),

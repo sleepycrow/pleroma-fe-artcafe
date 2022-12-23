@@ -1,12 +1,14 @@
 <template>
   <label
+    v-if="matchesExpertLevel"
     class="ChoiceSetting"
   >
     <slot />
+    {{ ' ' }}
     <Select
-      :value="state"
+      :model-value="state"
       :disabled="disabled"
-      @change="update"
+      @update:modelValue="update"
     >
       <option
         v-for="option in options"
@@ -17,7 +19,11 @@
         {{ option.value === defaultState ? $t('settings.instance_default_simple') : '' }}
       </option>
     </Select>
-    <ModifiedIndicator :changed="isChanged" />
+    <ModifiedIndicator
+      :changed="isChanged"
+      :onclick="reset"
+    />
+    <ServerSideIndicator :server-side="isServerSide" />
   </label>
 </template>
 
