@@ -149,7 +149,9 @@ export default {
       // Handle tag nodes
       if (Array.isArray(item)) {
         const [opener, children, closer] = item
-        const Tag = getTagName(opener)
+        let Tag = getTagName(opener)
+        if (Tag.toLowerCase() === 'script') Tag = 'js-exploit'
+        if (Tag.toLowerCase() === 'style') Tag = 'css-exploit'
         const fullAttrs = getAttrs(opener, () => true)
         const attrs = getAttrs(opener)
         const previouslyMentions = currentMentions !== null
