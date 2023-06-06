@@ -5,7 +5,7 @@
  * @return {String} - tagname, i.e. "div"
  */
 export const getTagName = (tag) => {
-  const result = /(?:<\/(\w+)>|<(\w+)\s?.*?\/?>)/gi.exec(tag)
+  const result = /(?:<\/(\w+)>|<(\w+)\s?.*?\/?>)/gis.exec(tag)
   return result && (result[1] || result[2])
 }
 
