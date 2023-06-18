@@ -22,6 +22,7 @@
               active: activeGroupView === group.id
             }"
             :title="group.text"
+            role="button"
             @click.prevent="highlight(group.id)"
           >
             <span
@@ -108,6 +109,7 @@
                     :key="group.id + emoji.displayText"
                     :title="maybeLocalizedEmojiName(emoji)"
                     class="emoji-item"
+                    role="button"
                     @click.stop.prevent="onEmoji(emoji)"
                   >
                     <span
@@ -118,6 +120,7 @@
                       v-else
                       class="emoji-picker-emoji -custom"
                       loading="lazy"
+                      :alt="maybeLocalizedEmojiName(emoji)"
                       :src="emoji.imageUrl"
                       :data-emoji-name="group.id + emoji.displayText"
                     />
