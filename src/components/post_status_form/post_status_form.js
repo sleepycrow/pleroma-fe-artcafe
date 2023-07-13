@@ -162,6 +162,7 @@ const PostStatusForm = {
     }
 
     return {
+      randomSeed: `${Math.random()}`.replace('.', '-'),
       dropFiles: [],
       uploadingFiles: false,
       error: null,

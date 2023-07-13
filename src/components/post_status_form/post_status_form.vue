@@ -135,6 +135,7 @@
             class="reply-or-quote-option"
             tabindex="0"
             role="radio"
+            :aria-labelledby="`reply-or-quote-option-${randomSeed}-reply`"
             :aria-checked="!newStatus.quoting"
             @click="newStatus.quoting = false"
           >
@@ -143,13 +144,16 @@
               :checked="!newStatus.quoting"
             >
             <label class="reply-or-quote-option-text">
-              {{ $t('post_status.reply_option') }}
+              <span :id="`reply-or-quote-option-${randomSeed}-reply`">
+                {{ $t('post_status.reply_option') }}
+              </span>
             </label>
           </div>
           <div
             class="reply-or-quote-option"
             tabindex="0"
             role="radio"
+            :aria-labelledby="`reply-or-quote-option-${randomSeed}-quote`"
             :aria-checked="newStatus.quoting"
             @click="newStatus.quoting = true"
           >
@@ -158,7 +162,9 @@
               :checked="newStatus.quoting"
             >
             <label class="reply-or-quote-option-text">
-              {{ $t('post_status.quote_option') }}
+              <span :id="`reply-or-quote-option-${randomSeed}-quote`">
+                {{ $t('post_status.quote_option') }}
+              </span>
             </label>
           </div>
         </div>
