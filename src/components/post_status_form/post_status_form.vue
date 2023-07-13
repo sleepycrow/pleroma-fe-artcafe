@@ -126,6 +126,42 @@
             class="preview-status"
           />
         </div>
+        <div
+          v-if="quotable"
+          role="radiogroup"
+          class="reply-or-quote-selector"
+        >
+          <div
+            class="reply-or-quote-option"
+            tabindex="0"
+            role="radio"
+            :aria-checked="!newStatus.quoting"
+            @click="newStatus.quoting = false"
+          >
+            <input
+              type="radio"
+              :checked="!newStatus.quoting"
+            >
+            <label class="reply-or-quote-option-text">
+              {{ $t('post_status.reply_option') }}
+            </label>
+          </div>
+          <div
+            class="reply-or-quote-option"
+            tabindex="0"
+            role="radio"
+            :aria-checked="newStatus.quoting"
+            @click="newStatus.quoting = true"
+          >
+            <input
+              type="radio"
+              :checked="newStatus.quoting"
+            >
+            <label class="reply-or-quote-option-text">
+              {{ $t('post_status.quote_option') }}
+            </label>
+          </div>
+        </div>
         <EmojiInput
           v-if="!disableSubject && (newStatus.spoilerText || alwaysShowSubject)"
           v-model="newStatus.spoilerText"
@@ -418,6 +454,20 @@
     border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
     padding: 0.5em;
     margin: 0;
+  }
+
+  .reply-or-quote-selector {
+    display: flex;
+    flex-direction: column;
+
+    .reply-or-quote-option {
+      display: flex;
+      align-items: center;
+
+      .reply-or-quote-option-text::before {
+        vertical-align: middle;
+      }
+    }
   }
 
   .text-format {
