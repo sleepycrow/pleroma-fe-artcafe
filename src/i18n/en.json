@@ -1030,7 +1030,10 @@
     "show_all_conversation": "Show full conversation ({numStatus} other status) | Show full conversation ({numStatus} other statuses)",
     "show_only_conversation_under_this": "Only show replies to this status",
     "status_history": "Status history",
-    "reaction_count_label": "{num} person reacted | {num} people reacted"
+    "reaction_count_label": "{num} person reacted | {num} people reacted",
+    "hide_quote": "Hide the quoted status",
+    "display_quote": "Display the quoted status",
+    "invisible_quote": "Quoted status unavailable: {link}"
   },
   "user_card": {
     "approve": "Approve",

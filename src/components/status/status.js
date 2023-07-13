@@ -133,6 +133,7 @@ const Status = {
     'showPinned',
     'inProfile',
     'profileUserId',
+    'inQuote',
 
     'simpleTree',
     'controlledThreadDisplayStatus',
@@ -159,7 +160,8 @@ const Status = {
       uncontrolledMediaPlaying: [],
       suspendable: true,
       error: null,
-      headTailLinks: null
+      headTailLinks: null,
+      displayQuote: !this.inQuote
     }
   },
   computed: {
@@ -402,8 +404,17 @@ const Status = {
     editingAvailable () {
       return this.$store.state.instance.editingAvailable
     },
+    hasVisibleQuote () {
+      return this.status.quote_url && this.status.quote_visible
+    },
+    hasInvisibleQuote () {
+      return this.status.quote_url && !this.status.quote_visible
+    },
     quotedStatus () {
       return this.status.quote_id ? this.$store.state.statuses.allStatusesObject[this.status.quote_id] : undefined
+    },
+    shouldDisplayQuote () {
+      return this.quotedStatus && this.displayQuote
     }
   },
   methods: {
@@ -471,6 +482,18 @@ const Status = {
           // Post is below screen, match its bottom to screen bottom
           window.scrollBy(0, rect.bottom - window.innerHeight + 50)
         }
+      }
+    },
+    toggleDisplayQuote () {
+      if (this.shouldDisplayQuote) {
+        this.displayQuote = false
+      } else if (!this.quotedStatus) {
+        this.$store.dispatch('fetchStatus', this.status.quote_id)
+          .then(() => {
+            this.displayQuote = true
+          })
+      } else {
+        this.displayQuote = true
       }
     }
   },

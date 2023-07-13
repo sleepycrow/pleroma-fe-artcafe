@@ -281,7 +281,7 @@ const PostStatusForm = {
           repliedStatus.visibility === 'local') {
         return true
       } else if (repliedStatus.visibility === 'private') {
-        return repliedStatus.account.id === this.$store.state.users.currentUser.id
+        return repliedStatus.user.id === this.$store.state.users.currentUser.id
       }
     },
     ...mapGetters(['mergedConfig']),
