@@ -364,6 +364,15 @@
             @parseReady="setHeadTailLinks"
           />
 
+          <article
+            v-if="quotedStatus"
+            class="quoted-status"
+          >
+            <Status
+              :statusoid="quotedStatus"
+            />
+          </article>
+
           <div
             v-if="inConversation && !isPreview && replies && replies.length"
             class="replies"

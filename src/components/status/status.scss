@@ -422,4 +422,10 @@
       }
     }
   }
+
+  .quoted-status {
+    margin-top: 0.5em;
+    border: 1px solid var(--border, $fallback--border);
+    border-radius: var(--attachmentRadius, $fallback--attachmentRadius);
+  }
 }

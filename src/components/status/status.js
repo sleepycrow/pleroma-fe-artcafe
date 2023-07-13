@@ -401,6 +401,9 @@ const Status = {
     },
     editingAvailable () {
       return this.$store.state.instance.editingAvailable
+    },
+    quotedStatus () {
+      return this.status.quote_id ? this.$store.state.statuses.allStatusesObject[this.status.quote_id] : undefined
     }
   },
   methods: {
