@@ -288,6 +288,8 @@ const PostStatusForm = {
       } else if (repliedStatus.visibility === 'private') {
         return repliedStatus.user.id === this.$store.state.users.currentUser.id
       }
+
+      return false
     },
     ...mapGetters(['mergedConfig']),
     ...mapState({
