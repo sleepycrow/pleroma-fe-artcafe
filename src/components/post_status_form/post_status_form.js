@@ -268,6 +268,10 @@ const PostStatusForm = {
       return typeof this.statusId !== 'undefined' && this.statusId.trim() !== ''
     },
     quotable () {
+      if (!this.$store.state.instance.quotingAvailable) {
+        return false
+      }
+
       if (!this.replyTo) {
         return false
       }
