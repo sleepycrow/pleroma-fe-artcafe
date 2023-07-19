@@ -129,44 +129,32 @@
         <div
           v-if="quotable"
           role="radiogroup"
-          class="reply-or-quote-selector"
+          class="btn-group reply-or-quote-selector"
         >
-          <div
-            class="reply-or-quote-option"
+          <button
+            :id="`reply-or-quote-option-${randomSeed}-reply`"
+            class="btn button-default reply-or-quote-option"
+            :class="{ toggled: !newStatus.quoting }"
             tabindex="0"
             role="radio"
             :aria-labelledby="`reply-or-quote-option-${randomSeed}-reply`"
             :aria-checked="!newStatus.quoting"
             @click="newStatus.quoting = false"
           >
-            <input
-              type="radio"
-              :checked="!newStatus.quoting"
-            >
-            <label class="reply-or-quote-option-text">
-              <span :id="`reply-or-quote-option-${randomSeed}-reply`">
-                {{ $t('post_status.reply_option') }}
-              </span>
-            </label>
-          </div>
-          <div
-            class="reply-or-quote-option"
+            {{ $t('post_status.reply_option') }}
+          </button>
+          <button
+            :id="`reply-or-quote-option-${randomSeed}-quote`"
+            class="btn button-default reply-or-quote-option"
+            :class="{ toggled: newStatus.quoting }"
             tabindex="0"
             role="radio"
             :aria-labelledby="`reply-or-quote-option-${randomSeed}-quote`"
             :aria-checked="newStatus.quoting"
             @click="newStatus.quoting = true"
           >
-            <input
-              type="radio"
-              :checked="newStatus.quoting"
-            >
-            <label class="reply-or-quote-option-text">
-              <span :id="`reply-or-quote-option-${randomSeed}-quote`">
-                {{ $t('post_status.quote_option') }}
-              </span>
-            </label>
-          </div>
+            {{ $t('post_status.quote_option') }}
+          </button>
         </div>
         <EmojiInput
           v-if="!disableSubject && (newStatus.spoilerText || alwaysShowSubject)"
@@ -463,17 +451,7 @@
   }
 
   .reply-or-quote-selector {
-    display: flex;
-    flex-direction: column;
-
-    .reply-or-quote-option {
-      display: flex;
-      align-items: center;
-
-      .reply-or-quote-option-text::before {
-        vertical-align: middle;
-      }
-    }
+    margin-bottom: 0.5em;
   }
 
   .text-format {
