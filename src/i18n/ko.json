@@ -686,7 +686,15 @@
     "remove_language": "삭제",
     "primary_language": "주 언어:",
     "fallback_language": "보조 언어 {index}:",
-    "confirm_dialogs_logout": "로그아웃"
+    "confirm_dialogs_logout": "로그아웃",
+    "url": "URL",
+    "preview": "미리보기",
+    "commit_value": "저장",
+    "commit_value_tooltip": "값이 저장되지 않았습니다, 버튼을 눌러 변경사항을 반영하세요",
+    "reset_value": "초기화",
+    "reset_value_tooltip": "변경사항 초기화",
+    "hard_reset_value": "완전 초기화",
+    "hard_reset_value_tooltip": "스토리지에서 설정을 제거하고, 기본값을 사용하도록 강제합니다"
   },
   "timeline": {
     "collapse": "접기",
@@ -703,7 +711,8 @@
     "no_more_statuses": "새 게시물 없음",
     "socket_reconnected": "실시간 연결 됨",
     "socket_broke": "실시간 연결이 끊어짐: CloseEvent 코드 {0}",
-    "quick_filter_settings": "빠른 필터 설정"
+    "quick_filter_settings": "빠른 필터 설정",
+    "quick_view_settings": "빠른 뷰 설정"
   },
   "user_card": {
     "approve": "승인",
@@ -774,7 +783,33 @@
     "approve_confirm_accept_button": "승인",
     "approve_confirm_cancel_button": "승인 안 함",
     "approve_confirm": "{user}의 팔로우 요청을 승인할까요?",
-    "block_confirm_title": "차단 확인"
+    "block_confirm_title": "차단 확인",
+    "note": "노트",
+    "unfollow_confirm": "정말 {user}를 팔로우 해제하시겠습니까?",
+    "unfollow_confirm_accept_button": "팔로우 해제",
+    "unfollow_confirm_cancel_button": "취소",
+    "remove_follower_confirm_title": "팔로워 삭제 확인",
+    "remove_follower_confirm_cancel_button": "냅두기",
+    "remove_follower_confirm_accept_button": "치우기",
+    "edit_note_cancel": "취소",
+    "birthday": "{birthday}에 태어남",
+    "edit_note": "노트 수정",
+    "edit_note_apply": "적용",
+    "deny_confirm_cancel_button": "취소",
+    "unfollow_confirm_title": "팔로우 해제 확인",
+    "mute_confirm_accept_button": "뮤트",
+    "remove_follower_confirm": "정말 {user}를 팔로워에서 치울까요?",
+    "deny_confirm_accept_button": "거절",
+    "mute_confirm_title": "뮤트 확인",
+    "mute_confirm": "정말 {user}를 뮤트할까요?",
+    "block_confirm_cancel_button": "취소",
+    "deny_confirm_title": "거절 확인",
+    "block_confirm": "정말 {user}를 차단할까요?",
+    "block_confirm_accept_button": "차단",
+    "mute_confirm_cancel_button": "취소",
+    "mute_duration_prompt": "이 사용자를 뮤트할 시간 (0으로 두면 무한히):",
+    "deny_confirm": "{user}의 팔로 요청을 거절할까요?",
+    "note_blank": "(없음)"
   },
   "user_profile": {
     "timeline_title": "사용자 타임라인",
@@ -794,7 +829,10 @@
     "add_reaction": "반응 추가",
     "accept_follow_request": "팔로우 요청 승인",
     "reject_follow_request": "팔로우 요청 거절",
-    "bookmark": "북마크"
+    "bookmark": "북마크",
+    "autocomplete_available": "{number}개의 결과가 있습니다. 위 또는 아래 화살표 키로 탐색할 수 있습니다. | {number}개의 결과가 있습니다. 위 또는 아래 화살표 키로 탐색할 수 있습니다.",
+    "toggle_expand": "알림을 펼치거나 접어서 전체 게시물을 보기",
+    "toggle_mute": "알림을 펼치거나 접어서 뮤트한 내용 보기"
   },
   "upload": {
     "error": {
@@ -840,7 +878,8 @@
       "symbols": "기호"
     },
     "keep_open": "열린 채로 두기",
-    "regional_indicator": "지역 표시기 {letter}"
+    "regional_indicator": "지역 표시기 {letter}",
+    "unpacked": "미분류 에모지"
   },
   "polls": {
     "add_poll": "투표를 추가",
@@ -1049,7 +1088,8 @@
     "update_changelog_here": "변경 내역",
     "update_changelog": "무엇이 바뀌었는지 자세히 알아보시려면, {theFullChangelog}을 참조하세요.",
     "big_update_content": "저희가 한동안 릴리즈를 안 해서, 익숙하셨던 생김새나 경험과 많이 달라졌을 수 있습니다.",
-    "update_bugs": "저희가 비록 테스트를 많이 하고 직접 개발 버전을 쓰기도 하지만, 많이 바꾸기도 했고, 몇몇 가지 놓친 점들이 있을 터이니, 사용하면서 불편한 점이나 문제는 {pleromaGitlab}에 제보해주시면 감사하겠습니다. 저희는 겪으신 문제점이나 Pleroma와 Pleroma-FE에 대한 피드백과 제안을 환영합니다."
+    "update_bugs": "저희가 비록 테스트를 많이 하고 직접 개발 버전을 쓰기도 하지만, 많이 바꾸기도 했고, 몇몇 가지 놓친 점들이 있을 터이니, 사용하면서 불편한 점이나 문제는 {pleromaGitlab}에 제보해주시면 감사하겠습니다. 저희는 겪으신 문제점이나 Pleroma와 Pleroma-FE에 대한 피드백과 제안을 환영합니다.",
+    "art_by": "{linkToArtist} 그림"
   },
   "unicode_domain_indicator": {
     "tooltip": "이 도메인은 아스키 문자가 아닌 문자를 포함하고 있습니다."
@@ -1115,7 +1155,9 @@
     "repeat_confirm_cancel_button": "리핏 안 함",
     "delete_confirm_title": "삭제 확인",
     "delete_confirm_accept_button": "삭제",
-    "delete_confirm_cancel_button": "냅두기"
+    "delete_confirm_cancel_button": "냅두기",
+    "delete_error": "게시물 삭제 에러: {0}",
+    "reaction_count_label": "{num}명이 반응함 | {num}명이 반응함"
   },
   "errors": {
     "storage_unavailable": "Pleroma가 브라우저 저장소에 접근할 수 없습니다. 로그인이 풀리거나 로컬 설정이 초기화 되는 등 예상치 못한 문제를 겪을 수 있습니다. 쿠키를 활성화 해보세요."
@@ -1159,5 +1201,91 @@
     "submit_edit_action": "수정본 반영",
     "cancel_edit_action": "취소",
     "inactive_message": "이 공지사항은 비활성화 되었습니다"
+  },
+  "admin_dash": {
+    "window_title": "관리",
+    "wip_notice": "이 관리자 대시보드는 실험적이며 개발 중에 있습니다, {adminFeLink}.",
+    "old_ui_link": "대신 구 관리자 UI를 사용할 수 있습니다",
+    "reset_all": "전부 초기화",
+    "commit_all": "전부 저장",
+    "tabs": {
+      "nodb": "DB 설정 불가",
+      "instance": "인스턴스",
+      "frontends": "프론트엔드",
+      "limits": "제한"
+    },
+    "nodb": {
+      "heading": "데이터베이스 설정 기능이 비활성화 되어 있습니다",
+      "documentation": "관련 문서",
+      "text2": "대부분의 설정을 건드릴 수 없습니다.",
+      "text": "백엔드 설정 파일에서 {property}를 {value}로 바꿔야 합니다, {documentation}를 참고하세요."
+    },
+    "captcha": {
+      "kocaptcha": "KoCaptcha",
+      "native": "내장"
+    },
+    "instance": {
+      "registrations": "유저 가입",
+      "captcha_header": "캡차",
+      "kocaptcha": "KoCaptcha 설정",
+      "access": "인스턴스 접근",
+      "restrict": {
+        "timelines": "타임라인 접근",
+        "profiles": "사용자 프로필 접근",
+        "activities": "게시물/활동 접근",
+        "header": "로그인하지 않은 방문자의 접근을 제한",
+        "description": "특정 API의 접근을 허용할지 말지에 대한 세부 설정입니다. 기본적으로(애매한 체크 표시) 인스턴스가 비공개이면 접근을 차단합니다, 체크 표시는 인스턴스가 공개여도 차단함을 의미합니다, 체크 해제는 인스턴스가 비공개여도 접근을 허용함을 의미합니다. 설정을 바꾸면 예기치 않은 동작이 일어날 수 있음을 유의하세요, 예로 프로필 접근이 차단되면 프로필 정보 없이 게시물이 보여집니다."
+      },
+      "instance": "인스턴스 정보"
+    },
+    "limits": {
+      "arbitrary_limits": "임의 제한",
+      "posts": "게시물 제한",
+      "uploads": "첨부파일 제한",
+      "users": "사용자 프로필 제한",
+      "profile_fields": "프로필 필드 제한",
+      "user_uploads": "프로필 미디어 제한"
+    },
+    "frontend": {
+      "repository": "리포지토리 링크",
+      "versions": "사용 가능한 버전",
+      "build_url": "빌드 URL",
+      "reinstall": "재설치",
+      "is_default": "(기본)",
+      "is_default_custom": "(기본, 버전: {version})",
+      "install": "설치",
+      "install_version": "설치된 버전 {version}",
+      "more_install_options": "설치 옵션 더 보기",
+      "more_default_options": "기본 설정 옵션 더 보기",
+      "set_default": "기본으로 설정",
+      "set_default_version": "버전 {version}을 기본으로 설정",
+      "wip_notice": "이 부분은 프론트엔드 관리에 대한 백엔드 구현이 미완성이기 때문에 개발 중이고 몇몇 기능이 빠져 있습니다.",
+      "default_frontend": "기본 프론트엔드",
+      "default_frontend_tip2": "개발 중: 아직 Pleroma 백엔드가 모든 설치된 프론트엔드 목록을 알려주지 않기 때문에 이름과 ref을 직접 입력해야 합니다. 아래에 있는 목록은 여기 값을 입력하기 위한 단축 버튼입니다.",
+      "available_frontends": "설치 가능",
+      "default_frontend_tip": "기본 프론트엔드는 모든 유저에게 보입니다. 현재로썬 유저가 개인적으로 프론트엔드를 선택할 수 있진 않습니다. PleromaFE에서 벗어난다면 저희가 완전히 대체할 때까지는 인스턴스 설정을 위해서 아마도 낡고 버그투성이인 AdminFE를 쓰셔야 할 겁니다."
+    },
+    "temp_overrides": {
+      ":pleroma": {
+        ":instance": {
+          ":public": {
+            "label": "인스턴스를 공개",
+            "description": "이것을 끄면 모든 API가 로그인한 유저만 사용 가능하게 되며, 로그인하지 않은 사용자에겐 공개와 연합 타임라인이 보이지 않게 됩니다."
+          },
+          ":limit_to_local_content": {
+            "label": "로컬 컨텐츠만 검색하도록 제한",
+            "description": "로그인하지 않은 사람 (기본값), 모두 또는 없음에게 전역 검색을 비활성화합니다"
+          },
+          ":description_limit": {
+            "label": "글자수 제한",
+            "description": "첨부파일 설명문의 글자수 제한"
+          },
+          ":background_image": {
+            "label": "배경 이미지",
+            "description": "배경 이미지 (주로 PleromaFE에서 쓰임)"
+          }
+        }
+      }
+    }
   }
 }
