@@ -360,7 +360,16 @@
         "color": "色彩",
         "opacity": "無透明度",
         "contrast": {
-          "hint": "色彩ê對比率：{ratio}。{level}、 {context}"
+          "hint": "色彩ê對比率：{ratio}。{level}、 {context}",
+          "level": {
+            "aa": "合AA級ê準則（上kē ê）",
+            "aaa": "合AAA級ê準則（建議ê）",
+            "bad": "無合半ê無障礙準則"
+          },
+          "context": {
+            "18pt": "大（18pt 以上）ê文字",
+            "text": "文字"
+          }
         }
       },
       "switcher": {
@@ -380,8 +389,19 @@
           "upgraded_from_v2": "PleromaFE升級ah，主題huân-sè kap lí知影ê無kâng。",
           "v2_imported": "Lí輸入ê檔案是舊版本ê前端用ê。Guán盡量予版本相通，毋過可能有所在buē-tàng。",
           "older_version_imported": "Lí輸入ê檔案是予舊ê前端用ê。",
-          "future_version_imported": "Lí輸入ê檔案是新ê前端所用ê。"
+          "future_version_imported": "Lí輸入ê檔案是新ê前端所用ê。",
+          "snapshot_missing": "無主題ê快相佇檔案內，所以，伊看起來凡勢kap原來預料ê無kâng。",
+          "snapshot_present": "主題ê快相有載入，所以逐ê值lóng khàm過去ah。Lí 通改載入主題實際ê資料。",
+          "fe_upgraded": "版本更新了後，Pleroma前端ê ia̋n-jín 升級ah。",
+          "fe_downgraded": "Pleroma ê前端滾tńg去ah。",
+          "migration_snapshot_ok": "為著保險，主題快相載入去ah。Lí ē當試載入主題資料。",
+          "migration_napshot_gone": "快相因故無去ah，tsi̍t-kuá所在看起來可能hām lí所想ê無kâng。",
+          "snapshot_source_mismatch": "版本tshia̋ng-póng：上可能因為前端滾轉去koh更新ah，若因為用舊版本ê前端，主題tsiah改變，lí有可能beh用舊ê版本。無，著用新ê。"
         }
+      },
+      "common_colors": {
+        "_tab_label": "一般",
+        "main": "一般ê色彩"
       }
     },
     "upload": {
