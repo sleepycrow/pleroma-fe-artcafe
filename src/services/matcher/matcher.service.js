@@ -14,8 +14,11 @@ export const mentionMatchesUrl = (attention, url) => {
  * @param {string} url
  */
 export const extractTagFromUrl = (url) => {
-  const regex = /tag[s]*\/(\w+)$/g
-  const result = regex.exec(url)
+  const decoded = decodeURI(url)
+  // https://git.pleroma.social/pleroma/elixir-libraries/linkify/-/blob/master/lib/linkify/parser.ex
+  // https://www.pcre.org/original/doc/html/pcrepattern.html
+  const regex = /tag[s]*\/([\p{L}\p{N}_]*[\p{Alphabetic}_·\u{200c}][\p{L}\p{N}_·\p{M}\u{200c}]*)$/ug
+  const result = regex.exec(decoded)
   if (!result) {
     return false
   }
