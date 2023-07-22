@@ -558,7 +558,7 @@
     "discoverable": "검색 결과나 다른 서비스들에서 이 계정을 찾을 수 있도록 허용",
     "pad_emoji": "에모지를 선택창에서 고를 때 띄어쓰기를 집어넣기",
     "wordfilter": "단어 필터",
-    "word_filter_and_more": "단어 필터 그리고 더보기...",
+    "word_filter_and_more": "단어 필터 및 기타 설정...",
     "accent": "강조",
     "hide_media_previews": "미디어 미리보기 숨기기",
     "max_thumbnails": "게시물 하나 당 최대로 보여질 섬네일 개수 (비워두면 제한을 두지 않습니다)",
