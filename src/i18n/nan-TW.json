@@ -401,7 +401,19 @@
       },
       "common_colors": {
         "_tab_label": "一般",
-        "main": "一般ê色彩"
+        "main": "一般ê色彩",
+        "foreground_hint": "請看「進階」分頁，來調整khah幼ê所在",
+        "rgbo": "標頭、強調、徽章"
+      },
+      "advanced_colors": {
+        "_tab_label": "進階",
+        "alert": "警告ê背景",
+        "alert_error": "錯誤",
+        "alert_warning": "警告",
+        "alert_neutral": "其他ê",
+        "post": "PO文／用者紹介",
+        "badge": "徽章ê背景",
+        "popover": "提示、目錄、跳出來ê"
       }
     },
     "upload": {
