@@ -413,7 +413,33 @@
         "alert_neutral": "其他ê",
         "post": "PO文／用者紹介",
         "badge": "徽章ê背景",
-        "popover": "提示、目錄、跳出來ê"
+        "popover": "提示、目錄、跳出來ê",
+        "badge_notification": "通知",
+        "panel_header": "面枋ê標題",
+        "top_bar": "頂 liâu-á",
+        "borders": "框á邊",
+        "buttons": "鈕仔",
+        "inputs": "輸入框á",
+        "faint_text": "淺ê文字",
+        "underlay": "Tshū-á",
+        "wallpaper": "壁紙",
+        "poll": "投票數ê圖",
+        "icons": "標á",
+        "highlight": "強調ê要素",
+        "pressed": "Tshi̍h ê 時",
+        "selectedPost": "選擇ê PO文",
+        "selectedMenu": "選擇ê目錄項目",
+        "disabled": "關ê",
+        "toggled": "切換ê時",
+        "tabs": "分頁",
+        "chat": {
+          "incoming": "收著ê",
+          "outgoing": "送出ê",
+          "border": "框á邊"
+        }
+      },
+      "radii": {
+        "_tab_label": "邊á角ê khà-buh"
       }
     },
     "upload": {
