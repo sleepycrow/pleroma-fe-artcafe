@@ -172,7 +172,7 @@
     "direct_warning_to_first_only": "Ĉi tiu afiŝo estas nur videbla al uzantoj menciitaj je la komenco de la mesaĝo.",
     "direct_warning_to_all": "Ĉi tiu afiŝo estos videbla al ĉiuj menciitaj uzantoj.",
     "media_description": "Priskribo de vidaŭdaĵo",
-    "post": "Afiŝo",
+    "post": "Afiŝi",
     "edit_remote_warning": "Aliaj foraj nodoj eble ne subtenas redaktadon, kaj ne povos ricevi pli novan version de via afiŝo.",
     "edit_unsupported_warning": "Pleroma ne subtenas redaktadon de mencioj aŭ enketoj.",
     "edit_status": "Redakti afiŝon",
