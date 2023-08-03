@@ -397,7 +397,8 @@
           "migration_snapshot_ok": "為著保險，主題快相載入去ah。Lí ē當試載入主題資料。",
           "migration_napshot_gone": "快相因故無去ah，tsi̍t-kuá所在看起來可能hām lí所想ê無kâng。",
           "snapshot_source_mismatch": "版本tshia̋ng-póng：上可能因為前端滾轉去koh更新ah，若因為用舊版本ê前端，主題tsiah改變，lí有可能beh用舊ê版本。無，著用新ê。"
-        }
+        },
+        "save_load_hint": "佇揀iah是載入主題ê時，「保存」選項保留現tsú時設定ê選項；mā佇輸出主題ê時tsūn，儲存頭拄á講ê選項。若是逐ê選擇框á無設定，逐項設定就ē khǹg佇輸出ê主題。"
       },
       "common_colors": {
         "_tab_label": "一般",
@@ -440,6 +441,19 @@
       },
       "radii": {
         "_tab_label": "邊á角ê khà-buh"
+      },
+      "shadows": {
+        "_tab_label": "影kap光",
+        "override": "Khàm掉",
+        "shadow_id": "影 #{value}",
+        "blur": "予n̄g-n̄g",
+        "spread": "Hōo 闊",
+        "inset": "內pîng",
+        "filter_hint": {
+          "always_drop_shadow": "警告，tsit ê 影一直用 {0}，若是瀏覽器支援tsē。"
+        },
+        "component": "部件",
+        "hintV3": "針對影，lí mā ē當用 {0} 標示法，來用其他ê色彩 khang (slot)。"
       }
     },
     "upload": {
