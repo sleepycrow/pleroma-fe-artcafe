@@ -450,10 +450,24 @@
         "spread": "Hōo 闊",
         "inset": "內pîng",
         "filter_hint": {
-          "always_drop_shadow": "警告，tsit ê 影一直用 {0}，若是瀏覽器支援tsē。"
+          "always_drop_shadow": "警告，tsit ê 影一直用 {0}，若是瀏覽器支援tsē。",
+          "drop_shadow_syntax": "{0} 無支援參數 {1} kap 關鍵字 {2}。",
+          "avatar_inset": "請注意，結合內pîng kap外pîng ê影佇標頭，可能佇透明ê標頭現無預料ê結果。",
+          "spread_zero": "若是「hōo 闊」ê值比0較大，影ê顯示ē kap hōo 闊設做0 kâng款",
+          "inset_classic": "內pîng ê影ē用{0}"
         },
         "component": "部件",
-        "hintV3": "針對影，lí mā ē當用 {0} 標示法，來用其他ê色彩 khang (slot)。"
+        "hintV3": "針對影，lí mā ē當用 {0} 標示法，來用其他ê色彩 khang (slot)。",
+        "components": {
+          "panelHeader": "面枋ê標題",
+          "topBar": "頂 liâu-á",
+          "avatar": "用者ê標頭（佇個人資料欄位）",
+          "popup": "跳出來ê kap提醒",
+          "button": "鈕仔",
+          "buttonHover": "鈕仔（滑鼠ê指標khǹg佇面頂）",
+          "panel": "面枋",
+          "avatarStatus": "用者ê標頭（佇PO文ê顯示）"
+        }
       }
     },
     "upload": {
