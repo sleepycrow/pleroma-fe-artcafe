@@ -273,7 +273,7 @@
     },
     "content_type_selection": "貼 ê 形式",
     "content_warning": "主旨（毋是必要）",
-    "default": "Tú 正 kàu 高雄 ah。",
+    "default": "Tú正kàu高雄ah。",
     "direct_warning_to_all": "Tsit ê PO 文通 hōo 逐 ê 提起 ê 用者看見。",
     "direct_warning_to_first_only": "Tsit ê PO 文，kan-ta 短信 tú 開始提起 ê 用者，tsiah 通看見。",
     "edit_remote_warning": "別 ê 站臺可能無支援編輯，無法度收著 PO 文上新 ê 版本。",
@@ -466,8 +466,39 @@
           "button": "鈕仔",
           "buttonHover": "鈕仔（滑鼠ê指標khǹg佇面頂）",
           "panel": "面枋",
-          "avatarStatus": "用者ê標頭（佇PO文ê顯示）"
+          "avatarStatus": "用者ê標頭（佇PO文ê顯示）",
+          "buttonPressedHover": "鈕仔（滑鼠指標leh khǹg 佇頂懸，koh tshi̍h ê時）",
+          "buttonPressed": "鈕仔（leh tshi̍h ê時）",
+          "input": "輸入框á"
         }
+      },
+      "fonts": {
+        "_tab_label": "字型",
+        "components": {
+          "interface": "界面",
+          "input": "輸入框á",
+          "post": "PO文",
+          "postCode": "RTF ê PO文ê平闊文字"
+        },
+        "family": "字型ê名",
+        "help": "揀界面元件所用ê字型。若是揀「家己指定」，lí著輸入系統內ê字型正確ê名。",
+        "size": "Sài-suh（單位：畫素）",
+        "weight": "字ê重（粗度）",
+        "custom": "家己指定"
+      },
+      "preview": {
+        "header": "先看māi",
+        "content": "內容",
+        "error": "錯誤ê例",
+        "button": "鈕á",
+        "text": "Tsē是{0}kap{1} ê例",
+        "mono": "內容",
+        "input": "Tú正kàu高雄ah。",
+        "faint_link": "有幫tsān ê手冊",
+        "fine_print": "讀guán ê {0}，毋過學無有路用ê！",
+        "header_faint": "Tsē OK",
+        "checkbox": "我有讀過使用條款",
+        "link": "好ê細ê連結"
       }
     },
     "upload": {
@@ -878,7 +909,13 @@
     "notification_mutes": "若tsún無愛收tuì指定用者來ê通知，著用消音。",
     "notification_blocks": "封鎖用者ē停止所有i hia來ê通知，mā取消訂伊。",
     "enable_web_push_notifications": "拍開網頁sak通知ê功能",
-    "more_settings": "Koh較tsē ê設定"
+    "more_settings": "Koh較tsē ê設定",
+    "version": {
+      "title": "版本",
+      "backend_version": "後端ê版本",
+      "frontend_version": "前端ê版本"
+    },
+    "commit_value": "儲存"
   },
   "status": {
     "favorites": "收藏"
