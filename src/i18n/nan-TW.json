@@ -807,7 +807,7 @@
     "show_moderator_badge": "佇我ê個人資料顯示「管理員」證章",
     "nsfw_clickthrough": "Khàm掉敏感ê媒體內容",
     "oauth_tokens": "OAuth token",
-    "refresh_token": "對頭the̍h token",
+    "refresh_token": "重頭the̍h token",
     "valid_until": "到期佇",
     "revoke_token": "撤回",
     "panelRadius": "面pang",
@@ -833,12 +833,12 @@
     "set_new_avatar": "設定新ê標頭",
     "set_new_profile_background": "設定新ê個人資料ê背景",
     "set_new_profile_banner": "設定新ê個人資料ê條á",
-    "reset_avatar": "Tuì頭設定標頭",
-    "reset_profile_background": "Tuì頭設個人資料ê背景",
-    "reset_profile_banner": "Tuì頭設個人資料ê條á",
-    "reset_avatar_confirm": "Lí敢確實beh tuì頭設定標頭？",
-    "reset_banner_confirm": "Lí敢確實beh tuì頭設定條á？",
-    "reset_background_confirm": "Lí敢確實beh tuì頭設定背景？",
+    "reset_avatar": "重頭設定標頭",
+    "reset_profile_background": "重頭設個人資料ê背景",
+    "reset_profile_banner": "重頭設個人資料ê條á",
+    "reset_avatar_confirm": "Lí敢確實beh 重頭設定標頭？",
+    "reset_banner_confirm": "Lí敢確實beh 重頭設定條á？",
+    "reset_background_confirm": "Lí敢確實beh 重頭設定背景？",
     "settings": "設定",
     "subject_input_always_show": "一直顯示主旨ê格á",
     "subject_line_behavior": "回應ê時，khóo-pih主旨",
@@ -915,7 +915,12 @@
       "backend_version": "後端ê版本",
       "frontend_version": "前端ê版本"
     },
-    "commit_value": "儲存"
+    "commit_value": "儲存",
+    "commit_value_tooltip": "值無儲存，tshi̍h tsit ê 鈕仔來送出你改變ê",
+    "hard_reset_value": "硬ê重頭設",
+    "hard_reset_value_tooltip": "Suá掉儲存內底ê設定，強制用預設ê值",
+    "reset_value": "重頭設",
+    "reset_value_tooltip": "重頭設草稿"
   },
   "status": {
     "favorites": "收藏"
@@ -925,5 +930,21 @@
   },
   "tool_tip": {
     "favorite": "收藏"
+  },
+  "password_reset": {
+    "instruction": "輸入你ê email地址iah是用者ê名。阮ē寄予lí連結，通重頭設你ê密碼。",
+    "password_reset_disabled": "密碼重頭設ê功能無開放。請聯絡lín站臺ê行政員。",
+    "password_reset_required_but_mailer_is_disabled": "Lí著重設密碼，M̄-koh重頭設密碼ê功能無開放。請聯絡lín站臺ê行政員。",
+    "forgot_password": "Buē記得密碼？",
+    "password_reset": "密碼重頭設",
+    "placeholder": "你ê email iah是用者ê名",
+    "check_email": "檢查你ê電子phue箱，有重頭設密碼ê連結ê phue無。",
+    "return_home": "Tńg去頭頁",
+    "too_many_requests": "Lí已經kàu 試ê回數限制 ah，小等leh koh試。",
+    "password_reset_required": "Lí著重設密碼，tsiah通登入。"
+  },
+  "admin_dash": {
+    "window_title": "行政員",
+    "reset_all": "Kui ê重頭設"
   }
 }
