@@ -1,6 +1,7 @@
 import { computed } from 'vue'
 import { mapGetters } from 'vuex'
 import Notification from '../notification/notification.vue'
+import ExtraNotifications from '../extra_notifications/extra_notifications.vue'
 import NotificationFilters from './notification_filters.vue'
 import notificationsFetcher from '../../services/notifications_fetcher/notifications_fetcher.service.js'
 import {
@@ -23,7 +24,8 @@ const DEFAULT_SEEN_TO_DISPLAY_COUNT = 30
 const Notifications = {
   components: {
     Notification,
-    NotificationFilters
+    NotificationFilters,
+    ExtraNotifications
   },
   props: {
     // Disables panel styles, unread mark, potentially other notification-related actions
@@ -94,6 +96,9 @@ const Notifications = {
       return this.filteredNotifications.slice(0, this.unseenCount + this.seenToDisplayCount)
     },
     noSticky () { return this.$store.getters.mergedConfig.disableStickyHeaders },
+    showExtraNotifications () {
+      return true
+    },
     ...mapGetters(['unreadChatCount', 'unreadAnnouncementCount'])
   },
   mounted () {

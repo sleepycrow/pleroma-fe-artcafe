@@ -55,6 +55,13 @@
           role="feed"
         >
           <div
+            v-if="showExtraNotifications"
+            role="listitem"
+            class="notification"
+          >
+            <extra-notifications />
+          </div>
+          <div
             v-for="notification in notificationsToDisplay"
             :key="notification.id"
             role="listitem"

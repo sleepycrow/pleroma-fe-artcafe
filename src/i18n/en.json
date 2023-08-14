@@ -205,7 +205,9 @@
     "migrated_to": "migrated to",
     "reacted_with": "reacted with {0}",
     "submitted_report": "submitted a report",
-    "poll_ended": "poll has ended"
+    "poll_ended": "poll has ended",
+    "unread_announcements": "{num} unread announcement | {num} unread announcements",
+    "unread_chats": "{num} unread chat | {num} unread chats"
   },
   "polls": {
     "add_poll": "Add poll",
