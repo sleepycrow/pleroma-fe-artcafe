@@ -945,6 +945,20 @@
   },
   "admin_dash": {
     "window_title": "行政員",
-    "reset_all": "Kui ê重頭設"
+    "reset_all": "Kui ê重頭設",
+    "wip_notice": "Tsit ê 管理 la-jí-báng (dashboard) 是試驗ê，koh teh 起做，{adminFeLink}.",
+    "old_ui_link": "舊ê管理界面佇tsia",
+    "commit_all": "Lóng總儲存",
+    "tabs": {
+      "nodb": "無資料庫ê設置",
+      "instance": "站臺",
+      "limits": "限制",
+      "frontends": "前端"
+    },
+    "nodb": {
+      "heading": "資料庫設置無開放",
+      "text": "Lí需要改後端ê設置檔案，tsiah ē當kā{property}設做{value}，請佇{documentation}了解詳細。",
+      "documentation": "文件"
+    }
   }
 }
