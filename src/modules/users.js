@@ -651,6 +651,12 @@ const users = {
               const response = data.error
               // Authentication failed
               commit('endLogin')
+
+              // remove authentication token on client/authentication errors
+              if ([400, 401, 403, 422].includes(response.status)) {
+                commit('clearToken')
+              }
+
               if (response.status === 401) {
                 reject(new Error('Wrong username or password'))
               } else {
