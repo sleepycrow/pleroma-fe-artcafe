@@ -7,6 +7,11 @@
         class="button-unstyled -link extra-notification"
         :to="{ name: 'chats', params: { username: currentUser.screen_name } }"
       >
+        <FAIcon
+          fixed-width
+          class="fa-scale-110 icon"
+          icon="comments"
+        />
         {{ $tc('notifications.unread_chats', unreadChatCount, { num: unreadChatCount }) }}
       </router-link>
     </div>
@@ -17,6 +22,11 @@
         class="button-unstyled -link extra-notification"
         :to="{ name: 'announcements' }"
       >
+        <FAIcon
+          fixed-width
+          class="fa-scale-110 icon"
+          icon="bullhorn"
+        />
         {{ $tc('notifications.unread_announcements', unreadAnnouncementCount, { num: unreadAnnouncementCount }) }}
       </router-link>
     </div>
@@ -27,6 +37,11 @@
         class="button-unstyled -link extra-notification"
         :to="{ name: 'friend-requests' }"
       >
+        <FAIcon
+          fixed-width
+          class="fa-scale-110 icon"
+          icon="user-plus"
+        />
         {{ $tc('notifications.unread_follow_requests', followRequestCount, { num: followRequestCount }) }}
       </router-link>
     </div>
@@ -79,6 +94,10 @@
 
   .extra-notification {
     padding: 1em;
+  }
+
+  .icon {
+    margin-right: 0.5em;
   }
 
   .tip {
