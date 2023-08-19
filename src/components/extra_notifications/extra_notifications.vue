@@ -1,7 +1,7 @@
 <template>
   <div class="ExtraNotifications">
     <div class="notification unseen">
-      <div class="notification-overlay"></div>
+      <div class="notification-overlay" />
       <router-link
         v-if="shouldShowChats"
         class="button-unstyled -link extra-notification"
@@ -16,7 +16,7 @@
       </router-link>
     </div>
     <div class="notification unseen">
-      <div class="notification-overlay"></div>
+      <div class="notification-overlay" />
       <router-link
         v-if="shouldShowAnnouncements"
         class="button-unstyled -link extra-notification"
@@ -31,7 +31,7 @@
       </router-link>
     </div>
     <div class="notification unseen">
-      <div class="notification-overlay"></div>
+      <div class="notification-overlay" />
       <router-link
         v-if="shouldShowFollowRequests"
         class="button-unstyled -link extra-notification"
