@@ -1,9 +1,11 @@
 <template>
   <div class="ExtraNotifications">
-    <div class="notification unseen">
+    <div
+      v-if="shouldShowChats"
+      class="notification unseen"
+    >
       <div class="notification-overlay" />
       <router-link
-        v-if="shouldShowChats"
         class="button-unstyled -link extra-notification"
         :to="{ name: 'chats', params: { username: currentUser.screen_name } }"
       >
@@ -15,10 +17,12 @@
         {{ $tc('notifications.unread_chats', unreadChatCount, { num: unreadChatCount }) }}
       </router-link>
     </div>
-    <div class="notification unseen">
+    <div
+      v-if="shouldShowAnnouncements"
+      class="notification unseen"
+    >
       <div class="notification-overlay" />
       <router-link
-        v-if="shouldShowAnnouncements"
         class="button-unstyled -link extra-notification"
         :to="{ name: 'announcements' }"
       >
@@ -30,10 +34,12 @@
         {{ $tc('notifications.unread_announcements', unreadAnnouncementCount, { num: unreadAnnouncementCount }) }}
       </router-link>
     </div>
-    <div class="notification unseen">
+    <div
+      v-if="shouldShowFollowRequests"
+      class="notification unseen"
+    >
       <div class="notification-overlay" />
       <router-link
-        v-if="shouldShowFollowRequests"
         class="button-unstyled -link extra-notification"
         :to="{ name: 'friend-requests' }"
       >
