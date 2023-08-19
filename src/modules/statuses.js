@@ -229,6 +229,10 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       timelineObject.newStatusCount += 1
     }
 
+    if (status.quote) {
+      addStatus(status.quote, /* showImmediately = */ false, /* addToTimeline = */ false)
+    }
+
     return status
   }
 

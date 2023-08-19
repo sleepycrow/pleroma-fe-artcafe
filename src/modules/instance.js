@@ -128,6 +128,7 @@ const defaultState = {
   mediaProxyAvailable: false,
   suggestionsEnabled: false,
   suggestionsWeb: '',
+  quotingAvailable: false,
 
   // Html stuff
   instanceSpecificPanelContent: '',

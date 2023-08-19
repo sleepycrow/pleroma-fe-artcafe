@@ -156,11 +156,13 @@ const PostStatusForm = {
         poll: this.statusPoll || {},
         mediaDescriptions: this.statusMediaDescriptions || {},
         visibility: this.statusScope || scope,
-        contentType: statusContentType
+        contentType: statusContentType,
+        quoting: false
       }
     }
 
     return {
+      randomSeed: `${Math.random()}`.replace('.', '-'),
       dropFiles: [],
       uploadingFiles: false,
       error: null,
@@ -265,6 +267,30 @@ const PostStatusForm = {
     isEdit () {
       return typeof this.statusId !== 'undefined' && this.statusId.trim() !== ''
     },
+    quotable () {
+      if (!this.$store.state.instance.quotingAvailable) {
+        return false
+      }
+
+      if (!this.replyTo) {
+        return false
+      }
+
+      const repliedStatus = this.$store.state.statuses.allStatusesObject[this.replyTo]
+      if (!repliedStatus) {
+        return false
+      }
+
+      if (repliedStatus.visibility === 'public' ||
+          repliedStatus.visibility === 'unlisted' ||
+          repliedStatus.visibility === 'local') {
+        return true
+      } else if (repliedStatus.visibility === 'private') {
+        return repliedStatus.user.id === this.$store.state.users.currentUser.id
+      }
+
+      return false
+    },
     ...mapGetters(['mergedConfig']),
     ...mapState({
       mobileLayout: state => state.interface.mobileLayout
@@ -292,7 +318,8 @@ const PostStatusForm = {
         visibility: newStatus.visibility,
         contentType: newStatus.contentType,
         poll: {},
-        mediaDescriptions: {}
+        mediaDescriptions: {},
+        quoting: false
       }
       this.pollFormVisible = false
       this.$refs.mediaUpload && this.$refs.mediaUpload.clearFile()
@@ -340,6 +367,8 @@ const PostStatusForm = {
         return
       }
 
+      const replyOrQuoteAttr = newStatus.quoting ? 'quoteId' : 'inReplyToStatusId'
+
       const postingOptions = {
         status: newStatus.status,
         spoilerText: newStatus.spoilerText || null,
@@ -347,7 +376,7 @@ const PostStatusForm = {
         sensitive: newStatus.nsfw,
         media: newStatus.files,
         store: this.$store,
-        inReplyToStatusId: this.replyTo,
+        [replyOrQuoteAttr]: this.replyTo,
         contentType: newStatus.contentType,
         poll,
         idempotencyKey: this.idempotencyKey
@@ -373,6 +402,7 @@ const PostStatusForm = {
       }
       const newStatus = this.newStatus
       this.previewLoading = true
+      const replyOrQuoteAttr = newStatus.quoting ? 'quoteId' : 'inReplyToStatusId'
       statusPoster.postStatus({
         status: newStatus.status,
         spoilerText: newStatus.spoilerText || null,
@@ -380,7 +410,7 @@ const PostStatusForm = {
         sensitive: newStatus.nsfw,
         media: [],
         store: this.$store,
-        inReplyToStatusId: this.replyTo,
+        [replyOrQuoteAttr]: this.replyTo,
         contentType: newStatus.contentType,
         poll: {},
         preview: true

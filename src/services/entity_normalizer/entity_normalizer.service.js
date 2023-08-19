@@ -325,6 +325,10 @@ export const parseStatus = (data) => {
       output.thread_muted = pleroma.thread_muted
       output.emoji_reactions = pleroma.emoji_reactions
       output.parent_visible = pleroma.parent_visible === undefined ? true : pleroma.parent_visible
+      output.quote = pleroma.quote ? parseStatus(pleroma.quote) : undefined
+      output.quote_id = pleroma.quote_id ? pleroma.quote_id : (output.quote ? output.quote.id : undefined)
+      output.quote_url = pleroma.quote_url
+      output.quote_visible = pleroma.quote_visible
     } else {
       output.text = data.content
       output.summary = data.spoiler_text

@@ -126,6 +126,36 @@
             class="preview-status"
           />
         </div>
+        <div
+          v-if="quotable"
+          role="radiogroup"
+          class="btn-group reply-or-quote-selector"
+        >
+          <button
+            :id="`reply-or-quote-option-${randomSeed}-reply`"
+            class="btn button-default reply-or-quote-option"
+            :class="{ toggled: !newStatus.quoting }"
+            tabindex="0"
+            role="radio"
+            :aria-labelledby="`reply-or-quote-option-${randomSeed}-reply`"
+            :aria-checked="!newStatus.quoting"
+            @click="newStatus.quoting = false"
+          >
+            {{ $t('post_status.reply_option') }}
+          </button>
+          <button
+            :id="`reply-or-quote-option-${randomSeed}-quote`"
+            class="btn button-default reply-or-quote-option"
+            :class="{ toggled: newStatus.quoting }"
+            tabindex="0"
+            role="radio"
+            :aria-labelledby="`reply-or-quote-option-${randomSeed}-quote`"
+            :aria-checked="newStatus.quoting"
+            @click="newStatus.quoting = true"
+          >
+            {{ $t('post_status.quote_option') }}
+          </button>
+        </div>
         <EmojiInput
           v-if="!disableSubject && (newStatus.spoilerText || alwaysShowSubject)"
           v-model="newStatus.spoilerText"
@@ -418,6 +448,10 @@
     border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
     padding: 0.5em;
     margin: 0;
+  }
+
+  .reply-or-quote-selector {
+    margin-bottom: 0.5em;
   }
 
   .text-format {
