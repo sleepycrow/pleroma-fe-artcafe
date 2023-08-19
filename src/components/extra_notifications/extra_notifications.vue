@@ -3,21 +3,21 @@
     <router-link
       v-if="shouldShowChats"
       class="button-unstyled -link extra-notification"
-      to="chats"
+      :to="{ name: 'chats', params: { username: currentUser.screen_name } }"
     >
       {{ $tc('notifications.unread_chats', unreadChatCount, { num: unreadChatCount }) }}
     </router-link>
     <router-link
       v-if="shouldShowAnnouncements"
       class="button-unstyled -link extra-notification"
-      to="announcements"
+      :to="{ name: 'announcements' }"
     >
       {{ $tc('notifications.unread_announcements', unreadAnnouncementCount, { num: unreadAnnouncementCount }) }}
     </router-link>
     <router-link
       v-if="shouldShowFollowRequests"
       class="button-unstyled -link extra-notification"
-      to="friend-requests"
+      :to="{ name: 'friend-requests' }"
     >
       {{ $tc('notifications.unread_follow_requests', followRequestCount, { num: followRequestCount }) }}
     </router-link>

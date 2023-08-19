@@ -17,6 +17,9 @@ const ExtraNotifications = {
     shouldShowCustomizationTip () {
       return this.mergedConfig.showExtraNotificationsTip && this.hasAnythingToShow
     },
+    currentUser () {
+      return this.$store.state.users.currentUser
+    },
     ...mapGetters(['unreadChatCount', 'unreadAnnouncementCount', 'followRequestCount', 'mergedConfig'])
   },
   methods: {
