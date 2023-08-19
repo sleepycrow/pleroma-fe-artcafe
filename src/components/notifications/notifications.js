@@ -97,7 +97,7 @@ const Notifications = {
     },
     noSticky () { return this.$store.getters.mergedConfig.disableStickyHeaders },
     showExtraNotifications () {
-      return true
+      return !this.noHeading
     },
     ...mapGetters(['unreadChatCount', 'unreadAnnouncementCount'])
   },
