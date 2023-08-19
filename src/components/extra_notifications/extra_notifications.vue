@@ -4,7 +4,7 @@
       <div class="notification-overlay"></div>
       <router-link
         v-if="shouldShowChats"
-        class="button-unstyled -link extra-notification-link"
+        class="button-unstyled -link extra-notification"
         :to="{ name: 'chats', params: { username: currentUser.screen_name } }"
       >
         {{ $tc('notifications.unread_chats', unreadChatCount, { num: unreadChatCount }) }}
@@ -14,7 +14,7 @@
       <div class="notification-overlay"></div>
       <router-link
         v-if="shouldShowAnnouncements"
-        class="button-unstyled -link extra-notification-link"
+        class="button-unstyled -link extra-notification"
         :to="{ name: 'announcements' }"
       >
         {{ $tc('notifications.unread_announcements', unreadAnnouncementCount, { num: unreadAnnouncementCount }) }}
@@ -24,7 +24,7 @@
       <div class="notification-overlay"></div>
       <router-link
         v-if="shouldShowFollowRequests"
-        class="button-unstyled -link extra-notification-link"
+        class="button-unstyled -link extra-notification"
         :to="{ name: 'friend-requests' }"
       >
         {{ $tc('notifications.unread_follow_requests', followRequestCount, { num: followRequestCount }) }}
@@ -33,7 +33,7 @@
     <i18n-t
       v-if="shouldShowCustomizationTip"
       tag="span"
-      class="notification tip"
+      class="notification tip extra-notification"
       keypath="notifications.configuration_tip"
     >
       <template #theSettings>
@@ -69,10 +69,16 @@
 
   .notification {
     width: 100%;
-    padding: 1em;
     border-bottom: 1px solid;
     border-color: $fallback--border;
     border-color: var(--border, $fallback--border);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .extra-notification {
+    padding: 1em;
   }
 
   .tip {
