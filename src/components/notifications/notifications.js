@@ -7,7 +7,8 @@ import notificationsFetcher from '../../services/notifications_fetcher/notificat
 import {
   notificationsFromStore,
   filteredNotificationsFromStore,
-  unseenNotificationsFromStore
+  unseenNotificationsFromStore,
+  countExtraNotifications
 } from '../../services/notification_utils/notification_utils.js'
 import FaviconService from '../../services/favicon_service/favicon_service.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -33,6 +34,11 @@ const Notifications = {
     minimalMode: Boolean,
     // Custom filter mode, an array of strings, possible values 'mention', 'repeat', 'like', 'follow', used to override global filter for use in "Interactions" timeline
     filterMode: Array,
+    // Do not show extra notifications
+    noExtra: {
+      type: Boolean,
+      default: false
+    },
     // Disable teleporting (i.e. for /users/user/notifications)
     disableTeleport: Boolean
   },
@@ -67,11 +73,17 @@ const Notifications = {
     filteredNotifications () {
       return filteredNotificationsFromStore(this.$store, this.filterMode)
     },
+    unseenCountBadgeText () {
+      return `${this.unseenCount ? this.unseenCount : ''}${this.extraNotificationsCount ? '*' : ''}`
+    },
     unseenCount () {
       return this.unseenNotifications.length
     },
+    extraNotificationsCount () {
+      return countExtraNotifications(this.$store)
+    },
     unseenCountTitle () {
-      return this.unseenCount + (this.unreadChatCount) + this.unreadAnnouncementCount
+      return this.unseenNotifications.length + (this.unreadChatCount) + this.unreadAnnouncementCount
     },
     loading () {
       return this.$store.state.statuses.notifications.loading
@@ -97,7 +109,7 @@ const Notifications = {
     },
     noSticky () { return this.$store.getters.mergedConfig.disableStickyHeaders },
     showExtraNotifications () {
-      return !this.noHeading
+      return !this.noExtra
     },
     ...mapGetters(['unreadChatCount', 'unreadAnnouncementCount'])
   },
