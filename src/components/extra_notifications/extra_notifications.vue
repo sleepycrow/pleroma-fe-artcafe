@@ -21,6 +21,29 @@
     >
       {{ $tc('notifications.unread_follow_requests', followRequestCount, { num: followRequestCount }) }}
     </router-link>
+    <i18n-t
+      v-if="shouldShowCustomizationTip"
+      tag="span"
+      class="extra-notification tip"
+      keypath="notifications.configuration_tip"
+    >
+      <template #theSettings>
+        <button
+          class="button-unstyled -link"
+          @click="openNotificationSettings"
+        >
+          {{ $t('notifications.configuration_tip_settings') }}
+        </button>
+      </template>
+      <template #dismiss>
+        <button
+          class="button-unstyled -link"
+          @click="dismissConfigurationTip"
+        >
+          {{ $t('notifications.configuration_tip_dismiss') }}
+        </button>
+      </template>
+    </i18n-t>
   </div>
 </template>
 
@@ -44,6 +67,10 @@
     border-bottom: 1px solid;
     border-color: $fallback--border;
     border-color: var(--border, $fallback--border);
+  }
+
+  .tip {
+    display: inline;
   }
 }
 </style>

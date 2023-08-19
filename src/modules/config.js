@@ -117,6 +117,11 @@ export const defaultState = {
   conversationTreeAdvanced: undefined, // instance default
   conversationOtherRepliesButton: undefined, // instance default
   conversationTreeFadeAncestors: undefined, // instance default
+  showExtraNotifications: undefined, // instance default
+  showExtraNotificationsTip: undefined, // instance default
+  showChatsInExtraNotifications: undefined, // instance default
+  showAnnouncementsInExtraNotifications: undefined, // instance default
+  showFollowRequestsInExtraNotifications: undefined, // instance default
   maxDepthInThread: undefined, // instance default
   autocompleteSelect: undefined // instance default
 }
