@@ -1,18 +1,25 @@
 <template>
   <div class="ExtraNotifications">
     <router-link
-      v-if="unreadChatCount"
+      v-if="shouldShowChats"
       class="button-unstyled -link extra-notification"
       to="chats"
     >
       {{ $tc('notifications.unread_chats', unreadChatCount, { num: unreadChatCount }) }}
     </router-link>
     <router-link
-      v-if="unreadAnnouncementCount"
+      v-if="shouldShowAnnouncements"
       class="button-unstyled -link extra-notification"
       to="announcements"
     >
       {{ $tc('notifications.unread_announcements', unreadAnnouncementCount, { num: unreadAnnouncementCount }) }}
+    </router-link>
+    <router-link
+      v-if="shouldShowFollowRequests"
+      class="button-unstyled -link extra-notification"
+      to="friend-requests"
+    >
+      {{ $tc('notifications.unread_follow_requests', followRequestCount, { num: followRequestCount }) }}
     </router-link>
   </div>
 </template>

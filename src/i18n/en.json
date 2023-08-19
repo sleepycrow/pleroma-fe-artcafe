@@ -207,7 +207,8 @@
     "submitted_report": "submitted a report",
     "poll_ended": "poll has ended",
     "unread_announcements": "{num} unread announcement | {num} unread announcements",
-    "unread_chats": "{num} unread chat | {num} unread chats"
+    "unread_chats": "{num} unread chat | {num} unread chats",
+    "unread_follow_requests": "{num} new follow request | {num} new follow requests"
   },
   "polls": {
     "add_poll": "Add poll",

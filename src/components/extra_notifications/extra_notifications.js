@@ -2,7 +2,16 @@ import { mapGetters } from 'vuex'
 
 const ExtraNotifications = {
   computed: {
-    ...mapGetters(['unreadChatCount', 'unreadAnnouncementCount'])
+    shouldShowChats () {
+      return this.unreadChatCount
+    },
+    shouldShowAnnouncements () {
+      return this.unreadAnnouncementCount
+    },
+    shouldShowFollowRequests () {
+      return this.followRequestCount
+    },
+    ...mapGetters(['unreadChatCount', 'unreadAnnouncementCount', 'followRequestCount'])
   }
 }
 
