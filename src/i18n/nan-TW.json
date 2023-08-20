@@ -248,7 +248,7 @@
     "regional_indicator": "地區指引 {letter}"
   },
   "errors": {
-    "storage_unavailable": "Pleroma buē-tàng the̍h 著瀏覽器儲存 ê。Lí ê 登入狀態抑是局部設定 buē 儲存，mā 凡勢 tú 著意料外 ê 問題。拍開 cookie 看覓。"
+    "storage_unavailable": "Pleroma buē-tàng the̍h 著瀏覽器儲存 ê。Lí ê 登入狀態抑是局部設定 buē 儲存，mā 凡勢 tú 著意料外 ê 問題。拍開 cookie 看māi。"
   },
   "interactions": {
     "favs_repeats": "轉送 kap kah 意",
@@ -279,7 +279,7 @@
     "edit_remote_warning": "別 ê 站臺可能無支援編輯，無法度收著 PO 文上新 ê 版本。",
     "edit_unsupported_warning": "Pleroma 無支持編輯 the̍h 起 hām 投票。",
     "posting": "PO 文",
-    "preview": "Sing 看覓",
+    "preview": "Sing看māi",
     "preview_empty": "空 ê",
     "empty_status_error": "無法度 PO 無檔案 koh 空 ê 狀態",
     "media_description_error": "更新媒體失敗，請 koh 試一 kái",
@@ -295,7 +295,9 @@
       "public": "公開 - PO kàu 公開時間線",
       "unlisted": "Mài 列出來 - Mài PO tī 公開時間線"
     },
-    "post": "PO 上去"
+    "post": "PO 上去",
+    "reply_option": "應tsit ê狀態",
+    "quote_option": "引用tsit ê狀態"
   },
   "registration": {
     "bio_optional": "介紹（毋是必要）",
@@ -715,7 +717,7 @@
     "navbar_column_stretch": "伸導覽liâu，kah 欄平闊",
     "always_show_post_button": "一直顯示「新ê PO文」ê鈕仔",
     "hide_wallpaper": "Khàm站臺ê壁紙",
-    "use_one_click_nsfw": "Tshi̍h 一ê就會當拍開敏感內容",
+    "use_one_click_nsfw": "Tshi̍h chi̍t 下就ē當拍開敏感內容",
     "hide_post_stats": "Khàm PO文ê統計數據（比如：kah 意ê額數）",
     "hide_filtered_statuses": "Khàm 逐ê過濾掉êPO文",
     "hide_wordfiltered_statuses": "Khàm詞語過濾掉ê狀態",
@@ -988,7 +990,20 @@
     },
     "frontend": {
       "repository": "原始碼庫ê連結",
-      "versions": "通用ê版本"
+      "versions": "通用ê版本",
+      "build_url": "起做URL",
+      "reinstall": "重頭安裝",
+      "is_default": "（預設）",
+      "is_default_custom": "（預設，版本：{version}）",
+      "install": "安裝",
+      "install_version": "安裝ê版本：{version}",
+      "more_install_options": "其他ê安裝選項",
+      "more_default_options": "其他ê預設設定ê選項",
+      "set_default": "設做預設ê",
+      "set_default_version": "Kā版本{version}設做預設ê"
     }
+  },
+  "timeline": {
+    "up_to_date": "是上新ê"
   }
 }
