@@ -160,6 +160,9 @@ const Timeline = {
       if (this.timeline.flushMarker !== 0) {
         this.$store.commit('clearTimeline', { timeline: this.timelineName, excludeUserId: true })
         this.$store.commit('queueFlush', { timeline: this.timelineName, id: 0 })
+        if (this.timelineName === 'user') {
+          this.$store.dispatch('fetchPinnedStatuses', this.userId)
+        }
         this.fetchOlderStatuses()
       } else {
         this.blockClicksTemporarily()
