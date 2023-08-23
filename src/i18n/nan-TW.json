@@ -1000,7 +1000,29 @@
       "more_install_options": "其他ê安裝選項",
       "more_default_options": "其他ê預設設定ê選項",
       "set_default": "設做預設ê",
-      "set_default_version": "Kā版本{version}設做預設ê"
+      "set_default_version": "Kā版本{version}設做預設ê",
+      "default_frontend_tip": "預設ê前端ē展示予逐ê用者。現在，用者無法度揀個人ê前端。若是lí變換，無beh用PleromaFE，上有可能ē用舊koh問題tsē ê AdminFE 做站臺ê設置，佇阮iáu-bē kā伊取代以前。",
+      "wip_notice": "請注意，tsit ê段落iáu teh起做，欠缺一寡特點，因為後端tuì前端管理ê實做無齊備。",
+      "default_frontend": "預設ê前端",
+      "default_frontend_tip2": "Teh起做：因為Pleroma後端無適當列出逐ê安裝ê前端，lí著手動輸入名字kap引用。下kha ê列單提供寫tsiah-ê 值ê近路。",
+      "available_frontends": "Ē當安裝"
+    },
+    "temp_overrides": {
+      ":pleroma": {
+        ":instance": {
+          ":public": {
+            "description": "無開放tse，ē 控制逐êAPI，干焦予登入ê用者用，mā ē予公開kap聯邦ê時間線，buē當予無落名ê訪客the̍h著。",
+            "label": "站臺是公開ê"
+          },
+          ":limit_to_local_content": {
+            "label": "Kan-ta會當tshuē在地ê內容",
+            "description": "無開放無認證ê用者、逐儂，猶是lóng總開放tshuē全球ê網路"
+          },
+          ":description_limit": {
+            "label": "限制"
+          }
+        }
+      }
     }
   },
   "timeline": {
