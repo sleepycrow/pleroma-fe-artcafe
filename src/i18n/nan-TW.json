@@ -983,7 +983,8 @@
         "header": "管制無落名ê訪客使用",
         "timelines": "讀取時間線",
         "profiles": "讀取用者ê個人資料",
-        "activities": "讀取狀態／活動"
+        "activities": "讀取狀態／活動",
+        "description": "（無）允准一kuá方面ê API the̍h取資源ê詳細設定。預設（無定ê狀態），若是站臺毋是公開ê，ē無允准the̍h取；選擇框á若勾，就算站臺是公開ê，iáu是無允准the̍h取；若無勾，就算站臺是私人ê，mā是允准the̍h取。請注意，若是設一kuá設定，無預料ê行為可能產生。比如講，若是the̍h取個人資料無開放，PO文buē顯示個人資料。"
       },
       "access": "讀取實體",
       "captcha_header": "CAPTCHA"
@@ -1019,7 +1020,12 @@
             "description": "無開放無認證ê用者、逐儂，猶是lóng總開放tshuē全球ê網路"
           },
           ":description_limit": {
-            "label": "限制"
+            "label": "限制",
+            "description": "附件說明ê字元限制"
+          },
+          ":background_image": {
+            "label": "背景ê影像",
+            "description": "背景ê影像（主要予PleromaFE用）"
           }
         }
       }
@@ -1027,5 +1033,27 @@
   },
   "timeline": {
     "up_to_date": "是上新ê"
+  },
+  "time": {
+    "unit": {
+      "days": "{0}工",
+      "days_short": "{0}工",
+      "hours": "{0}點鐘",
+      "hours_short": "{0}點鐘",
+      "minutes": "{0}分鐘",
+      "minutes_short": "{0}分",
+      "months": "{0}個月",
+      "months_short": "{0}個月",
+      "seconds": "{0}秒鐘",
+      "seconds_short": "{0}秒",
+      "weeks": "{0}禮拜",
+      "weeks_short": "{0}週",
+      "years": "{0}年",
+      "years_short": "{0}年"
+    },
+    "in_future": "koh有{0}",
+    "in_past": "{0}進前",
+    "now": "tú正",
+    "now_short": "tsit-má"
   }
 }
