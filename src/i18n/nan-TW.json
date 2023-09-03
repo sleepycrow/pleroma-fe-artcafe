@@ -1032,7 +1032,21 @@
     }
   },
   "timeline": {
-    "up_to_date": "是上新ê"
+    "up_to_date": "是上新ê",
+    "collapse": "疊起來",
+    "conversation": "會話",
+    "error": "佇the̍h時間線ê時出tshê：{0}",
+    "load_older": "載入舊ê狀態",
+    "repeated": "回應ah",
+    "no_retweet_hint": "PO文hőng標做限定跟綴ê，á是私人phue，無法度回應",
+    "show_new": "看新ê",
+    "reload": "重新載入",
+    "no_more_statuses": "無其他ê狀態",
+    "no_statuses": "無狀態",
+    "socket_reconnected": "實時ê連結成立ah",
+    "socket_broke": "實時連結拍m̄見ah：CloseEvent代碼{0}",
+    "quick_view_settings": "快速 view ê設定",
+    "quick_filter_settings": "快速過濾器ê設定"
   },
   "time": {
     "unit": {
