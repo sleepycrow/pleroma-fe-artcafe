@@ -925,13 +925,37 @@
     "reset_value_tooltip": "重頭設草稿"
   },
   "status": {
-    "favorites": "收藏"
+    "favorites": "收藏",
+    "repeat_confirm_cancel_button": "Mài轉送",
+    "delete_confirm_title": "Thâi掉ê確認",
+    "edit": "編輯狀態",
+    "edited_at": "（頂kái編輯佇：{time}）",
+    "pin": "釘佇個人資料",
+    "unpin": "Tuì個人資料拆掉",
+    "pinned": "釘入去ê",
+    "bookmark": "加入冊籤",
+    "unbookmark": "Tuì冊籤the̍h掉",
+    "delete_confirm": "Lí kám真ê beh thâi掉tsit ê狀態？",
+    "delete_confirm_accept_button": "Thâi掉",
+    "delete_confirm_cancel_button": "保留",
+    "reply_to": "回應",
+    "replies_list": "回應：",
+    "repeats": "轉送",
+    "repeat_confirm_accept_button": "轉送",
+    "repeat_confirm_title": "轉送ê確認",
+    "repeat_confirm": "Lí kám真ê beh轉送tsit ê狀態？",
+    "delete": "Thâi掉身份",
+    "delete_error": "Thâi狀態ê時出tshê：{0}",
+    "mentions": "提起"
   },
   "user_card": {
-    "favorites": "收藏"
+    "favorites": "收藏",
+    "show_repeats": "顯示轉送",
+    "hide_repeats": "Khàm掉轉送"
   },
   "tool_tip": {
-    "favorite": "收藏"
+    "favorite": "收藏",
+    "repeat": "轉送"
   },
   "password_reset": {
     "instruction": "輸入你ê email地址iah是用者ê名。阮ē寄予lí連結，通重頭設你ê密碼。",
@@ -1037,8 +1061,8 @@
     "conversation": "會話",
     "error": "佇the̍h時間線ê時出tshê：{0}",
     "load_older": "載入舊ê狀態",
-    "repeated": "回應ah",
-    "no_retweet_hint": "PO文hőng標做限定跟綴ê，á是私人phue，無法度回應",
+    "repeated": "轉送ah",
+    "no_retweet_hint": "PO文hőng標做限定跟綴ê，á是私人phue，無法度轉送",
     "show_new": "看新ê",
     "reload": "重新載入",
     "no_more_statuses": "無其他ê狀態",
