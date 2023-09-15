@@ -12,7 +12,7 @@ var env = process.env.NODE_ENV === 'testing'
     : config.build.env
 
 let commitHash = (() => {
-  let subst = "$Format:%h$";
+  const subst = "$Format:%h$";
   if(!subst.match(/Format:/)) {
     return subst;
   } else {
