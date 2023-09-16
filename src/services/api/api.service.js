@@ -107,6 +107,11 @@ const PLEROMA_ANNOUNCEMENTS_URL = '/api/v1/pleroma/admin/announcements'
 const PLEROMA_POST_ANNOUNCEMENT_URL = '/api/v1/pleroma/admin/announcements'
 const PLEROMA_EDIT_ANNOUNCEMENT_URL = id => `/api/v1/pleroma/admin/announcements/${id}`
 const PLEROMA_DELETE_ANNOUNCEMENT_URL = id => `/api/v1/pleroma/admin/announcements/${id}`
+const ARTCAFE_ALBUMS_URL = '/api/v1/artcafe/albums'
+const ARTCAFE_ALBUM_URL = id => `/api/v1/artcafe/albums/${id}`
+const ARTCAFE_ALBUM_TIMELINE_URL = id => `/api/v1/artcafe/albums/${id}/content`
+// const ARTCAFE_PUBLIC_USER_ALBUMS_URL = id => `/api/v1/artcafe/accounts/${id}/albums`
+// const ARTCAFE_ALBUMS_FOR_STATUS_URL = id => `/api/v1/artcafe/statuses/${id}/albums`
 
 const PLEROMA_ADMIN_CONFIG_URL = '/api/pleroma/admin/config'
 const PLEROMA_ADMIN_DESCRIPTIONS_URL = '/api/pleroma/admin/config/descriptions'
@@ -673,6 +678,7 @@ const fetchTimeline = ({
   until = false,
   userId = false,
   listId = false,
+  albumId = false,
   tag = false,
   withMuted = false,
   replyVisibility = 'all',
@@ -689,7 +695,8 @@ const fetchTimeline = ({
     list: MASTODON_LIST_TIMELINE_URL,
     favorites: MASTODON_USER_FAVORITES_TIMELINE_URL,
     tag: MASTODON_TAG_TIMELINE_URL,
-    bookmarks: MASTODON_BOOKMARK_TIMELINE_URL
+    bookmarks: MASTODON_BOOKMARK_TIMELINE_URL,
+    album: ARTCAFE_ALBUM_TIMELINE_URL
   }
   const isNotifications = timeline === 'notifications'
   const params = []
@@ -702,6 +709,8 @@ const fetchTimeline = ({
 
   if (timeline === 'list') {
     url = url(listId)
+  } else if (timeline === 'album') {
+    url = url(albumId)
   }
 
   if (since) {
@@ -722,7 +731,7 @@ const fetchTimeline = ({
   if (timeline === 'public' || timeline === 'publicAndExternal') {
     params.push(['only_media', false])
   }
-  if (timeline !== 'favorites' && timeline !== 'bookmarks') {
+  if (!['favorites', 'bookmarks', 'album'].includes(timeline)) {
     params.push(['with_muted', withMuted])
   }
   if (replyVisibility !== 'all') {
@@ -1765,6 +1774,50 @@ const installFrontend = ({ credentials, payload }) => {
     })
 }
 
+const fetchAlbums = ({ credentials }) => {
+  const url = ARTCAFE_ALBUMS_URL
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then(data => data.json())
+}
+
+const createAlbum = ({ title, isPublic, credentials }) => {
+  const url = ARTCAFE_ALBUMS_URL
+  const headers = authHeaders(credentials)
+  headers['Content-Type'] = 'application/json'
+
+  return fetch(url, {
+    headers,
+    method: 'POST',
+    body: JSON.stringify({ title, is_public: isPublic })
+  }).then((data) => data.json())
+}
+
+const getAlbum = ({ albumId, credentials }) => {
+  const url = ARTCAFE_ALBUM_URL(albumId)
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => data.json())
+}
+
+const updateAlbum = ({ albumId, title, isPublic, credentials }) => {
+  const url = ARTCAFE_ALBUM_URL(albumId)
+  const headers = authHeaders(credentials)
+  headers['Content-Type'] = 'application/json'
+
+  return fetch(url, {
+    headers,
+    method: 'PATCH',
+    body: JSON.stringify({ title, is_public: isPublic })
+  })
+}
+
+const deleteAlbum = ({ albumId, credentials }) => {
+  const url = ARTCAFE_ALBUM_URL(albumId)
+  return fetch(url, {
+    method: 'DELETE',
+    headers: authHeaders(credentials)
+  })
+}
+
 const apiService = {
   verifyCredentials,
   fetchTimeline,
@@ -1883,7 +1936,12 @@ const apiService = {
   fetchInstanceConfigDescriptions,
   fetchAvailableFrontends,
   pushInstanceDBConfig,
-  installFrontend
+  installFrontend,
+  fetchAlbums,
+  createAlbum,
+  getAlbum,
+  updateAlbum,
+  deleteAlbum
 }
 
 export default apiService
