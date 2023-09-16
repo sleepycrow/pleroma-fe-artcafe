@@ -177,7 +177,9 @@
     "edit_unsupported_warning": "Pleroma ne subtenas redaktadon de mencioj aŭ enketoj.",
     "edit_status": "Redakti afiŝon",
     "content_type_selection": "Formo de afiŝo",
-    "scope_notice_dismiss": "Fermi ĉi tiun avizon"
+    "scope_notice_dismiss": "Fermi ĉi tiun avizon",
+    "reply_option": "Respondi al ĉi tiu afiŝo",
+    "quote_option": "Citi ĉi tiun afiŝon"
   },
   "registration": {
     "bio": "Priskribo",
@@ -873,7 +875,8 @@
       "symbols": "Simboloj",
       "travel-and-places": "Vojaĝoj kaj lokoj"
     },
-    "regional_indicator": "Regiona marko {letter}"
+    "regional_indicator": "Regiona marko {letter}",
+    "unpacked": "Malpakitaj bildosignoj"
   },
   "polls": {
     "not_enough_options": "Tro malmultaj unikaj elektebloj en la enketo",
