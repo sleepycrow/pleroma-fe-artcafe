@@ -1780,7 +1780,7 @@ const fetchAlbums = ({ credentials }) => {
     .then(data => data.json())
 }
 
-const createAlbum = ({ title, isPublic, credentials }) => {
+const createAlbum = ({ title, description, isPublic, credentials }) => {
   const url = ARTCAFE_ALBUMS_URL
   const headers = authHeaders(credentials)
   headers['Content-Type'] = 'application/json'
@@ -1788,7 +1788,7 @@ const createAlbum = ({ title, isPublic, credentials }) => {
   return fetch(url, {
     headers,
     method: 'POST',
-    body: JSON.stringify({ title, is_public: isPublic })
+    body: JSON.stringify({ title, description, is_public: isPublic })
   }).then((data) => data.json())
 }
 
@@ -1798,7 +1798,7 @@ const getAlbum = ({ albumId, credentials }) => {
     .then((data) => data.json())
 }
 
-const updateAlbum = ({ albumId, title, isPublic, credentials }) => {
+const updateAlbum = ({ albumId, title, description, isPublic, credentials }) => {
   const url = ARTCAFE_ALBUM_URL(albumId)
   const headers = authHeaders(credentials)
   headers['Content-Type'] = 'application/json'
@@ -1806,7 +1806,7 @@ const updateAlbum = ({ albumId, title, isPublic, credentials }) => {
   return fetch(url, {
     headers,
     method: 'PATCH',
-    body: JSON.stringify({ title, is_public: isPublic })
+    body: JSON.stringify({ title, description, is_public: isPublic })
   })
 }
 
