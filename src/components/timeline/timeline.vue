@@ -1,19 +1,10 @@
 <template>
   <div :class="['Timeline', classes.root]">
     <div :class="classes.header">
-      <template v-if="!embedded">
-        <span
-          v-if="plainTitle"
-          class="title timeline-menu-title"
-        >
-          <span class="timeline-title">{{ plainTitle }}</span>
-        </span>
-        <TimelineMenu
-          v-else
-          :timeline-name="timelineName"
-        />
-      </template>
-
+      <TimelineMenu
+        v-if="!embedded"
+        :timeline-name="timelineName"
+      />
       <div
         v-if="showScrollTop && !embedded"
         class="rightside-button"
