@@ -110,7 +110,7 @@ const PLEROMA_DELETE_ANNOUNCEMENT_URL = id => `/api/v1/pleroma/admin/announcemen
 const ARTCAFE_ALBUMS_URL = '/api/v1/artcafe/albums'
 const ARTCAFE_ALBUM_URL = id => `/api/v1/artcafe/albums/${id}`
 const ARTCAFE_ALBUM_TIMELINE_URL = id => `/api/v1/artcafe/albums/${id}/content`
-// const ARTCAFE_PUBLIC_USER_ALBUMS_URL = id => `/api/v1/artcafe/accounts/${id}/albums`
+const ARTCAFE_PUBLIC_USER_ALBUMS_URL = id => `/api/v1/artcafe/accounts/${id}/albums`
 // const ARTCAFE_ALBUMS_FOR_STATUS_URL = id => `/api/v1/artcafe/statuses/${id}/albums`
 
 const PLEROMA_ADMIN_CONFIG_URL = '/api/pleroma/admin/config'
@@ -1818,6 +1818,12 @@ const deleteAlbum = ({ albumId, credentials }) => {
   })
 }
 
+const fetchPublicUserAlbums = ({ credentials, userId }) => {
+  const url = ARTCAFE_PUBLIC_USER_ALBUMS_URL(userId)
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then(data => data.json())
+}
+
 const apiService = {
   verifyCredentials,
   fetchTimeline,
@@ -1941,7 +1947,8 @@ const apiService = {
   createAlbum,
   getAlbum,
   updateAlbum,
-  deleteAlbum
+  deleteAlbum,
+  fetchPublicUserAlbums
 }
 
 export default apiService

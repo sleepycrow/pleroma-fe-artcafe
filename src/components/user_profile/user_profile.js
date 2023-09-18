@@ -5,6 +5,7 @@ import Timeline from '../timeline/timeline.vue'
 import Conversation from '../conversation/conversation.vue'
 import TabSwitcher from 'src/components/tab_switcher/tab_switcher.jsx'
 import RichContent from 'src/components/rich_content/rich_content.jsx'
+import UserAlbumList from '../user_album_list/user_album_list.vue'
 import List from '../list/list.vue'
 import withLoadMore from '../../hocs/with_load_more/with_load_more'
 import localeService from 'src/services/locale/locale.service.js'
@@ -182,7 +183,8 @@ const UserProfile = {
     FollowCard,
     TabSwitcher,
     Conversation,
-    RichContent
+    RichContent,
+    UserAlbumList
   }
 }
 

@@ -120,6 +120,14 @@
           :in-profile="true"
           :footer-slipgate="footerRef"
         />
+        <div
+          key="albums"
+          :label="$t('user_card.albums')"
+        >
+          <UserAlbumList
+            :user-id="userId"
+          />
+        </div>
       </tab-switcher>
       <div
         :ref="setFooterRef"
