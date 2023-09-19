@@ -1034,7 +1034,8 @@
     "reaction_count_label": "{num} person reacted | {num} people reacted",
     "hide_quote": "Hide the quoted status",
     "display_quote": "Display the quoted status",
-    "invisible_quote": "Quoted status unavailable: {link}"
+    "invisible_quote": "Quoted status unavailable: {link}",
+    "add_to_album": "Add to album"
   },
   "user_card": {
     "approve": "Approve",
@@ -1263,11 +1264,12 @@
     "edit_album": "Edit Album \"{albumTitle}\"",
     "title": "Title",
     "description": "Description",
-    "is_public": "Should this album be public?",
+    "public_album": "Public Album",
     "create": "Create",
     "save": "Save",
     "delete": "Delete",
     "really_delete": "Really delete this album?",
-    "err_not_found": "This album could not be found."
+    "err_not_found": "This album could not be found.",
+    "add_status_to_album": "Add status {statusId} to albums"
   }
 }
