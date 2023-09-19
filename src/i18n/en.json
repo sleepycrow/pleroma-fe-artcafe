@@ -189,7 +189,8 @@
     "mobile_notifications": "Open notifications",
     "mobile_notifications": "Open notifications (there are unread ones)",
     "mobile_notifications_close": "Close notifications",
-    "announcements": "Announcements"
+    "announcements": "Announcements",
+    "albums": "Albums"
   },
   "notifications": {
     "broken_favorite": "Unknown status, searching for it…",
@@ -1130,7 +1131,8 @@
     "note_blank": "(None)",
     "edit_note": "Edit note",
     "edit_note_apply": "Apply",
-    "edit_note_cancel": "Cancel"
+    "edit_note_cancel": "Cancel",
+    "albums": "Albums"
   },
   "user_profile": {
     "timeline_title": "User timeline",
@@ -1254,5 +1256,18 @@
   },
   "unicode_domain_indicator": {
     "tooltip": "This domain contains non-ascii characters."
+  },
+  "albums": {
+    "albums": "Albums",
+    "new": "New Album",
+    "edit_album": "Edit Album \"{albumTitle}\"",
+    "title": "Title",
+    "description": "Description",
+    "is_public": "Should this album be public?",
+    "create": "Create",
+    "save": "Save",
+    "delete": "Delete",
+    "really_delete": "Really delete this album?",
+    "err_not_found": "This album could not be found."
   }
 }
