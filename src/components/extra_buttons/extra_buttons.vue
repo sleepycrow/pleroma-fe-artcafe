@@ -78,6 +78,17 @@
           </button>
         </template>
         <button
+          v-if="canAddToAlbum"
+          class="button-default dropdown-item dropdown-item-icon"
+          @click.prevent="addStatusToAlbum"
+          @click="close"
+        >
+          <FAIcon
+            fixed-width
+            icon="folder"
+          /><span>{{ $t("status.add_to_album") }}</span>
+        </button>
+        <button
           v-if="ownStatus && editingAvailable"
           class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="editStatus"

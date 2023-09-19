@@ -10,7 +10,8 @@ import {
   faExternalLinkAlt,
   faHistory,
   faPlus,
-  faTimes
+  faTimes,
+  faFolder
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faBookmark as faBookmarkReg,
@@ -28,7 +29,8 @@ library.add(
   faFlag,
   faHistory,
   faPlus,
-  faTimes
+  faTimes,
+  faFolder
 )
 
 const ExtraButtons = {
@@ -123,6 +125,9 @@ const ExtraButtons = {
       const stripFieldsList = ['attachments', 'created_at', 'emojis', 'text', 'raw_html', 'nsfw', 'poll', 'summary', 'summary_raw_html']
       stripFieldsList.forEach(p => delete originalStatus[p])
       this.$store.dispatch('openStatusHistoryModal', originalStatus)
+    },
+    addStatusToAlbum () {
+      this.$store.dispatch('setAlbumAddModalStatusId', this.status.id)
     }
   },
   computed: {
@@ -141,6 +146,9 @@ const ExtraButtons = {
       return !!this.currentUser
     },
     canBookmark () {
+      return !!this.currentUser
+    },
+    canAddToAlbum () {
       return !!this.currentUser
     },
     statusLink () {

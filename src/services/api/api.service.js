@@ -111,7 +111,7 @@ const ARTCAFE_ALBUMS_URL = '/api/v1/artcafe/albums'
 const ARTCAFE_ALBUM_URL = id => `/api/v1/artcafe/albums/${id}`
 const ARTCAFE_ALBUM_TIMELINE_URL = id => `/api/v1/artcafe/albums/${id}/content`
 const ARTCAFE_PUBLIC_USER_ALBUMS_URL = id => `/api/v1/artcafe/accounts/${id}/albums`
-// const ARTCAFE_ALBUMS_FOR_STATUS_URL = id => `/api/v1/artcafe/statuses/${id}/albums`
+const ARTCAFE_ALBUMS_FOR_STATUS_URL = id => `/api/v1/artcafe/statuses/${id}/albums`
 
 const PLEROMA_ADMIN_CONFIG_URL = '/api/pleroma/admin/config'
 const PLEROMA_ADMIN_DESCRIPTIONS_URL = '/api/pleroma/admin/config/descriptions'
@@ -1808,6 +1808,7 @@ const updateAlbum = ({ albumId, title, description, isPublic, credentials }) => 
     method: 'PATCH',
     body: JSON.stringify({ title, description, is_public: isPublic })
   })
+    .then(data => data.json())
 }
 
 const deleteAlbum = ({ albumId, credentials }) => {
@@ -1816,11 +1817,44 @@ const deleteAlbum = ({ albumId, credentials }) => {
     method: 'DELETE',
     headers: authHeaders(credentials)
   })
+    .then(data => data.json())
 }
 
 const fetchPublicUserAlbums = ({ credentials, userId }) => {
   const url = ARTCAFE_PUBLIC_USER_ALBUMS_URL(userId)
   return fetch(url, { headers: authHeaders(credentials) })
+    .then(data => data.json())
+}
+
+const fetchAlbumsForStatus = ({ credentials, statusId }) => {
+  const url = ARTCAFE_ALBUMS_FOR_STATUS_URL(statusId)
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then(data => data.json())
+}
+
+const addStatusToAlbum = ({ credentials, albumId, statusId }) => {
+  const url = ARTCAFE_ALBUM_TIMELINE_URL(albumId)
+  const headers = authHeaders(credentials)
+  headers['Content-Type'] = 'application/json'
+
+  return fetch(url, {
+    headers,
+    method: 'POST',
+    body: JSON.stringify({ id: statusId })
+  })
+    .then(data => data.json())
+}
+
+const removeStatusFromAlbum = ({ credentials, albumId, statusId }) => {
+  const url = ARTCAFE_ALBUM_TIMELINE_URL(albumId)
+  const headers = authHeaders(credentials)
+  headers['Content-Type'] = 'application/json'
+
+  return fetch(url, {
+    headers,
+    method: 'DELETE',
+    body: JSON.stringify({ id: statusId })
+  })
     .then(data => data.json())
 }
 
@@ -1948,7 +1982,10 @@ const apiService = {
   getAlbum,
   updateAlbum,
   deleteAlbum,
-  fetchPublicUserAlbums
+  fetchPublicUserAlbums,
+  fetchAlbumsForStatus,
+  addStatusToAlbum,
+  removeStatusFromAlbum
 }
 
 export default apiService
