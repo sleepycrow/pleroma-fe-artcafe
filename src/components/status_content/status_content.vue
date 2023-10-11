@@ -43,7 +43,7 @@
       />
 
       <div
-        v-if="status.card && !noHeading && !compact"
+        v-if="statusCard && !noHeading && !compact"
         class="link-preview media-body"
       >
         <link-preview
