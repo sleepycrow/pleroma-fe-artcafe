@@ -75,7 +75,7 @@ const StatusContent = {
     ...controlledOrUncontrolledGetters(['showingTall', 'expandingSubject', 'showingLongSubject']),
     statusCard () {
       if (!this.status.card) return null
-      return this.status.card.url === this.status.quote_url ? null : status.card
+      return this.status.card.url === this.status.quote_url ? null : this.status.card
     },
     hideAttachments () {
       return (this.mergedConfig.hideAttachments && !this.inConversation) ||
