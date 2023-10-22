@@ -1262,6 +1262,7 @@
     "albums": "Albums",
     "new": "New Album",
     "edit_album": "Edit Album \"{albumTitle}\"",
+    "manage_albums": "Manage Albums",
     "title": "Title",
     "description": "Description",
     "public_album": "Public Album",

@@ -57,7 +57,7 @@
 
 <script src="./albums_timeline.js"></script>
 
-<style type="text/css">
+<style lang="scss">
 .album-timeline-heading {
   height: auto;
   display: block;
