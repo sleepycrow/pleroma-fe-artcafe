@@ -13,9 +13,9 @@ const i18n = createI18n({
   messages
 })
 
-function isEnabled () {
-  return localForage.getItem('vuex-lz')
-    .then(data => data.config.webPushNotifications)
+const state = {
+  lastFocused: null,
+  notificationIds: new Set()
 }
 
 function getWindowClients () {
@@ -29,11 +29,11 @@ const setLocale = async () => {
   i18n.locale = locale
 }
 
-const maybeShowNotification = async (event) => {
-  const enabled = await isEnabled()
+const showPushNotification = async (event) => {
   const activeClients = await getWindowClients()
   await setLocale()
-  if (enabled && (activeClients.length === 0)) {
+  // Only show push notifications if all tabs/windows are closed
+  if (activeClients.length === 0) {
     const data = event.data.json()
 
     const url = `${self.registration.scope}api/v1/notifications/${data.notification_id}`
@@ -48,8 +48,27 @@ const maybeShowNotification = async (event) => {
 }
 
 self.addEventListener('push', async (event) => {
+  console.log(event)
   if (event.data) {
-    event.waitUntil(maybeShowNotification(event))
+    event.waitUntil(showPushNotification(event))
+  }
+})
+
+self.addEventListener('message', async (event) => {
+  const { type, content } = event.data
+  console.log(event)
+
+  if (type === 'desktopNotification') {
+    const { title, body, icon, id } = content
+    if (state.notificationIds.has(id)) return
+    state.notificationIds.add(id)
+    setTimeout(() => state.notificationIds.remove(id), 10000)
+    self.registration.showNotification('SWTEST:  ' + title, { body, icon })
+  }
+
+  if (type === 'updateFocus') {
+    state.lastFocused = event.source.id
+    console.log(state)
   }
 })
 
@@ -59,7 +78,9 @@ self.addEventListener('notificationclick', (event) => {
   event.waitUntil(getWindowClients().then((list) => {
     for (let i = 0; i < list.length; i++) {
       const client = list[i]
-      if (client.url === '/' && 'focus' in client) { return client.focus() }
+      if (state.lastFocused === null || client.id === state.lastFocused) {
+        if ('focus' in client) return client.focus()
+      }
     }
 
     if (clients.openWindow) return clients.openWindow('/')

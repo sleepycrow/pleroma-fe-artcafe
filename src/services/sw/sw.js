@@ -10,8 +10,12 @@ function urlBase64ToUint8Array (base64String) {
   return Uint8Array.from([...rawData].map((char) => char.charCodeAt(0)))
 }
 
+function isSWSupported () {
+  return 'serviceWorker' in navigator
+}
+
 function isPushSupported () {
-  return 'serviceWorker' in navigator && 'PushManager' in window
+  return 'PushManager' in window
 }
 
 function getOrCreateServiceWorker () {
@@ -39,7 +43,7 @@ function unsubscribePush (registration) {
 }
 
 function deleteSubscriptionFromBackEnd (token) {
-  return window.fetch('/api/v1/push/subscription/', {
+  return fetch('/api/v1/push/subscription/', {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -78,6 +82,20 @@ function sendSubscriptionToBackEnd (subscription, token, notificationVisibility)
     return responseData
   })
 }
+export function initServiceWorker () {
+  if (!isSWSupported()) return
+  getOrCreateServiceWorker()
+}
+
+export async function showDesktopNotification (content) {
+  const { active: sw } = await window.navigator.serviceWorker.getRegistration()
+  sw.postMessage({ type: 'desktopNotification', content })
+}
+
+export async function updateFocus () {
+  const { active: sw } = await window.navigator.serviceWorker.getRegistration()
+  sw.postMessage({ type: 'updateFocus' })
+}
 
 export function registerPushNotifications (isEnabled, vapidPublicKey, token, notificationVisibility) {
   if (isPushSupported()) {
@@ -98,13 +116,8 @@ export function unregisterPushNotifications (token) {
         })
         .then(([registration, unsubResult]) => {
           if (!unsubResult) {
-            console.warn('Push subscription cancellation wasn\'t successful, killing SW anyway...')
+            console.warn('Push subscription cancellation wasn\'t successful')
           }
-          return registration.unregister().then((result) => {
-            if (!result) {
-              console.warn('Failed to kill SW')
-            }
-          })
         })
     ]).catch((e) => console.warn(`Failed to disable Web Push Notifications: ${e.message}`))
   }
