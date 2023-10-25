@@ -62,7 +62,7 @@ self.addEventListener('message', async (event) => {
     const { title, body, icon, id } = content
     if (state.notificationIds.has(id)) return
     state.notificationIds.add(id)
-    setTimeout(() => state.notificationIds.remove(id), 10000)
+    setTimeout(() => state.notificationIds.delete(id), 10000)
     self.registration.showNotification('SWTEST:  ' + title, { body, icon })
   }
 
