@@ -77,11 +77,11 @@ export const unseenNotificationsFromStore = store =>
 
 export const prepareNotificationObject = (notification, i18n) => {
   const nodes = document.querySelectorAll('link[rel="icon"]')
-  const icon = nodes[0].href
+  const badge = nodes[0].href
 
   const notifObj = {
     tag: notification.id,
-    icon
+    badge
   }
   const status = notification.status
   const title = notification.from_profile.name
