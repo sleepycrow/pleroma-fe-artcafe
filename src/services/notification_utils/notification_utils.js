@@ -76,8 +76,12 @@ export const unseenNotificationsFromStore = store =>
   filter(filteredNotificationsFromStore(store), ({ seen }) => !seen)
 
 export const prepareNotificationObject = (notification, i18n) => {
+  const nodes = document.querySelectorAll('link[rel="icon"]')
+  const icon = nodes[0].href
+
   const notifObj = {
-    tag: notification.id
+    tag: notification.id,
+    icon
   }
   const status = notification.status
   const title = notification.from_profile.name

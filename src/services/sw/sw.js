@@ -10,7 +10,7 @@ function urlBase64ToUint8Array (base64String) {
   return Uint8Array.from([...rawData].map((char) => char.charCodeAt(0)))
 }
 
-function isSWSupported () {
+export function isSWSupported () {
   return 'serviceWorker' in navigator
 }
 

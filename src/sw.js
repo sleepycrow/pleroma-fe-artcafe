@@ -59,16 +59,19 @@ self.addEventListener('message', async (event) => {
   console.log(event)
 
   if (type === 'desktopNotification') {
-    const { title, body, icon, id } = content
-    if (state.notificationIds.has(id)) return
-    state.notificationIds.add(id)
-    setTimeout(() => state.notificationIds.delete(id), 10000)
-    self.registration.showNotification('SWTEST:  ' + title, { body, icon })
+    const { title, ...rest } = content
+    const { tag } = rest
+    if (state.notificationIds.has(tag)) return
+    state.notificationIds.add(tag)
+    setTimeout(() => state.notificationIds.delete(tag), 10000)
+    self.registration.showNotification(title, rest)
   }
 
   if (type === 'updateFocus') {
     state.lastFocused = event.source.id
-    console.log(state)
+
+    const notifications = await self.registration.getNotifications()
+    notifications.forEach(n => n.close())
   }
 })
 
