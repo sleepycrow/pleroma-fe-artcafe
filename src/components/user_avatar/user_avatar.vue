@@ -27,7 +27,7 @@
 
 <script src="./user_avatar.js"></script>
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .Avatar {
   --_avatarShadowBox: var(--avatarStatusShadow);
@@ -85,10 +85,9 @@
     right: 0;
     margin: -0.2em;
     padding: 0.2em;
-    background: rgba(127, 127, 127, 0.5);
+    background: rgb(127 127 127 / 50%);
     color: #fff;
     border-radius: var(--tooltipRadius);
   }
-
 }
 </style>

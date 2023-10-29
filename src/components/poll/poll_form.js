@@ -94,19 +94,10 @@ export default {
     },
     convertExpiryToUnit (unit, amount) {
       // Note: we want seconds and not milliseconds
-      switch (unit) {
-        case 'minutes': return (1000 * amount) / DateUtils.MINUTE
-        case 'hours': return (1000 * amount) / DateUtils.HOUR
-        case 'days': return (1000 * amount) / DateUtils.DAY
-      }
+      return DateUtils.secondsToUnit(unit, amount)
     },
     convertExpiryFromUnit (unit, amount) {
-      // Note: we want seconds and not milliseconds
-      switch (unit) {
-        case 'minutes': return 0.001 * amount * DateUtils.MINUTE
-        case 'hours': return 0.001 * amount * DateUtils.HOUR
-        case 'days': return 0.001 * amount * DateUtils.DAY
-      }
+      return DateUtils.unitToSeconds(unit, amount)
     },
     expiryAmountChange () {
       this.expiryAmount =

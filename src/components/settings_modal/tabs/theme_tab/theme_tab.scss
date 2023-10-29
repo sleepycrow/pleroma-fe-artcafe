@@ -1,18 +1,15 @@
-@import 'src/_variables.scss';
+@import "src/variables";
+
 .theme-tab {
   padding-bottom: 2em;
-  .theme-warning {
-    display: flex;
-    align-items: baseline;
-    margin-bottom: .5em;
-    .buttons {
-      .btn {
-        margin-bottom: .5em;
-      }
-    }
-  }
+
   .preset-switcher {
     margin-right: 1em;
+  }
+
+  .btn {
+    margin-left: 0.25em;
+    margin-right: 0.25em;
   }
 
   .style-control {
@@ -24,33 +21,35 @@
       flex: 1;
     }
 
-    &.disabled {
-      input, select {
-        opacity: .5
-      }
-    }
-
     .opt {
-      margin: .5em;
+      margin: 0.5em;
     }
 
     .color-input {
       flex: 0 0 0;
     }
 
-    input, select {
+    input,
+    select {
       min-width: 3em;
       margin: 0;
       flex: 0;
 
-      &[type=number] {
+      &[type="number"] {
         min-width: 5em;
       }
 
-      &[type=range] {
+      &[type="range"] {
         flex: 1;
         min-width: 3em;
         align-self: flex-start;
+      }
+    }
+
+    &.disabled {
+      input,
+      select {
+        opacity: 0.5;
       }
     }
   }
@@ -63,8 +62,7 @@
   .reset-container,
   .apply-container,
   .radius-container,
-  .color-container,
-  {
+  .color-container, {
     display: flex;
   }
 
@@ -73,10 +71,11 @@
     flex-direction: column;
   }
 
-  .color-container{
+  .color-container {
     > h4 {
       width: 99%;
     }
+
     flex-wrap: wrap;
     justify-content: space-between;
   }
@@ -100,7 +99,7 @@
     p {
       flex: 1;
       margin: 0;
-      margin-right: .5em;
+      margin-right: 0.5em;
     }
   }
 
@@ -112,15 +111,16 @@
       min-width: 1px;
       flex: 0 auto;
       padding: 0 1em;
-      margin-bottom: .5em;
+      margin-bottom: 0.5em;
     }
   }
 
   .shadow-selector {
     .override {
       flex: 1;
-      margin-left: .5em;
+      margin-left: 0.5em;
     }
+
     .select-container {
       margin-top: -4px;
       margin-bottom: -3px;
@@ -136,7 +136,7 @@
 
     .presets,
     .import-export {
-      margin-bottom: .5em;
+      margin-bottom: 0.5em;
     }
 
     .import-export {
@@ -144,16 +144,17 @@
     }
 
     .override {
-      margin-left: .5em;
+      margin-left: 0.5em;
     }
   }
 
   .save-load-options {
     flex-wrap: wrap;
-    margin-top: .5em;
+    margin-top: 0.5em;
     justify-content: center;
+
     .keep-option {
-      margin: 0 .5em .5em;
+      margin: 0 0.5em 0.5em;
       min-width: 25%;
     }
   }
@@ -179,11 +180,11 @@
           flex: 1;
 
           h4 {
-            margin-bottom: .25em;
+            margin-bottom: 0.25em;
           }
 
           .icons {
-            margin-top: .5em;
+            margin-top: 0.5em;
             display: flex;
 
             i {
@@ -199,8 +200,20 @@
         align-items: center;
       }
 
-      .avatar, .avatar-alt{
-        background: linear-gradient(135deg, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%);
+      .avatar,
+      .avatar-alt {
+        background:
+          linear-gradient(
+            135deg,
+            #b8e1fc 0%,
+            #a9d2f3 10%,
+            #90bae4 25%,
+            #90bcea 37%,
+            #90bff0 50%,
+            #6ba8e5 51%,
+            #a2daf5 83%,
+            #bdf3fd 100%
+          );
         color: black;
         font-family: sans-serif;
         text-align: center;
@@ -251,31 +264,31 @@
     }
   }
 
+  .radius-item {
+    flex-basis: auto;
+  }
+
   .radius-item,
   .color-item {
     min-width: 20em;
     margin: 5px 6px 0 0;
-    display:flex;
+    display: flex;
     flex-direction: column;
     flex: 1 1 0;
 
     &.wide {
-      min-width: 60%
+      min-width: 60%;
     }
 
     &:not(.wide):nth-child(2n+1) {
       margin-right: 7px;
-
     }
 
-    .color, .opacity {
-      display:flex;
+    .color,
+    .opacity {
+      display: flex;
       align-items: baseline;
     }
-  }
-
-  .radius-item {
-    flex-basis: auto;
   }
 
   .theme-radius-rn,
@@ -295,14 +308,11 @@
 
   .theme-radius-in {
     min-width: 1em;
-  }
-
-  .theme-radius-in {
     max-width: 7em;
     flex: 1;
   }
 
-  .theme-radius-lb{
+  .theme-radius-lb {
     max-width: 50em;
   }
 
@@ -310,9 +320,16 @@
     padding: 20px;
   }
 
-  .btn {
-    margin-left: .25em;
-    margin-right: .25em;
+  .theme-warning {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 0.5em;
+
+    .buttons {
+      .btn {
+        margin-bottom: 0.5em;
+      }
+    }
   }
 }
 
@@ -323,6 +340,7 @@
     justify-content: space-around;
     flex-grow: 1;
 
+    /* stylelint-disable-next-line no-descending-specificity */
     .btn {
       flex-grow: 1;
       min-height: 2em;

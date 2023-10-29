@@ -45,6 +45,9 @@ const Popover = {
     // Lets hover popover stay when clicking inside of it
     stayOnClick: Boolean,
 
+    // Use styled button (to avoid nested buttons)
+    normalButton: Boolean,
+
     triggerAttrs: {
       type: Object,
       default: {}

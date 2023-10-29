@@ -95,10 +95,10 @@ const ListsNew = {
       return this.addedUserIds.has(user.id)
     },
     addUser (user) {
-      this.$store.dispatch('addListAccount', { accountId: this.user.id, listId: this.id })
+      this.$store.dispatch('addListAccount', { accountId: user.id, listId: this.id })
     },
     removeUser (userId) {
-      this.$store.dispatch('removeListAccount', { accountId: this.user.id, listId: this.id })
+      this.$store.dispatch('removeListAccount', { accountId: userId, listId: this.id })
     },
     onSearchLoading (results) {
       this.searchLoading = true

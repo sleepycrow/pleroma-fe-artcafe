@@ -75,7 +75,7 @@
 <script src="./shout_panel.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .floating-shout {
   position: fixed;

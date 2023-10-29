@@ -24,6 +24,7 @@
         />
         <RemoveFollowerButton
           v-if="noFollowsYou && relationship.followed_by"
+          :user="user"
           :relationship="relationship"
           class="follow-card-button"
         />
@@ -39,9 +40,8 @@
   &-content-container {
     flex-shrink: 0;
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     justify-content: space-between;
-    flex-wrap: wrap;
     line-height: 1.5em;
   }
 

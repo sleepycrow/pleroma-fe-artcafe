@@ -95,7 +95,7 @@
 <script src="./poll_form.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .poll-form {
   display: flex;
@@ -117,6 +117,7 @@
 
   .input-container {
     width: 100%;
+
     input {
       // Hack: dodge the floating X icon
       padding-right: 2.5em;

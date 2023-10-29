@@ -49,7 +49,7 @@
   margin: 0;
   padding: 0.6em 1em;
 
-   --emoji-size: 14px;
+  --emoji-size: 14px;
 
   &-collapsed-content {
     margin-left: 0.7em;

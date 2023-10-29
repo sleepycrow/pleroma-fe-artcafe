@@ -1,5 +1,6 @@
 import SideDrawer from '../side_drawer/side_drawer.vue'
 import Notifications from '../notifications/notifications.vue'
+import ConfirmModal from '../confirm_modal/confirm_modal.vue'
 import { unseenNotificationsFromStore } from '../../services/notification_utils/notification_utils'
 import GestureService from '../../services/gesture_service/gesture_service'
 import NavigationPins from 'src/components/navigation/navigation_pins.vue'
@@ -25,12 +26,14 @@ const MobileNav = {
   components: {
     SideDrawer,
     Notifications,
-    NavigationPins
+    NavigationPins,
+    ConfirmModal
   },
   data: () => ({
     notificationsCloseGesture: undefined,
     notificationsOpen: false,
-    notificationsAtTop: true
+    notificationsAtTop: true,
+    showingConfirmLogout: false
   }),
   created () {
     this.notificationsCloseGesture = GestureService.swipeGesture(
@@ -57,7 +60,11 @@ const MobileNav = {
     ...mapGetters(['unreadChatCount', 'unreadAnnouncementCount']),
     chatsPinned () {
       return new Set(this.$store.state.serverSideStorage.prefsStorage.collections.pinnedNavItems).has('chats')
-    }
+    },
+    shouldConfirmLogout () {
+      return this.$store.getters.mergedConfig.modalOnLogout
+    },
+    ...mapGetters(['unreadChatCount'])
   },
   methods: {
     toggleMobileSidebar () {
@@ -88,9 +95,23 @@ const MobileNav = {
     scrollMobileNotificationsToTop () {
       this.$refs.mobileNotifications.scrollTo(0, 0)
     },
+    showConfirmLogout () {
+      this.showingConfirmLogout = true
+    },
+    hideConfirmLogout () {
+      this.showingConfirmLogout = false
+    },
     logout () {
+      if (!this.shouldConfirmLogout) {
+        this.doLogout()
+      } else {
+        this.showConfirmLogout()
+      }
+    },
+    doLogout () {
       this.$router.replace('/main/public')
       this.$store.dispatch('logout')
+      this.hideConfirmLogout()
     },
     markNotificationsAsSeen () {
       // this.$refs.notifications.markAsSeen()

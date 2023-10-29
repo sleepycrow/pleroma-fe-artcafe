@@ -8,6 +8,7 @@
       class="button-unstyled nav-icon"
       :title="$t('nav.search')"
       type="button"
+      :aria-expanded="!hidden"
       @click.prevent.stop="toggleHidden"
     >
       <FAIcon
@@ -29,6 +30,7 @@
       <button
         class="button-default search-button"
         type="submit"
+        :title="$t('nav.search')"
         @click="find(searchTerm)"
       >
         <FAIcon
@@ -39,6 +41,8 @@
       <button
         class="button-unstyled cancel-search"
         type="button"
+        :title="$t('nav.search_close')"
+        :aria-expanded="!hidden"
         @click.prevent.stop="toggleHidden"
       >
         <FAIcon
@@ -56,7 +60,7 @@
 <script src="./search_bar.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .SearchBar {
   display: inline-flex;

@@ -1,52 +1,18 @@
-import { defaultState as configDefaultState } from 'src/modules/config.js'
-import { defaultState as serverSideConfigDefaultState } from 'src/modules/serverSideConfig.js'
-
 const SharedComputedObject = () => ({
   user () {
     return this.$store.state.users.currentUser
   },
-  // Getting values for default properties
-  ...Object.keys(configDefaultState)
-    .map(key => [
-      key + 'DefaultValue',
-      function () {
-        return this.$store.getters.defaultConfig[key]
-      }
-    ])
-    .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {}),
-  // Generating computed values for vuex properties
-  ...Object.keys(configDefaultState)
-    .map(key => [key, {
-      get () { return this.$store.getters.mergedConfig[key] },
-      set (value) {
-        this.$store.dispatch('setOption', { name: key, value })
-      }
-    }])
-    .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {}),
-  ...Object.keys(serverSideConfigDefaultState)
-    .map(key => ['serverSide_' + key, {
-      get () { return this.$store.state.serverSideConfig[key] },
-      set (value) {
-        this.$store.dispatch('setServerSideOption', { name: key, value })
-      }
-    }])
-    .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {}),
-  // Special cases (need to transform values or perform actions first)
-  useStreamingApi: {
-    get () { return this.$store.getters.mergedConfig.useStreamingApi },
-    set (value) {
-      const promise = value
-        ? this.$store.dispatch('enableMastoSockets')
-        : this.$store.dispatch('disableMastoSockets')
-
-      promise.then(() => {
-        this.$store.dispatch('setOption', { name: 'useStreamingApi', value })
-      }).catch((e) => {
-        console.error('Failed starting MastoAPI Streaming socket', e)
-        this.$store.dispatch('disableMastoSockets')
-        this.$store.dispatch('setOption', { name: 'useStreamingApi', value: false })
-      })
-    }
+  expertLevel () {
+    return this.$store.getters.mergedConfig.expertLevel > 0
+  },
+  mergedConfig () {
+    return this.$store.getters.mergedConfig
+  },
+  adminConfig () {
+    return this.$store.state.adminSettings.config
+  },
+  adminDraft () {
+    return this.$store.state.adminSettings.draft
   }
 })
 

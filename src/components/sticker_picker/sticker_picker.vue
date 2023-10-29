@@ -32,24 +32,29 @@
 <script src="./sticker_picker.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .sticker-picker {
   width: 100%;
+
   .contents {
     min-height: 250px;
+
     .sticker-picker-content {
       display: flex;
       flex-wrap: wrap;
       padding: 0 4px;
+
       .sticker {
         display: flex;
         flex: 1 1 auto;
         margin: 4px;
         width: 56px;
         height: 56px;
+
         img {
           height: 100%;
+
           &:hover {
             filter: drop-shadow(0 0 5px var(--accent, $fallback--link));
           }

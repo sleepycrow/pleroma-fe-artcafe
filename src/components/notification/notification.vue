@@ -121,7 +121,17 @@
                   scope="global"
                   keypath="notifications.reacted_with"
                 >
-                  <span class="emoji-reaction-emoji">{{ notification.emoji }}</span>
+                  <img
+                    v-if="notification.emoji_url"
+                    class="emoji-reaction-emoji emoji-reaction-emoji-image"
+                    :src="notification.emoji_url"
+                    :alt="notification.emoji"
+                    :title="notification.emoji"
+                  >
+                  <span
+                    v-else
+                    class="emoji-reaction-emoji"
+                  >{{ notification.emoji }}</span>
                 </i18n-t>
               </small>
             </span>
@@ -153,9 +163,9 @@
             </router-link>
             <button
               class="button-unstyled expand-icon"
-              @click.prevent="toggleStatusExpanded"
               :title="$t('tool_tip.toggle_expand')"
               :aria-expanded="statusExpanded"
+              @click.prevent="toggleStatusExpanded"
             >
               <FAIcon
                 class="fa-scale-110"
@@ -243,6 +253,28 @@
         </template>
       </div>
     </div>
+    <teleport to="#modal">
+      <confirm-modal
+        v-if="showingApproveConfirmDialog"
+        :title="$t('user_card.approve_confirm_title')"
+        :confirm-text="$t('user_card.approve_confirm_accept_button')"
+        :cancel-text="$t('user_card.approve_confirm_cancel_button')"
+        @accepted="doApprove"
+        @cancelled="hideApproveConfirmDialog"
+      >
+        {{ $t('user_card.approve_confirm', { user: user.screen_name_ui }) }}
+      </confirm-modal>
+      <confirm-modal
+        v-if="showingDenyConfirmDialog"
+        :title="$t('user_card.deny_confirm_title')"
+        :confirm-text="$t('user_card.deny_confirm_accept_button')"
+        :cancel-text="$t('user_card.deny_confirm_cancel_button')"
+        @accepted="doDeny"
+        @cancelled="hideDenyConfirmDialog"
+      >
+        {{ $t('user_card.deny_confirm', { user: user.screen_name_ui }) }}
+      </confirm-modal>
+    </teleport>
   </article>
 </template>
 

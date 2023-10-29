@@ -210,17 +210,16 @@
 <script src="./conversation.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .Conversation {
   z-index: 1;
 
   .conversation-dive-to-top-level-box {
     padding: var(--status-margin, $status-margin);
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: var(--border, $fallback--border);
+    border-bottom: 1px solid var(--border, $fallback--border);
     border-radius: 0;
+
     /* Make the button stretch along the whole row */
     display: flex;
     align-items: stretch;
@@ -235,52 +234,48 @@
   .thread-ancestor.-faded .StatusContent {
     --link: var(--faintLink);
     --text: var(--faint);
+
     color: var(--text);
   }
 
   .thread-ancestor-dive-box {
     padding-left: var(--status-margin, $status-margin);
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: var(--border, $fallback--border);
+    border-bottom: 1px solid var(--border, $fallback--border);
     border-radius: 0;
+
     /* Make the button stretch along the whole row */
-    &, &-inner {
+    &,
+    &-inner {
       display: flex;
       align-items: stretch;
       flex-direction: column;
     }
   }
+
   .thread-ancestor-dive-box-inner {
     padding: var(--status-margin, $status-margin);
   }
 
   .conversation-status {
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: var(--border, $fallback--border);
+    border-bottom: 1px solid var(--border, $fallback--border);
     border-radius: 0;
   }
 
   .thread-ancestor-has-other-replies .conversation-status,
+  &:last-child .conversation-status,
   .thread-ancestor:last-child .conversation-status,
   .thread-ancestor:last-child .thread-ancestor-dive-box,
-  &:last-child .conversation-status,
   &.-expanded .thread-tree .conversation-status {
     border-bottom: none;
   }
 
   .thread-ancestors + .thread-tree > .conversation-status {
-    border-top-width: 1px;
-    border-top-style: solid;
-    border-top-color: var(--border, $fallback--border);
+    border-top: 1px solid var(--border, $fallback--border);
   }
 
   /* expanded conversation in timeline */
   &.status-fadein.-expanded .thread-body {
-    border-left-width: 4px;
-    border-left-style: solid;
-    border-left-color: $fallback--cRed;
+    border-left: 4px solid $fallback--cRed;
     border-left-color: var(--cRed, $fallback--cRed);
     border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
     border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);

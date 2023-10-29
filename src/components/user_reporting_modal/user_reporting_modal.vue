@@ -72,7 +72,7 @@
 <script src="./user_reporting_modal.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .user-reporting-panel {
   width: 90vw;
@@ -121,7 +121,7 @@
     }
 
     .alert {
-      margin: 1em 0 0 0;
+      margin: 1em 0 0;
       line-height: 1.3em;
     }
   }

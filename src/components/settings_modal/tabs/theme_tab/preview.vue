@@ -33,10 +33,10 @@
               scope="global"
               keypath="settings.style.preview.text"
             >
-              <code style="font-family: var(--postCodeFont)">
+              <code style="font-family: var(--postCodeFont);">
                 {{ $t('settings.style.preview.mono') }}
               </code>
-              <a style="color: var(--link)">
+              <a style="color: var(--link);">
                 {{ $t('settings.style.preview.link') }}
               </a>
             </i18n-t>
@@ -44,25 +44,25 @@
             <div class="icons">
               <FAIcon
                 fixed-width
-                style="color: var(--cBlue)"
+                style="color: var(--cBlue);"
                 class="fa-scale-110 fa-old-padding"
                 icon="reply"
               />
               <FAIcon
                 fixed-width
-                style="color: var(--cGreen)"
+                style="color: var(--cGreen);"
                 class="fa-scale-110 fa-old-padding"
                 icon="retweet"
               />
               <FAIcon
                 fixed-width
-                style="color: var(--cOrange)"
+                style="color: var(--cOrange);"
                 class="fa-scale-110 fa-old-padding"
                 icon="star"
               />
               <FAIcon
                 fixed-width
-                style="color: var(--cRed)"
+                style="color: var(--cRed);"
                 class="fa-scale-110 fa-old-padding"
                 icon="times"
               />
@@ -81,7 +81,7 @@
               class="faint"
               scope="global"
             >
-              <a style="color: var(--faintLink)">
+              <a style="color: var(--faintLink);">
                 {{ $t('settings.style.preview.faint_link') }}
               </a>
             </i18n-t>
@@ -138,6 +138,7 @@ export default {}
 .preview-container {
   position: relative;
 }
+
 .underlay-preview {
   position: absolute;
   top: 0;

@@ -1,3 +1,4 @@
+import ConfirmModal from '../confirm_modal/confirm_modal.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faRetweet,
@@ -15,13 +16,24 @@ library.add(
 
 const RetweetButton = {
   props: ['status', 'loggedIn', 'visibility'],
+  components: {
+    ConfirmModal
+  },
   data () {
     return {
-      animated: false
+      animated: false,
+      showingConfirmDialog: false
     }
   },
   methods: {
     retweet () {
+      if (!this.status.repeated && this.shouldConfirmRepeat) {
+        this.showConfirmDialog()
+      } else {
+        this.doRetweet()
+      }
+    },
+    doRetweet () {
       if (!this.status.repeated) {
         this.$store.dispatch('retweet', { id: this.status.id })
       } else {
@@ -31,6 +43,13 @@ const RetweetButton = {
       setTimeout(() => {
         this.animated = false
       }, 500)
+      this.hideConfirmDialog()
+    },
+    showConfirmDialog () {
+      this.showingConfirmDialog = true
+    },
+    hideConfirmDialog () {
+      this.showingConfirmDialog = false
     }
   },
   computed: {
@@ -39,6 +58,9 @@ const RetweetButton = {
     },
     remoteInteractionLink () {
       return this.$store.getters.remoteInteractionLink({ statusId: this.status.id })
+    },
+    shouldConfirmRepeat () {
+      return this.mergedConfig.modalOnRepeat
     }
   }
 }

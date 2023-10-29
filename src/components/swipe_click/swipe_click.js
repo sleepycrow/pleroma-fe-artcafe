@@ -5,6 +5,8 @@ import GestureService from '../../services/gesture_service/gesture_service'
  *   direction: a vector that indicates the direction of the intended swipe
  *   threshold: the minimum distance in pixels the swipe has moved on `direction'
  *              for swipe-finished() to have a non-zero sign
+ *   disableClickThreshold: the minimum distance in pixels for the swipe to
+ *                          not trigger a click
  *   perpendicularTolerance: see gesture_service
  *
  * Events:
@@ -33,6 +35,10 @@ const SwipeClick = {
     threshold: {
       type: Function,
       default: () => 30
+    },
+    disableClickThreshold: {
+      type: Function,
+      default: () => 1
     },
     perpendicularTolerance: {
       type: Number,
@@ -72,6 +78,7 @@ const SwipeClick = {
     this.$gesture = new GestureService.SwipeAndClickGesture({
       direction: this.direction,
       threshold: this.threshold,
+      disableClickThreshold: this.disableClickThreshold,
       perpendicularTolerance: this.perpendicularTolerance,
       swipePreviewCallback: this.preview,
       swipeEndCallback: this.end,

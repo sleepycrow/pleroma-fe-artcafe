@@ -1,4 +1,4 @@
-@import '../../_variables.scss';
+@import "../../variables";
 
 .MentionLink {
   position: relative;
@@ -59,6 +59,7 @@
         font-weight: 600;
       }
     }
+
     &.-has-selection {
       color: var(--alertNeutralText, $fallback--text);
       background-color: var(--alertNeutral, $fallback--fg);
@@ -98,10 +99,6 @@
         box-shadow: 0 -5px 3px -4px inset var(--____highlight-solidColor);
       }
     }
-  }
-
-  .full {
-    pointer-events: none;
   }
 
   .serverName.-faded {

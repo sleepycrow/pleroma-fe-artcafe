@@ -1,4 +1,3 @@
-
 const languages = [
   'ar',
   'ca',
@@ -18,6 +17,7 @@ const languages = [
   'ja',
   'ja_easy',
   'ko',
+  'nan-TW',
   'nb',
   'nl',
   'oc',

@@ -32,7 +32,13 @@
       "private": "Лише читачі",
       "public": "Публічне",
       "unlisted": "Непублічне"
-    }
+    },
+    "undo": "Відмінити",
+    "yes": "Так",
+    "no": "Ні",
+    "unpin": "Відкріпити",
+    "scroll_to_top": "Вгору",
+    "pin": "Прикріпити"
   },
   "finder": {
     "error_fetching_user": "Користувача не знайдено",
@@ -48,7 +54,7 @@
     "media_proxy": "Посередник медіа-даних",
     "text_limit": "Ліміт символів",
     "upload_limit": "Обмеження завантажень",
-    "shout": "Оголошення"
+    "shout": "Гучномовець"
   },
   "exporter": {
     "processing": "Опрацьовую, скоро ви зможете завантажити файл",
@@ -61,7 +67,7 @@
     "mute": "Ігнорувати"
   },
   "shoutbox": {
-    "title": "Оголошення"
+    "title": "Гучномовець"
   },
   "about": {
     "staff": "Адміністрація",
@@ -81,7 +87,8 @@
         "accept_desc": "Поточний інстанс приймає повідомлення тільки з перелічених інстансів:",
         "simple_policies": "Правила поточного інстансу",
         "reason": "Причина",
-        "not_applicable": "н/в"
+        "not_applicable": "н/в",
+        "instance": "Інстанс"
       },
       "mrf_policies_desc": "Правила MRF розповсюджуються на даний  інстанс. Наступні правила активні:",
       "mrf_policies": "Активувати правила MRF (модуль переписування повідомлень)",
@@ -111,7 +118,10 @@
       "totp": "Двофакторна автентифікація"
     },
     "enter_two_factor_code": "Введіть двофакторний код автентифікації",
-    "placeholder": "напр. stepan"
+    "placeholder": "напр. stepan",
+    "logout_confirm": "Ви дійсно хочете вийти?",
+    "logout_confirm_accept_button": "Вийти",
+    "logout_confirm_cancel_button": "Ні, хочу назад!"
   },
   "importer": {
     "error": "Під час імпортування файлу сталася помилка.",
@@ -153,7 +163,8 @@
     "favorited_you": "вподобав(-ла) ваш допис",
     "broken_favorite": "Невідомий допис, шукаю його…",
     "error": "Помилка при оновленні сповіщень: {0}",
-    "poll_ended": "опитування закінчено"
+    "poll_ended": "опитування закінчено",
+    "submitted_report": "подав скаргу"
   },
   "nav": {
     "chats": "Чати",
@@ -174,7 +185,15 @@
     "back": "Назад",
     "administration": "Адміністрування",
     "home_timeline": "Домашня стрічка",
-    "lists": "Списки"
+    "lists": "Списки",
+    "edit_pinned": "Редагувати прикріплене",
+    "edit_finish": "Завершити редагування",
+    "mobile_sidebar": "Ввімкнути бокову панель",
+    "mobile_notifications": "Відкрити сповіщення (є непрочитані)",
+    "mobile_notifications_close": "Закрити сповіщення",
+    "edit_nav_mobile": "Редагувати панель навігації",
+    "announcements": "Анонси",
+    "search_close": "Закрити панель пошуку"
   },
   "media_modal": {
     "next": "Наступна",
@@ -221,7 +240,8 @@
     "follows": "Нові підписки",
     "favs_repeats": "Поширення та вподобайки",
     "moves": "Міграції користувачів",
-    "emoji_reactions": "Емоджі реакції"
+    "emoji_reactions": "Емоджі реакції",
+    "reports": "Скарги"
   },
   "errors": {
     "storage_unavailable": "Pleroma не змогла отримати доступ до сховища браузеру. Ваша сесія та налаштування не будуть збережені, це може спричинити непередбачувані проблеми. Спробуйте увімкнути cookie."
@@ -235,7 +255,19 @@
     "emoji": "Емодзі",
     "load_all": "Всі {emojiAmount} эмодзі завантажуються",
     "load_all_hint": "Завантажені перші {saneAmount} емодзі, завантаження всіх емодзі може призвести до проблем з продуктивністю.",
-    "unicode": "Стандартні емодзі"
+    "unicode": "Стандартні емодзі",
+    "regional_indicator": "Регіональний індикатор {letter}",
+    "unicode_groups": {
+      "animals-and-nature": "Тварини і Рослини",
+      "flags": "Прапори",
+      "food-and-drink": "Їжа та Напої",
+      "objects": "Об'єкти",
+      "people-and-body": "Люди та Тіло",
+      "smileys-and-emotion": "Смайлики та Емотікони",
+      "activities": "Активності",
+      "symbols": "Символи",
+      "travel-and-places": "Подорожі та Місця"
+    }
   },
   "post_status": {
     "content_type": {
@@ -269,7 +301,10 @@
     "preview_empty": "Пустий",
     "media_description_error": "Не вдалось оновити медіа, спробуйте ще раз",
     "media_description": "Опис медіа",
-    "post": "Опублікувати"
+    "post": "Опублікувати",
+    "edit_unsupported_warning": "Pleroma не підтримує редагування згадувань чи голосувань.",
+    "edit_status": "Редагувати допис",
+    "edit_remote_warning": "Інші віддалені інстанси можуть не підтримувати редагування та вони можуть не отримати актуальну версію допису."
   },
   "settings": {
     "blocks_imported": "Блокування імпортовані! Їх обробка триватиме певний час.",
@@ -654,7 +689,7 @@
       "backup_restore": "Резервне копіювання налаштувань"
     },
     "right_sidebar": "Показувати бокову панель справа",
-    "hide_shoutbox": "Приховати оголошення інстансу",
+    "hide_shoutbox": "Приховати гучномовець",
     "setting_server_side": "Цей параметр прив’язаний до вашого профілю та впливає на всі сеанси та клієнти",
     "lists_navigation": "Показувати списки в навігації",
     "account_backup": "Резервне копіювання облікового запису",
@@ -682,7 +717,33 @@
     "move_account": "Перемістити обліковий запис",
     "move_account_target": "Цільовий обліковий запис (напр. {example})",
     "moved_account": "Обліковий запис переміщено.",
-    "move_account_error": "Помилка під час переміщення облікового запису: {error}"
+    "move_account_error": "Помилка під час переміщення облікового запису: {error}",
+    "word_filter_and_more": "Фільтр слів та більше...",
+    "hide_bot_indication": "Сховати позначку бот у дописах",
+    "navbar_column_stretch": "Розтягнути панель навігації на ширину колонок",
+    "hide_wordfiltered_statuses": "Ховати фільтровані статуси",
+    "hide_muted_threads": "Ховати приглушені треди",
+    "posts": "Дописи",
+    "account_privacy": "Безпека",
+    "conversation_display": "Стиль відображення розмови",
+    "conversation_display_tree": "Деревоподібне",
+    "conversation_display_tree_quick": "Вигляд дерева",
+    "disable_sticky_headers": "Не закріплювати заголовок колонки зверху на сторінці",
+    "third_column_mode_none": "Не показувати третю колонку взагалі",
+    "third_column_mode_notifications": "Колонка сповіщень",
+    "columns": "Колонки",
+    "auto_update": "Автоматично показувати нові дописи",
+    "use_websockets": "Використовувати вебсокети (Оновлення в реальному часі)",
+    "use_at_icon": "Показувати {'@'} символ як іконку замість тексту",
+    "mute_bot_posts": "Приховати дописи ботів",
+    "always_show_post_button": "Завжди показувати плаваючу кнопку «Новий Допис»",
+    "hide_favorites_description": "Не показувати список моїх вподобань (люди все одно отримують сповіщення)",
+    "third_column_mode": "Коли достатньо місця, показувати третю колонку, що містить",
+    "user_popover_avatar_action_open": "Відкрити профіль",
+    "wordfilter": "Фільтр слів",
+    "mention_links": "Посилання для згадування",
+    "user_profiles": "Профілі користувачів",
+    "notification_visibility_polls": "Закінчення опитувань, в яких ви проголосували"
   },
   "selectable_list": {
     "select_all": "Вибрати все"
@@ -781,7 +842,23 @@
     "day": "{0} день",
     "seconds_short": "{0}с",
     "seconds": "{0} секунди",
-    "in_future": "через {0}"
+    "in_future": "через {0}",
+    "unit": {
+      "months": "{0} місяць | {0} місяців",
+      "minutes": "{0} хвилина | {0} хвилин",
+      "hours_short": "{0}год",
+      "minutes_short": "{0}хв",
+      "months_short": "{0}міс",
+      "seconds": "{0} секунда | {0} секунд",
+      "seconds_short": "{0}с",
+      "weeks_short": "{0}тижд",
+      "years": "{0} рік | {0} років",
+      "years_short": "{0}р.",
+      "days": "{0} день | {0} днів",
+      "days_short": "{0}д",
+      "hours": "{0} година | {0} годин",
+      "weeks": "{0} тиждень | {0} тижнів"
+    }
   },
   "search": {
     "no_results": "Немає результатів",
@@ -850,7 +927,9 @@
       "disabled": "Не виділяти"
     },
     "bot": "Бот",
-    "edit_profile": "Редагувати профіль"
+    "edit_profile": "Редагувати профіль",
+    "deactivated": "Деактивований",
+    "follow_cancel": "Скасувати запит"
   },
   "status": {
     "copy_link": "Скопіювати посилання на допис",
@@ -877,7 +956,16 @@
     "thread_muted": "Нитка заглушена",
     "unmute_conversation": "Припинити глушити розмову",
     "external_source": "Зовнішнє джерело",
-    "expand": "Розгорнути"
+    "expand": "Розгорнути",
+    "edit": "Редагувати допис",
+    "edited_at": "(змінено: {time})",
+    "thread_follow_with_icon": "{icon} {text}",
+    "ancestor_follow_with_icon": "{icon} {text}",
+    "show_all_conversation_with_icon": "{icon} {text}",
+    "plus_more": "+{number} більше",
+    "thread_show_full_with_icon": "{icon} {text}",
+    "show_only_conversation_under_this": "Показати всі відповіді на цей допис",
+    "status_history": "Історія змін"
   },
   "timeline": {
     "no_more_statuses": "Більше немає дописів",
@@ -913,6 +1001,30 @@
     "state": "Статус:",
     "state_open": "відкритий",
     "state_closed": "закритий",
-    "state_resolved": "вирішений"
+    "state_resolved": "вирішений",
+    "reported_statuses": "Дописи, на які подано скаргу:",
+    "reporter": "Позивач:",
+    "reported_user": "Відповідач:"
+  },
+  "announcements": {
+    "delete_action": "Видалити",
+    "page_header": "Анонси",
+    "title": "Анонси",
+    "mark_as_read_action": "Позначити як прочитане",
+    "post_form_header": "Розмістити оголошення",
+    "post_placeholder": "Введіть текст вашого оголошення тут...",
+    "post_action": "Пост",
+    "post_error": "Помилка: {error}",
+    "close_error": "Закрити",
+    "start_time_prompt": "Початок: ",
+    "end_time_prompt": "Кінець: ",
+    "all_day_prompt": "Це захід на цілий день",
+    "published_time_display": "Опубліковано в {time}",
+    "start_time_display": "Початок о {time}",
+    "end_time_display": "Кінець о {time}",
+    "edit_action": "Редагувати",
+    "submit_edit_action": "Надіслати",
+    "cancel_edit_action": "Скасувати",
+    "inactive_message": "Це оголошення неактивне"
   }
 }

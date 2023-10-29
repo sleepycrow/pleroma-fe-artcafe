@@ -26,7 +26,7 @@
 <script src="./chat_title.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .chat-title {
   display: flex;

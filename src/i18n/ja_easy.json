@@ -17,7 +17,17 @@
         "media_removal": "メディアをのぞく",
         "media_removal_desc": "このインスタンスは、これらのインスタンスからおくられてきたメディアを、とりのぞきます:",
         "media_nsfw": "メディアをすべてセンシティブにする",
-        "media_nsfw_desc": "このインスタンスは、これらのインスタンスからおくられてきたメディアを、すべて、センシティブにマークします:"
+        "media_nsfw_desc": "このインスタンスは、これらのインスタンスからおくられてきたメディアを、すべて、センシティブにマークします:",
+        "reason": "りゆう",
+        "instance": "インスタンス",
+        "not_applicable": "なし"
+      },
+      "keyword": {
+        "keyword_policies": "キーワードポリシー",
+        "reject": "おことわり",
+        "replace": "おきかえ",
+        "ftl_removal": "「つながっているすべてのネットワーク」タイムラインからのぞく",
+        "is_replaced_by": "→"
       }
     },
     "staff": "スタッフ"
@@ -36,7 +46,10 @@
     "scope_options": "こうかいはんいせんたく",
     "text_limit": "もじのかず",
     "title": "ゆうこうなきのう",
-    "who_to_follow": "おすすめユーザー"
+    "who_to_follow": "おすすめユーザー",
+    "pleroma_chat_messages": "Pleroma チャット",
+    "upload_limit": "アップロードできるファイルのおおきさ",
+    "shout": "Shoutbox"
   },
   "finder": {
     "error_fetching_user": "ユーザーけんさくがエラーになりました",
@@ -54,7 +67,34 @@
     "disable": "なし",
     "enable": "あり",
     "confirm": "たしかめる",
-    "verify": "たしかめる"
+    "verify": "たしかめる",
+    "retry": "もういちど、ためしてください",
+    "loading": "よみこんでいます…",
+    "undo": "もとにもどす",
+    "yes": "はい",
+    "no": "いいえ",
+    "unpin": "ピンどめするのをやめる",
+    "scroll_to_top": "いちばんうえにもどる",
+    "role": {
+      "moderator": "モデレーター",
+      "admin": "かんりするひと"
+    },
+    "flash_security": "Flash コンテンツはどんなコードでもじっこうできるので、あぶないかもしれません。",
+    "flash_fail": "Flash コンテンツをよみこむことに、しっぱいしました。コンソールで、くわしいないようを、よむことができます。",
+    "scope_in_timeline": {
+      "private": "フォロワーげんてい",
+      "public": "パブリック",
+      "unlisted": "アンリステッド",
+      "direct": "ダイレクト"
+    },
+    "pin": "ピンどめする",
+    "flash_content": "Flash コンテンツを、 Ruffle をつかってひょうじする (うごかないかもしれません)。",
+    "generic_error_message": "エラーになりました: {0}",
+    "error_retry": "もういちど、ためしてください",
+    "never_show_again": "にどとひょうじしない",
+    "close": "とじる",
+    "dismiss": "むしする",
+    "peek": "かくす"
   },
   "image_cropper": {
     "crop_picture": "がぞうをきりぬく",
@@ -83,11 +123,17 @@
     "heading": {
       "totp": "2-ファクターにんしょう",
       "recovery": "2-ファクターリカバリー"
-    }
+    },
+    "logout_confirm_title": "ログアウトのかくにん",
+    "logout_confirm": "ほんとうに、ログアウトしますか？",
+    "logout_confirm_accept_button": "ログアウトする",
+    "logout_confirm_cancel_button": "ログアウトしない"
   },
   "media_modal": {
     "previous": "まえ",
-    "next": "つぎ"
+    "next": "つぎ",
+    "counter": "{current} / {total}",
+    "hide": "メディアビューアーをとじる"
   },
   "nav": {
     "about": "これはなに？",
@@ -104,7 +150,20 @@
     "user_search": "ユーザーをさがす",
     "search": "さがす",
     "who_to_follow": "おすすめユーザー",
-    "preferences": "せってい"
+    "preferences": "せってい",
+    "home_timeline": "ホームタイムライン",
+    "bookmarks": "ブックマーク",
+    "timelines": "タイムライン",
+    "chats": "チャット",
+    "lists": "リスト",
+    "mobile_notifications": "つうちをひらく (よんでないものがあります)",
+    "mobile_notifications_close": "つうちをとじる",
+    "announcements": "おしらせ",
+    "edit_pinned": "ピンどめをへんしゅう",
+    "search_close": "けんさくバーをとじる",
+    "edit_nav_mobile": "ナビゲーションバーのせっていをかえる",
+    "mobile_sidebar": "モバイルのサイドバーをきりかえる",
+    "edit_finish": "へんしゅうをおわりにする"
   },
   "notifications": {
     "broken_favorite": "ステータスがみつかりません。さがしています…",
@@ -114,21 +173,29 @@
     "notifications": "つうち",
     "read": "よんだ！",
     "repeated_you": "あなたのステータスがリピートされました",
-    "no_more_notifications": "つうちはありません"
+    "no_more_notifications": "つうちはありません",
+    "error": "つうちをとりにいくことに、しっぱいしました: {0}",
+    "follow_request": "あなたをフォローしたいです",
+    "migrated_to": "インスタンスを、ひっこしました",
+    "reacted_with": "{0} でリアクションしました",
+    "poll_ended": "とうひょうが、おわりました",
+    "submitted_report": "つうほうしました"
   },
   "polls": {
-    "add_poll": "いれふだをはじめる",
+    "add_poll": "とうひょうをはじめる",
     "add_option": "オプションをふやす",
     "option": "オプション",
-    "votes": "いれふだ",
-    "vote": "ふだをいれる",
-    "type": "いれふだのかた",
+    "votes": "ひょう",
+    "vote": "とうひょうする",
+    "type": "とうひょうのけいしき",
     "single_choice": "ひとつえらぶ",
     "multiple_choices": "いくつでもえらべる",
-    "expiry": "いれふだのながさ",
-    "expires_in": "いれふだは {0} で、おわります",
-    "expired": "いれふだは {0} まえに、おわりました",
-    "not_enough_options": "ユニークなオプションが、たりません"
+    "expiry": "とうひょうのながさ",
+    "expires_in": "とうひょうは {0} で、おわります",
+    "expired": "とうひょうは {0} まえに、おわりました",
+    "not_enough_options": "ユニークなオプションが、たりません",
+    "people_voted_count": "{count} にんが、とうひょうしました",
+    "votes_count": "{count} ひょう"
   },
   "emoji": {
     "stickers": "ステッカー",
@@ -139,7 +206,19 @@
     "custom": "カスタムえもじ",
     "unicode": "ユニコードえもじ",
     "load_all_hint": "はじめの {saneAmount} このえもじだけがロードされています。すべてのえもじをロードすると、パフォーマンスがわるくなるかもしれません。",
-    "load_all": "すべてのえもじをロード ({emojiAmount} こあります)"
+    "load_all": "すべてのえもじをロード ({emojiAmount} こあります)",
+    "unicode_groups": {
+      "flags": "はた",
+      "activities": "かつどう",
+      "animals-and-nature": "どうぶつ・しぜん",
+      "food-and-drink": "たべもの・のみもの",
+      "objects": "もの",
+      "people-and-body": "ひと・からだ",
+      "smileys-and-emotion": "えがお・きもち",
+      "symbols": "きごう",
+      "travel-and-places": "りょこう・ばしょ"
+    },
+    "regional_indicator": "ばしょをしめすきごう {letter}"
   },
   "stickers": {
     "add_sticker": "ステッカーをふやす"
@@ -147,7 +226,10 @@
   "interactions": {
     "favs_repeats": "リピートとおきにいり",
     "follows": "あたらしいフォロー",
-    "load_older": "ふるいやりとりをみる"
+    "load_older": "ふるいやりとりをみる",
+    "emoji_reactions": "えもじリアクション",
+    "moves": "ユーザーのひっこし",
+    "reports": "つうほう"
   },
   "post_status": {
     "new_status": "とうこうする",
@@ -176,7 +258,18 @@
       "private": "フォロワーげんてい: フォロワーのみにとどきます",
       "public": "パブリック: パブリックタイムラインにとどきます",
       "unlisted": "アンリステッド: パブリックタイムラインにとどきません"
-    }
+    },
+    "media_description_error": "メディアのアップロードにしっぱいしました。もういちどためしてください",
+    "edit_status": "ステータスをへんしゅうする",
+    "media_description": "メディアのせつめい",
+    "content_type_selection": "とうこうのけいしき",
+    "edit_remote_warning": "ほかのリモートインスタンスは、へんしゅうをサポートしていないかもしれません。そして、へんしゅうされたとうこうをうけとることができないかもしれません。",
+    "post": "とうこう",
+    "edit_unsupported_warning": "Pleroma は、メンションやとうひょうのへんしゅうを、サポートしていません。",
+    "preview": "プレビュー",
+    "preview_empty": "なにもありません",
+    "empty_status_error": "とうこうないようを、にゅうりょくしてください",
+    "scope_notice_dismiss": "このつうちをとじる"
   },
   "registration": {
     "bio": "プロフィール",
@@ -196,8 +289,18 @@
       "email_required": "なにかかいてください",
       "password_required": "なにかかいてください",
       "password_confirmation_required": "なにかかいてください",
-      "password_confirmation_match": "パスワードがちがいます"
-    }
+      "password_confirmation_match": "パスワードがちがいます",
+      "birthday_required": "なにかかいてください",
+      "birthday_min_age": "{date} か、それよりまえにしてください"
+    },
+    "reason_placeholder": "このインスタンスでは、ひとがかくにんして、とうろくをうけいれています。\nなぜあなたがとうろくしたいのかを、かんりしているひとに、おしえてください。",
+    "bio_optional": "プロフィール (かかなくてもよい)",
+    "reason": "とうろくするりゆう",
+    "email_optional": "Eメール (かかなくてもよい)",
+    "register": "とうろくする",
+    "email_language": "サーバーからのメールは、なにご(どのことば)がいいですか？",
+    "birthday": "たんじょうび:",
+    "birthday_optional": "たんじょうび (かかなくてもよい):"
   },
   "remote_user_resolver": {
     "remote_user_resolver": "リモートユーザーリゾルバー",
@@ -393,7 +496,24 @@
         "save_load_hint": "「のこす」オプションをONにすると、テーマをえらんだときとロードしたとき、いまのせっていをのこします。また、テーマをエクスポートするとき、これらのオプションをストアします。すべてのチェックボックスをOFFにすると、テーマをエクスポートしたとき、すべてのせっていをセーブします。",
         "reset": "リセット",
         "clear_all": "すべてクリア",
-        "clear_opacity": "とうめいどをクリア"
+        "clear_opacity": "とうめいどをクリア",
+        "help": {
+          "older_version_imported": "ふるいバージョンのフロントエンドでつくられたファイルをインポートしました。",
+          "snapshot_missing": "ファイルにはテーマのスナップショットがありません。おもっていたみためと、ちがうかもしれません。",
+          "migration_snapshot_ok": "あんぜんのため、テーマのスナップショットがよみこまれました。テーマのデータをよみこむことができます。",
+          "snapshot_source_mismatch": "バージョンがただしくないです。フロントエンドのバージョンをもとにもどしたあと、あたらしくしたことが、りゆうかもしれません。ふるいフロントエンドでテーマをへんこうしていたばあい、ふるいバージョンをつかうのがいいです。そうでないばあい、あたらしいバージョンをつかってください。",
+          "snapshot_present": "テーマのスナップショットをよみこみました。せっていはうわがきされました。かわりに、テーマのじっさいのデータをよみこむことができます。",
+          "fe_upgraded": "フロントエンドといっしょに、テーマエンジンもあたらしくなりました。",
+          "fe_downgraded": "フロントエンドが、まえのバージョンにもどりました。",
+          "migration_napshot_gone": "スナップショットがありません。おぼえているみためと、ちがうかもしれません。",
+          "upgraded_from_v2": "PleromaFEがあたらしくなったので、いままでのみためとすこしちがうかもしれません。",
+          "v2_imported": "ふるいフロントエンドのためのファイルをインポートしました。せっていしたのとは、すこしちがうかもしれません。",
+          "future_version_imported": "あたらしいフロントエンドでつくられたファイルをインポートしました。"
+        },
+        "load_theme": "テーマをよみこむ",
+        "keep_as_is": "そのままにする",
+        "use_snapshot": "ふるいバージョン",
+        "use_source": "あたらしいバージョン"
       },
       "common": {
         "color": "いろ",
@@ -429,7 +549,26 @@
         "borders": "さかいめ",
         "buttons": "ボタン",
         "inputs": "インプットフィールド",
-        "faint_text": "うすいテキスト"
+        "faint_text": "うすいテキスト",
+        "post": "とうこう / プロフィール",
+        "wallpaper": "かべがみ",
+        "icons": "アイコン",
+        "highlight": "よくみえるようにした、ようそ",
+        "pressed": "おしたとき",
+        "chat": {
+          "border": "さかいめ",
+          "incoming": "うけとったもの",
+          "outgoing": "おくったもの"
+        },
+        "underlay": "アンダーレイ",
+        "alert_neutral": "それいがい",
+        "popover": "ツールチップ、メニュー、ポップオーバー",
+        "poll": "とうひょうのグラフ",
+        "selectedPost": "えらんだとうこう",
+        "selectedMenu": "えらんだメニューアイテム",
+        "disabled": "つかえないとき",
+        "toggled": "きりかえたとき",
+        "tabs": "タブ"
       },
       "radii": {
         "_tab_label": "まるさ"
@@ -462,7 +601,8 @@
           "buttonPressed": "ボタン (おされているとき)",
           "buttonPressedHover": "ボタン (ホバー、かつ、おされているとき)",
           "input": "インプットフィールド"
-        }
+        },
+        "hintV3": "かげのばあいは、 {0} というかきかたをつかうことができます。そうすると、ほかのいろのスロットをつかうことができます。"
       },
       "fonts": {
         "_tab_label": "フォント",
@@ -497,7 +637,167 @@
       "title": "バージョン",
       "backend_version": "バックエンドのバージョン",
       "frontend_version": "フロントエンドのバージョン"
-    }
+    },
+    "notification_visibility_polls": "あなたがさんかしたとうひょうが、おわりました",
+    "setting_server_side": "このせっていは、あなたのプロフィールについてのものです。へんこうすると、すべてのセッションとクライアントにえいきょうします",
+    "mute_import_error": "ミュートのインポートが、エラーになりました",
+    "account_backup_description": "あなたのアカウントじょうほうや、とうこうのアーカイブを、ダウンロードすることができます。しかし、 Pleroma アカウントにインポートすることはまだできません。",
+    "list_backups_error": "バックアップリストをとりにいくことが、エラーになりました: {error}",
+    "list_aliases_error": "エイリアスをとりにいくときに、エラーになりました: {error}",
+    "added_alias": "エイリアスをつくりました。",
+    "move_account_notes": "もしあなたがアカウントをほかのインスタンスにひっこしたいのなら、ひっこすさきのアカウントからここへのエイリアスをつくってください。",
+    "file_export_import": {
+      "backup_settings_theme": "せっていとテーマをファイルにバックアップする",
+      "restore_settings": "ファイルからせっていをもとにもどす",
+      "errors": {
+        "file_too_new": "メジャーバージョン({fileMajor})がちがいます。この PleromaFE (せっていのバージョン {feMajor}) はふるいので、つかうことができません",
+        "file_slightly_new": "ファイルのマイナーバージョンがちがっています。いくつかのせっていは、よみこまれないかもしれません",
+        "invalid_file": "これは Pleroma のせっていをバックアップしたファイルではありません。",
+        "file_too_old": "メジャーバージョン({fileMajor})がちがいます。ファイルのバージョンが古いので、使うことができません(バージョン {feMajor} いじょうのせっていバージョンをつかってください)"
+      },
+      "backup_settings": "せっていをファイルにバックアップする",
+      "backup_restore": "せっていのバックアップ"
+    },
+    "hide_wallpaper": "このインスタンスのバックグラウンドをかくす",
+    "reply_visibility_following_short": "わたしのフォローしているひとにあてられたリプライをみる",
+    "reply_visibility_self_short": "じぶんにあてられたリプライだけをみる",
+    "save": "へんこうをほぞんする",
+    "reset_banner_confirm": "ほんとうに、バナーをリセットしますか？",
+    "tree_advanced": "ツリービューで、ナビゲーションをもっとじゅうなんにする",
+    "third_column_mode": "じゅうぶんなくうかんがあれば、3ばんめのれつをひょうじする",
+    "conversation_other_replies_button": "「ほかのリプライ」ボタンをひょうじするばしょ",
+    "user_popover_avatar_action_open": "プロフィールをひらく",
+    "notification_setting_filters": "フィルター",
+    "notification_setting_hide_notification_contents": "おくったひとと、ないようを、プッシュつうちにひょうじしない",
+    "backup_running": "バックアップしています。{number}このデータをしょりしました。",
+    "word_filter_and_more": "ことばのフィルターと、そのほか…",
+    "account_privacy": "プライバシー",
+    "posts": "とうこう",
+    "move_account": "アカウントをひっこす",
+    "move_account_target": "ひっこしさきのアカウント (れい: {example})",
+    "mute_bot_posts": "Bot のとうこうをミュートする",
+    "hide_bot_indication": "Bot によるとうこうであることを、とうこうにひょうじしない",
+    "hide_all_muted_posts": "ミュートしたとうこうをかくす",
+    "hide_shoutbox": "Shoutbox をかくす",
+    "conversation_display_tree": "ツリーけいしき",
+    "mention_link_display_full_for_remote": "リモートユーザーだけ、ながいなまえでひょうじする (れい: {'@'}hoge{'@'}example.org)",
+    "mention_link_bolden_you": "あなたがメンションされたとき、あなたへのメンションを、よくみえるようにする",
+    "user_popover_avatar_action": "ポップオーバーのアバターをクリックしたとき",
+    "user_popover_avatar_action_zoom": "アバターをおおきくする",
+    "user_popover_avatar_action_close": "ポップオーバーをとじる",
+    "always_show_post_button": "とうこうボタンをいつもひょうじする",
+    "auto_update": "あたらしいとうこうを、じどうてきにみせる",
+    "user_mutes": "ユーザー",
+    "useStreamingApi": "とうこうとつうちを、リアルタイムにうけとる",
+    "use_websockets": "Websockets をつかう (リアルタイムアップデート)",
+    "mutes_and_blocks": "ミュートとブロック",
+    "emoji_reactions_on_timeline": "えもじリアクションをタイムラインにひょうじする",
+    "accent": "アクセント",
+    "domain_mutes": "ドメイン",
+    "import_mutes_from_a_csv_file": "CSVファイルからミュートをインポートする",
+    "reset_avatar": "アバターをリセットする",
+    "remove_language": "とりのぞく",
+    "primary_language": "いちばんわかることば:",
+    "add_language": "よびとしてつかうことばを、ついかする",
+    "fallback_language": "よびとしてつかうことば {index}:",
+    "lists_navigation": "ナビゲーションにリストをひょうじする",
+    "account_alias": "アカウントのエイリアス",
+    "mention_link_display_full": "いつも、ながいなまえをひょうじする (れい: {'@'}hoge{'@'}example.org)",
+    "setting_changed": "せっていは、デフォルトとちがっています",
+    "email_language": "サーバーからうけとるEメールのことば",
+    "mute_export": "ミュートのエクスポート",
+    "mute_export_button": "あなたのミュートを、 CSV ファイルにエクスポートします",
+    "mute_import": "ミュートのインポート",
+    "mutes_imported": "ミュートをインポートしました！すこしじかんがかかるかもしれません。",
+    "account_backup": "アカウントのバックアップ",
+    "account_backup_table_head": "バックアップ",
+    "download_backup": "ダウンロード",
+    "backup_not_ready": "バックアップのじゅんびが、まだできていません。",
+    "backup_failed": "バックアップにしっぱいしました。",
+    "remove_backup": "とりのぞく",
+    "add_backup": "あたらしいバックアップをつくる",
+    "added_backup": "あたらしいバックアップをつくりました。",
+    "add_backup_error": "あたらしいバックアップをつくるときに、エラーになりました: {error}",
+    "bot": "これは bot アカウントです",
+    "account_alias_table_head": "エイリアス",
+    "hide_list_aliases_error_action": "とじる",
+    "remove_alias": "このエイリアスをけす",
+    "add_alias_error": "エイリアスをつくるときに、エラーになりました: {error}",
+    "new_alias_target": "あたらしいエイリアスをつくる (れい: {example})",
+    "moved_account": "アカウントをひっこしました。",
+    "move_account_error": "アカウントをひっこしているときに、エラーになりました: {error}",
+    "wordfilter": "ことばのフィルター",
+    "hide_media_previews": "メディアのプレビューをかくす",
+    "right_sidebar": "サイドバーをみぎにひょうじする",
+    "hide_wordfiltered_statuses": "ことばのフィルターでフィルターされたステータスをかくす",
+    "hide_muted_threads": "ミュートされたスレッドをかくす",
+    "navbar_column_stretch": "ナビゲーションバーをれつのはばまでのばす",
+    "birthday": {
+      "label": "たんじょうび",
+      "show_birthday": "たんじょうびを、ひょうじする"
+    },
+    "profile_fields": {
+      "label": "プロフィールのメタデータ",
+      "add_field": "フィールドをふやす",
+      "name": "ラベル",
+      "value": "ないよう"
+    },
+    "user_profiles": "ユーザープロフィール",
+    "notification_visibility_moves": "ユーザーのひっこし",
+    "notification_visibility_emoji_reactions": "リアクション",
+    "hide_favorites_description": "おきにいりのリストをみせない (つうちはおくられます)",
+    "reset_profile_background": "プロフィールバックグラウンドをリセットする",
+    "reset_profile_banner": "プロフィールバナーをリセットする",
+    "reset_avatar_confirm": "ほんとうに、アバターをリセットしますか？",
+    "reset_background_confirm": "ほんとうに、バックグラウンドをリセットしますか？",
+    "column_sizes_sidebar": "サイドバー",
+    "column_sizes_notifs": "つうち",
+    "columns": "れつ",
+    "column_sizes": "れつのおおきさ",
+    "column_sizes_content": "コンテンツ",
+    "conversation_display": "スレッドのひょうじけいしき",
+    "conversation_display_linear": "リニアけいしき",
+    "conversation_display_linear_quick": "リニアビュー",
+    "show_scrollbars": "よこのれつにスクロールバーをひょうじする",
+    "third_column_mode_none": "3ばんめのれつをひょうじしない",
+    "third_column_mode_postform": "とうこうフォームとナビゲーション",
+    "third_column_mode_notifications": "つうちのれつをひょうじする",
+    "tree_fade_ancestors": "げんざいのステータスのおやを、うすいいろのもじでひょうじする",
+    "conversation_other_replies_button_below": "ステータスのした",
+    "conversation_other_replies_button_inside": "ステータスのなか",
+    "max_depth_in_thread": "デフォルトでひょうじするスレッドのふかさ",
+    "sensitive_by_default": "デフォルトで、とうこうをNSFWにする",
+    "type_domains_to_mute": "ミュートしたいドメインを、ここでけんさくできます",
+    "mention_link_use_tooltip": "メンションのリンクをクリックしたとき、ユーザーカードをみせる",
+    "mention_link_show_avatar": "ユーザーのアバターをリンクのよこにひょうじする",
+    "mention_link_show_avatar_quick": "ユーザーのアバターをメンションのとなりにひょうじする",
+    "mention_link_fade_domain": "ドメイン(れい: {'@'}hoge{'@'}example.org のなかの {'@'}example.org)を、うすいいろにする",
+    "user_popover_avatar_overlay": "ユーザーのポップオーバーを、ユーザーのアバターのうえにひょうじする",
+    "show_yous": "(あなた)をひょうじする",
+    "notification_setting_block_from_strangers": "フォローしていないユーザーからのつうちをブロックする",
+    "notification_setting_privacy": "プライバシー",
+    "more_settings": "そのたのせってい",
+    "expert_mode": "くわしいせっていを、ひょうじする",
+    "mention_links": "メンションのリンク",
+    "post_look_feel": "とうこうのみためとかんかく",
+    "allow_following_move": "フォローしているアカウントがインスタンスをひっこしたばあい、じどうでフォローしてもよい",
+    "chatMessageRadius": "チャットメッセージ",
+    "confirm_dialogs": "つぎのばあいに、かくにんをする",
+    "confirm_dialogs_repeat": "ステータスをリピートするとき",
+    "confirm_dialogs_unfollow": "ユーザーのフォローをはずすとき",
+    "confirm_dialogs_block": "ユーザーをブロックするとき",
+    "confirm_dialogs_mute": "ユーザーをミュートするとき",
+    "confirm_dialogs_delete": "ステータスをけすとき",
+    "confirm_dialogs_logout": "ログアウトするとき",
+    "confirm_dialogs_approve_follow": "フォローをうけいれるとき",
+    "confirm_dialogs_deny_follow": "フォローをことわるとき",
+    "confirm_dialogs_remove_follower": "フォロワーをとりのぞくとき",
+    "conversation_display_tree_quick": "ツリービュー",
+    "disable_sticky_headers": "れつのヘッダーを、がめんのいちばんうえにこていしない",
+    "virtual_scrolling": "タイムラインのレンダリングをよくする",
+    "use_at_icon": "{'@'} きごうを、もじのかわりに、アイコンでひょうじする",
+    "mention_link_display_short": "いつも、みじかいなまえにする (れい: {'@'}hoge)",
+    "mention_link_display": "メンションのリンクをひょうじするけいしき"
   },
   "time": {
     "day": "{0}日",
@@ -531,7 +831,23 @@
     "year": "{0}年",
     "years": "{0}年",
     "year_short": "{0}年",
-    "years_short": "{0}年"
+    "years_short": "{0}年",
+    "unit": {
+      "minutes": "{0}ふん",
+      "seconds_short": "{0}びょう",
+      "weeks": "{0}しゅうかん",
+      "weeks_short": "{0}しゅう",
+      "years": "{0}ねん",
+      "years_short": "{0}ねん",
+      "days": "{0}にち",
+      "days_short": "{0}にち",
+      "hours": "{0}じかん",
+      "hours_short": "{0}じかん",
+      "minutes_short": "{0}ふん",
+      "months": "{0}かげつ",
+      "months_short": "{0}かげつ",
+      "seconds": "{0}びょう"
+    }
   },
   "timeline": {
     "collapse": "たたむ",
@@ -543,7 +859,11 @@
     "show_new": "よみこみ",
     "up_to_date": "さいしん",
     "no_more_statuses": "これでおわりです",
-    "no_statuses": "ありません"
+    "no_statuses": "ありません",
+    "socket_broke": "コード{0}により、リアルタイムでつながることがなくなりました",
+    "socket_reconnected": "リアルタイムでつながることを、つくりました",
+    "reload": "もういちど、よみこむ",
+    "error": "タイムラインをとりにいくときに、エラーになりました: {0}"
   },
   "status": {
     "favorites": "おきにいり",
@@ -556,7 +876,57 @@
     "reply_to": "へんしん:",
     "replies_list": "へんしん:",
     "mute_conversation": "スレッドをミュートする",
-    "unmute_conversation": "スレッドをミュートするのをやめる"
+    "unmute_conversation": "スレッドをミュートするのをやめる",
+    "repeat_confirm_title": "リピートのかくにん",
+    "mentions": "メンション",
+    "thread_muted": "ミュートされたスレッド",
+    "collapse_attachments": "ファイルをかくす",
+    "remove_attachment": "ファイルをとりのぞく",
+    "thread_show_full": "このスレッドのすべてのとうこうをみる (ぜんぶで{numStatus}このステータス、ふかさ{depth})",
+    "show_all_attachments": "すべてのファイルをみる",
+    "hide_full_subject": "かくす",
+    "nsfw": "NSFW",
+    "hide_content": "かくす",
+    "status_deleted": "このとうこうは、けされました",
+    "you": "(あなた)",
+    "expand": "ひろげる",
+    "repeat_confirm_accept_button": "リピートする",
+    "repeat_confirm_cancel_button": "リピートしない",
+    "edited_at": "({time} まえにへんしゅう)",
+    "delete_confirm_title": "けすことのかくにん",
+    "delete_confirm_accept_button": "けす",
+    "delete_confirm_cancel_button": "のこす",
+    "edit": "ステータスをへんしゅうする",
+    "bookmark": "ブックマークする",
+    "unbookmark": "ブックマークをはずす",
+    "replies_list_with_others": "へんしん (ほかに +{numReplies}こ):",
+    "status_unavailable": "ステータスがありません",
+    "copy_link": "リンクをコピー",
+    "external_source": "そとにあるソース",
+    "thread_muted_and_words": "つぎのことばをふくむので:",
+    "show_content": "みる",
+    "plus_more": "あと {number}こ",
+    "many_attachments": "とうこうには、{number}このファイルがついています",
+    "show_attachment_in_modal": "メディアモーダルでみる",
+    "show_attachment_description": "せつめいのプレビュー (ぜんぶみるには、ファイルをひらいてください)",
+    "hide_attachment": "ファイルをかくす",
+    "attachment_stop_flash": "Flash プレーヤーをとめる",
+    "move_up": "ファイルをひだりにうごかす",
+    "move_down": "ファイルをみぎにうごかす",
+    "open_gallery": "ギャラリーをひらく",
+    "thread_hide": "スレッドをかくす",
+    "thread_show": "スレッドをみる",
+    "show_full_subject": "すべてをみる",
+    "repeat_confirm": "ほんとうに、このステータスをリピートしますか？",
+    "show_all_conversation": "このスレッドをぜんぶみる (あと {numStatus}このステータス)",
+    "show_only_conversation_under_this": "このステータスへのへんしんだけをみる",
+    "status_history": "ステータスのれきし",
+    "thread_show_full_with_icon": "{icon} {text}",
+    "thread_follow": "のこりのとうこうをみる (ぜんぶで {numStatus}このステータス)",
+    "thread_follow_with_icon": "{icon} {text}",
+    "ancestor_follow": "このステータスよりしたの、{numReplies}このへんしんをみる",
+    "ancestor_follow_with_icon": "{icon} {text}",
+    "show_all_conversation_with_icon": "{icon} {text}"
   },
   "user_card": {
     "approve": "うけいれ",
@@ -577,7 +947,7 @@
     "media": "メディア",
     "mention": "メンション",
     "mute": "ミュート",
-    "muted": "ミュートしています！",
+    "muted": "ミュートしています",
     "per_day": "/日",
     "remote_follow": "リモートフォロー",
     "report": "つうほう",
@@ -608,8 +978,52 @@
       "disable_remote_subscription": "ほかのインスタンスからフォローされないようにする",
       "disable_any_subscription": "フォローされないようにする",
       "quarantine": "ほかのインスタンスのユーザーのとうこうをとめる",
-      "delete_user": "ユーザーをけす"
-    }
+      "delete_user": "ユーザーをけす",
+      "delete_user_data_and_deactivate_confirmation": "これをすると、このアカウントのデータがきえて、にどとつかえなくなります。ほんとうに、していいですか？"
+    },
+    "mute_confirm_accept_button": "ミュートする",
+    "unfollow_confirm_title": "フォローをやめることのかくにん",
+    "mute_confirm": "ほんとうに、 {user} をミュートしますか？",
+    "mute_duration_prompt": "このユーザーをつぎのじかんだけミュートする (0にすると、おわりがありません):",
+    "edit_note_apply": "てきよう",
+    "block_confirm": "ほんとうに、 {user} をブロックしますか？",
+    "deactivated": "つかえない",
+    "remove_follower": "フォロワーをとりのぞく",
+    "highlight": {
+      "solid": "バッググラウンドをひとつのいろにする",
+      "striped": "しまもようのバックグラウンドにする",
+      "side": "はじにせんをつける",
+      "disabled": "めだたせない"
+    },
+    "mute_confirm_cancel_button": "ミュートしない",
+    "unfollow_confirm_accept_button": "フォローをやめる",
+    "unfollow_confirm": "ほんとうに、 {user} のフォローをやめますか？",
+    "unfollow_confirm_cancel_button": "フォローしたままにする",
+    "mute_confirm_title": "ミュートのかくにん",
+    "block_confirm_accept_button": "ブロックする",
+    "block_confirm_cancel_button": "ブロックしない",
+    "deny_confirm_title": "おことわりのかくにん",
+    "deny_confirm_accept_button": "ことわる",
+    "deny_confirm_cancel_button": "ことわらない",
+    "deny_confirm": "{user} のフォローリクエストをことわりますか？",
+    "follow_cancel": "リクエストをキャンセル",
+    "birthday": "{birthday} に、うまれました",
+    "remove_follower_confirm_title": "フォロワーをとりのぞくことのかくにん",
+    "remove_follower_confirm_accept_button": "とりのぞく",
+    "remove_follower_confirm_cancel_button": "のこす",
+    "remove_follower_confirm": "ほんとうに、 {user} をあなたのフォロワーからとりのぞきますか？",
+    "edit_note": "メモをへんしゅうする",
+    "edit_note_cancel": "キャンセル",
+    "message": "メッセージ",
+    "bot": "bot",
+    "approve_confirm_title": "うけいれのかくにん",
+    "approve_confirm_accept_button": "うけいれる",
+    "approve_confirm_cancel_button": "うけいれない",
+    "approve_confirm": "{user} のフォローリクエストをうけいれますか？",
+    "edit_profile": "プロフィールをへんしゅう",
+    "block_confirm_title": "ブロックのかくにん",
+    "note_blank": "(なし)",
+    "note": "メモ"
   },
   "user_profile": {
     "timeline_title": "ユーザータイムライン",
@@ -634,13 +1048,21 @@
     "repeat": "リピート",
     "reply": "リプライ",
     "favorite": "おきにいり",
-    "user_settings": "ユーザーせってい"
+    "user_settings": "ユーザーせってい",
+    "accept_follow_request": "フォローのおねがいを、うけいれる",
+    "toggle_mute": "ミュートされたないようをみるために、つうちをひらくか、とじる",
+    "autocomplete_available": "{number}このけっかが、あります。うえとしたのキーをつかって、けっかをみることができます。",
+    "add_reaction": "リアクションをつける",
+    "reject_follow_request": "フォローのおねがいを、ことわる",
+    "bookmark": "ブックマーク",
+    "toggle_expand": "とうこうをすべてみるために、つうちをひらくか、とじる"
   },
   "upload": {
     "error": {
       "base": "アップロードにしっぱいしました。",
       "file_too_big": "ファイルがおおきすぎます [{filesize} {filesizeunit} / {allowedsize} {allowedsizeunit}]",
-      "default": "しばらくしてから、ためしてください"
+      "default": "しばらくしてから、ためしてください",
+      "message": "アップロードにしっぱいしました: {0}"
     },
     "file_size_units": {
       "B": "B",
@@ -655,7 +1077,9 @@
     "hashtags": "ハッシュタグ",
     "person_talking": "{count} にんが、はなしています",
     "people_talking": "{count} にんが、はなしています",
-    "no_results": "みつかりませんでした"
+    "no_results": "みつかりませんでした",
+    "no_more_results": "これでおわりです",
+    "load_more": "もっとみる"
   },
   "password_reset": {
     "forgot_password": "パスワードを、わすれましたか？",
@@ -668,5 +1092,103 @@
     "password_reset_disabled": "このインスタンスでは、パスワードリセットは、できません。インスタンスのアドミニストレーターに、おといあわせください。",
     "password_reset_required": "ログインするには、パスワードをリセットしてください。",
     "password_reset_required_but_mailer_is_disabled": "あなたはパスワードのリセットがひつようです。しかし、まずいことに、このインスタンスでは、パスワードのリセットができなくなっています。このインスタンスのアドミニストレーターに、おといあわせください。"
+  },
+  "announcements": {
+    "post_placeholder": "おしらせのないようを、にゅうりょくしてください。",
+    "end_time_prompt": "おわるじかん: ",
+    "inactive_message": "このおしらせは、つかわれていません",
+    "page_header": "おしらせ",
+    "title": "おしらせ",
+    "post_action": "とうこう",
+    "post_form_header": "おしらせをとうこう",
+    "mark_as_read_action": "よんだことにする",
+    "post_error": "エラー: {error}",
+    "close_error": "とじる",
+    "delete_action": "けす",
+    "start_time_display": "{time}にはじまります",
+    "end_time_display": "{time}におわります",
+    "edit_action": "へんしゅう",
+    "start_time_prompt": "はじまるじかん: ",
+    "all_day_prompt": "このイベントはいちにちじゅうやります",
+    "published_time_display": "{time}にこうかいされました",
+    "submit_edit_action": "そうしん",
+    "cancel_edit_action": "キャンセル"
+  },
+  "report": {
+    "reported_statuses": "つうほうされたステータス:",
+    "reporter": "つうほうしたひと:",
+    "state_closed": "クローズ",
+    "state_resolved": "かいけつしました",
+    "reported_user": "つうほうされたユーザー:",
+    "notes": "メモ:",
+    "state": "じょうたい:",
+    "state_open": "オープン"
+  },
+  "update": {
+    "update_bugs": "もんだいや、バグがあれば、 {pleromaGitlab} でおしえてください。ちゃんとテストはしているのですが、たくさんのことをかえているので、そしてかいはつバージョンをつかっているので、もんだいやバグに、きづかないことがあります。あなたがきづいたもんだいについての、フィードバックやていあんを、まっています。 Pleroma や Pleroma-FE をよくするやりかたについても、おしえてください。",
+    "update_changelog_here": "すべてのかわったことのきろく",
+    "art_by": "{linkToArtist}によるさくひん",
+    "big_update_title": "すこし、まってください",
+    "big_update_content": "しばらくリリースがありませんでした。おもっていたみためと、ちがうかもしれません。",
+    "update_bugs_gitlab": "Pleroma GitLab",
+    "update_changelog": "かわったことをすべてみるには、{theFullChangelog}をみてください。"
+  },
+  "chats": {
+    "new": "あたらしいチャット",
+    "chats": "チャット",
+    "you": "あなた:",
+    "message_user": "{nickname} にメッセージ",
+    "delete": "けす",
+    "empty_message_error": "なにかかいてください",
+    "more": "もっとみる",
+    "delete_confirm": "ほんとうに、このメッセージをけしますか？",
+    "error_loading_chat": "チャットをよみこむことに、しっぱいしました。",
+    "error_sending_message": "メッセージをおくることに、しっぱいしました。",
+    "empty_chat_list_placeholder": "チャットがありません。あたらしいチャットボタンをおして、はじめてください！"
+  },
+  "shoutbox": {
+    "title": "Shoutbox"
+  },
+  "errors": {
+    "storage_unavailable": "Pleroma はブラウザーのストレージにアクセスすることができません。あなたがログインしたことと、あなたのローカルのせっていは、ほぞんされません。ほかにももんだいがおきるかもしれません。 Cookie をゆうこうにしてください。"
+  },
+  "lists": {
+    "lists": "リスト",
+    "new": "あたらしいリスト",
+    "search": "ユーザーをさがす",
+    "title": "リストのなまえ",
+    "create": "つくる",
+    "save": "へんこうをほぞんする",
+    "delete": "リストをけす",
+    "following_only": "フォローしているひとげんていにする",
+    "manage_lists": "リストをかんりする",
+    "manage_members": "リストにふくまれるひとを、かんりする",
+    "add_members": "もっとユーザーをさがす",
+    "remove_from_list": "リストからとりのぞく",
+    "add_to_list": "リストにいれる",
+    "editing_list": "リスト {listTitle} をへんしゅうしています",
+    "creating_list": "あたらしいリストをつくっています",
+    "update_title": "なまえをほぞんする",
+    "really_delete": "ほんとうに、リストをけしますか？",
+    "is_in_list": "すでにリストのなかにあります",
+    "error": "リストをへんしゅうするときに、エラーになりました: {0}"
+  },
+  "file_type": {
+    "audio": "オーディオ",
+    "video": "ビデオ",
+    "image": "がぞう",
+    "file": "ファイル"
+  },
+  "display_date": {
+    "today": "きょう"
+  },
+  "unicode_domain_indicator": {
+    "tooltip": "このドメインは、ASCIIいがいのもじをふくんでいます。"
+  },
+  "domain_mute_card": {
+    "mute": "ミュート",
+    "mute_progress": "ミュートしています…",
+    "unmute": "ミュートをやめる",
+    "unmute_progress": "ミュートをやめています…"
   }
 }

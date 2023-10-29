@@ -24,7 +24,7 @@
 <script src="./autosuggest.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .autosuggest {
   position: relative;
@@ -50,7 +50,7 @@
     border-radius: var(--inputRadius, $fallback--inputRadius);
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: 1px 1px 4px rgb(0 0 0 / 60%);
     box-shadow: var(--panelShadow);
     overflow-y: auto;
     z-index: 1;

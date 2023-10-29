@@ -1,7 +1,7 @@
 <template>
   <span
-    v-if="serverSide"
-    class="ServerSideIndicator"
+    v-if="isProfile"
+    class="ProfileSettingIndicator"
   >
     <Popover
       trigger="hover"
@@ -14,7 +14,7 @@
         />
       </template>
       <template #content>
-        <div class="serverside-tooltip">
+        <div class="profilesetting-tooltip">
           {{ $t('settings.setting_server_side') }}
         </div>
       </template>
@@ -33,17 +33,17 @@ library.add(
 
 export default {
   components: { Popover },
-  props: ['serverSide']
+  props: ['isProfile']
 }
 </script>
 
 <style lang="scss">
-.ServerSideIndicator {
+.ProfileSettingIndicator {
   display: inline-block;
   position: relative;
 }
 
-.serverside-tooltip {
+.profilesetting-tooltip {
   margin: 0.5em 1em;
   min-width: 10em;
   text-align: center;

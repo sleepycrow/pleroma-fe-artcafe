@@ -164,7 +164,7 @@
 <script src="./lists_edit.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .ListEdit {
   --panel-body-padding: 0.5em;

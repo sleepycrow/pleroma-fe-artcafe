@@ -8,6 +8,27 @@ import HashtagLink from 'src/components/hashtag_link/hashtag_link.vue'
 
 import './rich_content.scss'
 
+const MAYBE_LINE_BREAKING_ELEMENTS = [
+  'blockquote',
+  'br',
+  'hr',
+  'ul',
+  'ol',
+  'li',
+  'p',
+  'table',
+  'tbody',
+  'td',
+  'th',
+  'thead',
+  'tr',
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5'
+]
+
 /**
  * RichContent, The Über-powered component for rendering Post HTML.
  *
@@ -166,25 +187,22 @@ export default {
               !(children && typeof children[0] === 'string' && children[0].match(/^\s/))
                 ? lastSpacing
                 : ''
-        switch (Tag) {
-          case 'br':
+        if (MAYBE_LINE_BREAKING_ELEMENTS.includes(Tag)) {
+          // all the elements that can cause a line change
+          currentMentions = null
+        } else if (Tag === 'img') { // replace images with StillImage
+          return ['', [mentionsLinePadding, renderImage(opener)], '']
+        } else if (Tag === 'a' && this.handleLinks) { // replace mentions with MentionLink
+          if (fullAttrs.class && fullAttrs.class.includes('mention')) {
+            // Handling mentions here
+            return renderMention(attrs, children)
+          } else {
             currentMentions = null
-            break
-          case 'img': // replace images with StillImage
-            return ['', [mentionsLinePadding, renderImage(opener)], '']
-          case 'a': // replace mentions with MentionLink
-            if (!this.handleLinks) break
-            if (fullAttrs.class && fullAttrs.class.includes('mention')) {
-              // Handling mentions here
-              return renderMention(attrs, children)
-            } else {
-              currentMentions = null
-              break
-            }
-          case 'span':
-            if (this.handleLinks && fullAttrs.class && fullAttrs.class.includes('h-card')) {
-              return ['', children.map(processItem), '']
-            }
+          }
+        } else if (Tag === 'span') {
+          if (this.handleLinks && fullAttrs.class && fullAttrs.class.includes('h-card')) {
+            return ['', children.map(processItem), '']
+          }
         }
 
         if (children !== undefined) {

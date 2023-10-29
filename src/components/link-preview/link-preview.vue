@@ -33,7 +33,7 @@
 <script src="./link-preview.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .link-preview-card {
   display: flex;
@@ -46,6 +46,7 @@
     flex-shrink: 0;
     width: 120px;
     max-width: 25%;
+
     img {
       width: 100%;
       height: 100%;
@@ -67,7 +68,7 @@
   }
 
   .card-description {
-    margin: 0.5em 0 0 0;
+    margin: 0.5em 0 0;
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-word;

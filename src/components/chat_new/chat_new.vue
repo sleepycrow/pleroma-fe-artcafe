@@ -46,6 +46,6 @@
 
 <script src="./chat_new.js"></script>
 <style lang="scss">
-@import '../../_variables.scss';
-@import './chat_new.scss';
+@import "../../variables";
+@import "./chat_new";
 </style>

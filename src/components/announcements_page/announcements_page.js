@@ -28,6 +28,9 @@ const AnnouncementsPage = {
     }),
     announcements () {
       return this.$store.state.announcements.announcements
+    },
+    canPostAnnouncement () {
+      return this.currentUser && this.currentUser.privileges.includes('announcements_manage_announcements')
     }
   },
   methods: {

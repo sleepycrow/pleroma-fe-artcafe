@@ -169,6 +169,40 @@
 
             <div
               class="form-group"
+              :class="{ 'form-group--error': v$.user.birthday.$error }"
+            >
+              <label
+                class="form--label"
+                for="sign-up-birthday"
+              >
+                {{ birthdayRequired ? $t('registration.birthday') : $t('registration.birthday_optional') }}
+              </label>
+              <input
+                id="sign-up-birthday"
+                v-model="user.birthday"
+                :disabled="isPending"
+                class="form-control"
+                type="date"
+                :max="birthdayRequired ? birthdayMinAttr : undefined"
+                :aria-required="birthdayRequired"
+              >
+            </div>
+            <div
+              v-if="v$.user.birthday.$dirty"
+              class="form-error"
+            >
+              <ul>
+                <li v-if="v$.user.birthday.required.$invalid">
+                  <span>{{ $t('registration.validations.birthday_required') }}</span>
+                </li>
+                <li v-if="v$.user.birthday.maxValue.$invalid">
+                  <span>{{ $tc('registration.validations.birthday_min_age', { date: birthdayMinFormatted }) }}</span>
+                </li>
+              </ul>
+            </div>
+
+            <div
+              class="form-group"
               :class="{ 'form-group--error': v$.user.language.$error }"
             >
               <interface-language-switcher
@@ -176,6 +210,7 @@
                 :prompt-text="$t('registration.email_language')"
                 :language="v$.user.language.$model"
                 :set-language="val => v$.user.language.$model = val"
+                @click.stop.prevent
               />
             </div>
 
@@ -277,7 +312,7 @@
 
 <script src="./registration.js"></script>
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 $validations-cRed: #f04124;
 
 .registration-form {
@@ -321,7 +356,7 @@ $validations-cRed: #f04124;
 
   .form-group--error {
     animation-name: shakeError;
-    animation-duration: .6s;
+    animation-duration: 0.6s;
     animation-timing-function: ease-in-out;
   }
 
@@ -350,7 +385,7 @@ $validations-cRed: #f04124;
   }
 
   form textarea {
-    line-height:16px;
+    line-height: 16px;
     resize: vertical;
   }
 

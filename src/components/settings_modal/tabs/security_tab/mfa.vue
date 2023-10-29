@@ -137,9 +137,11 @@
 
 <script src="./mfa.js"></script>
 <style lang="scss">
-@import '../../../../_variables.scss';
+@import "../../../../variables";
+
 .mfa-settings {
-  .mfa-heading, .method-item {
+  .mfa-heading,
+  .method-item {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -155,18 +157,19 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+
     .qr-code {
       flex: 1;
       padding-right: 10px;
     }
     .verify { flex: 1; }
-    .error { margin: 4px 0 0 0; }
+    .error { margin: 4px 0 0; }
+
     .confirm-otp-actions {
       button {
         width: 15em;
         margin-top: 5px;
       }
-
     }
   }
 }

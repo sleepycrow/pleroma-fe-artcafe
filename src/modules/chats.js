@@ -65,6 +65,7 @@ const chats = {
       const newChatMessageSideEffects = (chat) => {
         maybeShowChatNotification(store, chat)
       }
+      commit('addNewUsers', chats.map(k => k.account).filter(k => k))
       commit('addNewChats', { dispatch, chats, rootGetters, newChatMessageSideEffects })
     },
     updateChat ({ commit }, { chat }) {

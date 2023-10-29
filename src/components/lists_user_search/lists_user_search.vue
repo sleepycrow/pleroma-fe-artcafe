@@ -27,12 +27,12 @@
 
 <script src="./lists_user_search.js"></script>
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .ListsUserSearch {
   .input-wrap {
     display: flex;
-    margin: 0.7em 0.5em 0.7em 0.5em;
+    margin: 0.7em 0.5em;
 
     input {
       width: 100%;

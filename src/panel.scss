@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 .panel {
   position: relative;
   display: flex;
@@ -12,14 +13,14 @@
   }
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 5;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: 1px 1px 4px rgb(0 0 0 / 60%);
     box-shadow: var(--panelShadow);
     pointer-events: none;
   }
@@ -87,7 +88,7 @@
 
   &::after,
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     bottom: 0;
@@ -126,7 +127,7 @@
 .panel-heading {
   border-radius: $fallback--panelRadius $fallback--panelRadius 0 0;
   border-radius: var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius) 0 0;
-  border-width: 0 0 1px 0;
+  border-width: 0 0 1px;
   align-items: start;
   // panel theme
   color: var(--panelText);
@@ -150,7 +151,7 @@
 
   .button-unstyled:hover,
   a:hover {
-    i[class*=icon-],
+    i[class*="icon-"],
     .svg-inline--fa,
     .iconLetter {
       color: var(--panelText);
@@ -173,7 +174,7 @@
       flex-shrink: 0;
 
       &,
-      i[class*=icon-] {
+      i[class*="icon-"] {
         color: $fallback--text;
         color: var(--btnPanelText, $fallback--text);
       }
@@ -234,7 +235,8 @@
   border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
   border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
   align-items: center;
-  border-width: 1px 0 0 0;
+  border-width: 1px 0 0;
   border-style: solid;
   border-color: var(--border, $fallback--border);
 }
+/* stylelint-enable no-descending-specificity */

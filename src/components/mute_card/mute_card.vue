@@ -37,6 +37,7 @@
 .mute-card-content-container {
   margin-top: 0.5em;
   text-align: right;
+
   button {
     width: 10em;
   }

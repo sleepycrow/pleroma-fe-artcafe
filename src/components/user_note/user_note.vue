@@ -48,7 +48,7 @@
 <script src="./user_note.js"></script>
 
 <style lang="scss">
-@import '../../variables';
+@import "../../variables";
 
 .user-note {
   display: flex;

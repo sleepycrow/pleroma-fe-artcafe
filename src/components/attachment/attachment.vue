@@ -162,10 +162,11 @@
         target="_blank"
       >
         <FAIcon
-          size="5x"
+          :size="compact ? '2x' : '5x'"
           :icon="placeholderIconClass"
+          :title="localDescription"
         />
-        <p>
+        <p v-if="!compact">
           {{ localDescription }}
         </p>
       </a>

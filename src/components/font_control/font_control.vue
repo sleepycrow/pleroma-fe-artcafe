@@ -4,6 +4,7 @@
     :class="{ custom: isCustom }"
   >
     <label
+      :id="name + '-label'"
       :for="preset === 'custom' ? name : name + '-font-switcher'"
       class="label"
     >
@@ -12,7 +13,8 @@
     <input
       v-if="typeof fallback !== 'undefined'"
       :id="name + '-o'"
-      class="opt exlcude-disabled"
+      :aria-labelledby="name + '-label'"
+      class="opt exlcude-disabled visible-for-screenreader-only"
       type="checkbox"
       :checked="present"
       @change="$emit('update:modelValue', typeof modelValue === 'undefined' ? fallback : undefined)"
@@ -21,6 +23,7 @@
       v-if="typeof fallback !== 'undefined'"
       class="opt-l"
       :for="name + '-o'"
+      :aria-hidden="true"
     />
     {{ ' ' }}
     <Select
@@ -50,17 +53,20 @@
 <script src="./font_control.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
+
 .font-control {
   input.custom-font {
     min-width: 10em;
   }
+
   &.custom {
     /* TODO Should make proper joiners... */
     .font-switcher {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
+
     .custom-font {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;

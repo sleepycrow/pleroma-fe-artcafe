@@ -1,9 +1,13 @@
 <template>
-  <div class="list">
+  <div
+    class="list"
+    role="list"
+  >
     <div
       v-for="item in items"
       :key="getKey(item)"
       class="list-item"
+      role="listitem"
     >
       <slot
         name="item"
@@ -35,7 +39,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .list {
   &-item:not(:last-child) {

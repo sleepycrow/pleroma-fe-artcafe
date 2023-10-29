@@ -15,6 +15,3 @@
 </template>
 
 <script src="./remote_user_resolver.js"></script>
-
-<style lang="scss">
-</style>

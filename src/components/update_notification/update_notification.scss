@@ -1,4 +1,5 @@
-@import 'src/_variables.scss';
+@import "src/variables";
+
 .UpdateNotification {
   overflow: hidden;
 }
@@ -21,7 +22,8 @@
 
   @media all and (max-width: 800px) {
     /* For mobile, the modal takes 100% of the available screen.
-    This ensures the minimized modal is always 50px above the browser bottom bar regardless of whether or not it is visible.
+       This ensures the minimized modal is always 50px above the browser
+       bottom bar regardless of whether or not it is visible.
    */
     width: 100vw;
   }
@@ -44,7 +46,7 @@
   }
 
   .panel-body {
-    border-width: 0 0 1px 0;
+    border-width: 0 0 1px;
     border-style: solid;
     border-color: var(--border, $fallback--border);
   }
@@ -67,7 +69,7 @@
     z-index: 20;
     position: relative;
     shape-margin: 0.5em;
-    filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.5));
+    filter: drop-shadow(5px 5px 10px rgb(0 0 0 / 50%));
     pointer-events: none;
   }
 
@@ -94,7 +96,7 @@
   }
 
   &.-peek {
-  /* Explanation:
+    /* Explanation:
    * 100vh - 100% = Distance between modal's top+bottom boundaries and screen
    * (100vh - 100%) / 2 = Distance between bottom (or top) boundary and screen
    */
@@ -103,7 +105,7 @@
     .pleroma-tan {
       float: right;
       z-index: 10;
-      shape-image-threshold: 0.7;
+      shape-image-threshold: 70%;
     }
 
     .extra-info-group {

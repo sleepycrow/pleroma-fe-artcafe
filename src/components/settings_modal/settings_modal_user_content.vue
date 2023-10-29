@@ -78,6 +78,6 @@
   </tab-switcher>
 </template>
 
-<script src="./settings_modal_content.js"></script>
+<script src="./settings_modal_user_content.js"></script>
 
-<style src="./settings_modal_content.scss" lang="scss"></style>
+<style src="./settings_modal_user_content.scss" lang="scss"></style>

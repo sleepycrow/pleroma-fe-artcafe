@@ -21,8 +21,8 @@ export const applyTheme = (input) => {
   body.classList.remove('hidden')
 }
 
-const configColumns = ({ sidebarColumnWidth, contentColumnWidth, notifsColumnWidth }) =>
-  ({ sidebarColumnWidth, contentColumnWidth, notifsColumnWidth })
+const configColumns = ({ sidebarColumnWidth, contentColumnWidth, notifsColumnWidth, emojiReactionsScale }) =>
+  ({ sidebarColumnWidth, contentColumnWidth, notifsColumnWidth, emojiReactionsScale })
 
 const defaultConfigColumns = configColumns(defaultState)
 

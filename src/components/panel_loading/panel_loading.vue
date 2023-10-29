@@ -23,7 +23,7 @@ export default {}
 </script>
 
 <style lang="scss">
-@import 'src/_variables.scss';
+@import "src/variables";
 
 .panel-loading {
   display: flex;
@@ -33,6 +33,7 @@ export default {}
   font-size: 2em;
   color: $fallback--text;
   color: var(--text, $fallback--text);
+
   .loading-text svg {
     line-height: 0;
     vertical-align: middle;

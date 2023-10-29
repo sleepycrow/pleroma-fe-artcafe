@@ -93,7 +93,7 @@
 <script src="./login_form.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .login-form {
   display: flex;
@@ -110,7 +110,7 @@
   }
 
   .login-bottom {
-    margin-top: 1.0em;
+    margin-top: 1em;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -121,7 +121,7 @@
     display: flex;
     flex-direction: column;
     padding: 0.3em 0.5em 0.6em;
-    line-height:24px;
+    line-height: 24px;
   }
 
   .form-bottom {
@@ -142,7 +142,6 @@
 
   .error {
     text-align: center;
-
     animation-name: shakeError;
     animation-duration: 0.4s;
     animation-timing-function: ease-in-out;

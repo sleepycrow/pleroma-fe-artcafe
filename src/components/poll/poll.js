@@ -12,7 +12,8 @@ export default {
   data () {
     return {
       loading: false,
-      choices: []
+      choices: [],
+      randomSeed: `${Math.random()}`.replace('.', '-')
     }
   },
   created () {

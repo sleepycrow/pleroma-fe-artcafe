@@ -77,7 +77,7 @@
 
 <script src="./password_reset.js"></script>
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .password-reset-form {
   display: flex;

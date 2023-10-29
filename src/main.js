@@ -10,8 +10,9 @@ import listsModule from './modules/lists.js'
 import usersModule from './modules/users.js'
 import apiModule from './modules/api.js'
 import configModule from './modules/config.js'
-import serverSideConfigModule from './modules/serverSideConfig.js'
+import profileConfigModule from './modules/profileConfig.js'
 import serverSideStorageModule from './modules/serverSideStorage.js'
+import adminSettingsModule from './modules/adminSettings.js'
 import shoutModule from './modules/shout.js'
 import oauthModule from './modules/oauth.js'
 import authFlowModule from './modules/auth_flow.js'
@@ -44,7 +45,7 @@ const i18n = createI18n({
   messages: messages.default
 })
 
-messages.setLanguage(i18n, currentLocale)
+messages.setLanguage(i18n.global, currentLocale)
 
 const persistedStateOptions = {
   paths: [
@@ -80,8 +81,9 @@ const persistedStateOptions = {
       lists: listsModule,
       api: apiModule,
       config: configModule,
-      serverSideConfig: serverSideConfigModule,
+      profileConfig: profileConfigModule,
       serverSideStorage: serverSideStorageModule,
+      adminSettings: adminSettingsModule,
       shout: shoutModule,
       oauth: oauthModule,
       authFlow: authFlowModule,

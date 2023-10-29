@@ -20,6 +20,7 @@
             v-for="(attachment, attachmentIndex) in row.items"
             :key="attachment.id"
             class="gallery-item"
+            :compact="compact"
             :nsfw="nsfw"
             :attachment="attachment"
             :size="size"
@@ -86,7 +87,7 @@
 <script src='./gallery.js'></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .Gallery {
   .gallery-rows {
@@ -99,6 +100,53 @@
     height: 0;
     width: 100%;
     flex-grow: 1;
+
+    .gallery-row-inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-flow: row wrap;
+      align-content: stretch;
+
+      .gallery-item {
+        margin: 0 0.5em 0 0;
+        flex-grow: 1;
+        height: 100%;
+        box-sizing: border-box;
+        // to make failed images a bit more noticeable on chromium
+        min-width: 2em;
+
+        &:last-child {
+          margin: 0;
+        }
+      }
+
+      &.-grid {
+        width: 100%;
+        height: auto;
+        position: relative;
+        display: grid;
+        grid-gap: 0.5em;
+        grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+
+        .gallery-item {
+          margin: 0;
+          height: 200px;
+        }
+      }
+    }
+
+    &.-grid,
+    &.-minimal {
+      height: auto;
+
+      .gallery-row-inner {
+        position: relative;
+      }
+    }
 
     &:not(:first-child) {
       margin-top: 0.5em;
@@ -114,7 +162,7 @@
         linear-gradient(to top, white, white);
 
       /* Autoprefixed seem to ignore this one, and also syntax is different */
-      -webkit-mask-composite: xor;
+      mask-composite: xor;
       mask-composite: exclude;
     }
   }
@@ -136,55 +184,6 @@
 
     button {
       padding: 0 2em;
-    }
-  }
-
-  .gallery-row {
-    &.-grid,
-    &.-minimal {
-      height: auto;
-      .gallery-row-inner {
-        position: relative;
-      }
-    }
-  }
-
-  .gallery-row-inner {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-content: stretch;
-
-    &.-grid {
-      width: 100%;
-      height: auto;
-      position: relative;
-      display: grid;
-      grid-column-gap: 0.5em;
-      grid-row-gap: 0.5em;
-      grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
-
-      .gallery-item {
-        margin: 0;
-        height: 200px;
-      }
-    }
-  }
-
-  .gallery-item {
-    margin: 0 0.5em 0 0;
-    flex-grow: 1;
-    height: 100%;
-    box-sizing: border-box;
-    // to make failed images a bit more noticeable on chromium
-    min-width: 2em;
-    &:last-child {
-      margin: 0;
     }
   }
 }

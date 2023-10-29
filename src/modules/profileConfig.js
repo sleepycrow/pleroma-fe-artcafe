@@ -22,9 +22,9 @@ const notificationsApi = ({ rootState, commit }, { path, value, oldValue }) => {
     .updateNotificationSettings({ settings })
     .then(result => {
       if (result.status === 'success') {
-        commit('confirmServerSideOption', { name, value })
+        commit('confirmProfileOption', { name, value })
       } else {
-        commit('confirmServerSideOption', { name, value: oldValue })
+        commit('confirmProfileOption', { name, value: oldValue })
       }
     })
 }
@@ -94,16 +94,16 @@ export const settingsMap = {
 
 export const defaultState = Object.fromEntries(Object.keys(settingsMap).map(key => [key, null]))
 
-const serverSideConfig = {
+const profileConfig = {
   state: { ...defaultState },
   mutations: {
-    confirmServerSideOption (state, { name, value }) {
+    confirmProfileOption (state, { name, value }) {
       set(state, name, value)
     },
-    wipeServerSideOption (state, { name }) {
+    wipeProfileOption (state, { name }) {
       set(state, name, null)
     },
-    wipeAllServerSideOptions (state) {
+    wipeAllProfileOptions (state) {
       Object.keys(settingsMap).forEach(key => {
         set(state, key, null)
       })
@@ -118,23 +118,23 @@ const serverSideConfig = {
     }
   },
   actions: {
-    setServerSideOption ({ rootState, state, commit, dispatch }, { name, value }) {
+    setProfileOption ({ rootState, state, commit, dispatch }, { name, value }) {
       const oldValue = get(state, name)
       const map = settingsMap[name]
       if (!map) throw new Error('Invalid server-side setting')
       const { set: path = map, api = defaultApi } = map
-      commit('wipeServerSideOption', { name })
+      commit('wipeProfileOption', { name })
 
       api({ rootState, commit }, { path, value, oldValue })
         .catch((e) => {
           console.warn('Error setting server-side option:', e)
-          commit('confirmServerSideOption', { name, value: oldValue })
+          commit('confirmProfileOption', { name, value: oldValue })
         })
     },
     logout ({ commit }) {
-      commit('wipeAllServerSideOptions')
+      commit('wipeAllProfileOptions')
     }
   }
 }
 
-export default serverSideConfig
+export default profileConfig

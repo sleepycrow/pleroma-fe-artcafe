@@ -1,4 +1,4 @@
-import { filter, trim } from 'lodash'
+import { filter, trim, debounce } from 'lodash'
 import BooleanSetting from '../helpers/boolean_setting.vue'
 import ChoiceSetting from '../helpers/choice_setting.vue'
 import IntegerSetting from '../helpers/integer_setting.vue'
@@ -29,11 +29,16 @@ const FilteringTab = {
       },
       set (value) {
         this.muteWordsStringLocal = value
+        this.debouncedSetMuteWords(value)
+      }
+    },
+    debouncedSetMuteWords () {
+      return debounce((value) => {
         this.$store.dispatch('setOption', {
           name: 'muteWords',
           value: filter(value.split('\n'), (word) => trim(word).length > 0)
         })
-      }
+      }, 1000)
     }
   },
   // Updating nested properties

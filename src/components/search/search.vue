@@ -148,7 +148,7 @@
 <script src="./search.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .search-result-heading {
   color: $fallback--faint;
@@ -176,7 +176,7 @@
 }
 
 .search-result-footer {
-  border-width: 1px 0 0 0;
+  border-width: 1px 0 0;
   border-style: solid;
   border-color: var(--border, $fallback--border);
   padding: 10px;
@@ -229,11 +229,11 @@
     color: $fallback--text;
     color: var(--text, $fallback--text);
   }
-  }
+}
 
-  .more-statuses-button {
-    height: 3.5em;
-    line-height: 3.5em;
-  }
+.more-statuses-button {
+  height: 3.5em;
+  line-height: 3.5em;
+}
 
 </style>

@@ -15,6 +15,3 @@
 </template>
 
 <script src="./who_to_follow.js"></script>
-
-<style lang="scss">
-</style>

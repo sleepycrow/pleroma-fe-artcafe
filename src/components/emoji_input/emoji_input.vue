@@ -4,12 +4,19 @@
     class="emoji-input"
     :class="{ 'with-picker': !hideEmojiButton }"
   >
-    <slot />
+    <slot
+      :id="'textbox-' + randomSeed"
+      :aria-owns="suggestionListId"
+      aria-autocomplete="both"
+      :aria-expanded="showSuggestions"
+      :aria-activedescendant="(!showSuggestions || highlighted === -1) ? '' : suggestionItemId(highlighted)"
+    />
     <!-- TODO: make the 'x' disappear if at the end maybe? -->
     <div
       ref="hiddenOverlay"
       class="hidden-overlay"
       :style="overlayStyle"
+      :aria-hidden="true"
     >
       <span>{{ preText }}</span>
       <span
@@ -18,11 +25,16 @@
       >x</span>
       <span>{{ postText }}</span>
     </div>
+    <screen-reader-notice
+      ref="screenReaderNotice"
+      aria-live="assertive"
+    />
     <template v-if="enableEmojiPicker">
       <button
         v-if="!hideEmojiButton"
         class="button-unstyled emoji-picker-icon"
         type="button"
+        :title="$t('emoji.add_emoji')"
         @click.prevent="togglePicker"
       >
         <FAIcon :icon="['far', 'smile-beam']" />
@@ -43,17 +55,24 @@
       ref="suggestorPopover"
       class="autocomplete-panel"
       placement="bottom"
+      :trigger-attrs="{ 'aria-hidden': true }"
     >
       <template #content>
         <div
+          :id="suggestionListId"
           ref="panel-body"
           class="autocomplete-panel-body"
+          role="listbox"
         >
           <div
             v-for="(suggestion, index) in suggestions"
+            :id="suggestionItemId(index)"
             :key="index"
             class="autocomplete-item"
+            role="option"
             :class="{ highlighted: index === highlighted }"
+            :aria-label="autoCompleteItemLabel(suggestion)"
+            :aria-selected="index === highlighted"
             @click.stop.prevent="onClick($event, suggestion)"
           >
             <span class="image">
@@ -91,22 +110,18 @@
 <script src="./emoji_input.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .emoji-input {
   display: flex;
   flex-direction: column;
   position: relative;
 
-  &.with-picker input {
-    padding-right: 30px;
-  }
-
   .emoji-picker-icon {
     position: absolute;
     top: 0;
     right: 0;
-    margin: .2em .25em;
+    margin: 0.2em 0.25em;
     font-size: 1.3em;
     cursor: pointer;
     line-height: 24px;
@@ -123,12 +138,17 @@
     margin-top: 2px;
 
     &.hide {
-      display: none
+      display: none;
     }
   }
 
-  input, textarea {
+  input,
+  textarea {
     flex: 1 0 auto;
+  }
+
+  &.with-picker input {
+    padding-right: 30px;
   }
 
   .hidden-overlay {
@@ -140,8 +160,10 @@
     right: 0;
     left: 0;
     overflow: hidden;
+
     /* DEBUG STUFF */
     color: red;
+
     /* set opacity to non-zero to see the overlay */
 
     .caret {
@@ -151,6 +173,7 @@
     }
   }
 }
+
 .autocomplete {
   &-panel {
     position: absolute;
@@ -160,7 +183,7 @@
     display: flex;
     cursor: pointer;
     padding: 0.2em 0.4em;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgb(0 0 0 / 40%);
     height: 32px;
 
     .image {
@@ -169,7 +192,6 @@
       line-height: 32px;
       text-align: center;
       font-size: 32px;
-
       margin-right: 4px;
 
       img {
@@ -199,6 +221,7 @@
       background-color: $fallback--fg;
       background-color: var(--selectedMenuPopover, $fallback--fg);
       color: var(--selectedMenuPopoverText, $fallback--text);
+
       --faint: var(--selectedMenuPopoverFaintText, $fallback--faint);
       --faintLink: var(--selectedMenuPopoverFaintLink, $fallback--faint);
       --lightText: var(--selectedMenuPopoverLightText, $fallback--lightText);

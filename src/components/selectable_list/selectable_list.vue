@@ -51,7 +51,7 @@
 <script src="./selectable_list.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .selectable-list {
   &-item-inner {
@@ -67,6 +67,7 @@
     background-color: $fallback--lightBg;
     background-color: var(--selectedMenu, $fallback--lightBg);
     color: var(--selectedMenuText, $fallback--text);
+
     --faint: var(--selectedMenuFaintText, $fallback--faint);
     --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
     --lightText: var(--selectedMenuLightText, $fallback--lightText);

@@ -32,6 +32,7 @@
 .modal-view.status-history-modal-view {
   align-items: flex-start;
 }
+
 .status-history-modal-panel {
   flex-shrink: 0;
   margin-top: 25%;

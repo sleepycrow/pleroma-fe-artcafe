@@ -4,23 +4,37 @@
     class="BooleanSetting"
   >
     <Checkbox
-      :model-value="state"
-      :disabled="disabled"
+      :model-value="visibleState"
+      :disabled="shouldBeDisabled"
+      :indeterminate="isIndeterminate"
       @update:modelValue="update"
     >
       <span
-        v-if="!!$slots.default"
         class="label"
+        :class="{ 'faint': shouldBeDisabled }"
       >
-        <slot />
+        <template v-if="backendDescriptionLabel">
+          {{ backendDescriptionLabel }}
+        </template>
+        <template v-else-if="source === 'admin'">
+          MISSING LABEL FOR {{ path }}
+        </template>
+        <slot v-else />
       </span>
-      {{ ' ' }}
-      <ModifiedIndicator
-        :changed="isChanged"
-        :onclick="reset"
-      />
-      <ServerSideIndicator :server-side="isServerSide" />
     </Checkbox>
+    <ModifiedIndicator
+      :changed="isChanged"
+      :onclick="reset"
+    />
+    <ProfileSettingIndicator :is-profile="isProfileSetting" />
+    <DraftButtons />
+    <p
+      v-if="backendDescriptionDescription"
+      class="setting-description"
+      :class="{ 'faint': shouldBeDisabled }"
+    >
+      {{ backendDescriptionDescription + ' ' }}
+    </p>
   </label>
 </template>
 

@@ -7,7 +7,7 @@
     </div>
     <div class="panel-body">
       <section
-        v-if="currentUser && currentUser.role === 'admin'"
+        v-if="canPostAnnouncement"
       >
         <div class="post-form">
           <div class="heading">
@@ -67,7 +67,8 @@
   .post-form {
     padding: var(--status-margin, $status-margin);
 
-    .heading, .body {
+    .heading,
+    .body {
       margin-bottom: var(--status-margin, $status-margin);
     }
 

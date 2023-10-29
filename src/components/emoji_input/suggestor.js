@@ -94,8 +94,9 @@ export const suggestUsers = ({ dispatch, state }) => {
 
     const newSuggestions = state.users.users.filter(
       user =>
-        user.screen_name.toLowerCase().startsWith(noPrefix) ||
-        user.name.toLowerCase().startsWith(noPrefix)
+        user.screen_name && user.name && (
+          user.screen_name.toLowerCase().startsWith(noPrefix) ||
+            user.name.toLowerCase().startsWith(noPrefix))
     ).slice(0, 20).sort((a, b) => {
       let aScore = 0
       let bScore = 0

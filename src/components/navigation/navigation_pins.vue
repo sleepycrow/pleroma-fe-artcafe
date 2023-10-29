@@ -27,7 +27,8 @@
 <script src="./navigation_pins.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
+
 .NavigationPins {
   display: flex;
   flex-wrap: wrap;

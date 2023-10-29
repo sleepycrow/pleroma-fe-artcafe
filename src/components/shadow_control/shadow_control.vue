@@ -129,12 +129,13 @@
           v-model="selected.inset"
           :disabled="!present"
           name="inset"
-          class="input-inset"
+          class="input-inset visible-for-screenreader-only"
           type="checkbox"
         >
         <label
           class="checkbox-label"
           for="inset"
+          :aria-hidden="true"
         />
       </div>
       <div
@@ -218,7 +219,8 @@
 <script src="./shadow_control.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
+
 .shadow-control {
   display: flex;
   flex-wrap: wrap;
@@ -229,6 +231,7 @@
   .shadow-tweak {
     margin: 5px 6px 0 0;
   }
+
   .shadow-preview-container {
     flex: 0;
     display: flex;
@@ -236,19 +239,19 @@
 
     $side: 15em;
 
-    input[type=number] {
+    input[type="number"] {
       width: 5em;
       min-width: 2em;
     }
+
     .x-shift-control,
     .y-shift-control {
       display: flex;
       flex: 0;
 
-      &[disabled=disabled] *{
-        opacity: .5
+      &[disabled="disabled"] * {
+        opacity: 0.5;
       }
-
     }
 
     .x-shift-control {
@@ -256,37 +259,40 @@
     }
 
     .x-shift-control .wrap,
-    input[type=range] {
+    input[type="range"] {
       margin: 0;
       width: $side;
       height: 2em;
     }
+
     .y-shift-control {
       flex-direction: column;
       align-items: flex-end;
+
       .wrap {
         width: 2em;
         height: $side;
       }
-      input[type=range] {
+
+      input[type="range"] {
         transform-origin: 1em 1em;
         transform: rotate(90deg);
       }
     }
+
     .preview-window {
       flex: 1;
-      background-color: #999999;
+      background-color: #999;
       display: flex;
       align-items: center;
       justify-content: center;
       background-image:
-      linear-gradient(45deg, #666666 25%, transparent 25%),
-      linear-gradient(-45deg, #666666 25%, transparent 25%),
-      linear-gradient(45deg, transparent 75%, #666666 75%),
-      linear-gradient(-45deg, transparent 75%, #666666 75%);
+        linear-gradient(45deg, #666 25%, transparent 25%),
+        linear-gradient(-45deg, #666 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #666 75%),
+        linear-gradient(-45deg, transparent 75%, #666 75%);
       background-size: 20px 20px;
-      background-position:0 0, 0 10px, 10px -10px, -10px 0;
-
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0;
       border-radius: $fallback--inputRadius;
       border-radius: var(--inputRadius, $fallback--inputRadius);
 
@@ -312,14 +318,15 @@
         flex: 1;
       }
 
-      .shadow-switcher, .btn {
+      .shadow-switcher,
+      .btn {
         min-width: 1px;
         margin-right: 5px;
       }
 
       .btn {
-        padding: 0 .4em;
-        margin: 0 .1em;
+        padding: 0 0.4em;
+        margin: 0 0.1em;
       }
     }
   }

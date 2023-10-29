@@ -33,6 +33,7 @@
       <gallery
         v-if="status.attachments.length !== 0"
         class="attachments media-body"
+        :compact="compact"
         :nsfw="nsfwClickthrough"
         :attachments="status.attachments"
         :limit="compact ? 1 : 0"
@@ -42,7 +43,7 @@
       />
 
       <div
-        v-if="status.card && !noHeading && !compact"
+        v-if="statusCard && !noHeading && !compact"
         class="link-preview media-body"
       >
         <link-preview

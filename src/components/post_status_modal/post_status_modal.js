@@ -44,6 +44,10 @@ const PostStatusModal = {
   methods: {
     closeModal () {
       this.$store.dispatch('closePostStatusModal')
+    },
+    resetAndClose () {
+      this.$store.dispatch('resetPostStatusModal')
+      this.$store.dispatch('closePostStatusModal')
     }
   }
 }

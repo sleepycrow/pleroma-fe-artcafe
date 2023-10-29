@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie'
 import { setPreset, applyTheme, applyConfig } from '../services/style_setter/style_setter.js'
 import messages from '../i18n/messages'
+import { set } from 'lodash'
 import localeService from '../services/locale/locale.service.js'
 
 const BACKEND_LANGUAGE_COOKIE_NAME = 'userLanguage'
@@ -78,6 +79,15 @@ export const defaultState = {
   minimalScopesMode: undefined, // instance default
   // This hides statuses filtered via a word filter
   hideFilteredStatuses: undefined, // instance default
+  modalOnRepeat: undefined, // instance default
+  modalOnUnfollow: undefined, // instance default
+  modalOnBlock: undefined, // instance default
+  modalOnMute: undefined, // instance default
+  modalOnDelete: undefined, // instance default
+  modalOnLogout: undefined, // instance default
+  modalOnApproveFollow: undefined, // instance default
+  modalOnDenyFollow: undefined, // instance default
+  modalOnRemoveUserFromFollowers: undefined, // instance default
   playVideosInModal: false,
   useOneClickNsfw: false,
   useContainFit: true,
@@ -88,6 +98,7 @@ export const defaultState = {
   sidebarColumnWidth: '25rem',
   contentColumnWidth: '45rem',
   notifsColumnWidth: '25rem',
+  emojiReactionsScale: 1.0,
   navbarColumnStretch: false,
   greentext: undefined, // instance default
   useAtIcon: undefined, // instance default
@@ -106,7 +117,8 @@ export const defaultState = {
   conversationTreeAdvanced: undefined, // instance default
   conversationOtherRepliesButton: undefined, // instance default
   conversationTreeFadeAncestors: undefined, // instance default
-  maxDepthInThread: undefined // instance default
+  maxDepthInThread: undefined, // instance default
+  autocompleteSelect: undefined // instance default
 }
 
 // caching the instance default properties
@@ -137,7 +149,7 @@ const config = {
   },
   mutations: {
     setOption (state, { name, value }) {
-      state[name] = value
+      set(state, name, value)
     },
     setHighlight (state, { user, color, type }) {
       const data = this.state.config.highlight[user]
@@ -167,28 +179,52 @@ const config = {
       commit('setHighlight', { user, color, type })
     },
     setOption ({ commit, dispatch, state }, { name, value }) {
-      commit('setOption', { name, value })
-      switch (name) {
-        case 'theme':
-          setPreset(value)
-          break
-        case 'sidebarColumnWidth':
-        case 'contentColumnWidth':
-        case 'notifsColumnWidth':
-          applyConfig(state)
-          break
-        case 'customTheme':
-        case 'customThemeSource':
-          applyTheme(value)
-          break
-        case 'interfaceLanguage':
-          messages.setLanguage(this.getters.i18n, value)
-          dispatch('loadUnicodeEmojiData', value)
-          Cookies.set(BACKEND_LANGUAGE_COOKIE_NAME, localeService.internalToBackendLocale(value))
-          break
-        case 'thirdColumnMode':
-          dispatch('setLayoutWidth', undefined)
-          break
+      const exceptions = new Set([
+        'useStreamingApi'
+      ])
+
+      if (exceptions.has(name)) {
+        switch (name) {
+          case 'useStreamingApi': {
+            const action = value ? 'enableMastoSockets' : 'disableMastoSockets'
+
+            dispatch(action).then(() => {
+              commit('setOption', { name: 'useStreamingApi', value })
+            }).catch((e) => {
+              console.error('Failed starting MastoAPI Streaming socket', e)
+              dispatch('disableMastoSockets')
+              dispatch('setOption', { name: 'useStreamingApi', value: false })
+            })
+          }
+        }
+      } else {
+        commit('setOption', { name, value })
+        switch (name) {
+          case 'theme':
+            setPreset(value)
+            break
+          case 'sidebarColumnWidth':
+          case 'contentColumnWidth':
+          case 'notifsColumnWidth':
+          case 'emojiReactionsScale':
+            applyConfig(state)
+            break
+          case 'customTheme':
+          case 'customThemeSource':
+            applyTheme(value)
+            break
+          case 'interfaceLanguage':
+            messages.setLanguage(this.getters.i18n, value)
+            dispatch('loadUnicodeEmojiData', value)
+            Cookies.set(
+              BACKEND_LANGUAGE_COOKIE_NAME,
+              localeService.internalToBackendLocaleMulti(value)
+            )
+            break
+          case 'thirdColumnMode':
+            dispatch('setLayoutWidth', undefined)
+            break
+        }
       }
     }
   }

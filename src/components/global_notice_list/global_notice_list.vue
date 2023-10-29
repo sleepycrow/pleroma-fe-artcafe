@@ -25,7 +25,7 @@
 <script src="./global_notice_list.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .global-notice-list {
   position: fixed;
@@ -73,6 +73,7 @@
   .global-success {
     background-color: var(--alertPopupSuccess, $fallback--cGreen);
     color: var(--alertPopupSuccessText, $fallback--text);
+
     .svg-inline--fa {
       color: var(--alertPopupSuccessText, $fallback--text);
     }
@@ -81,6 +82,7 @@
   .global-info {
     background-color: var(--alertPopupNeutral, $fallback--fg);
     color: var(--alertPopupNeutralText, $fallback--text);
+
     .svg-inline--fa {
       color: var(--alertPopupNeutralText, $fallback--text);
     }
@@ -88,6 +90,7 @@
 
   .close-notice {
     padding-right: 0.2em;
+
     .svg-inline--fa:hover {
       opacity: 0.6;
     }

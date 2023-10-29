@@ -3,15 +3,20 @@
     v-if="matchesExpertLevel"
     class="ChoiceSetting"
   >
-    <slot />
+    <template v-if="backendDescriptionLabel">
+      {{ backendDescriptionLabel }}
+    </template>
+    <template v-else>
+      <slot />
+    </template>
     {{ ' ' }}
     <Select
-      :model-value="state"
+      :model-value="realDraftMode ? draft :state"
       :disabled="disabled"
       @update:modelValue="update"
     >
       <option
-        v-for="option in options"
+        v-for="option in realOptions"
         :key="option.key"
         :value="option.value"
       >
@@ -23,13 +28,15 @@
       :changed="isChanged"
       :onclick="reset"
     />
-    <ServerSideIndicator :server-side="isServerSide" />
+    <ProfileSettingIndicator :is-profile="isProfileSetting" />
+    <DraftButtons />
+    <p
+      v-if="backendDescriptionDescription"
+      class="setting-description"
+    >
+      {{ backendDescriptionDescription + ' ' }}
+    </p>
   </label>
 </template>
 
 <script src="./choice_setting.js"></script>
-
-<style lang="scss">
-.ChoiceSetting {
-}
-</style>

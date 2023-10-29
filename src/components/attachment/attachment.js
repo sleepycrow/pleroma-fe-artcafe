@@ -36,6 +36,7 @@ library.add(
 const Attachment = {
   props: [
     'attachment',
+    'compact',
     'description',
     'hideDescription',
     'nsfw',
@@ -71,7 +72,8 @@ const Attachment = {
         {
           '-loading': this.loading,
           '-nsfw-placeholder': this.hidden,
-          '-editable': this.edit !== undefined
+          '-editable': this.edit !== undefined,
+          '-compact': this.compact
         },
         '-type-' + this.type,
         this.size && '-size-' + this.size,

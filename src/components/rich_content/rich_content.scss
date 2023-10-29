@@ -1,7 +1,11 @@
+@import "../../variables";
+
 .RichContent {
   blockquote {
-    margin: 0.2em 0 0.2em 2em;
+    margin: 0.2em 0 0.2em 0.2em;
     font-style: italic;
+    border-left: 0.2em solid var(--faint, $fallback--faint);
+    padding-left: 1em;
   }
 
   pre {
@@ -17,11 +21,11 @@
   }
 
   p {
-    margin: 0 0 1em 0;
+    margin: 0 0 1em;
   }
 
   p:last-child {
-    margin: 0 0 0 0;
+    margin: 0;
   }
 
   h1 {

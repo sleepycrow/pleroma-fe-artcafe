@@ -1,0 +1,1 @@
+Fix a bug where mentioning a user twice will not fill the mention into the textarea

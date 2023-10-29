@@ -20,6 +20,7 @@
         class="logo"
         :to="{ name: 'root' }"
         :style="logoBgStyle"
+        :title="sitename"
       >
         <div
           class="mask"
@@ -38,44 +39,55 @@
         />
         <button
           class="button-unstyled nav-icon"
-          @click="openSettingsModal"
+          :title="$t('nav.preferences')"
+          @click.stop="openSettingsModal"
         >
           <FAIcon
             fixed-width
             class="fa-scale-110 fa-old-padding"
             icon="cog"
-            :title="$t('nav.preferences')"
           />
         </button>
-        <a
+        <button
           v-if="currentUser && currentUser.role === 'admin'"
-          href="/pleroma/admin/#/login-pleroma"
-          class="nav-icon"
+          class="button-unstyled nav-icon"
           target="_blank"
-          @click.stop
+          :title="$t('nav.administration')"
+          @click.stop="openAdminModal"
         >
           <FAIcon
             fixed-width
             class="fa-scale-110 fa-old-padding"
             icon="tachometer-alt"
-            :title="$t('nav.administration')"
           />
-        </a>
+        </button>
         <span class="spacer" />
         <button
           v-if="currentUser"
           class="button-unstyled nav-icon"
-          @click.prevent="logout"
+          :title="$t('login.logout')"
+          @click.stop.prevent="logout"
         >
           <FAIcon
             fixed-width
             class="fa-scale-110 fa-old-padding"
             icon="sign-out-alt"
-            :title="$t('login.logout')"
           />
         </button>
       </div>
     </div>
+    <teleport to="#modal">
+      <confirm-modal
+        v-if="showingConfirmLogout"
+        :title="$t('login.logout_confirm_title')"
+        :confirm-text="$t('login.logout_confirm_accept_button')"
+        :cancel-text="$t('login.logout_confirm_cancel_button')"
+        @accepted="doLogout"
+        @cancelled="hideConfirmLogout"
+      >
+        {{ $t('login.logout_confirm') }}
+      </confirm-modal>
+    </teleport>
   </nav>
 </template>
 <script src="./desktop_nav.js"></script>

@@ -8,7 +8,8 @@ const StillImage = {
     'alt',
     'height',
     'width',
-    'dataSrc'
+    'dataSrc',
+    'loading'
   ],
   data () {
     return {

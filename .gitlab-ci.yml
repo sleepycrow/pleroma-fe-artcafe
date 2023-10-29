@@ -4,10 +4,35 @@
 image: node:16
 
 stages:
+  - check-changelog
   - lint
   - build
   - test
   - deploy
+
+# https://git.pleroma.social/help/ci/yaml/workflow.md#switch-between-branch-pipelines-and-merge-request-pipelines
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
+    - if: $CI_COMMIT_BRANCH
+
+check-changelog:
+  stage: check-changelog
+  image: alpine
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_PROJECT_PATH == 'pleroma/pleroma-fe' && $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^renovate/
+      when: never
+    - if: $CI_MERGE_REQUEST_SOURCE_PROJECT_PATH == 'pleroma/pleroma-fe' && $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == 'weblate'
+      when: never
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
+  before_script: ''
+  after_script: ''
+  cache: {}
+  script:
+    - apk add git
+    - sh ./tools/check-changelog
 
 lint:
   stage: lint

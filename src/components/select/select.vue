@@ -6,6 +6,7 @@
     <select
       :disabled="disabled"
       :value="modelValue"
+      v-bind="attrs"
       @change="$emit('update:modelValue', $event.target.value)"
     >
       <slot />
@@ -21,22 +22,20 @@
 <script src="./select.js"> </script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 /* TODO fix order of styles */
 label.Select {
   padding: 0;
 
   select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
     background: transparent;
     border: none;
     color: $fallback--text;
     color: var(--inputText, --text, $fallback--text);
     margin: 0;
-    padding: 0 2em 0 .2em;
+    padding: 0 2em 0 0.2em;
     font-family: sans-serif;
     font-family: var(--inputFont, sans-serif);
     font-size: 1em;
@@ -59,6 +58,5 @@ label.Select {
     z-index: 0;
     pointer-events: none;
   }
-
 }
 </style>

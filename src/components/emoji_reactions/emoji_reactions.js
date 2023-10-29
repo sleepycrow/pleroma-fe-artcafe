@@ -1,5 +1,17 @@
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import UserListPopover from '../user_list_popover/user_list_popover.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faPlus,
+  faMinus,
+  faCheck
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faPlus,
+  faMinus,
+  faCheck
+)
 
 const EMOJI_REACTION_COUNT_CUTOFF = 12
 
@@ -33,6 +45,9 @@ const EmojiReactions = {
     },
     loggedIn () {
       return !!this.$store.state.users.currentUser
+    },
+    remoteInteractionLink () {
+      return this.$store.getters.remoteInteractionLink({ statusId: this.status.id })
     }
   },
   methods: {
@@ -42,10 +57,10 @@ const EmojiReactions = {
     reactedWith (emoji) {
       return this.status.emoji_reactions.find(r => r.name === emoji).me
     },
-    fetchEmojiReactionsByIfMissing () {
+    async fetchEmojiReactionsByIfMissing () {
       const hasNoAccounts = this.status.emoji_reactions.find(r => !r.accounts)
       if (hasNoAccounts) {
-        this.$store.dispatch('fetchEmojiReactionsBy', this.status.id)
+        return await this.$store.dispatch('fetchEmojiReactionsBy', this.status.id)
       }
     },
     reactWith (emoji) {
@@ -54,13 +69,25 @@ const EmojiReactions = {
     unreact (emoji) {
       this.$store.dispatch('unreactWithEmoji', { id: this.status.id, emoji })
     },
-    emojiOnClick (emoji, event) {
+    async emojiOnClick (emoji, event) {
       if (!this.loggedIn) return
 
+      await this.fetchEmojiReactionsByIfMissing()
       if (this.reactedWith(emoji)) {
         this.unreact(emoji)
       } else {
         this.reactWith(emoji)
+      }
+    },
+    counterTriggerAttrs (reaction) {
+      return {
+        class: [
+          'btn',
+          'button-default',
+          'emoji-reaction-count-button',
+          { '-picked-reaction': this.reactedWith(reaction.name) }
+        ],
+        'aria-label': this.$tc('status.reaction_count_label', reaction.count, { num: reaction.count })
       }
     }
   }

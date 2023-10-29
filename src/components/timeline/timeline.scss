@@ -1,4 +1,4 @@
-@import '../../_variables.scss';
+@import "../../variables";
 
 .Timeline {
   .alert-dot {
@@ -46,10 +46,9 @@
       text-align: center;
       line-height: 2.75em;
       padding: 0 0.5em;
-    }
 
-    .timeline-heading {
-      .button-default, .alert {
+      .button-default,
+      .alert {
         line-height: 2em;
         width: 100%;
       }

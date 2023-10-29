@@ -11,10 +11,15 @@ const specialLanguageCodes = {
 const internalToBrowserLocale = code => specialLanguageCodes[code] || code
 
 const internalToBackendLocale = code => internalToBrowserLocale(code).replace('_', '-')
+const internalToBackendLocaleMulti = codes => {
+  const langs = Array.isArray(codes) ? codes : [codes]
+  return langs.map(internalToBackendLocale).join(',')
+}
 
 const getLanguageName = (code) => {
   const specialLanguageNames = {
     ja_easy: 'やさしいにほんご',
+    'nan-TW': '臺語（閩南語）',
     zh: '简体中文',
     zh_Hant: '繁體中文'
   }
@@ -28,6 +33,7 @@ const languages = _.map(languagesObject.languages, (code) => ({ code, name: getL
 const localeService = {
   internalToBrowserLocale,
   internalToBackendLocale,
+  internalToBackendLocaleMulti,
   languages,
   getLanguageName
 }

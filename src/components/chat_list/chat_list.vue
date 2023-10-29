@@ -45,7 +45,7 @@
 <script src="./chat_list.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .chat-list {
   min-height: 25em;

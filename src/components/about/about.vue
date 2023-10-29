@@ -9,6 +9,3 @@
 </template>
 
 <script src="./about.js"></script>
-
-<style lang="scss">
-</style>

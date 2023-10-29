@@ -1,0 +1,13 @@
+.frontends-tab {
+  .cards-list {
+    padding: 0;
+  }
+
+  dd {
+    text-overflow: ellipsis;
+    word-wrap: nowrap;
+    white-space: nowrap;
+    overflow-x: hidden;
+    max-width: 10em;
+  }
+}

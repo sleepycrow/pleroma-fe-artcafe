@@ -1,4 +1,5 @@
 import Popover from '../popover/popover.vue'
+import ConfirmModal from '../confirm_modal/confirm_modal.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faEllipsisH,
@@ -32,10 +33,14 @@ library.add(
 
 const ExtraButtons = {
   props: ['status'],
-  components: { Popover },
+  components: {
+    Popover,
+    ConfirmModal
+  },
   data () {
     return {
-      expanded: false
+      expanded: false,
+      showingDeleteDialog: false
     }
   },
   methods: {
@@ -46,10 +51,21 @@ const ExtraButtons = {
       this.expanded = false
     },
     deleteStatus () {
-      const confirmed = window.confirm(this.$t('status.delete_confirm'))
-      if (confirmed) {
-        this.$store.dispatch('deleteStatus', { id: this.status.id })
+      if (this.shouldConfirmDelete) {
+        this.showDeleteStatusConfirmDialog()
+      } else {
+        this.doDeleteStatus()
       }
+    },
+    doDeleteStatus () {
+      this.$store.dispatch('deleteStatus', { id: this.status.id })
+      this.hideDeleteStatusConfirmDialog()
+    },
+    showDeleteStatusConfirmDialog () {
+      this.showingDeleteDialog = true
+    },
+    hideDeleteStatusConfirmDialog () {
+      this.showingDeleteDialog = false
     },
     pinStatus () {
       this.$store.dispatch('pinStatus', this.status.id)
@@ -133,7 +149,10 @@ const ExtraButtons = {
     isEdited () {
       return this.status.edited_at !== null
     },
-    editingAvailable () { return this.$store.state.instance.editingAvailable }
+    editingAvailable () { return this.$store.state.instance.editingAvailable },
+    shouldConfirmDelete () {
+      return this.$store.getters.mergedConfig.modalOnDelete
+    }
   }
 }
 

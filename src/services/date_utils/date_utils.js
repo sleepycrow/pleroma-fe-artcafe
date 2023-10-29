@@ -41,3 +41,19 @@ export const relativeTimeShort = (date, nowThreshold = 1) => {
   r.key += '_short'
   return r
 }
+
+export const unitToSeconds = (unit, amount) => {
+  switch (unit) {
+    case 'minutes': return 0.001 * amount * MINUTE
+    case 'hours': return 0.001 * amount * HOUR
+    case 'days': return 0.001 * amount * DAY
+  }
+}
+
+export const secondsToUnit = (unit, amount) => {
+  switch (unit) {
+    case 'minutes': return (1000 * amount) / MINUTE
+    case 'hours': return (1000 * amount) / HOUR
+    case 'days': return (1000 * amount) / DAY
+  }
+}

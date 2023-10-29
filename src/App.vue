@@ -71,7 +71,6 @@
     <StatusHistoryModal v-if="editingAvailable" />
     <SettingsModal />
     <UpdateNotification />
-    <div id="modal" />
     <GlobalNoticeList />
   </div>
 </template>

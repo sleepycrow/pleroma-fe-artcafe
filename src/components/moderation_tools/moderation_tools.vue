@@ -166,18 +166,21 @@
 <script src="./moderation_tools.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .moderation-tools-popover {
   height: 100%;
+
   .trigger {
+    /* stylelint-disable-next-line declaration-no-important */
     display: flex !important;
     height: 100%;
   }
 }
 
 .moderation-tools-button {
-  svg,i {
+  svg,
+  i {
     font-size: 0.8em;
   }
 }

@@ -78,5 +78,11 @@ describe('MatcherService', () => {
 
       expect(MatcherService.extractTagFromUrl(url)).to.eql(false)
     })
+
+    it('should return tag name from non-ascii tags', () => {
+      const url = encodeURI('https://website.com/tag/喵喵喵')
+
+      expect(MatcherService.extractTagFromUrl(url)).to.eql('喵喵喵')
+    })
   })
 })

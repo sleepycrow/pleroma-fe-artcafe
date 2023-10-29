@@ -4,7 +4,10 @@
       <h2>{{ $t('settings.notification_setting_filters') }}</h2>
       <ul class="setting-list">
         <li>
-          <BooleanSetting path="serverSide_blockNotificationsFromStrangers">
+          <BooleanSetting
+            source="profile"
+            path="blockNotificationsFromStrangers"
+          >
             {{ $t('settings.notification_setting_block_from_strangers') }}
           </BooleanSetting>
         </li>
@@ -67,7 +70,8 @@
         </li>
         <li>
           <BooleanSetting
-            path="serverSide_webPushHideContents"
+            source="profile"
+            path="webPushHideContents"
             expert="1"
           >
             {{ $t('settings.notification_setting_hide_notification_contents') }}

@@ -13,7 +13,7 @@
 
   &:hover {
     background-color: var(--selectedPost, $fallback--lightBg);
-    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 3px 1px rgb(0 0 0 / 10%);
   }
 
   .chat-list-item-left {
@@ -67,6 +67,7 @@
     canvas {
       display: none;
     }
+
     img {
       visibility: visible;
     }
@@ -79,13 +80,11 @@
 
   .chat-preview-body {
     --emoji-size: 1.4em;
+
+    padding-right: 1em;
   }
 
   .time-wrapper {
     line-height: var(--post-line-height);
-  }
-
-  .chat-preview-body {
-    padding-right: 1em;
   }
 }

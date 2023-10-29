@@ -63,6 +63,11 @@ const MediaModal = {
     },
     type () {
       return this.currentMedia ? this.getType(this.currentMedia) : null
+    },
+    swipeDisableClickThreshold () {
+      // If there is only one media, allow more mouse movements to close the modal
+      // because there is less chance that the user wants to switch to another image
+      return () => this.canNavigate ? 1 : 30
     }
   },
   methods: {

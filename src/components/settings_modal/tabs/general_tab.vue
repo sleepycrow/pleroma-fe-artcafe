@@ -29,14 +29,11 @@
           <BooleanSetting path="streaming">
             {{ $t('settings.streaming') }}
           </BooleanSetting>
-          <ul
-            class="setting-list suboptions"
-            :class="[{disabled: !streaming}]"
-          >
+          <ul class="setting-list suboptions">
             <li>
               <BooleanSetting
                 path="pauseOnUnfocused"
-                :disabled="!streaming"
+                parent-path="streaming"
               >
                 {{ $t('settings.pause_on_unfocused') }}
               </BooleanSetting>
@@ -148,6 +145,56 @@
             </SizeSetting>
           </div>
         </li>
+        <li class="select-multiple">
+          <span class="label">{{ $t('settings.confirm_dialogs') }}</span>
+          <ul class="option-list">
+            <li>
+              <BooleanSetting path="modalOnRepeat">
+                {{ $t('settings.confirm_dialogs_repeat') }}
+              </BooleanSetting>
+            </li>
+            <li>
+              <BooleanSetting path="modalOnUnfollow">
+                {{ $t('settings.confirm_dialogs_unfollow') }}
+              </BooleanSetting>
+            </li>
+            <li>
+              <BooleanSetting path="modalOnBlock">
+                {{ $t('settings.confirm_dialogs_block') }}
+              </BooleanSetting>
+            </li>
+            <li>
+              <BooleanSetting path="modalOnMute">
+                {{ $t('settings.confirm_dialogs_mute') }}
+              </BooleanSetting>
+            </li>
+            <li>
+              <BooleanSetting path="modalOnDelete">
+                {{ $t('settings.confirm_dialogs_delete') }}
+              </BooleanSetting>
+            </li>
+            <li>
+              <BooleanSetting path="modalOnLogout">
+                {{ $t('settings.confirm_dialogs_logout') }}
+              </BooleanSetting>
+            </li>
+            <li>
+              <BooleanSetting path="modalOnApproveFollow">
+                {{ $t('settings.confirm_dialogs_approve_follow') }}
+              </BooleanSetting>
+            </li>
+            <li>
+              <BooleanSetting path="modalOnDenyFollow">
+                {{ $t('settings.confirm_dialogs_deny_follow') }}
+              </BooleanSetting>
+            </li>
+            <li>
+              <BooleanSetting path="modalOnRemoveUserFromFollowers">
+                {{ $t('settings.confirm_dialogs_remove_follower') }}
+              </BooleanSetting>
+            </li>
+          </ul>
+        </li>
       </ul>
     </div>
     <div class="setting-item">
@@ -163,7 +210,7 @@
           </ChoiceSetting>
         </li>
         <ul
-          v-if="conversationDisplay !== 'linear'"
+          v-if="mergedConfig.conversationDisplay !== 'linear'"
           class="setting-list suboptions"
         >
           <li>
@@ -215,11 +262,21 @@
         <li>
           <BooleanSetting
             v-if="user"
-            path="serverSide_stripRichContent"
+            source="profile"
+            path="stripRichContent"
             expert="1"
           >
             {{ $t('settings.no_rich_text_description') }}
           </BooleanSetting>
+        </li>
+        <li>
+          <FloatSetting
+            v-if="user"
+            path="emojiReactionsScale"
+            expert="1"
+          >
+            {{ $t('settings.emoji_reactions_scale') }}
+          </FloatSetting>
         </li>
         <h3>{{ $t('settings.attachments') }}</h3>
         <li>
@@ -240,7 +297,7 @@
             <BooleanSetting
               path="preloadImage"
               expert="1"
-              :disabled="!hideNsfw"
+              parent-path="hideNsfw"
             >
               {{ $t('settings.preload_images') }}
             </BooleanSetting>
@@ -249,7 +306,7 @@
             <BooleanSetting
               path="useOneClickNsfw"
               expert="1"
-              :disabled="!hideNsfw"
+              parent-path="hideNsfw"
             >
               {{ $t('settings.use_one_click_nsfw') }}
             </BooleanSetting>
@@ -262,15 +319,13 @@
           >
             {{ $t('settings.loop_video') }}
           </BooleanSetting>
-          <ul
-            class="setting-list suboptions"
-            :class="[{disabled: !streaming}]"
-          >
+          <ul class="setting-list suboptions">
             <li>
               <BooleanSetting
                 path="loopVideoSilentOnly"
                 expert="1"
-                :disabled="!loopVideo || !loopSilentAvailable"
+                parent-path="loopVideo"
+                :disabled="!loopSilentAvailable"
               >
                 {{ $t('settings.loop_video_silent_only') }}
               </BooleanSetting>
@@ -368,18 +423,18 @@
       <ul class="setting-list">
         <li>
           <label for="default-vis">
-            {{ $t('settings.default_vis') }} <ServerSideIndicator :server-side="true" />
+            {{ $t('settings.default_vis') }} <ProfileSettingIndicator :is-profile="true" />
             <ScopeSelector
               class="scope-selector"
               :show-all="true"
-              :user-default="serverSide_defaultScope"
-              :initial-scope="serverSide_defaultScope"
+              :user-default="$store.state.profileConfig.defaultScope"
+              :initial-scope="$store.state.profileConfig.defaultScope"
               :on-scope-change="changeDefaultScope"
             />
           </label>
         </li>
         <li>
-          <!-- <BooleanSetting path="serverSide_defaultNSFW"> -->
+          <!-- <BooleanSetting source="profile" path="defaultNSFW"> -->
           <BooleanSetting path="sensitiveByDefault">
             {{ $t('settings.sensitive_by_default') }}
           </BooleanSetting>
@@ -451,6 +506,14 @@
             {{ $t('settings.pad_emoji') }}
           </BooleanSetting>
         </li>
+        <li>
+          <BooleanSetting
+            path="autocompleteSelect"
+            expert="1"
+          >
+            {{ $t('settings.autocomplete_select_first') }}
+          </BooleanSetting>
+        </li>
       </ul>
     </div>
   </div>
@@ -464,6 +527,7 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
+
 .column-settings .size-label {
   display: block;
   margin-bottom: 0.5em;

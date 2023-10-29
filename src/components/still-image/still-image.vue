@@ -17,6 +17,7 @@
       :data-src="dataSrc"
       :src="realSrc"
       :referrerpolicy="referrerpolicy"
+      :loading="loading"
       @load="onLoad"
       @error="onError"
     >
@@ -27,7 +28,7 @@
 <script src="./still-image.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .still-image {
   position: relative;
@@ -57,13 +58,13 @@
   &.animated {
     &::before {
       zoom: var(--_still_image-label-scale, 1);
-      content: 'gif';
+      content: "gif";
       position: absolute;
       line-height: 1;
       font-size: 0.7em;
       top: 0.5em;
       left: 0.5em;
-      background: rgba(127, 127, 127, 0.5);
+      background: rgb(127 127 127 / 50%);
       color: #fff;
       display: block;
       padding: 2px 4px;

@@ -2,7 +2,7 @@
   word-break: break-all;
 
   .mention-link:not(:first-child)::before {
-    content: ' ';
+    content: " ";
   }
 
   .showMoreLess {

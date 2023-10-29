@@ -17,7 +17,7 @@
 <script src="./avatar_list.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .avatars {
   display: flex;

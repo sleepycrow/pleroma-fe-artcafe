@@ -45,10 +45,18 @@
 <script src="./size_setting.js"></script>
 
 <style lang="scss">
-.css-unit-input, .css-unit-input select {
-  margin-left: 0.5em;
-  width: 4em !important;
-  max-width: 4em !important;
-  min-width: 4em !important;
+.SizeSetting {
+  .number-input {
+    max-width: 6.5em;
+  }
+
+  .css-unit-input,
+  .css-unit-input select {
+    margin-left: 0.5em;
+    width: 4em;
+    max-width: 4em;
+    min-width: 4em;
+  }
 }
+
 </style>

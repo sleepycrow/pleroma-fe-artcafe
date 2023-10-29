@@ -1,5 +1,7 @@
 // stylelint-disable rscss/class-format
-@import './_variables.scss';
+/* stylelint-disable no-descending-specificity */
+@import "./variables";
+@import "./panel";
 
 :root {
   --navbar-height: 3.5rem;
@@ -123,7 +125,7 @@ h4 {
   font-weight: 1000;
 }
 
-i[class*=icon-],
+i[class*="icon-"],
 .svg-inline--fa,
 .iconLetter {
   color: $fallback--icon;
@@ -132,7 +134,7 @@ i[class*=icon-],
 
 .button-unstyled:hover,
 a:hover {
-  > i[class*=icon-],
+  > i[class*="icon-"],
   > .svg-inline--fa,
   > .iconLetter {
     color: var(--text);
@@ -141,12 +143,11 @@ a:hover {
 
 nav {
   z-index: var(--ZI_navbar);
-  color: var(--topBarText);
   background-color: $fallback--fg;
   background-color: var(--topBar, $fallback--fg);
   color: $fallback--faint;
   color: var(--faint, $fallback--faint);
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 4px rgb(0 0 0 / 60%);
   box-shadow: var(--topBarShadow);
   box-sizing: border-box;
   height: var(--navbar-height);
@@ -191,13 +192,11 @@ nav {
 }
 
 .underlay {
-  grid-column-start: 1;
-  grid-column-end: span 3;
-  grid-row-start: 1;
-  grid-row-end: 1;
+  grid-column: 1 / span 3;
+  grid-row: 1 / 1;
   pointer-events: none;
-  background-color: rgba(0, 0, 0, 0.15);
-  background-color: var(--underlay, rgba(0, 0, 0, 0.15));
+  background-color: rgb(0 0 0 / 15%);
+  background-color: var(--underlay, rgb(0 0 0 / 15%));
   z-index: -1000;
 }
 
@@ -231,8 +230,7 @@ nav {
     display: grid;
     grid-template-columns: 100%;
     box-sizing: border-box;
-    grid-row-start: 1;
-    grid-row-end: 1;
+    grid-row: 1 / 1;
     margin: 0 calc(var(--___columnMargin) / 2);
     padding: calc(var(--___columnMargin)) 0;
     row-gap: var(--___columnMargin);
@@ -307,7 +305,7 @@ nav {
     align-content: start;
   }
 
-  &.-reverse:not(.-wide):not(.-mobile) {
+  &.-reverse:not(.-wide, .-mobile) {
     grid-template-columns:
       var(--effectiveContentColumnWidth)
       var(--effectiveSidebarColumnWidth);
@@ -336,11 +334,8 @@ nav {
     padding: 0;
 
     .column {
-      margin-left: 0;
-      margin-right: 0;
       padding-top: 0;
-      margin-top: var(--navbar-height);
-      margin-bottom: 0;
+      margin: var(--navbar-height) 0 0 0;
     }
 
     .panel-heading,
@@ -389,7 +384,7 @@ nav {
     background: transparent;
   }
 
-  i[class*=icon-],
+  i[class*="icon-"],
   .svg-inline--fa {
     color: $fallback--text;
     color: var(--btnText, $fallback--text);
@@ -400,12 +395,15 @@ nav {
   }
 
   &:hover {
-    box-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 4px rgb(255 255 255 / 30%);
     box-shadow: var(--buttonHoverShadow);
   }
 
   &:active {
-    box-shadow: 0 0 4px 0 rgba(255, 255, 255, 0.3), 0 1px 0 0 rgba(0, 0, 0, 0.2) inset, 0 -1px 0 0 rgba(255, 255, 255, 0.2) inset;
+    box-shadow:
+      0 0 4px 0 rgb(255 255 255 / 30%),
+      0 1px 0 0 rgb(0 0 0 / 20%) inset,
+      0 -1px 0 0 rgb(255 255 255 / 20%) inset;
     box-shadow: var(--buttonPressedShadow);
     color: $fallback--text;
     color: var(--btnPressedText, $fallback--text);
@@ -438,7 +436,10 @@ nav {
     color: var(--btnToggledText, $fallback--text);
     background-color: $fallback--fg;
     background-color: var(--btnToggled, $fallback--fg);
-    box-shadow: 0 0 4px 0 rgba(255, 255, 255, 0.3), 0 1px 0 0 rgba(0, 0, 0, 0.2) inset, 0 -1px 0 0 rgba(255, 255, 255, 0.2) inset;
+    box-shadow:
+      0 0 4px 0 rgb(255 255 255 / 30%),
+      0 1px 0 0 rgb(0 0 0 / 20%) inset,
+      0 -1px 0 0 rgb(255 255 255 / 20%) inset;
     box-shadow: var(--buttonPressedShadow);
 
     svg,
@@ -503,7 +504,10 @@ textarea,
   border: none;
   border-radius: $fallback--inputRadius;
   border-radius: var(--inputRadius, $fallback--inputRadius);
-  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2) inset, 0 -1px 0 0 rgba(255, 255, 255, 0.2) inset, 0 0 2px 0 rgba(0, 0, 0, 1) inset;
+  box-shadow:
+    0 1px 0 0 rgb(0 0 0 / 20%) inset,
+    0 -1px 0 0 rgb(255 255 255 / 20%) inset,
+    0 0 2px 0 rgb(0 0 0 / 100%) inset;
   box-shadow: var(--inputShadow);
   background-color: $fallback--fg;
   background-color: var(--input, $fallback--fg);
@@ -521,13 +525,13 @@ textarea,
   padding: 0 var(--_padding);
 
   &:disabled,
-  &[disabled=disabled],
+  &[disabled="disabled"],
   &.disabled {
     cursor: not-allowed;
     opacity: 0.5;
   }
 
-  &[type=range] {
+  &[type="range"] {
     background: none;
     border: none;
     margin: 0;
@@ -535,7 +539,7 @@ textarea,
     flex: 1;
   }
 
-  &[type=radio] {
+  &[type="radio"] {
     display: none;
 
     &:checked + label::before {
@@ -555,7 +559,7 @@ textarea,
     + label::before {
       flex-shrink: 0;
       display: inline-block;
-      content: '';
+      content: "";
       transition: box-shadow 200ms;
       width: 1.1em;
       height: 1.1em;
@@ -575,9 +579,7 @@ textarea,
     }
   }
 
-  &[type=checkbox] {
-    display: none;
-
+  &[type="checkbox"] {
     &:checked + label::before {
       color: $fallback--text;
       color: var(--inputText, $fallback--text);
@@ -594,7 +596,7 @@ textarea,
     + label::before {
       flex-shrink: 0;
       display: inline-block;
-      content: '✓';
+      content: "✓";
       transition: color 200ms;
       width: 1.1em;
       height: 1.1em;
@@ -634,12 +636,26 @@ option {
 }
 
 .hide-number-spinner {
-  -moz-appearance: textfield;
+  appearance: textfield;
 
-  &[type=number]::-webkit-inner-spin-button,
-  &[type=number]::-webkit-outer-spin-button {
+  &[type="number"]::-webkit-inner-spin-button,
+  &[type="number"]::-webkit-outer-spin-button {
     opacity: 0;
     display: none;
+  }
+}
+
+.cards-list {
+  list-style: none;
+  display: grid;
+  grid-auto-flow: row dense;
+  grid-template-columns: 1fr 1fr;
+
+  li {
+    border: 1px solid var(--border);
+    border-radius: var(--inputRadius);
+    padding: 0.5em;
+    margin: 0.25em;
   }
 }
 
@@ -653,23 +669,24 @@ option {
   display: inline-flex;
   vertical-align: middle;
 
-  button {
+  button,
+  .button-dropdown {
     position: relative;
     flex: 1 1 auto;
 
-    &:not(:last-child) {
+    &:not(:last-child),
+    &:not(:last-child) .button-default {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
 
-    &:not(:first-child) {
+    &:not(:first-child),
+    &:not(:first-child) .button-default {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
   }
 }
-
-@import './panel.scss';
 
 .fa {
   color: grey;
@@ -686,7 +703,7 @@ option {
   max-width: 10em;
   min-width: 1.7em;
   height: 1.3em;
-  padding: 0.15em 0.15em;
+  padding: 0.15em;
   vertical-align: middle;
   font-weight: normal;
   font-style: normal;
@@ -789,7 +806,8 @@ option {
 
 .fa-old-padding {
   &.iconLetter,
-  &.svg-inline--fa, &-layer {
+  &.svg-inline--fa,
+  &-layer {
     padding: 0 0.3em;
   }
 }
@@ -882,4 +900,17 @@ option {
 .fade-enter-from,
 .fade-leave-active {
   opacity: 0;
+}
+/* stylelint-enable no-descending-specificity */
+
+.visible-for-screenreader-only {
+  display: block;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  visibility: visible;
+  clip: rect(0 0 0 0);
+  padding: 0;
+  position: absolute;
 }

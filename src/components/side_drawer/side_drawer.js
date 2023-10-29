@@ -115,7 +115,10 @@ const SideDrawer = {
       GestureService.updateSwipe(e, this.closeGesture)
     },
     openSettingsModal () {
-      this.$store.dispatch('openSettingsModal')
+      this.$store.dispatch('openSettingsModal', 'user')
+    },
+    openAdminModal () {
+      this.$store.dispatch('openSettingsModal', 'admin')
     }
   }
 }

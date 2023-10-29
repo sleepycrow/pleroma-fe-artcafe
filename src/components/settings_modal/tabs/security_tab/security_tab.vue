@@ -143,8 +143,8 @@
         />
       </div>
       <div>
-        <i18n
-          path="settings.new_alias_target"
+        <i18n-t
+          keypath="settings.new_alias_target"
           tag="p"
         >
           <code
@@ -152,7 +152,7 @@
           >
             foo@example.org
           </code>
-        </i18n>
+        </i18n-t>
         <input
           v-model="addAliasTarget"
         >
@@ -175,16 +175,16 @@
       <h2>{{ $t('settings.move_account') }}</h2>
       <p>{{ $t('settings.move_account_notes') }}</p>
       <div>
-        <i18n
-          path="settings.move_account_target"
+        <i18n-t
+          keypath="settings.move_account_target"
           tag="p"
         >
-          <code
-            place="example"
-          >
-            foo@example.org
-          </code>
-        </i18n>
+          <template #example>
+            <code>
+              foo@example.org
+            </code>
+          </template>
+        </i18n-t>
         <input
           v-model="moveAccountTarget"
         >

@@ -74,13 +74,56 @@
         </button>
       </template>
     </Popover>
+    <teleport to="#modal">
+      <confirm-modal
+        v-if="showingConfirmBlock"
+        :title="$t('user_card.block_confirm_title')"
+        :confirm-text="$t('user_card.block_confirm_accept_button')"
+        :cancel-text="$t('user_card.block_confirm_cancel_button')"
+        @accepted="doBlockUser"
+        @cancelled="hideConfirmBlock"
+      >
+        <i18n-t
+          keypath="user_card.block_confirm"
+          tag="span"
+        >
+          <template #user>
+            <span
+              v-text="user.screen_name_ui"
+            />
+          </template>
+        </i18n-t>
+      </confirm-modal>
+    </teleport>
+    <teleport to="#modal">
+      <confirm-modal
+        v-if="showingConfirmRemoveFollower"
+        :title="$t('user_card.remove_follower_confirm_title')"
+        :confirm-text="$t('user_card.remove_follower_confirm_accept_button')"
+        :cancel-text="$t('user_card.remove_follower_confirm_cancel_button')"
+        @accepted="doRemoveUserFromFollowers"
+        @cancelled="hideConfirmRemoveUserFromFollowers"
+      >
+        <i18n-t
+          keypath="user_card.remove_follower_confirm"
+          tag="span"
+        >
+          <template #user>
+            <span
+              v-text="user.screen_name_ui"
+            />
+          </template>
+        </i18n-t>
+      </confirm-modal>
+    </teleport>
   </div>
 </template>
 
 <script src="./account_actions.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
+
 .AccountActions {
   .ellipsis-button {
     width: 2.5em;

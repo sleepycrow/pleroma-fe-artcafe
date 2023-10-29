@@ -1,4 +1,4 @@
-@import '../../_variables.scss';
+@import "../../variables";
 
 .user-card {
   position: relative;
@@ -11,7 +11,7 @@
   }
 
   .panel-heading {
-    padding: .5em 0;
+    padding: 0.5em 0;
     text-align: center;
     box-shadow: none;
     background: transparent;
@@ -35,10 +35,11 @@
     left: 0;
     right: 0;
     bottom: 0;
-    mask: linear-gradient(to top, white, transparent) bottom no-repeat,
-          linear-gradient(to top, white, white);
+    mask:
+      linear-gradient(to top, white, transparent) bottom no-repeat,
+      linear-gradient(to top, white, white);
     // Autoprefixer seem to ignore this one, and also syntax is different
-    -webkit-mask-composite: xor;
+    mask-composite: xor;
     mask-composite: exclude;
     background-size: cover;
     mask-size: 100% 60%;
@@ -159,17 +160,17 @@
       top: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: rgb(0 0 0 / 30%);
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: $fallback--avatarRadius;
       border-radius: var(--avatarRadius, $fallback--avatarRadius);
       opacity: 0;
-      transition: opacity .2s ease;
+      transition: opacity 0.2s ease;
 
       svg {
-        color: #FFF;
+        color: #fff;
       }
     }
 
@@ -178,7 +179,8 @@
     }
   }
 
-  .external-link-button, .edit-profile-button {
+  .external-link-button,
+  .edit-profile-button {
     cursor: pointer;
     width: 2.5em;
     text-align: center;
@@ -189,34 +191,6 @@
       color: $fallback--lightText;
       color: var(--lightText, $fallback--lightText);
     }
-  }
-
-  .user-summary {
-    display: block;
-    margin-left: 0.6em;
-    text-align: left;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    flex: 1 1 0;
-    // This is so that text doesn't get overlapped by avatar's shadow if it has
-    // big one
-    z-index: 1;
-    line-height: 2em;
-
-    --emoji-size: 1.7em;
-
-    .top-line,
-    .bottom-line {
-      display: flex;
-    }
-  }
-
-  .user-name {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    flex: 1 1 auto;
-    margin-right: 1em;
-    font-size: 1.1em;
   }
 
   .bottom-line {
@@ -253,8 +227,36 @@
     }
   }
 
+  .user-summary {
+    display: block;
+    margin-left: 0.6em;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1 1 0;
+    // This is so that text doesn't get overlapped by avatar's shadow if it has
+    // big one
+    z-index: 1;
+    line-height: 2em;
+
+    --emoji-size: 1.7em;
+
+    .top-line,
+    .bottom-line {
+      display: flex;
+    }
+  }
+
+  .user-name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex: 1 1 auto;
+    margin-right: 1em;
+    font-size: 1.1em;
+  }
+
   .user-meta {
-    margin-bottom: .15em;
+    margin-bottom: 0.15em;
     display: flex;
     align-items: baseline;
     line-height: 22px;
@@ -263,7 +265,7 @@
     .following {
       flex: 1 0 auto;
       margin: 0;
-      margin-bottom: .25em;
+      margin-bottom: 0.25em;
       text-align: left;
     }
 
@@ -271,7 +273,7 @@
       flex: 0 1 auto;
       display: flex;
       flex-wrap: wrap;
-      margin-right: -.5em;
+      margin-right: -0.5em;
       align-self: start;
 
       .userHighlightCl {
@@ -294,19 +296,20 @@
       .userHighlightText,
       .userHighlightSel {
         vertical-align: top;
-        margin-right: .5em;
-        margin-bottom: .25em;
+        margin-right: 0.5em;
+        margin-bottom: 0.25em;
       }
     }
   }
+
   .user-interactions {
     position: relative;
     display: flex;
     flex-flow: row wrap;
-    margin-right: -.75em;
+    margin-right: -0.75em;
 
     > * {
-      margin: 0 .75em .6em 0;
+      margin: 0 0.75em 0.6em 0;
       white-space: nowrap;
       min-width: 95px;
     }
@@ -317,7 +320,7 @@
   }
 
   .user-note {
-    margin: 0 .75em .6em 0;
+    margin: 0 0.75em 0.6em 0;
   }
 }
 
@@ -327,8 +330,8 @@
 
 .user-counts {
   display: flex;
-  line-height:16px;
-  padding: .5em 1.5em 0em 1.5em;
+  line-height: 16px;
+  padding: 0.5em 1.5em 0;
   text-align: center;
   justify-content: space-between;
   color: $fallback--lightText;
@@ -338,15 +341,22 @@
 
 .user-count {
   flex: 1 0 auto;
-  padding: .5em 0 .5em 0;
-  margin: 0 .5em;
+  padding: 0.5em 0;
+  margin: 0 0.5em;
 
   h5 {
-    font-size:1em;
+    font-size: 1em;
     font-weight: bolder;
     margin: 0 0 0.25em;
   }
+
+  /* stylelint-disable-next-line no-descending-specificity */
   a {
     text-decoration: none;
   }
+}
+
+.mute-expiry {
+  display: flex;
+  flex-direction: row;
 }

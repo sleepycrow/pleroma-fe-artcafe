@@ -25,7 +25,7 @@
 <script src="./dialog_modal.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 // TODO: unify with other modals.
 .dark-overlay {
@@ -38,8 +38,8 @@
     position: fixed;
     right: 0;
     top: 0;
-    background: rgba(27,31,35,.5);
-    z-index: 99;
+    background: rgb(27 31 35 / 50%);
+    z-index: 2000;
   }
 }
 
@@ -51,7 +51,7 @@
   margin: 15vh auto;
   position: fixed;
   transform: translateX(-50%);
-  z-index: 999;
+  z-index: 2001;
   cursor: default;
   display: block;
   background-color: $fallback--bg;
@@ -65,7 +65,7 @@
 
   .dialog-modal-content {
     margin: 0;
-    padding: 1rem 1rem;
+    padding: 1rem;
     background-color: $fallback--bg;
     background-color: var(--bg, $fallback--bg);
     white-space: normal;
@@ -73,7 +73,7 @@
 
   .dialog-modal-footer {
     margin: 0;
-    padding: .5em .5em;
+    padding: 0.5em;
     background-color: $fallback--bg;
     background-color: var(--bg, $fallback--bg);
     border-top: 1px solid $fallback--border;
@@ -83,7 +83,7 @@
 
     button {
       width: auto;
-      margin-left: .5rem;
+      margin-left: 0.5rem;
     }
   }
 }

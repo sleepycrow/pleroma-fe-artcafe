@@ -9,17 +9,20 @@ import DomainMuteCard from 'src/components/domain_mute_card/domain_mute_card.vue
 import SelectableList from 'src/components/selectable_list/selectable_list.vue'
 import ProgressButton from 'src/components/progress_button/progress_button.vue'
 import withSubscription from 'src/components/../hocs/with_subscription/with_subscription'
+import withLoadMore from 'src/components/../hocs/with_load_more/with_load_more'
 import Checkbox from 'src/components/checkbox/checkbox.vue'
 
-const BlockList = withSubscription({
+const BlockList = withLoadMore({
   fetch: (props, $store) => $store.dispatch('fetchBlocks'),
   select: (props, $store) => get($store.state.users.currentUser, 'blockIds', []),
+  destroy: () => {},
   childPropName: 'items'
 })(SelectableList)
 
-const MuteList = withSubscription({
+const MuteList = withLoadMore({
   fetch: (props, $store) => $store.dispatch('fetchMutes'),
   select: (props, $store) => get($store.state.users.currentUser, 'muteIds', []),
+  destroy: () => {},
   childPropName: 'items'
 })(SelectableList)
 

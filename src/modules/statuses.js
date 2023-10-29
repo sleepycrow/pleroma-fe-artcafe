@@ -229,6 +229,10 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       timelineObject.newStatusCount += 1
     }
 
+    if (status.quote) {
+      addStatus(status.quote, /* showImmediately = */ false, /* addToTimeline = */ false)
+    }
+
     return status
   }
 
@@ -615,9 +619,19 @@ const statuses = {
     fetchStatusHistory ({ rootState, dispatch }, status) {
       return apiService.fetchStatusHistory({ status })
     },
-    deleteStatus ({ rootState, commit }, status) {
-      commit('setDeleted', { status })
+    deleteStatus ({ rootState, commit, dispatch }, status) {
       apiService.deleteStatus({ id: status.id, credentials: rootState.users.currentUser.credentials })
+        .then((_) => {
+          commit('setDeleted', { status })
+        })
+        .catch((e) => {
+          dispatch('pushGlobalNotice', {
+            level: 'error',
+            messageKey: 'status.delete_error',
+            messageArgs: [e.message],
+            timeout: 5000
+          })
+        })
     },
     deleteStatusById ({ rootState, commit }, id) {
       const status = rootState.statuses.allStatusesObject[id]
@@ -747,7 +761,7 @@ const statuses = {
       )
     },
     fetchEmojiReactionsBy ({ rootState, commit }, id) {
-      rootState.api.backendInteractor.fetchEmojiReactions({ id }).then(
+      return rootState.api.backendInteractor.fetchEmojiReactions({ id }).then(
         emojiReactions => {
           commit('addEmojiReactionsBy', { id, emojiReactions, currentUser: rootState.users.currentUser })
         }
@@ -765,6 +779,7 @@ const statuses = {
       return store.rootState.api.backendInteractor.search2({ q, resolve, limit, offset, following, type })
         .then((data) => {
           store.commit('addNewUsers', data.accounts)
+          store.commit('addNewUsers', data.statuses.map(s => s.user).filter(u => u))
           store.commit('addNewStatuses', { statuses: data.statuses })
           return data
         })

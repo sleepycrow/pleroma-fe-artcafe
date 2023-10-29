@@ -125,6 +125,8 @@ export const parseUser = (data) => {
         output.role = 'member'
       }
 
+      output.birthday = data.pleroma.birthday
+
       if (data.pleroma.privileges) {
         output.privileges = data.pleroma.privileges
       } else if (data.pleroma.is_admin) {
@@ -162,6 +164,7 @@ export const parseUser = (data) => {
         output.no_rich_text = data.source.pleroma.no_rich_text
         output.show_role = data.source.pleroma.show_role
         output.discoverable = data.source.pleroma.discoverable
+        output.show_birthday = data.pleroma.show_birthday
       }
     }
 
@@ -322,6 +325,10 @@ export const parseStatus = (data) => {
       output.thread_muted = pleroma.thread_muted
       output.emoji_reactions = pleroma.emoji_reactions
       output.parent_visible = pleroma.parent_visible === undefined ? true : pleroma.parent_visible
+      output.quote = pleroma.quote ? parseStatus(pleroma.quote) : undefined
+      output.quote_id = pleroma.quote_id ? pleroma.quote_id : (output.quote ? output.quote.id : undefined)
+      output.quote_url = pleroma.quote_url
+      output.quote_visible = pleroma.quote_visible
     } else {
       output.text = data.content
       output.summary = data.spoiler_text
@@ -438,6 +445,7 @@ export const parseNotification = (data) => {
       : parseUser(data.target)
     output.from_profile = parseUser(data.account)
     output.emoji = data.emoji
+    output.emoji_url = data.emoji_url
     if (data.report) {
       output.report = data.report
       output.report.content = data.report.content

@@ -13,6 +13,7 @@ export default {
     'modelValue',
     'disabled',
     'unstyled',
-    'kind'
+    'kind',
+    'attrs'
   ]
 }

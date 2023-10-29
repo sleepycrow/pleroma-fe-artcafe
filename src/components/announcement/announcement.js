@@ -27,6 +27,9 @@ const Announcement = {
     ...mapState({
       currentUser: state => state.users.currentUser
     }),
+    canEditAnnouncement () {
+      return this.currentUser && this.currentUser.privileges.includes('announcements_manage_announcements')
+    },
     content () {
       return this.announcement.content
     },

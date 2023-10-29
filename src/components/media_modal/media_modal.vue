@@ -10,6 +10,7 @@
       class="modal-image-container"
       :direction="swipeDirection"
       :threshold="swipeThreshold"
+      :disable-click-threshold="swipeDisableClickThreshold"
       @preview-requested="handleSwipePreview"
       @swipe-finished="handleSwipeEnd"
       @swipeless-clicked="hide"
@@ -120,32 +121,12 @@ $modal-view-button-icon-half-height: calc(#{$modal-view-button-icon-height} / 2)
 $modal-view-button-icon-width: 3em;
 $modal-view-button-icon-margin: 0.5em;
 
-.modal-view.media-modal-view {
-  z-index: var(--ZI_media_modal);
-  flex-direction: column;
-
-  .modal-view-button-arrow,
-  .modal-view-button-hide {
-    opacity: 0.75;
-
-    &:focus,
-    &:hover {
-      outline: none;
-      box-shadow: none;
-    }
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-  overflow: hidden;
-}
-
 .media-modal-view {
   @keyframes media-fadein {
     from {
       opacity: 0;
     }
+
     to {
       opacity: 1;
     }
@@ -226,7 +207,7 @@ $modal-view-button-icon-margin: 0.5em;
     appearance: none;
     overflow: visible;
     cursor: pointer;
-    transition: opacity 333ms cubic-bezier(.4,0,.22,1);
+    transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);
     height: $modal-view-button-icon-height;
     width: $modal-view-button-icon-width;
 
@@ -236,9 +217,9 @@ $modal-view-button-icon-margin: 0.5em;
       width: $modal-view-button-icon-width;
       font-size: 1rem;
       line-height: $modal-view-button-icon-height;
-      color: #FFF;
+      color: #fff;
       text-align: center;
-      background-color: rgba(0,0,0,.3);
+      background-color: rgb(0 0 0 / 30%);
     }
   }
 
@@ -254,13 +235,14 @@ $modal-view-button-icon-margin: 0.5em;
       position: absolute;
       top: 0;
       line-height: $modal-view-button-icon-height;
-      color: #FFF;
+      color: #fff;
       text-align: center;
-      background-color: rgba(0,0,0,.3);
+      background-color: rgb(0 0 0 / 30%);
     }
 
     &--prev {
       left: 0;
+
       .arrow-icon {
         left: $modal-view-button-icon-margin;
       }
@@ -268,6 +250,7 @@ $modal-view-button-icon-margin: 0.5em;
 
     &--next {
       right: 0;
+
       .arrow-icon {
         right: $modal-view-button-icon-margin;
       }
@@ -278,10 +261,33 @@ $modal-view-button-icon-margin: 0.5em;
     position: absolute;
     top: 0;
     right: 0;
+
     .button-icon {
       top: $modal-view-button-icon-margin;
       right: $modal-view-button-icon-margin;
     }
   }
+}
+
+.modal-view.media-modal-view {
+  z-index: var(--ZI_media_modal);
+  flex-direction: column;
+
+  .modal-view-button-arrow,
+  .modal-view-button-hide {
+    opacity: 0.75;
+
+    &:focus,
+    &:hover {
+      outline: none;
+      box-shadow: none;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  overflow: hidden;
 }
 </style>

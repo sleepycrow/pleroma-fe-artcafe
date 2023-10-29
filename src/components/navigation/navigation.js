@@ -80,3 +80,21 @@ export const ROOT_ITEMS = {
     criteria: ['announcements']
   }
 }
+
+export function routeTo (item, currentUser) {
+  if (!item.route && !item.routeObject) return null
+
+  let route
+
+  if (item.routeObject) {
+    route = item.routeObject
+  } else {
+    route = { name: (item.anon || currentUser) ? item.route : item.anonRoute }
+  }
+
+  if (USERNAME_ROUTES.has(route.name)) {
+    route.params = { username: currentUser.screen_name, name: currentUser.screen_name }
+  }
+
+  return route
+}

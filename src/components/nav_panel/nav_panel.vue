@@ -102,7 +102,7 @@
 <script src="./nav_panel.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .NavPanel {
   .panel {
@@ -169,8 +169,9 @@
   }
 
   .nav-panel-heading {
-   // breaks without a unit
-   --panel-heading-height-padding: 0em;
+    // breaks without a unit
+    // stylelint-disable-next-line length-zero-no-unit
+    --panel-heading-height-padding: 0px;
   }
 }
 </style>

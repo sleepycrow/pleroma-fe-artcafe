@@ -6,7 +6,7 @@ var ServiceWorkerWebpackPlugin = require('serviceworker-webpack5-plugin')
 var CopyPlugin = require('copy-webpack-plugin');
 var { VueLoaderPlugin } = require('vue-loader')
 var ESLintPlugin = require('eslint-webpack-plugin');
-
+var StylelintPlugin = require('stylelint-webpack-plugin');
 
 var env = process.env.NODE_ENV
 // check env & config/index.js to decide weither to enable CSS Sourcemaps for the
@@ -111,6 +111,7 @@ module.exports = {
       extensions: ['js', 'vue'],
       formatter: require('eslint-formatter-friendly')
     }),
+    new StylelintPlugin({}),
     new VueLoaderPlugin(),
     // This copies Ruffle's WASM to a directory so that JS side can access it
     new CopyPlugin({

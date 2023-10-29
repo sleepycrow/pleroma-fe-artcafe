@@ -1,7 +1,9 @@
 const defaultState = {
   settingsModalState: 'hidden',
-  settingsModalLoaded: false,
+  settingsModalLoadedUser: false,
+  settingsModalLoadedAdmin: false,
   settingsModalTargetTab: null,
+  settingsModalMode: 'user',
   settings: {
     currentSaveStateNotice: null,
     noticeClearTimeout: null,
@@ -54,10 +56,17 @@ const interfaceMod = {
           throw new Error('Illegal minimization state of settings modal')
       }
     },
-    openSettingsModal (state) {
+    openSettingsModal (state, value) {
+      state.settingsModalMode = value
       state.settingsModalState = 'visible'
-      if (!state.settingsModalLoaded) {
-        state.settingsModalLoaded = true
+      if (value === 'user') {
+        if (!state.settingsModalLoadedUser) {
+          state.settingsModalLoadedUser = true
+        }
+      } else if (value === 'admin') {
+        if (!state.settingsModalLoadedAdmin) {
+          state.settingsModalLoadedAdmin = true
+        }
       }
     },
     setSettingsModalTargetTab (state, value) {
@@ -92,8 +101,8 @@ const interfaceMod = {
     closeSettingsModal ({ commit }) {
       commit('closeSettingsModal')
     },
-    openSettingsModal ({ commit }) {
-      commit('openSettingsModal')
+    openSettingsModal ({ commit }, value = 'user') {
+      commit('openSettingsModal', value)
     },
     togglePeekSettingsModal ({ commit }) {
       commit('togglePeekSettingsModal')
@@ -103,7 +112,7 @@ const interfaceMod = {
     },
     openSettingsModalTab ({ commit }, value) {
       commit('setSettingsModalTargetTab', value)
-      commit('openSettingsModal')
+      commit('openSettingsModal', 'user')
     },
     pushGlobalNotice (
       { commit, dispatch, state },

@@ -60,13 +60,7 @@ export default {
         const isWanted = slot => slot.props && slot.props['data-tab-name'] === tabName
         return this.$slots.default().findIndex(isWanted) === this.activeIndex
       }
-    },
-    settingsModalVisible () {
-      return this.settingsModalState === 'visible'
-    },
-    ...mapState({
-      settingsModalState: state => state.interface.settingsModalState
-    })
+    }
   },
   beforeUpdate () {
     const currentSlot = this.slots()[this.active]
@@ -117,6 +111,7 @@ export default {
                 onClick={this.clickTab(index)}
                 class={classesTab.join(' ')}
                 type="button"
+                role="tab"
               >
                 <img src={props.image} title={props['image-tooltip']}/>
                 {props.label ? '' : props.label}
@@ -131,6 +126,7 @@ export default {
               onClick={this.clickTab(index)}
               class={classesTab.join(' ')}
               type="button"
+              role="tab"
             >
               {!props.icon ? '' : (<FAIcon class="tab-icon" size="2x" fixed-width icon={props.icon}/>)}
               <span class="text">
@@ -167,11 +163,15 @@ export default {
 
     return (
       <div class={'tab-switcher ' + (this.sideTabBar ? 'side-tabs' : 'top-tabs')}>
-        <div class="tabs">
+        <div
+          class="tabs"
+          role="tablist"
+        >
           {tabs}
         </div>
         <div
           ref="contents"
+          role="tabpanel"
           class={'contents' + (this.scrollableTabs ? ' scrollable-tabs' : '')}
           v-body-scroll-lock={this.bodyScrollLock}
         >

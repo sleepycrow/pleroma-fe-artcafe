@@ -113,12 +113,23 @@
     "submit": "提交",
     "apply": "應用",
     "role": {
-      "moderator": "主持人",
+      "moderator": "審查者",
       "admin": "管理員"
     },
     "flash_content": "點擊以使用 Ruffle 顯示 Flash 內容（實驗性，可能無效）。",
     "flash_security": "請注意，這可能有潜在的危險，因為Flash內容仍然是武斷的程式碼。",
-    "flash_fail": "無法加載flash內容，請參閱控制台瞭解詳細資訊。"
+    "flash_fail": "無法加載flash內容，請參閱控制台瞭解詳細資訊。",
+    "no": "否",
+    "generic_error_message": "發生了一個錯誤： {0}",
+    "never_show_again": "不再顯示",
+    "yes": "是",
+    "undo": "復原",
+    "scroll_to_top": "滾動至頂部",
+    "pin": "置頂",
+    "scope_in_timeline": {
+      "private": "僅關注者"
+    },
+    "unpin": "停止置頂"
   },
   "finder": {
     "find_user": "尋找用戶",
@@ -133,7 +144,8 @@
     "pleroma_chat_messages": "Pleroma 聊天",
     "chat": "聊天",
     "gopher": "Gopher",
-    "upload_limit": "上傳限制"
+    "upload_limit": "上傳限制",
+    "shout": "留言板"
   },
   "exporter": {
     "processing": "正在處理，稍後會提示您下載文件",
@@ -164,11 +176,14 @@
         "reject": "拒絕",
         "accept_desc": "本實例只接收來自下列實例的消息：",
         "simple_policies": "站規",
-        "accept": "接受"
+        "accept": "接受",
+        "instance": "實例",
+        "reason": "原因",
+        "not_applicable": "N/A"
       },
       "mrf_policies_desc": "MRF 策略會影響本實例的互通行為。以下策略已啟用：",
       "keyword": {
-        "ftl_removal": "從“全部已知網絡”時間線上移除",
+        "ftl_removal": "從「全部已知網絡」時間線上移除",
         "replace": "取代",
         "reject": "拒絕",
         "is_replaced_by": "→",
@@ -531,7 +546,7 @@
       "backend_version": "後端版本",
       "frontend_version": "前端版本"
     },
-    "virtual_scrolling": "優化時間線渲染",
+    "virtual_scrolling": "最佳化時間軸算繪",
     "import_mutes_from_a_csv_file": "從CSV文件導入靜音",
     "mutes_imported": "靜音導入了！處理它們將需要一段時間。",
     "mute_import": "靜音導入",
@@ -561,7 +576,10 @@
     },
     "sensitive_by_default": "默認標記發文為敏感內容",
     "right_sidebar": "在右側顯示側邊欄",
-    "hide_shoutbox": "隱藏實例留言框"
+    "hide_shoutbox": "隱藏實例留言框",
+    "mention_link_display_short": "總是使用短名（如： {'@'}foo）",
+    "mention_link_display": "顯式提及連結",
+    "use_at_icon": "將{'@'}改用圖標顯示，不用文字"
   },
   "chats": {
     "more": "更多",
@@ -865,5 +883,26 @@
     "password_reset_disabled": "密碼重置已經被禁用。請聯繫你的實例管理員。",
     "password_reset_required": "您必須重置密碼才能登陸。",
     "password_reset_required_but_mailer_is_disabled": "您必須重置密碼，但是密碼重置被禁用了。請聯繫您所在實例的管理員。"
+  },
+  "announcements": {
+    "post_error": "錯誤： {error}",
+    "close_error": "關閉",
+    "delete_action": "刪除",
+    "start_time_prompt": "開始時間： ",
+    "end_time_prompt": "結束時間： ",
+    "all_day_prompt": "這是全日活動",
+    "start_time_display": "{time} 開始",
+    "end_time_display": "{time} 結束",
+    "published_time_display": "{time} 發布",
+    "edit_action": "編輯",
+    "submit_edit_action": "送出",
+    "cancel_edit_action": "取消",
+    "inactive_message": "此公告無效",
+    "page_header": "公告",
+    "title": "公告",
+    "mark_as_read_action": "標示為以閱讀",
+    "post_placeholder": "在此輸入您的公告內容……",
+    "post_form_header": "發布公告",
+    "post_action": "發布"
   }
 }

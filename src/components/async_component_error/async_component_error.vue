@@ -34,9 +34,10 @@ export default {
   height: 100%;
   align-items: center;
   justify-content: center;
+
   .btn {
-    margin: .5em;
-    padding: .5em 2em;
+    margin: 0.5em;
+    padding: 0.5em 2em;
   }
 }
 </style>

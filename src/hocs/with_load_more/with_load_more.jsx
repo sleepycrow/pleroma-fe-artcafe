@@ -98,7 +98,7 @@ const withLoadMore = ({
               </button>
             }
             {!this.error && this.loading && <FAIcon spin icon="circle-notch"/>}
-            {!this.error && !this.loading && !this.bottomedOut && <a onClick={this.fetchEntries}>{this.$t('general.more')}</a>}
+            {!this.error && !this.loading && !this.bottomedOut && <a onClick={this.fetchEntries} role="button" tabindex="0">{this.$t('general.more')}</a>}
           </div>
         </div>
       )

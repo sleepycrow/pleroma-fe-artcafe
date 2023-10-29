@@ -7,13 +7,11 @@
           <BooleanSetting path="hideFilteredStatuses">
             {{ $t('settings.hide_filtered_statuses') }}
           </BooleanSetting>
-          <ul
-            class="setting-list suboptions"
-            :class="[{disabled: !streaming}]"
-          >
+          <ul class="setting-list suboptions">
             <li>
               <BooleanSetting
-                :disabled="hideFilteredStatuses"
+                parent-path="hideFilteredStatuses"
+                :parent-invert="true"
                 path="hideWordFilteredPosts"
               >
                 {{ $t('settings.hide_wordfiltered_statuses') }}
@@ -22,7 +20,8 @@
             <li>
               <BooleanSetting
                 v-if="user"
-                :disabled="hideFilteredStatuses"
+                parent-path="hideFilteredStatuses"
+                :parent-invert="true"
                 path="hideMutedThreads"
               >
                 {{ $t('settings.hide_muted_threads') }}
@@ -31,7 +30,8 @@
             <li>
               <BooleanSetting
                 v-if="user"
-                :disabled="hideFilteredStatuses"
+                parent-path="hideFilteredStatuses"
+                :parent-invert="true"
                 path="hideMutedPosts"
               >
                 {{ $t('settings.hide_muted_posts') }}

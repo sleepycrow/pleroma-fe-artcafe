@@ -11,9 +11,16 @@ var env = process.env.NODE_ENV === 'testing'
     ? require('../config/test.env')
     : config.build.env
 
-let commitHash = require('child_process')
-    .execSync('git rev-parse --short HEAD')
-    .toString();
+let commitHash = (() => {
+  const subst = "$Format:%h$";
+  if(!subst.match(/Format:/)) {
+    return subst;
+  } else {
+    return require('child_process')
+      .execSync('git rev-parse --short HEAD')
+      .toString();
+  }
+})();
 
 var webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',

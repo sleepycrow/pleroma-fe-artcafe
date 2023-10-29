@@ -78,6 +78,16 @@
                 {{ $t('settings.download_backup') }}
               </a>
               <span
+                v-else-if="backup.state === 'running'"
+              >
+                {{ $tc('settings.backup_running', backup.processed_number, { number: backup.processed_number }) }}
+              </span>
+              <span
+                v-else-if="backup.state === 'failed'"
+              >
+                {{ $t('settings.backup_failed') }}
+              </span>
+              <span
                 v-else
               >
                 {{ $t('settings.backup_not_ready') }}

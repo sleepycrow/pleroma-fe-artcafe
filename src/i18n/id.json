@@ -214,7 +214,8 @@
     "domain_mutes": "Domain",
     "composing": "Menulis",
     "no_blocks": "Tidak ada yang diblokir",
-    "no_mutes": "Tidak ada yang dibisukan"
+    "no_mutes": "Tidak ada yang dibisukan",
+    "remove_language": "Hapus"
   },
   "about": {
     "mrf": {
@@ -230,7 +231,9 @@
         "accept_desc": "Instansi ini hanya menerima pesan dari instansi-instansi berikut:",
         "accept": "Terima",
         "media_removal": "Penghapusan Media",
-        "media_removal_desc": "Instansi ini menghapus media dari postingan yang berasal dari instansi-instansi berikut:"
+        "media_removal_desc": "Instansi ini menghapus media dari postingan yang berasal dari instansi-instansi berikut:",
+        "instance": "Instance",
+        "reason": "Alasan"
       },
       "federation": "Federasi",
       "mrf_policies": "Kebijakan MRF yang diaktifkan"
@@ -437,7 +440,10 @@
       "password_required": "tidak boleh kosong",
       "email_required": "tidak boleh kosong",
       "fullname_required": "tidak boleh kosong",
-      "username_required": "tidak boleh kosong"
+      "username_required": "tidak boleh kosong",
+      "password_confirmation_match": "wajib sama dengan sandi",
+      "birthday_required": "tidak boleh kosong",
+      "birthday_min_age": "wajib sama dengan atau sebelum {date}"
     },
     "register": "Daftar",
     "fullname_placeholder": "contoh. Lain Iwakura",
@@ -450,7 +456,12 @@
     "bio": "Bio",
     "reason_placeholder": "Instansi ini menerima pendaftaran secara manual.\nBeritahu administrasinya mengapa Anda ingin mendaftar.",
     "reason": "Alasan mendaftar",
-    "registration": "Pendaftaran"
+    "registration": "Pendaftaran",
+    "email_language": "Dalam bahasa apa kamu ingin menerima surel dari server ini?",
+    "email_optional": "Surel (opsional)",
+    "birthday": "Ulang tahun:",
+    "birthday_optional": "Ulang tahun (opsional):",
+    "bio_optional": "Bio (opsional)"
   },
   "post_status": {
     "preview_empty": "Kosong",
@@ -482,7 +493,8 @@
     "empty_status_error": "Tidak dapat memposting status kosong tanpa berkas",
     "account_not_locked_warning_link": "terkunci",
     "account_not_locked_warning": "Akun Anda tidak {0}. Siapapun dapat mengikuti Anda untuk melihat postingan hanya-pengikut Anda.",
-    "new_status": "Posting status baru"
+    "new_status": "Posting status baru",
+    "edit_status": "Sunting status"
   },
   "general": {
     "apply": "Terapkan",
@@ -508,7 +520,15 @@
     "generic_error": "Terjadi kesalahan",
     "loading": "Memuat…",
     "more": "Lebih banyak",
-    "submit": "Kirim"
+    "submit": "Kirim",
+    "yes": "Ya",
+    "no": "Tidak",
+    "scope_in_timeline": {
+      "direct": "Langsung",
+      "private": "Hanya pengikut",
+      "public": "Publik"
+    },
+    "generic_error_message": "Terjadi kesalahan: {0}"
   },
   "remote_user_resolver": {
     "error": "Tidak ditemukan."
@@ -522,7 +542,18 @@
     "emoji": "Emoji",
     "stickers": "Stiker",
     "keep_open": "Tetap buka pemilih",
-    "custom": "Emoji kustom"
+    "custom": "Emoji kustom",
+    "unicode_groups": {
+      "activities": "Aktivitas",
+      "animals-and-nature": "Hewan & Alam",
+      "flags": "Bendera",
+      "food-and-drink": "Makanan & Minuman",
+      "objects": "Objek",
+      "people-and-body": "Orang & Tubuh",
+      "smileys-and-emotion": "Emosi",
+      "symbols": "Simbol",
+      "travel-and-places": "Perjalanan & Tempat-tempat"
+    }
   },
   "polls": {
     "expired": "Japat berakhir {0} yang lalu",
@@ -553,11 +584,17 @@
     "timelines": "Linimasa",
     "chats": "Obrolan",
     "dms": "Pesan langsung",
-    "friend_requests": "Ingin mengikuti"
+    "friend_requests": "Ingin mengikuti",
+    "twkn": "Jaringan Dikenal",
+    "mobile_notifications_close": "Tutup notifikasi",
+    "announcements": "Pengumuman",
+    "mobile_notifications": "Buka notifikasi (ada yang belum dibaca)"
   },
   "media_modal": {
     "next": "Selanjutnya",
-    "previous": "Sebelum"
+    "previous": "Sebelum",
+    "counter": "{current} / {total}",
+    "hide": "Tutup penampil media"
   },
   "login": {
     "recovery_code": "Kode pemulihan",
@@ -574,7 +611,10 @@
     "heading": {
       "totp": "Otentikasi dua-faktor"
     },
-    "enter_two_factor_code": "Masukkan kode dua-faktor"
+    "enter_two_factor_code": "Masukkan kode dua-faktor",
+    "logout_confirm": "Apa kamu yakin ingin keluar?",
+    "logout_confirm_accept_button": "Keluar",
+    "logout_confirm_cancel_button": "Jangan keluar"
   },
   "importer": {
     "error": "Terjadi kesalahan ketika mnengimpor berkas ini.",
@@ -597,7 +637,8 @@
     "gopher": "Gopher",
     "pleroma_chat_messages": "Pleroma Obrolan",
     "chat": "Obrolan",
-    "upload_limit": "Batas unggahan"
+    "upload_limit": "Batas unggahan",
+    "media_proxy": "Proxy media"
   },
   "exporter": {
     "processing": "Memproses, Anda akan segera diminta untuk mengunduh berkas Anda",
@@ -619,12 +660,41 @@
     "moves": "Pengguna yang bermigrasi",
     "follows": "Pengikut baru",
     "favs_repeats": "Ulangan dan favorit",
-    "load_older": "Muat interaksi yang lebih tua"
+    "load_older": "Muat interaksi yang lebih tua",
+    "emoji_reactions": "Reaksi Emoji",
+    "reports": "Laporan"
   },
   "errors": {
     "storage_unavailable": "Pleroma tidak dapat mengakses penyimpanan browser. Login Anda atau pengaturan lokal Anda tidak akan tersimpan dan masalah yang tidak terduga dapat terjadi. Coba mengaktifkan kuki."
   },
   "shoutbox": {
     "title": "Kotak Suara"
+  },
+  "report": {
+    "state_closed": "Ditutup",
+    "reporter": "Pelapor:",
+    "reported_statuses": "Status yang dilaporkan:",
+    "reported_user": "Pengguna yang dilaporkan:",
+    "notes": "Catatan:",
+    "state": "Status:",
+    "state_open": "Terbuka",
+    "state_resolved": "Selesai"
+  },
+  "announcements": {
+    "end_time_prompt": "Waktu berakhir: ",
+    "published_time_display": "Diterbitkan pada {time}",
+    "page_header": "Pengumuman",
+    "title": "Pengumuman",
+    "mark_as_read_action": "Tandai telah dibaca",
+    "post_placeholder": "Ketik isi pengumumanmu di sini...",
+    "close_error": "Tutup",
+    "delete_action": "Hapus",
+    "start_time_prompt": "Waktu mulai: ",
+    "post_error": "Kesalahan: {error}",
+    "start_time_display": "Dimulai pada {time}",
+    "end_time_display": "Berakhir pada {time}",
+    "edit_action": "Sunting",
+    "submit_edit_action": "Kirim",
+    "cancel_edit_action": "Batal"
   }
 }

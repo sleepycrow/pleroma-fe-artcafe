@@ -1,27 +1,17 @@
 <template>
-  <span
-    v-if="matchesExpertLevel"
-    class="IntegerSetting"
+  <NumberSetting
+    v-bind="$attrs"
+    truncate="1"
   >
-    <label :for="path">
-      <slot />
-    </label>
-    <input
-      :id="path"
-      class="number-input"
-      type="number"
-      step="1"
-      :disabled="disabled"
-      :min="min || 0"
-      :value="state"
-      @change="update"
-    >
-    {{ ' ' }}
-    <ModifiedIndicator
-      :changed="isChanged"
-      :onclick="reset"
-    />
-  </span>
+    <slot />
+  </NumberSetting>
 </template>
 
-<script src="./integer_setting.js"></script>
+<script>
+import NumberSetting from './number_setting.vue'
+export default {
+  components: {
+    NumberSetting
+  }
+}
+</script>

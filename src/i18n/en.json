@@ -137,6 +137,10 @@
     "login": "Log in",
     "description": "Log in with OAuth",
     "logout": "Log out",
+    "logout_confirm_title": "Logout confirmation",
+    "logout_confirm": "Do you really want to logout?",
+    "logout_confirm_accept_button": "Logout",
+    "logout_confirm_cancel_button": "Do not logout",
     "password": "Password",
     "placeholder": "e.g. lain",
     "register": "Register",
@@ -172,6 +176,7 @@
     "bookmarks": "Bookmarks",
     "user_search": "User Search",
     "search": "Search",
+    "search_close": "Close search bar",
     "who_to_follow": "Who to follow",
     "preferences": "Preferences",
     "timelines": "Timelines",
@@ -225,6 +230,7 @@
     "search_emoji": "Search for an emoji",
     "add_emoji": "Insert emoji",
     "custom": "Custom emoji",
+    "unpacked": "Unpacked emoji",
     "unicode": "Unicode emoji",
     "unicode_groups": {
       "activities": "Activities",
@@ -255,6 +261,8 @@
   "post_status": {
     "edit_status": "Edit status",
     "new_status": "Post new status",
+    "reply_option": "Reply to this status",
+    "quote_option": "Quote this status",
     "account_not_locked_warning": "Your account is not {0}. Anyone can follow you to view your follower-only posts.",
     "account_not_locked_warning_link": "locked",
     "attachments_sensitive": "Mark attachments as sensitive",
@@ -265,6 +273,7 @@
       "text/markdown": "Markdown",
       "text/bbcode": "BBCode"
     },
+    "content_type_selection": "Post format",
     "content_warning": "Subject (optional)",
     "default": "Just landed in L.A.",
     "direct_warning_to_all": "This post will be visible to all the mentioned users.",
@@ -282,6 +291,7 @@
       "private": "This post will be visible to your followers only",
       "unlisted": "This post will not be visible in Public Timeline and The Whole Known Network"
     },
+    "scope_notice_dismiss": "Close this notice",
     "scope": {
       "direct": "Direct - post to mentioned users only",
       "private": "Followers-only - post to followers only",
@@ -311,9 +321,13 @@
       "email_required": "cannot be left blank",
       "password_required": "cannot be left blank",
       "password_confirmation_required": "cannot be left blank",
-      "password_confirmation_match": "should be the same as password"
+      "password_confirmation_match": "should be the same as password",
+      "birthday_required": "cannot be left blank",
+      "birthday_min_age": "must be on or before {date}"
     },
-    "email_language": "In which language do you want to receive emails from the server?"
+    "email_language": "In which language do you want to receive emails from the server?",
+    "birthday": "Birthday:",
+    "birthday_optional": "Birthday (optional):"
   },
   "remote_user_resolver": {
     "remote_user_resolver": "Remote user resolver",
@@ -334,6 +348,10 @@
     "select_all": "Select all"
   },
   "settings": {
+    "add_language": "Add fallback language",
+    "remove_language": "Remove",
+    "primary_language": "Primary language:",
+    "fallback_language": "Fallback language {index}:",
     "app_name": "App name",
     "expert_mode": "Show advanced",
     "save": "Save changes",
@@ -390,6 +408,8 @@
     "account_backup_table_head": "Backup",
     "download_backup": "Download",
     "backup_not_ready": "This backup is not ready yet.",
+    "backup_running": "This backup is in progress, processed {number} record. | This backup is in progress, processed {number} records.",
+    "backup_failed": "This backup has failed.",
     "remove_backup": "Remove",
     "list_backups_error": "Error fetching backup list: {error}",
     "add_backup": "Create a new backup",
@@ -413,6 +433,16 @@
     "composing": "Composing",
     "confirm_new_password": "Confirm new password",
     "current_password": "Current password",
+    "confirm_dialogs": "Ask for confirmation when",
+    "confirm_dialogs_repeat": "repeating a status",
+    "confirm_dialogs_unfollow": "unfollowing a user",
+    "confirm_dialogs_block": "blocking a user",
+    "confirm_dialogs_mute": "muting a user",
+    "confirm_dialogs_delete": "deleting a status",
+    "confirm_dialogs_logout": "logging out",
+    "confirm_dialogs_approve_follow": "approving a follower",
+    "confirm_dialogs_deny_follow": "denying a follower",
+    "confirm_dialogs_remove_follower": "removing a follower",
     "mutes_and_blocks": "Mutes and Blocks",
     "data_import_export_tab": "Data import / export",
     "default_vis": "Default visibility scope",
@@ -437,7 +467,9 @@
     "domain_mutes": "Domains",
     "avatar_size_instruction": "The recommended minimum size for avatar images is 150x150 pixels.",
     "pad_emoji": "Pad emoji with spaces when adding from picker",
+    "autocomplete_select_first": "Automatically select the first candidate when autocomplete results are available",
     "emoji_reactions_on_timeline": "Show emoji reactions on timeline",
+    "emoji_reactions_scale": "Reactions scale factor",
     "export_theme": "Save preset",
     "filtering": "Filtering",
     "wordfilter": "Wordfilter",
@@ -489,6 +521,8 @@
     "loop_video_silent_only": "Loop only videos without sound (i.e. Mastodon's \"gifs\")",
     "mutes_tab": "Mutes",
     "play_videos_in_modal": "Play videos in a popup frame",
+    "url": "URL",
+    "preview": "Preview",
     "file_export_import": {
       "backup_restore": "Settings backup",
       "backup_settings": "Backup settings to file",
@@ -506,6 +540,10 @@
       "add_field": "Add field",
       "name": "Label",
       "value": "Content"
+    },
+    "birthday": {
+      "label": "Birthday",
+      "show_birthday": "Show my birthday"
     },
     "account_privacy": "Privacy",
     "use_contain_fit": "Don't crop the attachment in thumbnails",
@@ -796,6 +834,98 @@
       "title": "Version",
       "backend_version": "Backend version",
       "frontend_version": "Frontend version"
+    },
+    "commit_value": "Save",
+    "commit_value_tooltip": "Value is not saved, press this button to commit your changes",
+    "reset_value": "Reset",
+    "reset_value_tooltip": "Reset draft",
+    "hard_reset_value": "Hard reset",
+    "hard_reset_value_tooltip": "Remove setting from storage, forcing use of default value"
+  },
+  "admin_dash": {
+    "window_title": "Administration",
+    "wip_notice": "This admin dashboard is experimental and WIP, {adminFeLink}.",
+    "old_ui_link": "old admin UI available here",
+    "reset_all": "Reset all",
+    "commit_all": "Save all",
+    "tabs": {
+      "nodb": "No DB Config",
+      "instance": "Instance",
+      "limits": "Limits",
+      "frontends": "Front-ends"
+    },
+    "nodb": {
+      "heading": "Database config is disabled",
+      "text": "You need to change backend config files so that {property} is set to {value}, see more in {documentation}.",
+      "documentation": "documentation",
+      "text2": "Most configuration options will be unavailable."
+    },
+    "captcha": {
+      "native": "Native",
+      "kocaptcha": "KoCaptcha"
+    },
+    "instance": {
+      "instance": "Instance information",
+      "registrations": "User sign-ups",
+      "captcha_header": "CAPTCHA",
+      "kocaptcha": "KoCaptcha settings",
+      "access": "Instance access",
+      "restrict": {
+        "header": "Restrict access for anonymous visitors",
+        "description": "Detailed setting for allowing/disallowing access to certain aspects of API. By default (indeterminate state) it will disallow if instance is not public, ticked checkbox means disallow access even if instance is public, unticked means allow access even if instance is private. Please note that unexpected behavior might happen if some settings are set, i.e. if profile access is disabled posts will show without profile information.",
+        "timelines": "Timelines access",
+        "profiles": "User profiles access",
+        "activities": "Statues/activities access"
+      }
+    },
+    "limits": {
+      "arbitrary_limits": "Arbitrary limits",
+      "posts": "Post limits",
+      "uploads": "Attachments limits",
+      "users": "User profile limits",
+      "profile_fields": "Profile fields limits",
+      "user_uploads": "Profile media limits"
+    },
+    "frontend": {
+      "repository": "Repository link",
+      "versions": "Available versions",
+      "build_url": "Build URL",
+      "reinstall": "Reinstall",
+      "is_default": "(Default)",
+      "is_default_custom": "(Default, version: {version})",
+      "install": "Install",
+      "install_version": "Install version {version}",
+      "more_install_options": "More install options",
+      "more_default_options": "More default setting options",
+      "set_default": "Set default",
+      "set_default_version": "Set version {version} as default",
+      "wip_notice": "Please note that this section is a WIP and lacks certain features as backend implementation of front-end management is incomplete.",
+      "default_frontend": "Default front-end",
+      "default_frontend_tip": "Default front-end will be shown to all users. Currently there's no way to for a user to select personal front-end. If you switch away from PleromaFE you'll most likely have to use old and buggy AdminFE to do instance configuration until we replace it.",
+      "default_frontend_tip2": "WIP: Since Pleroma backend doesn't properly list all installed frontends you'll have to enter name and reference manually. List below provides shortcuts to fill the values.",
+      "available_frontends": "Available for install"
+    },
+    "temp_overrides": {
+      ":pleroma": {
+        ":instance": {
+          ":public": {
+            "label": "Instance is public",
+            "description": "Disabling this will make all API accessible only for logged-in users, this will make Public and Federated timelines inaccessible to anonymous visitors."
+          },
+          ":limit_to_local_content": {
+            "label": "Limit search to local content",
+            "description": "Disables global network search for unauthenticated (default), all users or none"
+          },
+          ":description_limit": {
+            "label": "Limit",
+            "description": "Character limit for attachment descriptions"
+          },
+          ":background_image": {
+            "label": "Background image",
+            "description": "Background image (primarily used by PleromaFE)"
+          }
+        }
+      }
     }
   },
   "time": {
@@ -840,7 +970,12 @@
   "status": {
     "favorites": "Favorites",
     "repeats": "Repeats",
+    "repeat_confirm": "Do you really want to repeat this status?",
+    "repeat_confirm_title": "Repeat confirmation",
+    "repeat_confirm_accept_button": "Repeat",
+    "repeat_confirm_cancel_button": "Do not repeat",
     "delete": "Delete status",
+    "delete_error": "Error deleting status: {0}",
     "edit": "Edit status",
     "edited_at": "(last edited {time})",
     "pin": "Pin on profile",
@@ -849,6 +984,9 @@
     "bookmark": "Bookmark",
     "unbookmark": "Unbookmark",
     "delete_confirm": "Do you really want to delete this status?",
+    "delete_confirm_title": "Delete confirmation",
+    "delete_confirm_accept_button": "Delete",
+    "delete_confirm_cancel_button": "Keep",
     "reply_to": "Reply to",
     "mentions": "Mentions",
     "replies_list": "Replies:",
@@ -891,14 +1029,30 @@
     "show_all_conversation_with_icon": "{icon} {text}",
     "show_all_conversation": "Show full conversation ({numStatus} other status) | Show full conversation ({numStatus} other statuses)",
     "show_only_conversation_under_this": "Only show replies to this status",
-    "status_history": "Status history"
+    "status_history": "Status history",
+    "reaction_count_label": "{num} person reacted | {num} people reacted",
+    "hide_quote": "Hide the quoted status",
+    "display_quote": "Display the quoted status",
+    "invisible_quote": "Quoted status unavailable: {link}"
   },
   "user_card": {
     "approve": "Approve",
+    "approve_confirm_title": "Approve confirmation",
+    "approve_confirm_accept_button": "Approve",
+    "approve_confirm_cancel_button": "Do not approve",
+    "approve_confirm": "Do you want to approve {user}'s follow request?",
     "block": "Block",
     "blocked": "Blocked!",
+    "block_confirm_title": "Block confirmation",
+    "block_confirm": "Do you really want to block {user}?",
+    "block_confirm_accept_button": "Block",
+    "block_confirm_cancel_button": "Do not block",
     "deactivated": "Deactivated",
     "deny": "Deny",
+    "deny_confirm_title": "Deny confirmation",
+    "deny_confirm_accept_button": "Deny",
+    "deny_confirm_cancel_button": "Do not deny",
+    "deny_confirm": "Do you want to deny {user}'s follow request?",
     "edit_profile": "Edit profile",
     "favorites": "Favorites",
     "follow": "Follow",
@@ -906,6 +1060,10 @@
     "follow_sent": "Request sent!",
     "follow_progress": "Requesting…",
     "follow_unfollow": "Unfollow",
+    "unfollow_confirm_title": "Unfollow confirmation",
+    "unfollow_confirm": "Do you really want to unfollow {user}?",
+    "unfollow_confirm_accept_button": "Unfollow",
+    "unfollow_confirm_cancel_button": "Do not unfollow",
     "followees": "Following",
     "followers": "Followers",
     "following": "Following!",
@@ -917,9 +1075,18 @@
     "message": "Message",
     "mute": "Mute",
     "muted": "Muted",
+    "mute_confirm_title": "Mute confirmation",
+    "mute_confirm": "Do you really want to mute {user}?",
+    "mute_confirm_accept_button": "Mute",
+    "mute_confirm_cancel_button": "Do not mute",
+    "mute_duration_prompt": "Mute this user for (0 for indefinite time):",
     "per_day": "per day",
     "remote_follow": "Remote follow",
     "remove_follower": "Remove follower",
+    "remove_follower_confirm_title": "Remove follower confirmation",
+    "remove_follower_confirm_accept_button": "Remove",
+    "remove_follower_confirm_cancel_button": "Keep",
+    "remove_follower_confirm": "Do you really want to remove {user} from your followers?",
     "report": "Report",
     "statuses": "Statuses",
     "subscribe": "Subscribe",
@@ -933,6 +1100,7 @@
     "hide_repeats": "Hide repeats",
     "show_repeats": "Show repeats",
     "bot": "Bot",
+    "birthday": "Born {birthday}",
     "admin_menu": {
       "moderation": "Moderation",
       "grant_admin": "Grant Admin",
@@ -993,7 +1161,8 @@
     "reject_follow_request": "Reject follow request",
     "bookmark": "Bookmark",
     "toggle_expand": "Expand or collapse notification to show post in full",
-    "toggle_mute": "Expand or collapse notification to reveal muted content"
+    "toggle_mute": "Expand or collapse notification to reveal muted content",
+    "autocomplete_available": "{number} result is available. Use up and down keys to navigate through them. | {number} results are available. Use up and down keys to navigate through them."
   },
   "upload": {
     "error": {

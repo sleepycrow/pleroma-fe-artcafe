@@ -1,5 +1,5 @@
 import { mapState } from 'vuex'
-import { TIMELINES, ROOT_ITEMS, USERNAME_ROUTES } from 'src/components/navigation/navigation.js'
+import { TIMELINES, ROOT_ITEMS, routeTo } from 'src/components/navigation/navigation.js'
 import { getListEntries, filterNavigation } from 'src/components/navigation/filter.js'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -31,14 +31,7 @@ const NavPanel = {
   props: ['limit'],
   methods: {
     getRouteTo (item) {
-      if (item.routeObject) {
-        return item.routeObject
-      }
-      const route = { name: (item.anon || this.currentUser) ? item.route : item.anonRoute }
-      if (USERNAME_ROUTES.has(route.name)) {
-        route.params = { username: this.currentUser.screen_name }
-      }
-      return route
+      return routeTo(item, this.currentUser)
     }
   },
   computed: {
@@ -52,6 +45,7 @@ const NavPanel = {
       privateMode: state => state.instance.private,
       federating: state => state.instance.federating,
       pleromaChatMessagesAvailable: state => state.instance.pleromaChatMessagesAvailable,
+      supportsAnnouncements: state => state.announcements.supportsAnnouncements,
       pinnedItems: state => new Set(state.serverSideStorage.prefsStorage.collections.pinnedNavItems)
     }),
     pinnedList () {
@@ -63,6 +57,7 @@ const NavPanel = {
         ],
         {
           hasChats: this.pleromaChatMessagesAvailable,
+          hasAnnouncements: this.supportsAnnouncements,
           isFederating: this.federating,
           isPrivate: this.privateMode,
           currentUser: this.currentUser
@@ -82,6 +77,7 @@ const NavPanel = {
         ],
         {
           hasChats: this.pleromaChatMessagesAvailable,
+          hasAnnouncements: this.supportsAnnouncements,
           isFederating: this.federating,
           isPrivate: this.privateMode,
           currentUser: this.currentUser

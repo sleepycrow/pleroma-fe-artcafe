@@ -4,53 +4,63 @@
     :class="containerClass"
   >
     <div
-      v-for="(option, index) in options"
-      :key="index"
-      class="poll-option"
+      :role="showResults ? 'section' : (poll.multiple ? 'group' : 'radiogroup')"
     >
       <div
-        v-if="showResults"
-        :title="resultTitle(option)"
-        class="option-result"
+        v-for="(option, index) in options"
+        :key="index"
+        class="poll-option"
       >
-        <div class="option-result-label">
-          <span class="result-percentage">
-            {{ percentageForOption(option.votes_count) }}%
-          </span>
-          <RichContent
-            :html="option.title_html"
-            :handle-links="false"
-            :emoji="emoji"
+        <div
+          v-if="showResults"
+          :title="resultTitle(option)"
+          class="option-result"
+        >
+          <div class="option-result-label">
+            <span class="result-percentage">
+              {{ percentageForOption(option.votes_count) }}%
+            </span>
+            <RichContent
+              :html="option.title_html"
+              :handle-links="false"
+              :emoji="emoji"
+            />
+          </div>
+          <div
+            class="result-fill"
+            :style="{ 'width': `${percentageForOption(option.votes_count)}%` }"
           />
         </div>
         <div
-          class="result-fill"
-          :style="{ 'width': `${percentageForOption(option.votes_count)}%` }"
-        />
-      </div>
-      <div
-        v-else
-        @click="activateOption(index)"
-      >
-        <input
-          v-if="poll.multiple"
-          type="checkbox"
-          :disabled="loading"
-          :value="index"
-        >
-        <input
           v-else
-          type="radio"
-          :disabled="loading"
-          :value="index"
+          tabindex="0"
+          :role="poll.multiple ? 'checkbox' : 'radio'"
+          :aria-labelledby="`option-vote-${randomSeed}-${index}`"
+          :aria-checked="choices[index]"
+          @click="activateOption(index)"
         >
-        <label class="option-vote">
-          <RichContent
-            :html="option.title_html"
-            :handle-links="false"
-            :emoji="emoji"
-          />
-        </label>
+          <input
+            v-if="poll.multiple"
+            type="checkbox"
+            class="poll-checkbox"
+            :disabled="loading"
+            :value="index"
+          >
+          <input
+            v-else
+            type="radio"
+            :disabled="loading"
+            :value="index"
+          >
+          <label class="option-vote">
+            <RichContent
+              :id="`option-vote-${randomSeed}-${index}`"
+              :html="option.title_html"
+              :handle-links="false"
+              :emoji="emoji"
+            />
+          </label>
+        </div>
       </div>
     </div>
     <div class="footer faint">
@@ -90,7 +100,7 @@
 <script src="./poll.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .poll {
   .votes {
@@ -98,9 +108,11 @@
     flex-direction: column;
     margin: 0 0 0.5em;
   }
+
   .poll-option {
     margin: 0.75em 0.5em;
   }
+
   .option-result {
     height: 100%;
     display: flex;
@@ -109,6 +121,7 @@
     color: $fallback--lightText;
     color: var(--lightText, $fallback--lightText);
   }
+
   .option-result-label {
     display: flex;
     align-items: center;
@@ -116,10 +129,12 @@
     z-index: 1;
     word-break: break-word;
   }
+
   .result-percentage {
     width: 3.5em;
     flex-shrink: 0;
   }
+
   .result-fill {
     height: 100%;
     position: absolute;
@@ -133,23 +148,32 @@
     left: 0;
     transition: width 0.5s;
   }
+
   .option-vote {
     display: flex;
     align-items: center;
   }
+
   input {
     width: 3.5em;
   }
+
   .footer {
     display: flex;
     align-items: center;
   }
+
   &.loading * {
     cursor: progress;
   }
+
   .poll-vote-button {
     padding: 0 0.5em;
     margin-right: 0.5em;
+  }
+
+  .poll-checkbox {
+    display: none;
   }
 }
 </style>

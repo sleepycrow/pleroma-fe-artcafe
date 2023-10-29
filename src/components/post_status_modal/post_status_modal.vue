@@ -12,7 +12,7 @@
       <PostStatusForm
         class="panel-body"
         v-bind="params"
-        @posted="closeModal"
+        @posted="resetAndClose"
       />
     </div>
   </Modal>

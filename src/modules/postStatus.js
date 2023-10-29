@@ -10,6 +10,9 @@ const postStatus = {
     },
     closePostStatusModal (state) {
       state.modalActivated = false
+    },
+    resetPostStatusModal (state) {
+      state.params = null
     }
   },
   actions: {
@@ -18,6 +21,9 @@ const postStatus = {
     },
     closePostStatusModal ({ commit }) {
       commit('closePostStatusModal')
+    },
+    resetPostStatusModal ({ commit }) {
+      commit('resetPostStatusModal')
     }
   }
 }

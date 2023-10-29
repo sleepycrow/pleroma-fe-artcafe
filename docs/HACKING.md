@@ -25,7 +25,17 @@ This could be a bit trickier, you basically need steps 1-4 from *develop build* 
 
 ### Replacing your instance's frontend with custom FE build
 
-This is the most easiest way to use and test FE build: you just need to copy or symlink contents of `dist` folder into backend's [static directory](../backend/configuration/static_dir.md), by default it is located in `instance/static`, or in `/var/lib/pleroma/static` for OTP release installations, create it if it doesn't exist already. Be aware that running `yarn build` wipes the contents of `dist` folder.
+#### New way (via AdminFE, a bit janky but works)
+
+In backend's [static directory](../backend/configuration/static_dir.md) there should be a folder called `frontends` if you installed any frontends from AdminFE before, otherwise you can create it yourself (ensuring correct permissions). Backend will serve given frontend from path `frontends/{frontend}/{reference}`, where `{frontend}` is name of frontend (`pleroma-fe`) and `{reference}` is version. You could make a production build, move `dist` folder into `frontends/pleroma-fe` and rename it into something like `myCustomVersion`. To actually make backend serve this frontend by default, in AdminFE you'll need to set name/reference in Settings -> Frontend -> Frontends -> Primary.
+
+You could also install from a zip file (i.e. CI build) but AdminFE UI is a bit buggy and lacking, so this approach is not recommended.
+
+Take note that frontend management is in early development and currently there's no way for user to change frontend or version for themselves, primary frontend becomes default frontend for all users and visitors.
+
+#### Old way (replaces everything, hard to maintain, not recommended)
+
+Copy or symlink contents of `dist` folder into backend's [static directory](../backend/configuration/static_dir.md), by default it is located in `instance/static`, or in `/var/lib/pleroma/static` for OTP release installations, create it if it doesn't exist already. Be aware that running `yarn build` wipes the contents of `dist` folder, and this could remove emojis, other frontends etc. and therefore this approach is not recommended.
 
 ### Running production build locally or on a separate server
 

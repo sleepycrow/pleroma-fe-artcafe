@@ -4,6 +4,7 @@ import { sumBy, set } from 'lodash'
 const Gallery = {
   props: [
     'attachments',
+    'compact',
     'limitRows',
     'descriptions',
     'limit',

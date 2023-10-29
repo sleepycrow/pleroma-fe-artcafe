@@ -53,7 +53,15 @@
       "direct": "私讯",
       "private": "仅关注者",
       "unlisted": "列外"
-    }
+    },
+    "scroll_to_top": "滚动至顶",
+    "generic_error_message": "发生一个错误：{0}",
+    "never_show_again": "不再显示",
+    "undo": "撤销",
+    "yes": "是",
+    "no": "否",
+    "unpin": "取消固定该项",
+    "pin": "固定该项"
   },
   "image_cropper": {
     "crop_picture": "裁剪图片",
@@ -82,7 +90,11 @@
     "heading": {
       "totp": "双重因素验证",
       "recovery": "双重因素恢复"
-    }
+    },
+    "logout_confirm_cancel_button": "不要登出",
+    "logout_confirm_title": "确认登出",
+    "logout_confirm_accept_button": "登出",
+    "logout_confirm": "您确定要登出吗？"
   },
   "media_modal": {
     "previous": "往前",
@@ -109,7 +121,16 @@
     "chats": "聊天",
     "timelines": "时间线",
     "bookmarks": "书签",
-    "home_timeline": "主页时间线"
+    "home_timeline": "主页时间线",
+    "lists": "列表",
+    "edit_finish": "完成编辑",
+    "mobile_notifications": "打开通知（有未读的）",
+    "mobile_notifications_close": "关闭通知",
+    "announcements": "公告",
+    "edit_nav_mobile": "自定义导航栏",
+    "edit_pinned": "编辑固定的项目",
+    "mobile_sidebar": "切换移动设备侧栏",
+    "search_close": "关闭搜索栏"
   },
   "notifications": {
     "broken_favorite": "未知的状态，正在搜索中…",
@@ -124,7 +145,8 @@
     "migrated_to": "迁移到了",
     "follow_request": "想要关注你",
     "error": "取得通知时发生错误：{0}",
-    "poll_ended": "投票结束了"
+    "poll_ended": "投票结束了",
+    "submitted_report": "提交举报"
   },
   "polls": {
     "add_poll": "增加投票",
@@ -149,7 +171,9 @@
     "favs_repeats": "转发和喜欢",
     "follows": "新的关注者",
     "load_older": "加载更早的互动",
-    "moves": "用户迁移"
+    "moves": "用户迁移",
+    "reports": "举报",
+    "emoji_reactions": "表情回应"
   },
   "post_status": {
     "new_status": "发布新状态",
@@ -183,7 +207,12 @@
     "media_description": "媒体描述",
     "media_description_error": "更新媒体失败，请重试",
     "empty_status_error": "不能发布没有内容、没有附件的发文",
-    "post": "发送"
+    "post": "发送",
+    "edit_remote_warning": "其它远程实例可能不支持编辑并且无法接收您的帖子的最新版本。",
+    "edit_unsupported_warning": "Pleroma 不支持对提及或投票进行编辑。",
+    "edit_status": "编辑状态",
+    "content_type_selection": "发帖格式",
+    "scope_notice_dismiss": "关闭此提示"
   },
   "registration": {
     "bio": "简介",
@@ -203,12 +232,18 @@
       "email_required": "不能留空",
       "password_required": "不能留空",
       "password_confirmation_required": "不能留空",
-      "password_confirmation_match": "密码不一致"
+      "password_confirmation_match": "密码不一致",
+      "birthday_required": "不能为空",
+      "birthday_min_age": "必须在 {date} 或之前"
     },
     "reason_placeholder": "此实例的注册需要手动批准。\n请让管理员知道您为什么想要注册。",
     "reason": "注册理由",
     "register": "注册",
-    "email_language": "你想从服务器收到什么语言的邮件？"
+    "email_language": "你想从服务器收到什么语言的邮件？",
+    "bio_optional": "介绍（可选）",
+    "email_optional": "电子邮件（可选）",
+    "birthday": "生日：",
+    "birthday_optional": "生日（可选）："
   },
   "selectable_list": {
     "select_all": "选择全部"
@@ -260,7 +295,7 @@
     "change_password_error": "修改密码的时候出了点问题。",
     "changed_password": "成功修改了密码！",
     "collapse_subject": "折叠带主题的内容",
-    "composing": "写作",
+    "composing": "撰写",
     "confirm_new_password": "确认新密码",
     "current_avatar": "当前头像",
     "current_password": "当前密码",
@@ -599,7 +634,7 @@
       "backup_settings": "备份设置到文件",
       "backup_restore": "设置备份"
     },
-    "right_sidebar": "在右侧显示侧边栏",
+    "right_sidebar": "反转分栏的顺序",
     "hide_shoutbox": "隐藏实例留言板",
     "expert_mode": "显示高级",
     "download_backup": "下载",
@@ -631,7 +666,88 @@
     "move_account_notes": "如果你想把账号移动到别的地方，你必须去目标账号，然后加一个指向这里的别名。",
     "wordfilter": "词语过滤器",
     "user_profiles": "用户资料",
-    "third_column_mode_notifications": "消息栏"
+    "third_column_mode_notifications": "通知栏",
+    "backup_running": "此备份正在进行，已处理 {number} 条记录。 |此备份正在进行，已处理 {number} 条记录。",
+    "lists_navigation": "在导航中显示列表",
+    "word_filter_and_more": "词过滤器及其它...",
+    "backup_failed": "此备份已失败。",
+    "birthday": {
+      "label": "生日",
+      "show_birthday": "展示我的生日"
+    },
+    "hide_favorites_description": "不显示我的喜欢列表（人们仍然会收到通知）",
+    "third_column_mode": "当有足够的空间时，显示第三栏包含",
+    "third_column_mode_postform": "主要的发文形式和导航",
+    "columns": "分栏",
+    "user_popover_avatar_overlay": "在用户头像上显示用户弹出窗口",
+    "navbar_column_stretch": "延伸导航栏至分栏宽度",
+    "posts": "帖子",
+    "conversation_display_linear_quick": "线性视图",
+    "conversation_other_replies_button": "显示 “其它回复” 按钮",
+    "confirm_dialogs_delete": "删除状态",
+    "confirm_dialogs_mute": "隐藏用户",
+    "column_sizes": "分栏大小",
+    "column_sizes_sidebar": "侧栏",
+    "column_sizes_content": "內容",
+    "column_sizes_notifs": "通知",
+    "conversation_other_replies_button_below": "在状态下方",
+    "conversation_other_replies_button_inside": "在状态中",
+    "auto_update": "自动显示新的帖子",
+    "use_websockets": "使用 websockets（实时更新）",
+    "max_depth_in_thread": "默认显示同主题帖子中的最大层数",
+    "hide_wordfiltered_statuses": "隐藏经过词语过滤的状态",
+    "hide_muted_threads": "不显示已隐藏的同主题帖子",
+    "notification_visibility_polls": "你所投的投票的结束于",
+    "tree_advanced": "允许在树状视图中进行更灵活的导航",
+    "tree_fade_ancestors": "以模糊的文字显示当前状态的上级",
+    "conversation_display_linear": "线性样式",
+    "mention_link_fade_domain": "淡化域名（例如：{'@'}example.org 中的 {'@'}foo{'@'}example.org）",
+    "mention_link_bolden_you": "当你被提及时突出显示提及你",
+    "user_popover_avatar_action": "弹出式头像点击动作",
+    "user_popover_avatar_action_zoom": "缩放头像",
+    "user_popover_avatar_action_close": "关闭弹出窗口",
+    "show_yous": "显示 (You)s",
+    "add_language": "添加备用语言",
+    "remove_language": "移除",
+    "primary_language": "主要语言：",
+    "fallback_language": "备用语言 {index}：",
+    "account_privacy": "隐私",
+    "conversation_display": "对话显示样式",
+    "conversation_display_tree": "树状样式",
+    "conversation_display_tree_quick": "树状视图",
+    "disable_sticky_headers": "不要把分栏的顶栏固定在屏幕的顶部",
+    "confirm_dialogs": "请求确认于",
+    "confirm_dialogs_logout": "登出",
+    "confirm_dialogs_deny_follow": "拒绝关注请求",
+    "confirm_dialogs_approve_follow": "批准关注请求",
+    "confirm_dialogs_block": "屏蔽用户",
+    "confirm_dialogs_unfollow": "取消关注用户",
+    "confirm_dialogs_repeat": "转发状态",
+    "confirm_dialogs_remove_follower": "移除关注者",
+    "mute_bot_posts": "隐藏机器人的帖子",
+    "hide_bot_indication": "隐藏帖子中的机器人提示",
+    "always_show_post_button": "始终显示浮动的新帖子按钮",
+    "show_scrollbars": "显示侧栏的滚动条",
+    "third_column_mode_none": "完全不显示第三栏",
+    "use_at_icon": "将 {'@'} 符号显示为图标而不是文本",
+    "mention_link_display": "显示提及链接",
+    "mention_link_display_short": "始终以简称的形式出现（例如：{'@'}foo）",
+    "mention_link_display_full_for_remote": "仅远程实例用户以全名的形式出现（例如：{'@'}foo{'@'}example.org）",
+    "mention_link_display_full": "始终以全名的形式出现（例如：{'@'}foo{'@'}example.org）",
+    "mention_link_use_tooltip": "点击提及链接时显示用户卡片",
+    "mention_link_show_avatar": "在链接旁边显示用户头像",
+    "mention_link_show_avatar_quick": "在提及内容旁边显示用户头像",
+    "user_popover_avatar_action_open": "打开个人资料",
+    "autocomplete_select_first": "当有自动完成的结果时，自动选择第一个候选项",
+    "url": "URL",
+    "preview": "预览",
+    "commit_value": "保存",
+    "commit_value_tooltip": "当前值未保存，请按此按钮以提交你的修改",
+    "reset_value": "重置",
+    "reset_value_tooltip": "重置草稿",
+    "hard_reset_value": "硬重置",
+    "hard_reset_value_tooltip": "从存储中移除设置，强制使用默认值",
+    "emoji_reactions_scale": "表情回应比例系数"
   },
   "time": {
     "day": "{0} 天",
@@ -697,7 +813,9 @@
     "reload": "重新载入",
     "error": "取得时间轴时发生错误：{0}",
     "socket_broke": "丢失实时连接：CloseEvent code {0}",
-    "socket_reconnected": "已建立实时连接"
+    "socket_reconnected": "已建立实时连接",
+    "quick_view_settings": "快速视图设置",
+    "quick_filter_settings": "快速过滤设置"
   },
   "status": {
     "favorites": "喜欢",
@@ -706,7 +824,7 @@
     "pin": "在个人资料置顶",
     "unpin": "取消在个人资料置顶",
     "pinned": "置顶",
-    "delete_confirm": "你真的想要删除这条状态吗？",
+    "delete_confirm": "您确定要删除这条状态吗？",
     "reply_to": "回复",
     "replies_list": "回复：",
     "mute_conversation": "隐藏对话",
@@ -715,7 +833,7 @@
     "show_content": "显示内容",
     "hide_full_subject": "隐藏此部分标题",
     "show_full_subject": "显示全部标题",
-    "thread_muted": "此系列消息已被隐藏",
+    "thread_muted": "同主题帖子已被隐藏",
     "copy_link": "复制状态链接",
     "status_unavailable": "状态不可取得",
     "unbookmark": "取消书签",
@@ -736,10 +854,10 @@
     "attachment_stop_flash": "停止 Flash 播放器",
     "move_up": "把附件左移",
     "open_gallery": "打开图库",
-    "thread_hide": "隐藏这个线索",
-    "thread_show": "显示这个线索",
+    "thread_hide": "隐藏这个同主题帖子",
+    "thread_show": "显示这个同主题帖子",
     "thread_show_full_with_icon": "{icon} {text}",
-    "thread_follow": "查看这个线索的剩余部分（一共有 {numStatus} 个状态）",
+    "thread_follow": "查看这个同主题帖子的剩余部分（一共有 {numStatus} 个状态）",
     "thread_follow_with_icon": "{icon} {text}",
     "ancestor_follow": "查看这个状态下的别的 {numReplies} 个回复",
     "ancestor_follow_with_icon": "{icon} {text}",
@@ -748,8 +866,21 @@
     "mentions": "提及",
     "replies_list_with_others": "回复（另外 +{numReplies} 个）：",
     "move_down": "把附件右移",
-    "thread_show_full": "显示这个线索下的所有东西（一共有 {numStatus} 个状态，最大深度 {depth}）",
-    "show_only_conversation_under_this": "只显示这个状态的回复"
+    "thread_show_full": "显示这个同主题帖子下的所有东西（一共有 {numStatus} 个状态，最大深度 {depth}）",
+    "show_only_conversation_under_this": "只显示这个状态的回复",
+    "repeat_confirm": "您确定要转发这条状态吗？",
+    "repeat_confirm_title": "确认转发",
+    "repeat_confirm_accept_button": "转发",
+    "repeat_confirm_cancel_button": "不要转发",
+    "edit": "编辑状态",
+    "edited_at": "（最后编辑于 {time}）",
+    "delete_confirm_title": "确认删除",
+    "delete_confirm_accept_button": "删除",
+    "delete_confirm_cancel_button": "保留",
+    "show_attachment_in_modal": "在媒体模式中显示",
+    "status_history": "状态历史",
+    "delete_error": "删除状态时出错：{0}",
+    "reaction_count_label": "{num} 人作出了表情回应"
   },
   "user_card": {
     "approve": "核准",
@@ -797,7 +928,8 @@
       "disable_remote_subscription": "禁止从远程实例关注用户",
       "disable_any_subscription": "完全禁止关注用户",
       "quarantine": "从联合实例中禁止用户帖子",
-      "delete_user": "删除用户"
+      "delete_user": "删除用户",
+      "delete_user_data_and_deactivate_confirmation": "这将永久删除该账户的数据并停用该账户。你完全确定吗？"
     },
     "hidden": "已隐藏",
     "show_repeats": "显示转发",
@@ -811,7 +943,41 @@
       "solid": "单一颜色背景",
       "disabled": "不突出显示"
     },
-    "edit_profile": "编辑个人资料"
+    "edit_profile": "编辑个人资料",
+    "approve_confirm_title": "确认批准",
+    "approve_confirm_accept_button": "批准",
+    "block_confirm_accept_button": "屏蔽",
+    "block_confirm_cancel_button": "不要屏蔽",
+    "deactivated": "已停用",
+    "deny_confirm_title": "确认拒绝",
+    "deny_confirm_accept_button": "拒绝",
+    "deny_confirm_cancel_button": "不要拒绝",
+    "deny_confirm": "您是否要拒绝 {user} 的关注请求？",
+    "follow_cancel": "取消请求",
+    "unfollow_confirm_title": "确认取消关注",
+    "unfollow_confirm": "您确定要取消关注 {user} 吗？",
+    "unfollow_confirm_accept_button": "取消关注",
+    "unfollow_confirm_cancel_button": "不要取消关注",
+    "mute_confirm_title": "确认隐藏",
+    "mute_confirm_accept_button": "隐藏",
+    "mute_confirm_cancel_button": "不要隐藏",
+    "mute_duration_prompt": "让这个用户隐藏（0表示无限期）：",
+    "remove_follower": "移除关注者",
+    "remove_follower_confirm_title": "确认移除关注者",
+    "remove_follower_confirm_cancel_button": "保留",
+    "remove_follower_confirm": "您确定要将 {user} 从您的关注者里移除吗？",
+    "birthday": "生于 {birthday}",
+    "note": "备注",
+    "approve_confirm_cancel_button": "不要批准",
+    "approve_confirm": "您是否要批准 {user} 的关注请求？",
+    "block_confirm_title": "确认屏蔽",
+    "block_confirm": "您确定要屏蔽 {user} 吗？",
+    "mute_confirm": "您确定要隐藏 {user} 吗？",
+    "remove_follower_confirm_accept_button": "移除",
+    "note_blank": "（空）",
+    "edit_note": "编辑备注",
+    "edit_note_apply": "应用",
+    "edit_note_cancel": "取消"
   },
   "user_profile": {
     "timeline_title": "用户时间线",
@@ -840,7 +1006,10 @@
     "reject_follow_request": "拒绝关注请求",
     "add_reaction": "添加互动",
     "bookmark": "书签",
-    "accept_follow_request": "接受关注请求"
+    "accept_follow_request": "接受关注请求",
+    "toggle_expand": "展开或折叠通知以显示帖子全文",
+    "toggle_mute": "展开或折叠通知以显示已隐藏的内容",
+    "autocomplete_available": "共有 {number} 个结果可用。使用向上和向下键浏览它们。"
   },
   "upload": {
     "error": {
@@ -862,7 +1031,9 @@
     "hashtags": "话题标签",
     "person_talking": "{count} 人正在讨论",
     "people_talking": "{count} 人正在讨论",
-    "no_results": "没有搜索结果"
+    "no_results": "没有搜索结果",
+    "no_more_results": "没有更多结果",
+    "load_more": "加载更多结果"
   },
   "password_reset": {
     "forgot_password": "忘记密码了？",
@@ -890,7 +1061,20 @@
     "search_emoji": "搜索表情符号",
     "emoji": "表情符号",
     "load_all": "加载所有表情符号（共 {emojiAmount} 个）",
-    "load_all_hint": "最先加载的 {saneAmount} 表情符号，加载全部表情符号可能会带来性能问题。"
+    "load_all_hint": "最先加载的 {saneAmount} 表情符号，加载全部表情符号可能会带来性能问题。",
+    "unicode_groups": {
+      "flags": "旗帜",
+      "food-and-drink": "饮食",
+      "objects": "物件",
+      "people-and-body": "人和身体",
+      "symbols": "符号",
+      "travel-and-places": "旅行和地点",
+      "activities": "活动",
+      "animals-and-nature": "动物和自然",
+      "smileys-and-emotion": "表情与情感"
+    },
+    "regional_indicator": "地区指示符 {letter}",
+    "unpacked": "未分组的表情符号"
   },
   "about": {
     "mrf": {
@@ -950,7 +1134,7 @@
     "empty_chat_list_placeholder": "您还没有任何聊天记录。开始聊天吧！",
     "error_sending_message": "发送消息时出了点问题。",
     "error_loading_chat": "加载聊天时出了点问题。",
-    "delete_confirm": "您确实要删除此消息吗？",
+    "delete_confirm": "您确定要删除此消息吗？",
     "more": "更多",
     "empty_message_error": "无法发布空消息",
     "new": "新聊天",
@@ -958,5 +1142,155 @@
     "delete": "删除",
     "message_user": "发消息给 {nickname}",
     "you": "你："
+  },
+  "announcements": {
+    "page_header": "公告",
+    "title": "公告",
+    "mark_as_read_action": "标为已读",
+    "post_form_header": "发布公告",
+    "post_placeholder": "在这里输入公告内容...",
+    "post_action": "发布",
+    "post_error": "错误：{error}",
+    "close_error": "关闭",
+    "delete_action": "删除",
+    "start_time_prompt": "起始时间： ",
+    "end_time_prompt": "终止时间： ",
+    "all_day_prompt": "这是全天的事件",
+    "published_time_display": "发表于 {time}",
+    "start_time_display": "开始于 {time}",
+    "end_time_display": "结束于 {time}",
+    "edit_action": "编辑",
+    "submit_edit_action": "提交",
+    "cancel_edit_action": "取消",
+    "inactive_message": "这个公告不活跃"
+  },
+  "report": {
+    "reported_user": "被举报者：",
+    "state_closed": "已关闭",
+    "state_resolved": "已解决",
+    "reporter": "举报者：",
+    "state_open": "开启",
+    "reported_statuses": "已举报的状态：",
+    "notes": "备注：",
+    "state": "状态："
+  },
+  "unicode_domain_indicator": {
+    "tooltip": "此域名包含非 ascii 字符。"
+  },
+  "update": {
+    "update_bugs_gitlab": "Pleroma GitLab",
+    "update_changelog": "关于变化的更多细节，请参见 {theFullChangelog} 。",
+    "update_changelog_here": "完整的更新日志",
+    "big_update_title": "请忍耐一下",
+    "big_update_content": "我们已经有一段时间没有发布发行版，所以事情的外观和感觉可能与你习惯的不一样。",
+    "update_bugs": "请在 {pleromaGitlab} 上报告任何问题和bug，因为我们已经改变了很多，虽然我们进行了彻底的测试，并且自己使用了开发版本，但我们可能错过了一些东西。我们欢迎你对你可能遇到的问题或如何改进Pleroma和Pleroma-FE提出反馈和建议。",
+    "art_by": "Art by {linkToArtist}"
+  },
+  "lists": {
+    "search": "搜索用户",
+    "create": "创建",
+    "save": "保存更改",
+    "delete": "删除列表",
+    "following_only": "限制于正在关注",
+    "manage_lists": "管理列表",
+    "manage_members": "管理列表成员",
+    "add_members": "搜索更多用户",
+    "remove_from_list": "从列表中移除",
+    "add_to_list": "添加到列表",
+    "is_in_list": "已在列表中",
+    "editing_list": "正在编辑列表 {listTitle}",
+    "creating_list": "正在创建新的列表",
+    "update_title": "保存标题",
+    "really_delete": "真的要删除列表吗？",
+    "error": "操作列表时出错：{0}",
+    "lists": "列表",
+    "new": "新的列表",
+    "title": "列表标题"
+  },
+  "admin_dash": {
+    "window_title": "管理员",
+    "old_ui_link": "旧的管理界面在此处",
+    "reset_all": "重置全部",
+    "commit_all": "保存全部",
+    "tabs": {
+      "nodb": "无数据库配置",
+      "instance": "实例",
+      "limits": "限制",
+      "frontends": "前端"
+    },
+    "nodb": {
+      "heading": "数据库配置已禁用",
+      "documentation": "文档",
+      "text2": "大多数配置选项将不可用。",
+      "text": "你需要修改后端配置文件，以便将 {property} 设置为 {value}，更多内容请参见 {documentation}。"
+    },
+    "captcha": {
+      "native": "本地",
+      "kocaptcha": "KoCaptcha"
+    },
+    "instance": {
+      "instance": "实例信息",
+      "registrations": "用户注册",
+      "captcha_header": "验证码",
+      "kocaptcha": "KoCaptcha 设置",
+      "access": "实例访问",
+      "restrict": {
+        "header": "限制匿名访客的访问",
+        "timelines": "时间线访问",
+        "profiles": "用户个人资料访问",
+        "activities": "状态/活动访问",
+        "description": "允许/不允许访问特定 API 的详细设置。默认情况下（不确定状态），如果实例不是公开的，它将拒绝访问；勾选复选框意味着即使实例是公开的，也拒绝访问；不勾选意味着即使实例是私有的，也允许访问。请注意，如果某些设置被设定，可能会发生意想不到的行为，例如，如果个人资料访问被禁用，显示的帖文将不包含个人资料信息。"
+      }
+    },
+    "limits": {
+      "arbitrary_limits": "任意限制",
+      "posts": "帖文限制",
+      "uploads": "附件限制",
+      "users": "用户个人资料限制",
+      "profile_fields": "个人资料字段限制",
+      "user_uploads": "个人资料媒体限制"
+    },
+    "frontend": {
+      "repository": "存储库链接",
+      "versions": "可用版本",
+      "build_url": "构建产物 URL",
+      "reinstall": "重新安装",
+      "is_default": "（默认）",
+      "is_default_custom": "（默认，版本：{version}）",
+      "install": "安装",
+      "install_version": "安装版本 {version}",
+      "more_install_options": "更多安装选项",
+      "more_default_options": "更多默认设置选项",
+      "set_default": "设为默认",
+      "set_default_version": "将版本 {version} 设为默认",
+      "wip_notice": "请注意，此部分是一个WIP，缺乏某些功能，因为前端管理的后台实现并不完整。",
+      "default_frontend": "默认前端",
+      "default_frontend_tip": "默认的前端将显示给所有用户。目前还没有办法让用户选择个人的前端。如果你不使用 PleromaFE，你很可能不得不使用旧的和有问题的 AdminFE 来进行实例配置，直到我们替换它。",
+      "default_frontend_tip2": "WIP: 由于 Pleroma 后端没有正确列出所有已安装的前端，你必须手动输入名称和引用。下面的列表提供了填写这些值的快捷方式。",
+      "available_frontends": "可供安装"
+    },
+    "temp_overrides": {
+      ":pleroma": {
+        ":instance": {
+          ":public": {
+            "label": "实例是公开的",
+            "description": "禁用此功能将使所有的 API 只能被已登录用户访问，这将使公共和联邦时间线无法被匿名访客访问。"
+          },
+          ":limit_to_local_content": {
+            "label": "将搜索限于本地内容",
+            "description": "禁用未认证用户（默认）、所有用户或无人的全局网络搜索"
+          },
+          ":description_limit": {
+            "label": "限制",
+            "description": "附件描述的字数限制"
+          },
+          ":background_image": {
+            "label": "背景图片",
+            "description": "背景图片（主要使用于 PleromaFE）"
+          }
+        }
+      }
+    },
+    "wip_notice": "此管理仪表板是实验性和 WIP 的，{adminFeLink}。"
   }
 }

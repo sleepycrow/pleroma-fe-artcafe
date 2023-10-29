@@ -49,7 +49,7 @@ const announcements = {
       }
 
       const currentUser = store.rootState.users.currentUser
-      const isAdmin = currentUser && currentUser.role === 'admin'
+      const isAdmin = currentUser && currentUser.privileges.includes('announcements_manage_announcements')
 
       const getAnnouncements = async () => {
         if (!isAdmin) {

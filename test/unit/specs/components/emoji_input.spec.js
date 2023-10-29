@@ -14,7 +14,8 @@ const generateInput = (value, padEmoji = true) => {
               padEmoji
             }
           }
-        }
+        },
+        $t: (msg) => msg
       },
       stubs: {
         FAIcon: true

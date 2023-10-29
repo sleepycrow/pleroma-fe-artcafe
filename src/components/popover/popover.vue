@@ -5,7 +5,8 @@
   >
     <button
       ref="trigger"
-      class="button-unstyled popover-trigger-button"
+      class="popover-trigger-button"
+      :class="normalButton ? 'button-default btn' : 'button-unstyled'"
       type="button"
       v-bind="triggerAttrs"
       @click="onClick"
@@ -41,7 +42,7 @@
 <script src="./popover.js" />
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .popover-trigger-button {
   display: inline-block;
@@ -52,31 +53,31 @@
   position: fixed;
   min-width: 0;
   max-width: calc(100vw - 20px);
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 3px rgb(0 0 0 / 50%);
   box-shadow: var(--popupShadow);
 }
 
 .popover-default {
-  &:after {
-    content: '';
+  &::after {
+    content: "";
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 3;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: 1px 1px 4px rgb(0 0 0 / 60%);
     box-shadow: var(--panelShadow);
     pointer-events: none;
   }
 
   border-radius: $fallback--btnRadius;
   border-radius: var(--btnRadius, $fallback--btnRadius);
-
   background-color: $fallback--bg;
   background-color: var(--popover, $fallback--bg);
   color: $fallback--text;
   color: var(--popoverText, $fallback--text);
+
   --faint: var(--popoverFaintText, $fallback--faint);
   --faintLink: var(--popoverFaintLink, $fallback--faint);
   --lightText: var(--popoverLightText, $fallback--lightText);
@@ -87,7 +88,7 @@
 
 .dropdown-menu {
   display: block;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
   font-size: 1em;
   text-align: left;
   list-style: none;
@@ -97,7 +98,7 @@
 
   .dropdown-divider {
     height: 0;
-    margin: .5rem 0;
+    margin: 0.5rem 0;
     overflow: hidden;
     border-top: 1px solid $fallback--border;
     border-top: 1px solid var(--border, $fallback--border);
@@ -113,7 +114,7 @@
     text-align: inherit;
     white-space: nowrap;
     border: none;
-    border-radius: 0px;
+    border-radius: 0;
     background-color: transparent;
     box-shadow: none;
     width: 100%;
@@ -126,7 +127,7 @@
       svg {
         width: 22px;
         margin-right: 0.75rem;
-        color: var(--menuPopoverIcon, $fallback--icon)
+        color: var(--menuPopoverIcon, $fallback--icon);
       }
     }
 
@@ -137,17 +138,21 @@
       }
     }
 
-    &:active, &:hover {
+    &:active,
+    &:hover {
       background-color: $fallback--lightBg;
       background-color: var(--selectedMenuPopover, $fallback--lightBg);
       box-shadow: none;
+
       --btnText: var(--selectedMenuPopoverText, $fallback--link);
       --faint: var(--selectedMenuPopoverFaintText, $fallback--faint);
       --faintLink: var(--selectedMenuPopoverFaintLink, $fallback--faint);
       --lightText: var(--selectedMenuPopoverLightText, $fallback--lightText);
       --icon: var(--selectedMenuPopoverIcon, $fallback--icon);
+
       svg {
         color: var(--selectedMenuPopoverIcon, $fallback--icon);
+
         --icon: var(--selectedMenuPopoverIcon, $fallback--icon);
       }
     }
@@ -161,16 +166,16 @@
       max-height: 22px;
       line-height: 22px;
       text-align: center;
-      border-radius: 0px;
+      border-radius: 0;
       background-color: $fallback--fg;
       background-color: var(--input, $fallback--fg);
-      box-shadow: 0px 0px 2px black inset;
+      box-shadow: 0 0 2px black inset;
       box-shadow: var(--inputShadow);
       margin-right: 0.75em;
 
       &.menu-checkbox-checked::after {
         font-size: 1.25em;
-        content: '✓';
+        content: "✓";
       }
 
       &.-radio {
@@ -178,16 +183,15 @@
 
         &.menu-checkbox-checked::after {
           font-size: 2em;
-          content: '•';
+          content: "•";
         }
       }
     }
-
   }
 
   .button-default.dropdown-item {
     &,
-    i[class*=icon-] {
+    i[class*="icon-"] {
       color: $fallback--text;
       color: var(--btnText, $fallback--text);
     }

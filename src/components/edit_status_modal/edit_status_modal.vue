@@ -26,6 +26,7 @@
 .modal-view.edit-form-modal-view {
   align-items: flex-start;
 }
+
 .edit-form-modal-panel {
   flex-shrink: 0;
   margin-top: 25%;

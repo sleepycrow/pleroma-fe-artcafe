@@ -63,7 +63,7 @@
 <script src="./navigation_entry.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+@import "../../variables";
 
 .NavigationEntry {
   display: flex;
@@ -102,6 +102,7 @@
     background-color: var(--selectedMenu, $fallback--lightBg);
     color: $fallback--link;
     color: var(--selectedMenuText, $fallback--link);
+
     --faint: var(--selectedMenuFaintText, $fallback--faint);
     --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
     --lightText: var(--selectedMenuLightText, $fallback--lightText);
@@ -117,6 +118,7 @@
     background-color: var(--selectedMenu, $fallback--lightBg);
     color: $fallback--text;
     color: var(--selectedMenuText, $fallback--text);
+
     --faint: var(--selectedMenuFaintText, $fallback--faint);
     --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
     --lightText: var(--selectedMenuLightText, $fallback--lightText);

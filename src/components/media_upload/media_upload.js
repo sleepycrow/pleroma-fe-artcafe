@@ -23,6 +23,11 @@ const mediaUpload = {
     }
   },
   methods: {
+    onClick () {
+      if (this.uploadReady) {
+        this.$refs.input.click()
+      }
+    },
     uploadFile (file) {
       const self = this
       const store = this.$store
@@ -69,10 +74,15 @@ const mediaUpload = {
       this.multiUpload(target.files)
     }
   },
-  props: [
-    'dropFiles',
-    'disabled'
-  ],
+  props: {
+    dropFiles: Object,
+    disabled: Boolean,
+    normalButton: Boolean,
+    acceptTypes: {
+      type: String,
+      default: '*/*'
+    }
+  },
   watch: {
     dropFiles: function (fileInfos) {
       if (!this.uploading) {

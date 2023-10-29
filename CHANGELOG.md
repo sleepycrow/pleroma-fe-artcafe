@@ -3,6 +3,34 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## 2.5.1
+### Fixed
+- Checkboxes in settings can now work with screenreaders
+- Autocomplete in edit boxes can now work with screenreaders
+- Status interact buttons now have focus indicator for anonymous users
+- Top bar buttons now correctly have text labels
+- It is now possible to register if the site admin requires birthday to register
+- User cards from search results will correctly popup
+- Fix notification attachment icon overflow
+- Editing mute words is less laggy
+- Repeater's name will no longer mess up with the directionality of the text sitting on the same line
+- Unauthenticated access will give better error messages
+- It is now easier to close the media viewer with a mouse when there is only one image
+- Deleting profile fields can work properly
+- Clicking the react button will correctly focus the search box
+- Clicking buttons on the top-bar will no longer bring you to the top of the page
+- Emoji picker is much faster to load
+- `blockquote`s have a better display style
+- Announcements posting and editing are now available to everyone with such a privilege, not just admins
+- Adding or removing list members will actually work
+- Emojis without a pack are now correctly displayed in emoji picker
+- Changing notification settings will actually work
+
+### Added
+- You can now set and see birthdays
+- Optional confirmation dialogs when performing various actions
+- You can now set fallback languages
+
 ## 2.5.0 - 23.12.2022
 ### Fixed
 - UI no longer lags when switching between mobile and desktop mode
