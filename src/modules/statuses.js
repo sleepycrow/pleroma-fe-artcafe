@@ -64,7 +64,8 @@ export const defaultState = () => ({
     dms: emptyTl(),
     bookmarks: emptyTl(),
     list: emptyTl(),
-    album: emptyTl()
+    album: emptyTl(),
+    bubble: emptyTl()
   }
 })
 
