@@ -17,9 +17,9 @@
           <div class="title">
             {{ $t('notifications.notifications') }}
             <span
-              v-if="unseenCount"
+              v-if="unseenCountBadgeText"
               class="badge badge-notification unseen-count"
-            >{{ unseenCount }}</span>
+            >{{ unseenCountBadgeText }}</span>
           </div>
           <div
             v-if="showScrollTop"
@@ -54,6 +54,13 @@
           class="panel-body"
           role="feed"
         >
+          <div
+            v-if="showExtraNotifications"
+            role="listitem"
+            class="notification"
+          >
+            <extra-notifications />
+          </div>
           <div
             v-for="notification in notificationsToDisplay"
             :key="notification.id"

@@ -124,3 +124,17 @@ export const prepareNotificationObject = (notification, i18n) => {
 
   return notifObj
 }
+
+export const countExtraNotifications = (store) => {
+  const mergedConfig = store.getters.mergedConfig
+
+  if (!mergedConfig.showExtraNotifications) {
+    return 0
+  }
+
+  return [
+    mergedConfig.showChatsInExtraNotifications ? store.getters.unreadChatCount : 0,
+    mergedConfig.showAnnouncementsInExtraNotifications ? store.getters.unreadAnnouncementCount : 0,
+    mergedConfig.showFollowRequestsInExtraNotifications ? store.getters.followRequestCount : 0
+  ].reduce((a, c) => a + c, 0)
+}

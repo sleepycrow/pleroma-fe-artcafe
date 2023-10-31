@@ -1,7 +1,10 @@
 import SideDrawer from '../side_drawer/side_drawer.vue'
 import Notifications from '../notifications/notifications.vue'
 import ConfirmModal from '../confirm_modal/confirm_modal.vue'
-import { unseenNotificationsFromStore } from '../../services/notification_utils/notification_utils'
+import {
+  unseenNotificationsFromStore,
+  countExtraNotifications
+} from '../../services/notification_utils/notification_utils'
 import GestureService from '../../services/gesture_service/gesture_service'
 import NavigationPins from 'src/components/navigation/navigation_pins.vue'
 import { mapGetters } from 'vuex'
@@ -50,7 +53,7 @@ const MobileNav = {
       return unseenNotificationsFromStore(this.$store)
     },
     unseenNotificationsCount () {
-      return this.unseenNotifications.length
+      return this.unseenNotifications.length + countExtraNotifications(this.$store)
     },
     hideSitename () { return this.$store.state.instance.hideSitename },
     sitename () { return this.$store.state.instance.name },

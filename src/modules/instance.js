@@ -103,6 +103,11 @@ const defaultState = {
   conversationTreeAdvanced: false,
   conversationOtherRepliesButton: 'below',
   conversationTreeFadeAncestors: false,
+  showExtraNotifications: true,
+  showExtraNotificationsTip: true,
+  showChatsInExtraNotifications: true,
+  showAnnouncementsInExtraNotifications: true,
+  showFollowRequestsInExtraNotifications: true,
   maxDepthInThread: 6,
   autocompleteSelect: false,
 
