@@ -42,18 +42,52 @@ const FrontendsTab = {
     ...SharedComputedObject()
   },
   methods: {
+    canInstall (frontend) {
+      const fe = this.frontends.find(f => f.name === frontend.name)
+      if (!fe) return false
+      return fe.refs.includes(frontend.ref)
+    },
+    getSuggestedRef (frontend) {
+      const defaultFe = this.adminDraft[':pleroma'][':frontends'][':primary']
+      if (defaultFe.name === frontend.name && this.canInstall(defaultFe)) {
+        return defaultFe.ref
+      } else {
+        return frontend.refs[0]
+      }
+    },
     update (frontend, suggestRef) {
-      const ref = suggestRef || frontend.refs[0]
+      const ref = suggestRef || this.getSuggestedRef(frontend)
       const { name } = frontend
       const payload = { name, ref }
 
       this.$store.state.api.backendInteractor.installFrontend({ payload })
-        .then((externalUser) => {
+        .then(async (response) => {
           this.$store.dispatch('loadFrontendsStuff')
+          if (response.error) {
+            const reason = await response.error.json()
+            this.$store.dispatch('pushGlobalNotice', {
+              level: 'error',
+              messageKey: 'admin_dash.frontend.failure_installing_frontend',
+              messageArgs: {
+                version: name + '/' + ref,
+                reason: reason.error
+              },
+              timeout: 5000
+            })
+          } else {
+            this.$store.dispatch('pushGlobalNotice', {
+              level: 'success',
+              messageKey: 'admin_dash.frontend.success_installing_frontend',
+              messageArgs: {
+                version: name + '/' + ref
+              },
+              timeout: 2000
+            })
+          }
         })
     },
     setDefault (frontend, suggestRef) {
-      const ref = suggestRef || frontend.refs[0]
+      const ref = suggestRef || this.getSuggestedRef(frontend)
       const { name } = frontend
 
       this.$store.commit('updateAdminDraft', { path: [':pleroma', ':frontends', ':primary'], value: { name, ref } })

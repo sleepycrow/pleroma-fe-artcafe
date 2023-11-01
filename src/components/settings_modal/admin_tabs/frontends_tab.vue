@@ -86,6 +86,11 @@
                       ? $t('admin_dash.frontend.reinstall')
                       : $t('admin_dash.frontend.install')
                   }}
+                  <code>
+                    {{
+                      getSuggestedRef(frontend)
+                    }}
+                  </code>
                 </button>
                 <Popover
                   v-if="frontend.refs.length > 1"
@@ -93,13 +98,14 @@
                   class="button-dropdown"
                   placement="bottom"
                 >
-                  <template #content>
+                  <template #content="{close}">
                     <div class="dropdown-menu">
                       <button
                         v-for="ref in frontend.refs"
                         :key="ref"
                         class="button-default dropdown-item"
-                        @click="update(frontend, ref)"
+                        @click.prevent="update(frontend, ref)"
+                        @click="close"
                       >
                         <i18n-t keypath="admin_dash.frontend.install_version">
                           <template #version>
@@ -136,6 +142,11 @@
                   {{
                     $t('admin_dash.frontend.set_default')
                   }}
+                  <code>
+                    {{
+                      getSuggestedRef(frontend)
+                    }}
+                  </code>
                 </button>
                 {{ ' ' }}
                 <Popover
@@ -144,13 +155,14 @@
                   class="button-dropdown"
                   placement="bottom"
                 >
-                  <template #content>
+                  <template #content="{close}">
                     <div class="dropdown-menu">
                       <button
-                        v-for="ref in frontend.refs.slice(1)"
+                        v-for="ref in frontend.installedRefs || frontend.refs"
                         :key="ref"
                         class="button-default dropdown-item"
-                        @click="setDefault(frontend, ref)"
+                        @click.prevent="setDefault(frontend, ref)"
+                        @click="close"
                       >
                         <i18n-t keypath="admin_dash.frontend.set_default_version">
                           <template #version>
