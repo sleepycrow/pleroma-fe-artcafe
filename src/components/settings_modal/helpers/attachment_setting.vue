@@ -2,6 +2,7 @@
   <span
     v-if="matchesExpertLevel"
     class="AttachmentSetting"
+    :class="{ '-compact': compact }"
   >
     <label
       :for="path"
@@ -24,8 +25,8 @@
       {{ backendDescriptionDescription + ' ' }}
     </p>
     <div class="attachment-input">
-      <div>{{ $t('settings.url') }}</div>
-      <div class="controls">
+      <div class="controls control-field">
+        <label for="path">{{ $t('settings.url') }}</label>
         <input
           :id="path"
           class="string-input"
@@ -40,7 +41,7 @@
         />
         <ProfileSettingIndicator :is-profile="isProfileSetting" />
       </div>
-      <div>{{ $t('settings.preview') }}</div>
+      <div v-if="!compact">{{ $t('settings.preview') }}</div>
       <Attachment
         class="attachment"
         :compact="compact"
@@ -50,7 +51,7 @@
         @setMedia="onMedia"
         @naturalSizeLoad="onNaturalSizeLoad"
       />
-      <div class="controls">
+      <div class="controls control-upload">
         <MediaUpload
           ref="mediaUpload"
           class="media-upload-icon"
@@ -82,6 +83,35 @@
     display: flex;
     flex-direction: column;
     width: 20em;
+  }
+
+  &.-compact {
+    .attachment-input {
+      flex-direction: row;
+      align-items: flex-end;
+    }
+
+    .attachment {
+      flex: 0;
+      order: 0;
+      display: block;
+      min-width: 4em;
+      height: 4em;
+      align-self: center;
+      margin-bottom: 0;
+    }
+
+    .control-field {
+      order: 1;
+      min-width: 12em;
+      margin-left: 0.5em;
+    }
+
+    .control-upload {
+      order: 2;
+      min-width: 12em;
+      padding: 0 0.5em;
+    }
   }
 
   .controls {

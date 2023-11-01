@@ -7,6 +7,7 @@ export default {
   ...Setting,
   props: {
     ...Setting.props,
+    compact: Boolean,
     acceptTypes: {
       type: String,
       required: false,
