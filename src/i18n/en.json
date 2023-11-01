@@ -30,7 +30,9 @@
         "media_nsfw_desc": "This instance forces media to be set sensitive in posts on the following instances:"
       }
     },
-    "staff": "Staff"
+    "staff": "Staff",
+    "local_bubble_instances": "Local Bubble Instances",
+    "bubble_instance_info": "Instances, which the staff indicated fall within this instance's \"Bubble\". This may be due to them dealing with similar subject matter, being allied or any number of other reasons. Statuses from these instances will show up in the Bubble Timeline."
   },
   "announcements": {
     "page_header": "Announcements",
@@ -76,7 +78,8 @@
     "title": "Features",
     "who_to_follow": "Who to follow",
     "upload_limit": "Upload limit",
-    "albums": "Albums"
+    "albums": "Albums",
+    "bubble_timeline": "Bubble Timeline"
   },
   "finder": {
     "error_fetching_user": "Error fetching user",

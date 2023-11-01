@@ -26,6 +26,9 @@
           <li v-if="albums">
             {{ $t('features_panel.albums') }}
           </li>
+          <li v-if="bubbleTimeline">
+            {{ $t('features_panel.bubble_timeline') }}
+          </li>
           <li>{{ $t('features_panel.scope_options') }}</li>
           <li>{{ $t('features_panel.text_limit') }} = {{ textlimit }}</li>
           <li>{{ $t('features_panel.upload_limit') }} = {{ uploadlimit.num }} {{ $t('upload.file_size_units.' + uploadlimit.unit) }}</li>
