@@ -4,6 +4,7 @@ import IntegerSetting from '../helpers/integer_setting.vue'
 import StringSetting from '../helpers/string_setting.vue'
 import GroupSetting from '../helpers/group_setting.vue'
 import Popover from 'src/components/popover/popover.vue'
+import PanelLoading from 'src/components/panel_loading/panel_loading.vue'
 
 import SharedComputedObject from '../helpers/shared_computed_object.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -22,12 +23,18 @@ const FrontendsTab = {
       defaultSource: 'admin'
     }
   },
+  data () {
+    return {
+      working: false
+    }
+  },
   components: {
     BooleanSetting,
     ChoiceSetting,
     IntegerSetting,
     StringSetting,
     GroupSetting,
+    PanelLoading,
     Popover
   },
   created () {
@@ -60,7 +67,11 @@ const FrontendsTab = {
       const { name } = frontend
       const payload = { name, ref }
 
+      this.working = true
       this.$store.state.api.backendInteractor.installFrontend({ payload })
+        .finally(() => {
+          this.working = false
+        })
         .then(async (response) => {
           this.$store.dispatch('loadFrontendsStuff')
           if (response.error) {
