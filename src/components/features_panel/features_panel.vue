@@ -23,6 +23,9 @@
           <li v-if="mediaProxy">
             {{ $t('features_panel.media_proxy') }}
           </li>
+          <li v-if="albums">
+            {{ $t('features_panel.albums') }}
+          </li>
           <li>{{ $t('features_panel.scope_options') }}</li>
           <li>{{ $t('features_panel.text_limit') }} = {{ textlimit }}</li>
           <li>{{ $t('features_panel.upload_limit') }} = {{ uploadlimit.num }} {{ $t('upload.file_size_units.' + uploadlimit.unit) }}</li>

@@ -75,7 +75,8 @@
     "text_limit": "Text limit",
     "title": "Features",
     "who_to_follow": "Who to follow",
-    "upload_limit": "Upload limit"
+    "upload_limit": "Upload limit",
+    "albums": "Albums"
   },
   "finder": {
     "error_fetching_user": "Error fetching user",
