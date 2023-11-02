@@ -14,6 +14,12 @@ export const filterNavigation = (list = [], { hasChats, hasAnnouncements, isFede
 export const getListEntries = state => state.lists.allLists.map(list => ({
   name: 'list-' + list.id,
   routeObject: { name: 'lists-timeline', params: { id: list.id } },
-  labelRaw: list.title,
-  iconLetter: list.title[0]
+  labelRaw: list.title
+  // iconLetter: list.title[0]
+}))
+
+export const getAlbumEntries = state => state.albums.allAlbums.map(album => ({
+  name: 'album-' + album.id,
+  routeObject: { name: 'albums-timeline', params: { id: album.id } },
+  labelRaw: album.title
 }))

@@ -260,6 +260,7 @@ const getNodeInfo = async ({ store }) => {
       store.dispatch('setInstanceOption', { name: 'pollLimits', value: metadata.pollLimits })
       store.dispatch('setInstanceOption', { name: 'mailerEnabled', value: metadata.mailerEnabled })
       store.dispatch('setInstanceOption', { name: 'quotingAvailable', value: features.includes('quote_posting') })
+      store.dispatch('setInstanceOption', { name: 'albumsAvailable', value: features.includes('artcafe_albums') })
 
       const uploadLimits = metadata.uploadLimits
       store.dispatch('setInstanceOption', { name: 'uploadlimit', value: parseInt(uploadLimits.general) })

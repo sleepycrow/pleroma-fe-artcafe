@@ -27,6 +27,8 @@ import statusHistoryModule from './modules/statusHistory.js'
 import chatsModule from './modules/chats.js'
 import announcementsModule from './modules/announcements.js'
 
+import albumsModule from './modules/albums.js'
+
 import { createI18n } from 'vue-i18n'
 
 import createPersistedState from './lib/persisted_state.js'
@@ -95,7 +97,8 @@ const persistedStateOptions = {
       editStatus: editStatusModule,
       statusHistory: statusHistoryModule,
       chats: chatsModule,
-      announcements: announcementsModule
+      announcements: announcementsModule,
+      albums: albumsModule
     },
     plugins,
     strict: false // Socket modifies itself, let's ignore this for now.

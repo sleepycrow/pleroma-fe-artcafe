@@ -25,6 +25,9 @@ import ListsTimeline from 'components/lists_timeline/lists_timeline.vue'
 import ListsEdit from 'components/lists_edit/lists_edit.vue'
 import NavPanel from 'src/components/nav_panel/nav_panel.vue'
 import AnnouncementsPage from 'components/announcements_page/announcements_page.vue'
+import Albums from '../components/albums/albums.vue'
+import AlbumsTimeline from '../components/albums_timeline/albums_timeline.vue'
+import AlbumsEdit from '../components/albums_edit/albums_edit.vue'
 
 export default (store) => {
   const validateAuthenticatedRoute = (to, from, next) => {
@@ -84,6 +87,10 @@ export default (store) => {
     { name: 'lists-timeline', path: '/lists/:id', component: ListsTimeline },
     { name: 'lists-edit', path: '/lists/:id/edit', component: ListsEdit },
     { name: 'lists-new', path: '/lists/new', component: ListsEdit },
+    { name: 'albums', path: '/albums', component: Albums },
+    { name: 'albums-timeline', path: '/albums/:id', component: AlbumsTimeline },
+    { name: 'albums-edit', path: '/albums/:id/edit', component: AlbumsEdit },
+    { name: 'albums-new', path: '/albums/new', component: AlbumsEdit },
     { name: 'edit-navigation', path: '/nav-edit', component: NavPanel, props: () => ({ forceExpand: true, forceEditMode: true }), beforeEnter: validateAuthenticatedRoute }
   ]
 

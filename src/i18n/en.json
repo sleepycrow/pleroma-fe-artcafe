@@ -75,7 +75,8 @@
     "text_limit": "Text limit",
     "title": "Features",
     "who_to_follow": "Who to follow",
-    "upload_limit": "Upload limit"
+    "upload_limit": "Upload limit",
+    "albums": "Albums"
   },
   "finder": {
     "error_fetching_user": "Error fetching user",
@@ -189,7 +190,8 @@
     "mobile_notifications": "Open notifications",
     "mobile_notifications": "Open notifications (there are unread ones)",
     "mobile_notifications_close": "Close notifications",
-    "announcements": "Announcements"
+    "announcements": "Announcements",
+    "albums": "Albums"
   },
   "notifications": {
     "broken_favorite": "Unknown status, searching for it…",
@@ -1044,7 +1046,8 @@
     "reaction_count_label": "{num} person reacted | {num} people reacted",
     "hide_quote": "Hide the quoted status",
     "display_quote": "Display the quoted status",
-    "invisible_quote": "Quoted status unavailable: {link}"
+    "invisible_quote": "Quoted status unavailable: {link}",
+    "add_to_album": "Add to album"
   },
   "user_card": {
     "approve": "Approve",
@@ -1141,7 +1144,8 @@
     "note_blank": "(None)",
     "edit_note": "Edit note",
     "edit_note_apply": "Apply",
-    "edit_note_cancel": "Cancel"
+    "edit_note_cancel": "Cancel",
+    "albums": "Albums"
   },
   "user_profile": {
     "timeline_title": "User timeline",
@@ -1265,5 +1269,20 @@
   },
   "unicode_domain_indicator": {
     "tooltip": "This domain contains non-ascii characters."
+  },
+  "albums": {
+    "albums": "Albums",
+    "new": "New Album",
+    "edit_album": "Edit Album \"{albumTitle}\"",
+    "manage_albums": "Manage Albums",
+    "title": "Title",
+    "description": "Description",
+    "public_album": "Public Album",
+    "create": "Create",
+    "save": "Save",
+    "delete": "Delete",
+    "really_delete": "Really delete this album?",
+    "err_not_found": "This album could not be found.",
+    "add_status_to_album": "Add status {statusId} to albums"
   }
 }

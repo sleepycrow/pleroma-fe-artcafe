@@ -48,6 +48,7 @@
             />
           </div>
         </div>
+
         <NavigationEntry
           v-if="currentUser"
           :show-pin="false"
@@ -82,6 +83,42 @@
             class="timelines"
           />
         </div>
+
+        <NavigationEntry
+          v-if="currentUser"
+          :show-pin="false"
+          :item="{ icon: 'folder', label: 'nav.albums' }"
+          :aria-expanded="showAlbums ? 'true' : 'false'"
+          @click="toggleAlbums"
+        >
+          <router-link
+            :title="$t('albums.manage_albums')"
+            class="extra-button"
+            :to="{ name: 'albums' }"
+            @click.stop
+          >
+            <FAIcon
+              class="extra-button"
+              fixed-width
+              icon="wrench"
+            />
+          </router-link>
+          <FAIcon
+            class="timelines-chevron"
+            fixed-width
+            :icon="showAlbums ? 'chevron-up' : 'chevron-down'"
+          />
+        </NavigationEntry>
+        <div
+          v-show="showAlbums"
+          class="timelines-background"
+        >
+          <AlbumsMenuContent
+            :show-pin="editMode || forceEditMode"
+            class="timelines"
+          />
+        </div>
+
         <NavigationEntry
           v-for="item in rootItems"
           :key="item.name"

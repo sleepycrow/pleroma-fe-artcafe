@@ -621,6 +621,8 @@ const users = {
 
               dispatch('startFetchingLists')
 
+              dispatch('startFetchingAlbums')
+
               if (user.locked) {
                 dispatch('startFetchingFollowRequests')
               }

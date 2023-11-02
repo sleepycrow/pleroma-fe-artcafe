@@ -134,6 +134,7 @@ const defaultState = {
   suggestionsEnabled: false,
   suggestionsWeb: '',
   quotingAvailable: false,
+  albumsAvailable: false,
 
   // Html stuff
   instanceSpecificPanelContent: '',

@@ -9,7 +9,8 @@ const FeaturesPanel = {
     mediaProxy: function () { return this.$store.state.instance.mediaProxyAvailable },
     minimalScopesMode: function () { return this.$store.state.instance.minimalScopesMode },
     textlimit: function () { return this.$store.state.instance.textlimit },
-    uploadlimit: function () { return fileSizeFormatService.fileSizeFormat(this.$store.state.instance.uploadlimit) }
+    uploadlimit: function () { return fileSizeFormatService.fileSizeFormat(this.$store.state.instance.uploadlimit) },
+    albums: function () { return this.$store.state.instance.albumsAvailable }
   }
 }
 

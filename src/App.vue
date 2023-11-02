@@ -69,6 +69,7 @@
     <PostStatusModal />
     <EditStatusModal v-if="editingAvailable" />
     <StatusHistoryModal v-if="editingAvailable" />
+    <AddToAlbumModal />
     <SettingsModal />
     <UpdateNotification />
     <GlobalNoticeList />

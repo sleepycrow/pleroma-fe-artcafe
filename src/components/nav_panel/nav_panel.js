@@ -1,4 +1,5 @@
 import ListsMenuContent from 'src/components/lists_menu/lists_menu_content.vue'
+import AlbumsMenuContent from 'src/components/albums_menu/albums_menu_content.vue'
 import { mapState, mapGetters } from 'vuex'
 import { TIMELINES, ROOT_ITEMS } from 'src/components/navigation/navigation.js'
 import { filterNavigation } from 'src/components/navigation/filter.js'
@@ -19,7 +20,8 @@ import {
   faInfoCircle,
   faStream,
   faList,
-  faBullhorn
+  faBullhorn,
+  faFolder
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -34,13 +36,15 @@ library.add(
   faInfoCircle,
   faStream,
   faList,
-  faBullhorn
+  faBullhorn,
+  faFolder
 )
 const NavPanel = {
   props: ['forceExpand', 'forceEditMode'],
   created () {
   },
   components: {
+    AlbumsMenuContent,
     ListsMenuContent,
     NavigationEntry,
     NavigationPins,
@@ -51,6 +55,7 @@ const NavPanel = {
       editMode: false,
       showTimelines: false,
       showLists: false,
+      showAlbums: false,
       timelinesList: Object.entries(TIMELINES).map(([k, v]) => ({ ...v, name: k })),
       rootList: Object.entries(ROOT_ITEMS).map(([k, v]) => ({ ...v, name: k }))
     }
@@ -61,6 +66,9 @@ const NavPanel = {
     },
     toggleLists () {
       this.showLists = !this.showLists
+    },
+    toggleAlbums () {
+      this.showAlbums = !this.showAlbums
     },
     toggleEditMode () {
       this.editMode = !this.editMode
