@@ -1,7 +1,6 @@
 import UserPanel from './components/user_panel/user_panel.vue'
 import NavPanel from './components/nav_panel/nav_panel.vue'
 import InstanceSpecificPanel from './components/instance_specific_panel/instance_specific_panel.vue'
-import FeaturesPanel from './components/features_panel/features_panel.vue'
 import WhoToFollowPanel from './components/who_to_follow_panel/who_to_follow_panel.vue'
 import ShoutPanel from './components/shout_panel/shout_panel.vue'
 import MediaModal from './components/media_modal/media_modal.vue'
@@ -26,7 +25,6 @@ export default {
     NavPanel,
     Notifications: defineAsyncComponent(() => import('./components/notifications/notifications.vue')),
     InstanceSpecificPanel,
-    FeaturesPanel,
     WhoToFollowPanel,
     ShoutPanel,
     MediaModal,
@@ -106,7 +104,6 @@ export default {
       if (this.isListEdit) return false
       return this.$store.getters.mergedConfig.alwaysShowNewPostButton || this.layoutType === 'mobile'
     },
-    showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel },
     editingAvailable () { return this.$store.state.instance.editingAvailable },
     shoutboxPosition () {
       return this.$store.getters.mergedConfig.alwaysShowNewPostButton || false
