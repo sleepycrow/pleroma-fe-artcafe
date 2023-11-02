@@ -52,7 +52,7 @@ const fetchAndUpdate = ({
   args.albumId = albumId
   args.tag = tag
   args.withMuted = !hideMutedPosts
-  if (loggedIn && ['friends', 'public', 'publicAndExternal'].includes(timeline)) {
+  if (loggedIn && ['friends', 'public', 'publicAndExternal', 'bubble'].includes(timeline)) {
     args.replyVisibility = replyVisibility
   }
 

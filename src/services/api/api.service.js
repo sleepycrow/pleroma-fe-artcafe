@@ -118,6 +118,8 @@ const PLEROMA_ADMIN_DESCRIPTIONS_URL = '/api/pleroma/admin/config/descriptions'
 const PLEROMA_ADMIN_FRONTENDS_URL = '/api/pleroma/admin/frontends'
 const PLEROMA_ADMIN_FRONTENDS_INSTALL_URL = '/api/pleroma/admin/frontends/install'
 
+const ARTCAFE_BUBBLE_TIMELINE_URL = '/api/v1/timelines/bubble'
+
 const oldfetch = window.fetch
 
 const fetch = (url, options) => {
@@ -696,7 +698,8 @@ const fetchTimeline = ({
     favorites: MASTODON_USER_FAVORITES_TIMELINE_URL,
     tag: MASTODON_TAG_TIMELINE_URL,
     bookmarks: MASTODON_BOOKMARK_TIMELINE_URL,
-    album: ARTCAFE_ALBUM_TIMELINE_URL
+    album: ARTCAFE_ALBUM_TIMELINE_URL,
+    bubble: ARTCAFE_BUBBLE_TIMELINE_URL
   }
   const isNotifications = timeline === 'notifications'
   const params = []

@@ -10,7 +10,8 @@ const FeaturesPanel = {
     minimalScopesMode: function () { return this.$store.state.instance.minimalScopesMode },
     textlimit: function () { return this.$store.state.instance.textlimit },
     uploadlimit: function () { return fileSizeFormatService.fileSizeFormat(this.$store.state.instance.uploadlimit) },
-    albums: function () { return this.$store.state.instance.albumsAvailable }
+    albums: function () { return this.$store.state.instance.albumsAvailable },
+    bubbleTimeline: function () { return this.$store.state.instance.bubbleTimelineAvailable }
   }
 }
 

@@ -150,7 +150,11 @@ const defaultState = {
     max_option_chars: 255,
     min_expiration: 60,
     max_expiration: 60 * 60 * 24
-  }
+  },
+
+  // Artcafe specific
+  bubbleTimelineAvailable: false,
+  localBubbleInstances: []
 }
 
 const loadAnnotations = (lang) => {

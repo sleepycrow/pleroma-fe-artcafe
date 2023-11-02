@@ -21,7 +21,8 @@ import {
   faStream,
   faList,
   faBullhorn,
-  faFolder
+  faFolder,
+  faCircle
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -37,7 +38,8 @@ library.add(
   faStream,
   faList,
   faBullhorn,
-  faFolder
+  faFolder,
+  faCircle
 )
 const NavPanel = {
   props: ['forceExpand', 'forceEditMode'],

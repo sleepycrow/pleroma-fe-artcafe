@@ -261,6 +261,8 @@ const getNodeInfo = async ({ store }) => {
       store.dispatch('setInstanceOption', { name: 'mailerEnabled', value: metadata.mailerEnabled })
       store.dispatch('setInstanceOption', { name: 'quotingAvailable', value: features.includes('quote_posting') })
       store.dispatch('setInstanceOption', { name: 'albumsAvailable', value: features.includes('artcafe_albums') })
+      store.dispatch('setInstanceOption', { name: 'bubbleTimelineAvailable', value: features.includes('bubble_timeline') })
+      store.dispatch('setInstanceOption', { name: 'localBubbleInstances', value: metadata.localBubbleInstances })
 
       const uploadLimits = metadata.uploadLimits
       store.dispatch('setInstanceOption', { name: 'uploadlimit', value: parseInt(uploadLimits.general) })

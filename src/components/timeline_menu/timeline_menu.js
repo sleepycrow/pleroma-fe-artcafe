@@ -19,7 +19,8 @@ export const timelineNames = () => {
     bookmarks: 'nav.bookmarks',
     dms: 'nav.dms',
     'public-timeline': 'nav.public_tl',
-    'public-external-timeline': 'nav.twkn'
+    'public-external-timeline': 'nav.twkn',
+    'bubble-timeline': 'nav.bubble_tl'
   }
 }
 

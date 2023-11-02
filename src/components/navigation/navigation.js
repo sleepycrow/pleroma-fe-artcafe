@@ -22,6 +22,13 @@ export const TIMELINES = {
     label: 'nav.public_tl',
     criteria: ['!private']
   },
+  bubble: {
+    route: 'bubble-timeline',
+    anon: true,
+    icon: 'circle',
+    label: 'nav.bubble_tl',
+    criteria: ['!private']
+  },
   twkn: {
     route: 'public-external-timeline',
     anon: true,
