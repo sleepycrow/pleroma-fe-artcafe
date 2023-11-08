@@ -65,6 +65,9 @@ export const defaultState = {
     chatMention: true,
     polls: true
   },
+  notificationSettings: {
+    nativeNotifications: ['follows', 'mentions', 'followRequest', 'reports', 'chatMention', 'polls']
+  },
   webPushNotifications: false,
   muteWords: [],
   highlight: {},

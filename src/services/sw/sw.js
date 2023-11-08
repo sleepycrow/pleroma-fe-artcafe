@@ -87,7 +87,7 @@ export async function initServiceWorker () {
   await getOrCreateServiceWorker()
   navigator.serviceWorker.addEventListener('message', (event) => {
     console.log('SW MESSAGE', event)
-    // TODO actually act upon click (open drawer on mobile for now)
+    // TODO actually act upon click (open drawer on mobile, open chat/thread etc)
   })
 }
 
