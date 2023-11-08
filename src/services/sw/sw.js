@@ -82,9 +82,13 @@ function sendSubscriptionToBackEnd (subscription, token, notificationVisibility)
     return responseData
   })
 }
-export function initServiceWorker () {
+export async function initServiceWorker () {
   if (!isSWSupported()) return
-  getOrCreateServiceWorker()
+  await getOrCreateServiceWorker()
+  navigator.serviceWorker.addEventListener('message', (event) => {
+    console.log('SW MESSAGE', event)
+    // TODO actually act upon click (open drawer on mobile for now)
+  })
 }
 
 export async function showDesktopNotification (content) {

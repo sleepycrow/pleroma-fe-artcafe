@@ -56,7 +56,6 @@ self.addEventListener('push', async (event) => {
 
 self.addEventListener('message', async (event) => {
   const { type, content } = event.data
-  console.log(event)
 
   if (type === 'desktopNotification') {
     const { title, ...rest } = content
@@ -79,6 +78,11 @@ self.addEventListener('notificationclick', (event) => {
   event.notification.close()
 
   event.waitUntil(getWindowClients().then((list) => {
+    for (let i = 0; i < list.length; i++) {
+      const client = list[i]
+      client.postMessage({ type: 'notificationClicked', id: event.notification.tag })
+    }
+
     for (let i = 0; i < list.length; i++) {
       const client = list[i]
       if (state.lastFocused === null || client.id === state.lastFocused) {
