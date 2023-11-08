@@ -55,10 +55,13 @@ const createFaviconService = () => {
     })
   }
 
+  const getOriginalFavicons = () => [...favicons]
+
   return {
     initFaviconService,
     clearFaviconBadge,
-    drawFaviconBadge
+    drawFaviconBadge,
+    getOriginalFavicons
   }
 }
 

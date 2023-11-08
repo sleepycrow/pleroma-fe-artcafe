@@ -1,6 +1,9 @@
 import { filter, sortBy, includes } from 'lodash'
 import { muteWordHits } from '../status_parser/status_parser.js'
 import { showDesktopNotification } from '../desktop_notification_utils/desktop_notification_utils.js'
+import FaviconService from 'src/services/favicon_service/favicon_service.js'
+
+let cachedBadgeUrl = null
 
 export const notificationsFromStore = store => store.state.statuses.notifications.data
 
@@ -76,12 +79,14 @@ export const unseenNotificationsFromStore = store =>
   filter(filteredNotificationsFromStore(store), ({ seen }) => !seen)
 
 export const prepareNotificationObject = (notification, i18n) => {
-  const nodes = document.querySelectorAll('link[rel="icon"]')
-  const badge = nodes[0].href
+  if (cachedBadgeUrl === null) {
+    const favicon = FaviconService.getOriginalFavicons()[0]
+    cachedBadgeUrl = favicon.favcanvas.toDataURL()
+  }
 
   const notifObj = {
     tag: notification.id,
-    badge
+    badge: cachedBadgeUrl
   }
   const status = notification.status
   const title = notification.from_profile.name
