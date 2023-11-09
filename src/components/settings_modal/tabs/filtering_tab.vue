@@ -91,6 +91,11 @@
             {{ $t('settings.hide_attachments_in_convo') }}
           </BooleanSetting>
         </li>
+        <li>
+          <BooleanSetting path="hideScrobbles">
+            {{ $t('settings.hide_scrobbles') }}
+          </BooleanSetting>
+        </li>
       </ul>
     </div>
     <div

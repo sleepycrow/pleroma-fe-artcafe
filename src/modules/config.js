@@ -40,6 +40,7 @@ export const defaultState = {
   padEmoji: true,
   hideAttachments: false,
   hideAttachmentsInConv: false,
+  hideScrobbles: false,
   maxThumbnails: 16,
   hideNsfw: true,
   preloadImage: true,
