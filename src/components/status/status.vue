@@ -249,6 +249,24 @@
                 </button>
               </span>
             </div>
+            <div class="status-rich-presence" v-if="scrobblePresent">
+              <FAIcon
+                class="fa-scale-110 fa-old-padding"
+                icon="music"
+              />
+              {{ scrobble.artist }} — {{ scrobble.title }}
+              <FAIcon
+                class="fa-scale-110 fa-old-padding"
+                icon="play"
+              />
+              <span class="status-rich-presence-time">
+                <Timeago
+                  template-key="time.in_past"
+                  :time="scrobble.created_at"
+                  :auto-update="60"
+                />
+              </span>
+            </div>
             <div
               v-if="isReply || hasMentionsLine"
               class="heading-reply-row"
