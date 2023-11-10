@@ -266,7 +266,6 @@
                   :auto-update="60"
                 />
               </span>
-              </div>
             </div>
             <div
               v-if="isReply || hasMentionsLine"
@@ -364,6 +363,7 @@
                 </template>
               </i18n-t>
             </div>
+          </div>
 
           <StatusContent
             ref="content"
