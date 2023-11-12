@@ -121,7 +121,8 @@
     "placeholder": "напр. stepan",
     "logout_confirm": "Ви дійсно хочете вийти?",
     "logout_confirm_accept_button": "Вийти",
-    "logout_confirm_cancel_button": "Ні, хочу назад!"
+    "logout_confirm_cancel_button": "Ні, хочу назад!",
+    "logout_confirm_title": "Вихід"
   },
   "importer": {
     "error": "Під час імпортування файлу сталася помилка.",
@@ -164,7 +165,13 @@
     "broken_favorite": "Невідомий допис, шукаю його…",
     "error": "Помилка при оновленні сповіщень: {0}",
     "poll_ended": "опитування закінчено",
-    "submitted_report": "подав скаргу"
+    "submitted_report": "подав скаргу",
+    "unread_announcements": "{num} непрочитане оголошення | {num} непрочитаних оголошень",
+    "unread_chats": "{num} непрочитаний чат | {num} непрочитаних чатів",
+    "unread_follow_requests": "{num} новий запит на підписку | {num} нових запитів на підписку",
+    "configuration_tip": "Ви можете налаштувати, що відображати тут у {theSettings}. {dismiss}",
+    "configuration_tip_settings": "налаштування",
+    "configuration_tip_dismiss": "Не показувати знову"
   },
   "nav": {
     "chats": "Чати",
@@ -267,7 +274,8 @@
       "activities": "Активності",
       "symbols": "Символи",
       "travel-and-places": "Подорожі та Місця"
-    }
+    },
+    "unpacked": "Розпаковані емоджі"
   },
   "post_status": {
     "content_type": {
@@ -304,7 +312,11 @@
     "post": "Опублікувати",
     "edit_unsupported_warning": "Pleroma не підтримує редагування згадувань чи голосувань.",
     "edit_status": "Редагувати допис",
-    "edit_remote_warning": "Інші віддалені інстанси можуть не підтримувати редагування та вони можуть не отримати актуальну версію допису."
+    "edit_remote_warning": "Інші віддалені інстанси можуть не підтримувати редагування та вони можуть не отримати актуальну версію допису.",
+    "content_type_selection": "Форматування допису",
+    "scope_notice_dismiss": "Закрити це сповіщення",
+    "reply_option": "Відповісти на цей допис",
+    "quote_option": "Процитувати допис"
   },
   "settings": {
     "blocks_imported": "Блокування імпортовані! Їх обробка триватиме певний час.",
@@ -730,7 +742,7 @@
     "conversation_display_tree_quick": "Вигляд дерева",
     "disable_sticky_headers": "Не закріплювати заголовок колонки зверху на сторінці",
     "third_column_mode_none": "Не показувати третю колонку взагалі",
-    "third_column_mode_notifications": "Колонка сповіщень",
+    "third_column_mode_notifications": "Колонку сповіщень",
     "columns": "Колонки",
     "auto_update": "Автоматично показувати нові дописи",
     "use_websockets": "Використовувати вебсокети (Оновлення в реальному часі)",
@@ -743,7 +755,38 @@
     "wordfilter": "Фільтр слів",
     "mention_links": "Посилання для згадування",
     "user_profiles": "Профілі користувачів",
-    "notification_visibility_polls": "Закінчення опитувань, в яких ви проголосували"
+    "notification_visibility_polls": "Закінчення опитувань, в яких ви проголосували",
+    "remove_language": "Вилучити",
+    "primary_language": "Основна мова:",
+    "fallback_language": "Резервна мова {index}:",
+    "confirm_dialogs_deny_follow": "тим, як відмовити у запиті на підписку",
+    "confirm_dialogs_remove_follower": "видаленням підписника",
+    "notification_show_extra": "Показувати додаткові сповіщення в панелі сповіщень",
+    "notification_extra_chats": "Показувати непрочитані чати",
+    "notification_extra_announcements": "Показувати непрочитані оголошення",
+    "notification_extra_follow_requests": "Показувати нові запити на підписку",
+    "third_column_mode_postform": "Форму відправки повідомлень та панель навігації",
+    "notification_extra_tip": "Показати пораду з налаштувань для додаткових сповіщень",
+    "backup_running": "Резервне копіювання триває, оброблено {number} записи. | Резервне копіювання триває, оброблено {number} записів.",
+    "backup_failed": "Резервне копіювання не вдалося.",
+    "preview": "Попередній перегляд",
+    "url": "URL",
+    "birthday": {
+      "label": "День народження",
+      "show_birthday": "Показувати мій день народження"
+    },
+    "confirm_dialogs": "Запитувати підтвердження перед",
+    "confirm_dialogs_repeat": "поширенням допису",
+    "confirm_dialogs_unfollow": "скасуванням підписки",
+    "confirm_dialogs_block": "блокуванням користувача",
+    "confirm_dialogs_mute": "тим, як заглушити користувача",
+    "show_scrollbars": "Показувати смугу прокрутки на бічних панелях",
+    "column_sizes": "Розміри панелей",
+    "column_sizes_sidebar": "Бічна панель",
+    "add_language": "Додати резервну мову",
+    "confirm_dialogs_delete": "видаленням допису",
+    "confirm_dialogs_logout": "виходом із системи",
+    "confirm_dialogs_approve_follow": "схваленням запиту на підписку"
   },
   "selectable_list": {
     "select_all": "Вибрати все"
@@ -760,7 +803,8 @@
       "password_required": "не може бути порожнім",
       "email_required": "не може бути порожнім",
       "fullname_required": "не може бути порожнім",
-      "username_required": "не може бути порожнім"
+      "username_required": "не може бути порожнім",
+      "birthday_required": "не може бути пустим"
     },
     "bio_placeholder": "напр.\nНаш народ завжди прагне волі для себе і бажає її для інших народів. Він боровся і бореться за правду і справедливість. Ми хочемо жити у згоді і взаємному шануванні з усіми народами доброї волі. Такі самі права визнаємо за іншими народами, за які боремося для себе.",
     "fullname_placeholder": "напр. Степан Бандера",
@@ -778,7 +822,9 @@
     "reason": "Причина реєстрації",
     "bio_optional": "Біографія (необов'язково)",
     "email_language": "Якою мовою ви бажаєте отримувати електронні листи від сервера?",
-    "email_optional": "Ел. пошта (необов'язково)"
+    "email_optional": "Ел. пошта (необов'язково)",
+    "birthday": "День народження:",
+    "birthday_optional": "День народження (необов'язково):"
   },
   "who_to_follow": {
     "who_to_follow": "На кого підписатися",
@@ -890,7 +936,8 @@
       "grant_moderator": "Надати права модератора",
       "revoke_admin": "Позбавити прав адміністратора",
       "grant_admin": "Надати права адміністратора",
-      "quarantine": "Не розповсюджувати дописи на інших інстансах"
+      "quarantine": "Не розповсюджувати дописи на інших інстансах",
+      "delete_user_data_and_deactivate_confirmation": "Це назовсім видалить дані обліковки й вимкне її. Точно продовжити?"
     },
     "deny": "Відмовити",
     "block": "Заблокувати",
@@ -929,7 +976,32 @@
     "bot": "Бот",
     "edit_profile": "Редагувати профіль",
     "deactivated": "Деактивований",
-    "follow_cancel": "Скасувати запит"
+    "follow_cancel": "Скасувати запит",
+    "block_confirm_title": "Блокування",
+    "block_confirm": "Точно заблокувати {user}?",
+    "mute_confirm_cancel_button": "Ні, не приглушувати",
+    "note_blank": "(Пусто)",
+    "edit_note_apply": "Застосувати",
+    "edit_note_cancel": "Скасувати",
+    "block_confirm_accept_button": "Так, заблокувати",
+    "block_confirm_cancel_button": "Ні, не блокувати",
+    "deny_confirm_title": "Відхилити запит на підписку",
+    "mute_confirm_accept_button": "Так, приглушити",
+    "mute_confirm": "Точно приглушити {user}?",
+    "edit_note": "Редагувати нотатку",
+    "mute_confirm_title": "Приглушення",
+    "mute_duration_prompt": "Приглушити користувача на (0 якщо назавжди):",
+    "approve_confirm_title": "Дозвіл підписатись",
+    "approve_confirm_accept_button": "Так, дозволити",
+    "approve_confirm_cancel_button": "Ні, скасувати",
+    "deny_confirm_accept_button": "Так, відхилити",
+    "deny_confirm_cancel_button": "Ні, скасувати",
+    "deny_confirm": "Ви точно хочете відхилити запит на підписку від {user}?",
+    "unfollow_confirm_title": "Відписка",
+    "unfollow_confirm": "Точно відписатись від {user}?",
+    "unfollow_confirm_accept_button": "Так, відписатись",
+    "unfollow_confirm_cancel_button": "Ні, не відписуватись",
+    "note": "Приватна нотатка"
   },
   "status": {
     "copy_link": "Скопіювати посилання на допис",
@@ -965,7 +1037,38 @@
     "plus_more": "+{number} більше",
     "thread_show_full_with_icon": "{icon} {text}",
     "show_only_conversation_under_this": "Показати всі відповіді на цей допис",
-    "status_history": "Історія змін"
+    "status_history": "Історія змін",
+    "thread_hide": "Сховати гілку",
+    "open_gallery": "Відкрити галерею",
+    "repeat_confirm": "Точно поширити допис?",
+    "repeat_confirm_title": "Підтвердьте поширення",
+    "repeat_confirm_accept_button": "Так, поширити",
+    "repeat_confirm_cancel_button": "Ні, не поширювати",
+    "delete_error": "Помилка при видаленні допису: {0}",
+    "delete_confirm_accept_button": "Так, видалити",
+    "delete_confirm_cancel_button": "Ні, лишити",
+    "delete_confirm_title": "Підтвердьте видалення",
+    "you": "(ви)",
+    "collapse_attachments": "Згорнути вкладення",
+    "show_all_attachments": "Показати всі вкладення",
+    "hide_attachment": "Сховати вкладення",
+    "many_attachments": "Вкладень: {number} | Вкладень: {number}",
+    "attachment_stop_flash": "Зупинити Flash-плеєр",
+    "thread_follow": "Ще відповідей: {numStatus} | Ще відповідей: {numStatus}",
+    "remove_attachment": "Видалити вкладення",
+    "ancestor_follow": "Переглянути ще {numReplies} під цим дописом | Переглянути ще {numReplies} під цим дописом",
+    "show_all_conversation": "Показати всю розмову (ще дописів: {numStatus}) | Показати всю розмову (ще дописів: {numStatus})",
+    "move_up": "Посунути вкладення ліворуч",
+    "move_down": "Посунути вкладення праворуч",
+    "thread_show": "Показати гілку",
+    "mentions": "Згадки",
+    "thread_show_full": "Показати відповіді: {numStatus} | Показати відповіді: {numStatus}",
+    "hide_quote": "Сховати процитований допис",
+    "display_quote": "Показати процитований допис",
+    "invisible_quote": "Процитований допис недоступний: {link}",
+    "replies_list_with_others": "Ще відповідей: {numReplies} | Ще відповідей: {numReplies}:",
+    "show_attachment_in_modal": "Показати вкладення у вікні",
+    "show_attachment_description": "Переглянути опис (натисніть саме вкладення, якщо опис не вміщається)"
   },
   "timeline": {
     "no_more_statuses": "Більше немає дописів",
@@ -980,7 +1083,8 @@
     "repeated": "поширив(-ла)",
     "no_retweet_hint": "Запис, позначено як \"тільки для підписників\" або \"особисте\" і тому не може бути поширений",
     "socket_broke": "Втрачено з'єднання у реальному часі: код {0}",
-    "socket_reconnected": "Встановлено з'єднання у реальному часі"
+    "socket_reconnected": "Встановлено з'єднання у реальному часі",
+    "quick_view_settings": "Налаштування швидкого перегляду"
   },
   "user_reporting": {
     "submit": "Відправити",
@@ -1026,5 +1130,35 @@
     "submit_edit_action": "Надіслати",
     "cancel_edit_action": "Скасувати",
     "inactive_message": "Це оголошення неактивне"
+  },
+  "lists": {
+    "really_delete": "Дійсно видалити список?",
+    "error": "Помилка при роботі зі списками: {0}",
+    "is_in_list": "Вже є у списку",
+    "editing_list": "Редагування списку {listTitle}",
+    "creating_list": "Створення нового списку",
+    "search": "Знайти користувачів",
+    "create": "Створити",
+    "save": "Зберегти зміни",
+    "manage_members": "Керувати учасниками списку",
+    "new": "Новий список",
+    "title": "Назва списку",
+    "delete": "Видалити список",
+    "following_only": "Лише за ким ви стежите",
+    "lists": "Списки",
+    "manage_lists": "Керувати списками",
+    "remove_from_list": "Видалити зі списку",
+    "add_to_list": "Додати до списку"
+  },
+  "update": {
+    "update_changelog": "Щоб дізнатись більше інформації, дивіться {theFullChangelog}.",
+    "update_bugs": "Будь ласка, повідомляйте про будь-які проблеми та помилки на {pleromaGitlab}, оскільки ми внесли багато змін, і навіть після ретельно проведених перевірок, ми можемо щось пропустити. Ми заздалегідь вдячні за ваші відгуки щодо проблем, з якими ви можете зіткнутися, а також пропозиції щодо вдосконалення Pleroma та Pleroma-FE.",
+    "update_changelog_here": "повний список змін",
+    "big_update_title": "Хвилинку уваги",
+    "update_bugs_gitlab": "Pleroma GitLab",
+    "big_update_content": "У нас не було оновлень протягом тривалого часу, тому речі можуть мати інакший вигляд, аніж ви звикли."
+  },
+  "unicode_domain_indicator": {
+    "tooltip": "Цей домен містить не-ASCII символи."
   }
 }
