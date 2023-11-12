@@ -2,6 +2,7 @@
   <Popover
     class="ExtraButtons"
     trigger="click"
+    :triggerAttrs="{ title: $t('status.more_actions') }"
     placement="top"
     :offset="{ y: 5 }"
     :bound-to="{ x: 'container' }"
@@ -10,10 +11,14 @@
     @close="onClose"
   >
     <template #content="{close}">
-      <div class="dropdown-menu">
+      <div
+        class="dropdown-menu"
+        role="menu"
+      >
         <button
           v-if="canMute && !status.thread_muted"
           class="button-default dropdown-item dropdown-item-icon"
+          role="menuitem"
           @click.prevent="muteConversation"
         >
           <FAIcon
@@ -24,6 +29,7 @@
         <button
           v-if="canMute && status.thread_muted"
           class="button-default dropdown-item dropdown-item-icon"
+          role="menuitem"
           @click.prevent="unmuteConversation"
         >
           <FAIcon
@@ -34,6 +40,7 @@
         <button
           v-if="!status.pinned && canPin"
           class="button-default dropdown-item dropdown-item-icon"
+          role="menuitem"
           @click.prevent="pinStatus"
           @click="close"
         >
@@ -45,6 +52,7 @@
         <button
           v-if="status.pinned && canPin"
           class="button-default dropdown-item dropdown-item-icon"
+          role="menuitem"
           @click.prevent="unpinStatus"
           @click="close"
         >
@@ -57,6 +65,7 @@
           <button
             v-if="!status.bookmarked"
             class="button-default dropdown-item dropdown-item-icon"
+            role="menuitem"
             @click.prevent="bookmarkStatus"
             @click="close"
           >
@@ -68,6 +77,7 @@
           <button
             v-if="status.bookmarked"
             class="button-default dropdown-item dropdown-item-icon"
+            role="menuitem"
             @click.prevent="unbookmarkStatus"
             @click="close"
           >
@@ -80,6 +90,7 @@
         <button
           v-if="ownStatus && editingAvailable"
           class="button-default dropdown-item dropdown-item-icon"
+          role="menuitem"
           @click.prevent="editStatus"
           @click="close"
         >
@@ -91,6 +102,7 @@
         <button
           v-if="isEdited && editingAvailable"
           class="button-default dropdown-item dropdown-item-icon"
+          role="menuitem"
           @click.prevent="showStatusHistory"
           @click="close"
         >
@@ -102,6 +114,7 @@
         <button
           v-if="canDelete"
           class="button-default dropdown-item dropdown-item-icon"
+          role="menuitem"
           @click.prevent="deleteStatus"
           @click="close"
         >
@@ -112,6 +125,7 @@
         </button>
         <button
           class="button-default dropdown-item dropdown-item-icon"
+          role="menuitem"
           @click.prevent="copyLink"
           @click="close"
         >
@@ -123,6 +137,7 @@
         <a
           v-if="!status.is_local"
           class="button-default dropdown-item dropdown-item-icon"
+          role="menuitem"
           title="Source"
           :href="status.external_url"
           target="_blank"
@@ -134,6 +149,7 @@
         </a>
         <button
           class="button-default dropdown-item dropdown-item-icon"
+          role="menuitem"
           @click.prevent="reportStatus"
           @click="close"
         >
