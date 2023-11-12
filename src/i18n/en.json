@@ -1033,7 +1033,8 @@
     "reaction_count_label": "{num} person reacted | {num} people reacted",
     "hide_quote": "Hide the quoted status",
     "display_quote": "Display the quoted status",
-    "invisible_quote": "Quoted status unavailable: {link}"
+    "invisible_quote": "Quoted status unavailable: {link}",
+    "more_actions": "More actions on this status"
   },
   "user_card": {
     "approve": "Approve",
