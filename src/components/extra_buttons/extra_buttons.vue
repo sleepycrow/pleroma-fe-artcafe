@@ -2,7 +2,7 @@
   <Popover
     class="ExtraButtons"
     trigger="click"
-    :triggerAttrs="{ title: $t('status.more_actions') }"
+    :trigger-attrs="triggerAttrs"
     placement="top"
     :offset="{ y: 5 }"
     :bound-to="{ x: 'container' }"
@@ -14,6 +14,7 @@
       <div
         class="dropdown-menu"
         role="menu"
+        :id="`popup-menu-${randomSeed}`"
       >
         <button
           v-if="canMute && !status.thread_muted"

@@ -1,4 +1,5 @@
 import statusPoster from '../../services/status_poster/status_poster.service.js'
+import genRandomSeed from '../../services/random_seed/random_seed.service.js'
 import MediaUpload from '../media_upload/media_upload.vue'
 import ScopeSelector from '../scope_selector/scope_selector.vue'
 import EmojiInput from '../emoji_input/emoji_input.vue'
@@ -162,7 +163,7 @@ const PostStatusForm = {
     }
 
     return {
-      randomSeed: `${Math.random()}`.replace('.', '-'),
+      randomSeed: genRandomSeed(),
       dropFiles: [],
       uploadingFiles: false,
       error: null,

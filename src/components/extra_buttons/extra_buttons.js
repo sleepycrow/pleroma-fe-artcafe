@@ -1,4 +1,5 @@
 import Popover from '../popover/popover.vue'
+import genRandomSeed from '../../services/random_seed/random_seed.service.js'
 import ConfirmModal from '../confirm_modal/confirm_modal.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
@@ -40,7 +41,8 @@ const ExtraButtons = {
   data () {
     return {
       expanded: false,
-      showingDeleteDialog: false
+      showingDeleteDialog: false,
+      randomSeed: genRandomSeed()
     }
   },
   methods: {
@@ -152,6 +154,15 @@ const ExtraButtons = {
     editingAvailable () { return this.$store.state.instance.editingAvailable },
     shouldConfirmDelete () {
       return this.$store.getters.mergedConfig.modalOnDelete
+    },
+    triggerAttrs () {
+      return {
+        title: this.$t('status.more_actions'),
+        id: `popup-trigger-${this.randomSeed}`,
+        'aria-controls': `popup-menu-${this.randomSeed}`,
+        'aria-expanded': this.expanded,
+        'aria-haspopup': 'menu'
+      }
     }
   }
 }
