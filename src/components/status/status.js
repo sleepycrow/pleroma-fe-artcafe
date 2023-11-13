@@ -154,6 +154,7 @@ const Status = {
     'controlledSetMediaPlaying',
     'dive'
   ],
+  emits: ['interacted'],
   data () {
     return {
       uncontrolledReplying: false,
@@ -442,9 +443,11 @@ const Status = {
       this.error = error
     },
     clearError () {
+      this.$emit('interacted')
       this.error = undefined
     },
     toggleReplying () {
+      this.$emit('interacted')
       controlledOrUncontrolledToggle(this, 'replying')
     },
     gotoOriginal (id) {

@@ -96,6 +96,15 @@ export async function showDesktopNotification (content) {
   sw.postMessage({ type: 'desktopNotification', content })
 }
 
+export async function closeDesktopNotification ({ id }) {
+  const { active: sw } = await window.navigator.serviceWorker.getRegistration()
+  if (id >= 0) {
+    sw.postMessage({ type: 'desktopNotificationClose', content: { id } })
+  } else {
+    sw.postMessage({ type: 'desktopNotificationClose', content: { all: true } })
+  }
+}
+
 export async function updateFocus () {
   const { active: sw } = await window.navigator.serviceWorker.getRegistration()
   sw.postMessage({ type: 'updateFocus' })

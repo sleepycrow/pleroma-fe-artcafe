@@ -17,6 +17,10 @@ import {
   isValidNotification,
   maybeShowNotification
 } from '../services/notification_utils/notification_utils.js'
+import {
+  closeDesktopNotification,
+  closeAllDesktopNotifications
+} from '../services/desktop_notification_utils/desktop_notification_utils.js'
 import apiService from '../services/api/api.service.js'
 
 const emptyTl = (userId = 0) => ({
@@ -726,6 +730,8 @@ const statuses = {
       apiService.markNotificationsAsSeen({
         id: rootState.statuses.notifications.maxId,
         credentials: rootState.users.currentUser.credentials
+      }).then(() => {
+        closeAllDesktopNotifications(rootState)
       })
     },
     markSingleNotificationAsSeen ({ rootState, commit }, { id }) {
@@ -734,6 +740,8 @@ const statuses = {
         single: true,
         id,
         credentials: rootState.users.currentUser.credentials
+      }).then(() => {
+        closeDesktopNotification(rootState, id)
       })
     },
     dismissNotificationLocal ({ rootState, commit }, { id }) {

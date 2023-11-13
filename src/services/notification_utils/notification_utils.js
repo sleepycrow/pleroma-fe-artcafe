@@ -1,6 +1,7 @@
 import { filter, sortBy, includes } from 'lodash'
 import { muteWordHits } from '../status_parser/status_parser.js'
 import { showDesktopNotification } from '../desktop_notification_utils/desktop_notification_utils.js'
+
 import FaviconService from 'src/services/favicon_service/favicon_service.js'
 
 let cachedBadgeUrl = null
@@ -68,8 +69,8 @@ export const maybeShowNotification = (store, notification) => {
 
 export const filteredNotificationsFromStore = (store, types) => {
   // map is just to clone the array since sort mutates it and it causes some issues
-  let sortedNotifications = notificationsFromStore(store).map(_ => _).sort(sortById)
-  sortedNotifications = sortBy(sortedNotifications, 'seen')
+  const sortedNotifications = notificationsFromStore(store).map(_ => _).sort(sortById)
+  // TODO implement sorting elsewhere and make it optional
   return sortedNotifications.filter(
     (notification) => (types || visibleTypes(store)).includes(notification.type)
   )

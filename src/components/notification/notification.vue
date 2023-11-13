@@ -6,6 +6,7 @@
       class="Notification"
       :compact="true"
       :statusoid="notification.status"
+      @interacted="interacted"
     />
   </article>
   <article v-else>

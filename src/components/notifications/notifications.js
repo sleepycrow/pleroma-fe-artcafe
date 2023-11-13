@@ -159,6 +159,26 @@ const Notifications = {
     updateScrollPosition () {
       this.showScrollTop = this.$refs.root.offsetTop < this.scrollerRef.scrollTop
     },
+    notificationClicked (notification) {
+      const { type, id, seen } = notification
+      if (!seen) {
+        switch (type) {
+          case 'mention':
+          case 'pleroma:report':
+          case 'follow_request':
+            break
+          default:
+            this.markOneAsSeen(id)
+        }
+      }
+    },
+    notificationInteracted (notification) {
+      const { id, seen } = notification
+      if (!seen) this.markOneAsSeen(id)
+    },
+    markOneAsSeen (id) {
+      this.$store.dispatch('markSingleNotificationAsSeen', { id })
+    },
     markAsSeen () {
       this.$store.dispatch('markNotificationsAsSeen')
       this.seenToDisplayCount = DEFAULT_SEEN_TO_DISPLAY_COUNT
