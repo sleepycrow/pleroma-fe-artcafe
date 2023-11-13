@@ -1,4 +1,5 @@
 import Completion from '../../services/completion/completion.js'
+import genRandomSeed from '../../services/random_seed/random_seed.service.js'
 import EmojiPicker from '../emoji_picker/emoji_picker.vue'
 import Popover from 'src/components/popover/popover.vue'
 import ScreenReaderNotice from 'src/components/screen_reader_notice/screen_reader_notice.vue'
@@ -110,7 +111,7 @@ const EmojiInput = {
   },
   data () {
     return {
-      randomSeed: `${Math.random()}`.replace('.', '-'),
+      randomSeed: genRandomSeed(),
       input: undefined,
       caretEl: undefined,
       highlighted: -1,

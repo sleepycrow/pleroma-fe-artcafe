@@ -205,7 +205,13 @@
     "migrated_to": "migrated to",
     "reacted_with": "reacted with {0}",
     "submitted_report": "submitted a report",
-    "poll_ended": "poll has ended"
+    "poll_ended": "poll has ended",
+    "unread_announcements": "{num} unread announcement | {num} unread announcements",
+    "unread_chats": "{num} unread chat | {num} unread chats",
+    "unread_follow_requests": "{num} new follow request | {num} new follow requests",
+    "configuration_tip": "You can customize what to display here in {theSettings}. {dismiss}",
+    "configuration_tip_settings": "the settings",
+    "configuration_tip_dismiss": "Do not show again"
   },
   "polls": {
     "add_poll": "Add poll",
@@ -489,6 +495,7 @@
     "hide_muted_posts": "Hide posts of muted users",
     "mute_bot_posts": "Mute bot posts",
     "hide_bot_indication": "Hide bot indication in posts",
+    "hide_scrobbles": "Hide scrobbles",
     "hide_all_muted_posts": "Hide muted posts",
     "max_thumbnails": "Maximum amount of thumbnails per post (empty = no limit)",
     "hide_isp": "Hide instance-specific panel",
@@ -561,6 +568,11 @@
     "notification_visibility_moves": "User Migrates",
     "notification_visibility_emoji_reactions": "Reactions",
     "notification_visibility_polls": "Ends of polls you voted in",
+    "notification_show_extra": "Show extra notifications in the notifications column",
+    "notification_extra_chats": "Show unread chats",
+    "notification_extra_announcements": "Show unread announcements",
+    "notification_extra_follow_requests": "Show new follow requests",
+    "notification_extra_tip": "Show the customization tip for extra notifications",
     "no_rich_text_description": "Strip rich text formatting from all posts",
     "no_blocks": "No blocks",
     "no_mutes": "No mutes",
@@ -1033,7 +1045,8 @@
     "reaction_count_label": "{num} person reacted | {num} people reacted",
     "hide_quote": "Hide the quoted status",
     "display_quote": "Display the quoted status",
-    "invisible_quote": "Quoted status unavailable: {link}"
+    "invisible_quote": "Quoted status unavailable: {link}",
+    "more_actions": "More actions on this status"
   },
   "user_card": {
     "approve": "Approve",

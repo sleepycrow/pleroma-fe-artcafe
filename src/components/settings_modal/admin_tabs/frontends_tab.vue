@@ -33,9 +33,9 @@
           >
             <strong>{{ frontend.name }}</strong>
             {{ ' ' }}
-            <span v-if="adminDraft[':pleroma'][':frontends'][':primary'].name === frontend.name">
+            <span v-if="adminDraft[':pleroma'][':frontends'][':primary']?.name === frontend.name">
               <i18n-t
-                v-if="adminDraft[':pleroma'][':frontends'][':primary'].ref === frontend.refs[0]"
+                v-if="adminDraft[':pleroma'][':frontends'][':primary']?.ref === frontend.refs[0]"
                 keypath="admin_dash.frontend.is_default"
               />
               <i18n-t

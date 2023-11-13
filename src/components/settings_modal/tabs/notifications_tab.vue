@@ -51,6 +51,47 @@
             </li>
           </ul>
         </li>
+        <li>
+          <BooleanSetting path="showExtraNotifications">
+            {{ $t('settings.notification_show_extra') }}
+          </BooleanSetting>
+        </li>
+        <li>
+          <ul class="setting-list suboptions">
+            <li>
+              <BooleanSetting
+                path="showChatsInExtraNotifications"
+                :disabled="!mergedConfig.showExtraNotifications"
+              >
+                {{ $t('settings.notification_extra_chats') }}
+              </BooleanSetting>
+            </li>
+            <li>
+              <BooleanSetting
+                path="showAnnouncementsInExtraNotifications"
+                :disabled="!mergedConfig.showExtraNotifications"
+              >
+                {{ $t('settings.notification_extra_announcements') }}
+              </BooleanSetting>
+            </li>
+            <li>
+              <BooleanSetting
+                path="showFollowRequestsInExtraNotifications"
+                :disabled="!mergedConfig.showExtraNotifications"
+              >
+                {{ $t('settings.notification_extra_follow_requests') }}
+              </BooleanSetting>
+            </li>
+            <li>
+              <BooleanSetting
+                path="showExtraNotificationsTip"
+                :disabled="!mergedConfig.showExtraNotifications"
+              >
+                {{ $t('settings.notification_extra_tip') }}
+              </BooleanSetting>
+            </li>
+          </ul>
+        </li>
       </ul>
     </div>
 
