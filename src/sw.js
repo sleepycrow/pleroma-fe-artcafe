@@ -69,7 +69,8 @@ self.addEventListener('message', async (event) => {
   if (type === 'desktopNotificationClose') {
     const { id, all } = content
     const search = all ? null : { tag: id }
-    self.registration.getNotifications(search).forEach(n => n.close())
+    const notifications = await self.registration.getNotifications(search)
+    notifications.forEach(n => n.close())
   }
 
   if (type === 'updateFocus') {
