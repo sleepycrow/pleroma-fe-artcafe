@@ -1,4 +1,4 @@
-import { filter, sortBy, includes } from 'lodash'
+import { filter, includes } from 'lodash'
 import { muteWordHits } from '../status_parser/status_parser.js'
 import { showDesktopNotification } from '../desktop_notification_utils/desktop_notification_utils.js'
 
