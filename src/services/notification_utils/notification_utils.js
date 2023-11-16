@@ -82,7 +82,11 @@ export const unseenNotificationsFromStore = store =>
 export const prepareNotificationObject = (notification, i18n) => {
   if (cachedBadgeUrl === null) {
     const favicon = FaviconService.getOriginalFavicons()[0]
-    cachedBadgeUrl = favicon.favimg.href
+    if (!favicon) {
+      cachedBadgeUrl = 'about:blank'
+    } else {
+      cachedBadgeUrl = favicon.favimg.href
+    }
   }
 
   const notifObj = {

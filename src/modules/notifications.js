@@ -52,7 +52,7 @@ export const notifications = {
       })
     },
     markSingleNotificationAsSeen (state, { id }) {
-      const notification = find(state.data, n => n.id === id)
+      const notification = state.idStore[id]
       if (notification) notification.seen = true
     },
     dismissNotification (state, { id }) {
@@ -60,7 +60,7 @@ export const notifications = {
       delete state.idStore[id]
     },
     updateNotification (state, { id, updater }) {
-      const notification = find(state.data, n => n.id === id)
+      const notification = state.idStore[id]
       notification && updater(notification)
     }
   },
@@ -113,7 +113,7 @@ export const notifications = {
         }
       })
     },
-    notificationClicked ({ state, commit }, { id }) {
+    notificationClicked ({ state, dispatch }, { id }) {
       const notification = state.idStore[id]
       const { type, seen } = notification
 
@@ -124,7 +124,7 @@ export const notifications = {
           case 'follow_request':
             break
           default:
-            commit('markSingleNotificationAsSeen', { id })
+            dispatch('markSingleNotificationAsSeen', { id })
         }
       }
     },
