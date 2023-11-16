@@ -57,9 +57,7 @@ export const notifications = {
     },
     dismissNotification (state, { id }) {
       state.data = state.data.filter(n => n.id !== id)
-    },
-    dismissNotifications (state, { finder }) {
-      state.data = state.data.filter(n => finder)
+      delete state.idStore[id]
     },
     updateNotification (state, { id, updater }) {
       const notification = find(state.data, n => n.id === id)
@@ -88,7 +86,6 @@ export const notifications = {
       statusNotifications.forEach(notification => {
         const id = notification.status.id
         const referenceStatus = rootState.statuses.allStatusesObject[id]
-        console.log()
 
         if (referenceStatus) {
           notification.status = referenceStatus
@@ -108,14 +105,13 @@ export const notifications = {
         // eslint-disable-next-line no-prototype-builtins
         if (!state.idStore.hasOwnProperty(notification.id)) {
           commit('updateNotificationsMinMaxId', notification.id)
+          commit('addNewNotifications', { notifications: [notification] })
 
           maybeShowNotification(store, notification)
         } else if (notification.seen) {
           state.idStore[notification.id].seen = true
         }
       })
-
-      commit('addNewNotifications', { notifications })
     },
     setNotificationsLoading ({ rootState, commit }, { value }) {
       commit('setNotificationsLoading', { value })

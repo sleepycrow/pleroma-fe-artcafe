@@ -139,11 +139,11 @@ const addStatusToGlobalStorage = (state, data) => {
   return result
 }
 
+// XXX: this isn't actually really used anymore since deletes just don't appear outside streaming, thanks masto
 // Remove status from the global storages (arrays and objects maintaining statuses) except timelines
 const removeStatusFromGlobalStorage = (state, status) => {
   remove(state.allStatuses, { id: status.id })
-
-  // TODO: Need to remove from allStatusesObject?
+  delete state.allStatusesObject[status.id]
 
   // Remove from conversation
   const conversationId = status.statusnet_conversation_id
@@ -516,11 +516,8 @@ export const mutations = {
 const statuses = {
   state: defaultState(),
   actions: {
-    addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId, pagination }) {
+    addNewStatuses ({ rootState, commit, dispatch, state }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId, pagination }) {
       commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser, userId, pagination })
-
-      const deletions = statuses.filter(status => status.type === 'deletion')
-      console.log(deletions)
     },
     fetchStatus ({ rootState, dispatch }, id) {
       return rootState.api.backendInteractor.fetchStatus({ id })
