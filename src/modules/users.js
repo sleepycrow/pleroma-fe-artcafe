@@ -498,7 +498,7 @@ const users = {
       store.commit('addNewUsers', users)
       store.commit('addNewUsers', targetUsers)
 
-      const notificationsObject = store.rootState.statuses.notifications.idStore
+      const notificationsObject = store.rootState.notifications.idStore
       const relevantNotifications = Object.entries(notificationsObject)
         .filter(([k, val]) => notificationIds.includes(k))
         .map(([k, val]) => val)

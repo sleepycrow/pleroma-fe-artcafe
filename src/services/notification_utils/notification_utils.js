@@ -6,7 +6,7 @@ import FaviconService from 'src/services/favicon_service/favicon_service.js'
 
 let cachedBadgeUrl = null
 
-export const notificationsFromStore = store => store.state.statuses.notifications.data
+export const notificationsFromStore = store => store.state.notifications.data
 
 export const visibleTypes = store => {
   const rootState = store.rootState || store.state

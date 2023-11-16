@@ -7,7 +7,7 @@ const state = { failCreateNotif: false }
 
 export const showDesktopNotification = (rootState, desktopNotificationOpts) => {
   if (!('Notification' in window && window.Notification.permission === 'granted')) return
-  if (rootState.statuses.notifications.desktopNotificationSilence) { return }
+  if (rootState.notifications.desktopNotificationSilence) { return }
 
   if (isSWSupported()) {
     swDesktopNotification(desktopNotificationOpts)

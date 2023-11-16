@@ -65,7 +65,7 @@ const Notifications = {
       return notificationsFromStore(this.$store)
     },
     error () {
-      return this.$store.state.statuses.notifications.error
+      return this.$store.state.notifications.error
     },
     unseenNotifications () {
       return unseenNotificationsFromStore(this.$store)
@@ -86,7 +86,7 @@ const Notifications = {
       return this.unseenNotifications.length + (this.unreadChatCount) + this.unreadAnnouncementCount
     },
     loading () {
-      return this.$store.state.statuses.notifications.loading
+      return this.$store.state.notifications.loading
     },
     noHeading () {
       const { layoutType } = this.$store.state.interface
@@ -160,17 +160,7 @@ const Notifications = {
       this.showScrollTop = this.$refs.root.offsetTop < this.scrollerRef.scrollTop
     },
     notificationClicked (notification) {
-      const { type, id, seen } = notification
-      if (!seen) {
-        switch (type) {
-          case 'mention':
-          case 'pleroma:report':
-          case 'follow_request':
-            break
-          default:
-            this.markOneAsSeen(id)
-        }
-      }
+      // const { type, id, seen } = notification
     },
     notificationInteracted (notification) {
       const { id, seen } = notification

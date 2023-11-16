@@ -12,15 +12,6 @@ import {
   isArray,
   omitBy
 } from 'lodash'
-import {
-  isStatusNotification,
-  isValidNotification,
-  maybeShowNotification
-} from '../services/notification_utils/notification_utils.js'
-import {
-  closeDesktopNotification,
-  closeAllDesktopNotifications
-} from '../services/desktop_notification_utils/desktop_notification_utils.js'
 import apiService from '../services/api/api.service.js'
 
 const emptyTl = (userId = 0) => ({
@@ -40,22 +31,12 @@ const emptyTl = (userId = 0) => ({
   flushMarker: 0
 })
 
-const emptyNotifications = () => ({
-  desktopNotificationSilence: true,
-  maxId: 0,
-  minId: Number.POSITIVE_INFINITY,
-  data: [],
-  idStore: {},
-  loading: false
-})
-
 export const defaultState = () => ({
   allStatuses: [],
   scrobblesNextFetch: {},
   allStatusesObject: {},
   conversationsObject: {},
   maxId: 0,
-  notifications: emptyNotifications(),
   favorites: new Set(),
   timelines: {
     mentions: emptyTl(),
@@ -163,9 +144,6 @@ const removeStatusFromGlobalStorage = (state, status) => {
   remove(state.allStatuses, { id: status.id })
 
   // TODO: Need to remove from allStatusesObject?
-
-  // Remove possible notification
-  remove(state.notifications.data, ({ action: { id } }) => id === status.id)
 
   // Remove from conversation
   const conversationId = status.statusnet_conversation_id
@@ -342,52 +320,6 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 }
 
-const updateNotificationsMinMaxId = (state, notification) => {
-  state.notifications.maxId = notification.id > state.notifications.maxId
-    ? notification.id
-    : state.notifications.maxId
-  state.notifications.minId = notification.id < state.notifications.minId
-    ? notification.id
-    : state.notifications.minId
-}
-
-const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes, rootGetters, newNotificationSideEffects }) => {
-  each(notifications, (notification) => {
-    // If invalid notification, update ids but don't add it to store
-    if (!isValidNotification(notification)) {
-      console.error('Invalid notification:', notification)
-      updateNotificationsMinMaxId(state, notification)
-      return
-    }
-
-    if (isStatusNotification(notification.type)) {
-      notification.action = addStatusToGlobalStorage(state, notification.action).item
-      notification.status = notification.status && addStatusToGlobalStorage(state, notification.status).item
-    }
-
-    if (notification.type === 'pleroma:report') {
-      dispatch('addReport', notification.report)
-    }
-
-    if (notification.type === 'pleroma:emoji_reaction') {
-      dispatch('fetchEmojiReactionsBy', notification.status.id)
-    }
-
-    // Only add a new notification if we don't have one for the same action
-    // eslint-disable-next-line no-prototype-builtins
-    if (!state.notifications.idStore.hasOwnProperty(notification.id)) {
-      updateNotificationsMinMaxId(state, notification)
-
-      state.notifications.data.push(notification)
-      state.notifications.idStore[notification.id] = notification
-
-      newNotificationSideEffects(notification)
-    } else if (notification.seen) {
-      state.notifications.idStore[notification.id].seen = true
-    }
-  })
-}
-
 const removeStatus = (state, { timeline, userId }) => {
   const timelineObject = state.timelines[timeline]
   if (userId) {
@@ -400,7 +332,6 @@ const removeStatus = (state, { timeline, userId }) => {
 
 export const mutations = {
   addNewStatuses,
-  addNewNotifications,
   removeStatus,
   showNewStatuses (state, { timeline }) {
     const oldTimeline = (state.timelines[timeline])
@@ -421,9 +352,6 @@ export const mutations = {
   clearTimeline (state, { timeline, excludeUserId = false }) {
     const userId = excludeUserId ? state.timelines[timeline].userId : undefined
     state.timelines[timeline] = emptyTl(userId)
-  },
-  clearNotifications (state) {
-    state.notifications = emptyNotifications()
   },
   setFavorited (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
@@ -506,31 +434,6 @@ export const mutations = {
   setNsfw (state, { id, nsfw }) {
     const newStatus = state.allStatusesObject[id]
     newStatus.nsfw = nsfw
-  },
-  setNotificationsLoading (state, { value }) {
-    state.notifications.loading = value
-  },
-  setNotificationsSilence (state, { value }) {
-    state.notifications.desktopNotificationSilence = value
-  },
-  markNotificationsAsSeen (state) {
-    each(state.notifications.data, (notification) => {
-      notification.seen = true
-    })
-  },
-  markSingleNotificationAsSeen (state, { id }) {
-    const notification = find(state.notifications.data, n => n.id === id)
-    if (notification) notification.seen = true
-  },
-  dismissNotification (state, { id }) {
-    state.notifications.data = state.notifications.data.filter(n => n.id !== id)
-  },
-  dismissNotifications (state, { finder }) {
-    state.notifications.data = state.notifications.data.filter(n => finder)
-  },
-  updateNotification (state, { id, updater }) {
-    const notification = find(state.notifications.data, n => n.id === id)
-    notification && updater(notification)
   },
   queueFlush (state, { timeline, id }) {
     state.timelines[timeline].flushMarker = id
@@ -615,20 +518,9 @@ const statuses = {
   actions: {
     addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId, pagination }) {
       commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser, userId, pagination })
-    },
-    addNewNotifications (store, { notifications, older }) {
-      const { commit, dispatch, rootGetters } = store
 
-      const newNotificationSideEffects = (notification) => {
-        maybeShowNotification(store, notification)
-      }
-      commit('addNewNotifications', { dispatch, notifications, older, rootGetters, newNotificationSideEffects })
-    },
-    setNotificationsLoading ({ rootState, commit }, { value }) {
-      commit('setNotificationsLoading', { value })
-    },
-    setNotificationsSilence ({ rootState, commit }, { value }) {
-      commit('setNotificationsSilence', { value })
+      const deletions = statuses.filter(status => status.type === 'deletion')
+      console.log(deletions)
     },
     fetchStatus ({ rootState, dispatch }, id) {
       return rootState.api.backendInteractor.fetchStatus({ id })
@@ -724,35 +616,6 @@ const statuses = {
     },
     queueFlushAll ({ rootState, commit }) {
       commit('queueFlushAll')
-    },
-    markNotificationsAsSeen ({ rootState, commit }) {
-      commit('markNotificationsAsSeen')
-      apiService.markNotificationsAsSeen({
-        id: rootState.statuses.notifications.maxId,
-        credentials: rootState.users.currentUser.credentials
-      }).then(() => {
-        closeAllDesktopNotifications(rootState)
-      })
-    },
-    markSingleNotificationAsSeen ({ rootState, commit }, { id }) {
-      commit('markSingleNotificationAsSeen', { id })
-      apiService.markNotificationsAsSeen({
-        single: true,
-        id,
-        credentials: rootState.users.currentUser.credentials
-      }).then(() => {
-        closeDesktopNotification(rootState, id)
-      })
-    },
-    dismissNotificationLocal ({ rootState, commit }, { id }) {
-      commit('dismissNotification', { id })
-    },
-    dismissNotification ({ rootState, commit }, { id }) {
-      commit('dismissNotification', { id })
-      rootState.api.backendInteractor.dismissNotification({ id })
-    },
-    updateNotification ({ rootState, commit }, { id, updater }) {
-      commit('updateNotification', { id, updater })
     },
     fetchFavsAndRepeats ({ rootState, commit }, id) {
       Promise.all([

@@ -249,7 +249,7 @@
           <StatusContent
             :class="{ faint: !statusExpanded }"
             :compact="!statusExpanded"
-            :status="notification.action"
+            :status="notification.status"
           />
         </template>
       </div>
