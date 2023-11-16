@@ -113,7 +113,7 @@ export const notifications = {
         }
       })
     },
-    notificationClicked ({ state, commit }, id) {
+    notificationClicked ({ state, commit }, { id }) {
       const notification = state.idStore[id]
       const { type, seen } = notification
 
