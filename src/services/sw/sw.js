@@ -82,12 +82,18 @@ function sendSubscriptionToBackEnd (subscription, token, notificationVisibility)
     return responseData
   })
 }
-export async function initServiceWorker () {
+export async function initServiceWorker (store) {
   if (!isSWSupported()) return
   await getOrCreateServiceWorker()
   navigator.serviceWorker.addEventListener('message', (event) => {
+    const { dispatch } = store
     console.log('SW MESSAGE', event)
-    // TODO actually act upon click (open drawer on mobile, open chat/thread etc)
+    const { type, ...rest } = event
+
+    switch (type) {
+      case 'notificationClicked':
+        dispatch('notificationClicked', { id: rest.id })
+    }
   })
 }
 

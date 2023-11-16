@@ -113,6 +113,21 @@ export const notifications = {
         }
       })
     },
+    notificationClicked ({ state, commit }, id) {
+      const notification = state.idStore[id]
+      const { type, seen } = notification
+
+      if (!seen) {
+        switch (type) {
+          case 'mention':
+          case 'pleroma:report':
+          case 'follow_request':
+            break
+          default:
+            commit('markSingleNotificationAsSeen', { id })
+        }
+      }
+    },
     setNotificationsLoading ({ rootState, commit }, { value }) {
       commit('setNotificationsLoading', { value })
     },

@@ -345,7 +345,7 @@ const afterStoreSetup = async ({ store, i18n }) => {
   store.dispatch('setLayoutHeight', windowHeight())
 
   FaviconService.initFaviconService()
-  initServiceWorker()
+  initServiceWorker(store)
 
   window.addEventListener('focus', () => updateFocus())
 

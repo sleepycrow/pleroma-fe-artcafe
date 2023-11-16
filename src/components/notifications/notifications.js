@@ -159,14 +159,16 @@ const Notifications = {
     updateScrollPosition () {
       this.showScrollTop = this.$refs.root.offsetTop < this.scrollerRef.scrollTop
     },
+    /* "Interacted" really refers to "actionable" notifications that require user input,
+     * everything else (likes/repeats/reacts) cannot be acted and therefore we just clear
+     * the "seen" status upon any clicks on them
+     */
     notificationClicked (notification) {
-      // const { type, id, seen } = notification
+      const { id } = notification
+      this.$store.dispatch('notificationClicked', { id })
     },
     notificationInteracted (notification) {
-      const { id, seen } = notification
-      if (!seen) this.markOneAsSeen(id)
-    },
-    markOneAsSeen (id) {
+      const { id } = notification
       this.$store.dispatch('markSingleNotificationAsSeen', { id })
     },
     markAsSeen () {
