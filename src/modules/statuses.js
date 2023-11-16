@@ -139,19 +139,6 @@ const addStatusToGlobalStorage = (state, data) => {
   return result
 }
 
-// XXX: this isn't actually really used anymore since deletes just don't appear outside streaming, thanks masto
-// Remove status from the global storages (arrays and objects maintaining statuses) except timelines
-const removeStatusFromGlobalStorage = (state, status) => {
-  remove(state.allStatuses, { id: status.id })
-  delete state.allStatusesObject[status.id]
-
-  // Remove from conversation
-  const conversationId = status.statusnet_conversation_id
-  if (state.conversationsObject[conversationId]) {
-    remove(state.conversationsObject[conversationId], { id: status.id })
-  }
-}
-
 const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {}, noIdUpdate = false, userId, pagination = {} }) => {
   // Sanity check
   if (!isArray(statuses)) {
@@ -283,20 +270,6 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       if (!state.favorites.has(favorite.id)) {
         state.favorites.add(favorite.id)
         favoriteStatus(favorite)
-      }
-    },
-    deletion: (deletion) => {
-      const uri = deletion.uri
-      const status = find(allStatuses, { uri })
-      if (!status) {
-        return
-      }
-
-      removeStatusFromGlobalStorage(state, status)
-
-      if (timeline) {
-        remove(timelineObject.statuses, { uri })
-        remove(timelineObject.visibleStatuses, { uri })
       }
     },
     follow: (follow) => {
