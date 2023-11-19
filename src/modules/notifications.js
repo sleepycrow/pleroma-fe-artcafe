@@ -150,7 +150,7 @@ export const notifications = {
         id,
         credentials: rootState.users.currentUser.credentials
       }).then(() => {
-        closeDesktopNotification(rootState, id)
+        closeDesktopNotification(rootState, { id })
       })
     },
     dismissNotificationLocal ({ rootState, commit }, { id }) {

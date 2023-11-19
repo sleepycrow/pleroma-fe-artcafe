@@ -21,7 +21,7 @@ export const showDesktopNotification = (rootState, desktopNotificationOpts) => {
   }
 }
 
-export const closeDesktopNotification = (rootState, id) => {
+export const closeDesktopNotification = (rootState, { id }) => {
   if (!('Notification' in window && window.Notification.permission === 'granted')) return
 
   if (isSWSupported()) {
@@ -33,6 +33,6 @@ export const closeAllDesktopNotifications = (rootState) => {
   if (!('Notification' in window && window.Notification.permission === 'granted')) return
 
   if (isSWSupported()) {
-    swCloseDesktopNotification()
+    swCloseDesktopNotification({})
   }
 }
