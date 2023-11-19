@@ -21,6 +21,7 @@ library.add(
 )
 
 const DEFAULT_SEEN_TO_DISPLAY_COUNT = 30
+const ACTIONABLE_NOTIFICATION_TYPES = new Set(['mention', 'pleroma:report', 'follow_request'])
 
 const Notifications = {
   components: {
@@ -71,14 +72,26 @@ const Notifications = {
       return unseenNotificationsFromStore(this.$store)
     },
     filteredNotifications () {
-      return filteredNotificationsFromStore(this.$store, this.filterMode)
+      if (this.unseenAtTop) {
+        return [
+          ...filteredNotificationsFromStore(this.$store).filter(n => this.shouldShowUnseen(n)),
+          ...filteredNotificationsFromStore(this.$store).filter(n => !this.shouldShowUnseen(n))
+        ]
+      } else {
+        return filteredNotificationsFromStore(this.$store, this.filterMode)
+      }
     },
     unseenCountBadgeText () {
       return `${this.unseenCount ? this.unseenCount : ''}${this.extraNotificationsCount ? '*' : ''}`
     },
     unseenCount () {
-      return this.unseenNotifications.length
+      if (this.ignoreInactionableSeen) {
+        return this.unseenNotifications.filter(n => ACTIONABLE_NOTIFICATION_TYPES.has(n.type)).length
+      } else {
+        return this.unseenNotifications.length
+      }
     },
+    ignoreInactionableSeen () { return this.$store.getters.mergedConfig.ignoreInactionableSeen },
     extraNotificationsCount () {
       return countExtraNotifications(this.$store)
     },
@@ -108,6 +121,7 @@ const Notifications = {
       return this.filteredNotifications.slice(0, this.unseenCount + this.seenToDisplayCount)
     },
     noSticky () { return this.$store.getters.mergedConfig.disableStickyHeaders },
+    unseenAtTop () { return this.$store.getters.mergedConfig.unseenAtTop },
     showExtraNotifications () {
       return !this.noExtra
     },
@@ -154,10 +168,15 @@ const Notifications = {
     scrollToTop () {
       const scrollable = this.scrollerRef
       scrollable.scrollTo({ top: this.$refs.root.offsetTop })
-      // this.$refs.root.scrollIntoView({ behavior: 'smooth', block: 'start' })
     },
     updateScrollPosition () {
       this.showScrollTop = this.$refs.root.offsetTop < this.scrollerRef.scrollTop
+    },
+    shouldShowUnseen (notification) {
+      if (notification.seen) return false
+
+      const actionable = ACTIONABLE_NOTIFICATION_TYPES.has(notification.type)
+      return this.ignoreInactionableSeen ? actionable : true
     },
     /* "Interacted" really refers to "actionable" notifications that require user input,
      * everything else (likes/repeats/reacts) cannot be acted and therefore we just clear

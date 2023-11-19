@@ -67,6 +67,17 @@
           </FALayers>
         </button>
         <button
+          v-if="!closingDrawerMarksAsSeen"
+          class="button-unstyled mobile-nav-button"
+          :title="$t('nav.mobile_notifications_close')"
+          @click.stop.prevent="markNotificationsAsSeen()"
+        >
+          <FAIcon
+            class="fa-scale-110 fa-old-padding"
+            icon="check-double"
+          />
+        </button>
+        <button
           class="button-unstyled mobile-nav-button"
           :title="$t('nav.mobile_notifications_close')"
           @click.stop.prevent="closeMobileNotifications(true)"

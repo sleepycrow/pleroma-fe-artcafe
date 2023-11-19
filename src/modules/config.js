@@ -127,7 +127,10 @@ export const defaultState = {
   showAnnouncementsInExtraNotifications: undefined, // instance default
   showFollowRequestsInExtraNotifications: undefined, // instance default
   maxDepthInThread: undefined, // instance default
-  autocompleteSelect: undefined // instance default
+  autocompleteSelect: undefined, // instance default
+  closingDrawerMarksAsSeen: undefined, // instance default
+  unseenAtTop: undefined, // instance default
+  ignoreInactionableSeen: undefined // instance default
 }
 
 // caching the instance default properties

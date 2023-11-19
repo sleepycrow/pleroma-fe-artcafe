@@ -14,7 +14,8 @@ import {
   faBell,
   faBars,
   faArrowUp,
-  faMinus
+  faMinus,
+  faCheckDouble
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -22,7 +23,8 @@ library.add(
   faBell,
   faBars,
   faArrowUp,
-  faMinus
+  faMinus,
+  faCheckDouble
 )
 
 const MobileNav = {
@@ -66,6 +68,9 @@ const MobileNav = {
     },
     shouldConfirmLogout () {
       return this.$store.getters.mergedConfig.modalOnLogout
+    },
+    closingDrawerMarksAsSeen () {
+      return this.$store.getters.mergedConfig.closingDrawerMarksAsSeen
     },
     ...mapGetters(['unreadChatCount'])
   },

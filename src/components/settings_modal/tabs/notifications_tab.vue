@@ -1,6 +1,29 @@
 <template>
   <div :label="$t('settings.notifications')">
     <div class="setting-item">
+      <h2>{{ $t('settings.notification_setting_annoyance') }}</h2>
+      <ul class="setting-list">
+        <li>
+          <BooleanSetting path="closingDrawerMarksAsSeen">
+            {{ $t('settings.notification_setting_drawer_marks_as_seen') }}
+          </BooleanSetting>
+        </li>
+        <li>
+          <BooleanSetting path="ignoreInactionableSeen">
+            {{ $t('settings.notification_setting_ignore_inactionable_seen') }}
+          </BooleanSetting>
+          <p>
+            {{ $t('settings.notification_setting_ignore_inactionable_seen_tip') }}
+          </p>
+        </li>
+        <li>
+          <BooleanSetting path="unseenAtTop">
+            {{ $t('settings.notification_setting_unseen_at_top') }}
+          </BooleanSetting>
+        </li>
+      </ul>
+    </div>
+    <div class="setting-item">
       <h2>{{ $t('settings.notification_setting_filters') }}</h2>
       <ul class="setting-list">
         <li>

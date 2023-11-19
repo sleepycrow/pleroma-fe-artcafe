@@ -66,7 +66,7 @@
             :key="notification.id"
             role="listitem"
             class="notification"
-            :class="{unseen: !minimalMode && !notification.seen}"
+            :class="{unseen: !minimalMode && shouldShowUnseen(notification)}"
             @click="e => notificationClicked(notification)"
           >
             <div class="notification-overlay" />
