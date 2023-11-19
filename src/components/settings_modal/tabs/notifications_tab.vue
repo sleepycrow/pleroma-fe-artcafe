@@ -34,43 +34,128 @@
             {{ $t('settings.notification_setting_block_from_strangers') }}
           </BooleanSetting>
         </li>
-        <li class="select-multiple">
-          <span class="label">{{ $t('settings.notification_visibility') }}</span>
-          <ul class="option-list">
+        <li>
+          <h3> {{ $t('settings.notification_visibility') }}</h3>
+          <ul class="setting-list two-column">
             <li>
-              <BooleanSetting path="notificationVisibility.likes">
-                {{ $t('settings.notification_visibility_likes') }}
-              </BooleanSetting>
+              <h4> {{ $t('settings.notification_visibility_mentions') }}</h4>
+              <ul class="setting-list">
+                <li>
+                  <BooleanSetting path="notificationVisibility.mentions">
+                    {{ $t('settings.notification_visibility_in_column') }}
+                  </BooleanSetting>
+                </li>
+                <li>
+                  <BooleanSetting path="notificationNative.mentions" >
+                    {{ $t('settings.notification_visibility_native_notifications') }}
+                  </BooleanSetting>
+                </li>
+              </ul>
             </li>
             <li>
-              <BooleanSetting path="notificationVisibility.repeats">
-                {{ $t('settings.notification_visibility_repeats') }}
-              </BooleanSetting>
+              <h4> {{ $t('settings.notification_visibility_likes') }}</h4>
+              <ul class="setting-list">
+                <li>
+                  <BooleanSetting path="notificationVisibility.likes">
+                    {{ $t('settings.notification_visibility_in_column') }}
+                  </BooleanSetting>
+                </li>
+                <li>
+                  <BooleanSetting path="notificationNative.likes" >
+                    {{ $t('settings.notification_visibility_native_notifications') }}
+                  </BooleanSetting>
+                </li>
+              </ul>
             </li>
             <li>
-              <BooleanSetting path="notificationVisibility.follows">
-                {{ $t('settings.notification_visibility_follows') }}
-              </BooleanSetting>
+              <h4> {{ $t('settings.notification_visibility_repeats') }}</h4>
+              <ul class="setting-list">
+                <li>
+                  <BooleanSetting path="notificationVisibility.repeats">
+                    {{ $t('settings.notification_visibility_in_column') }}
+                  </BooleanSetting>
+                </li>
+                <li>
+                  <BooleanSetting path="notificationNative.repeats" >
+                    {{ $t('settings.notification_visibility_native_notifications') }}
+                  </BooleanSetting>
+                </li>
+              </ul>
             </li>
             <li>
-              <BooleanSetting path="notificationVisibility.mentions">
-                {{ $t('settings.notification_visibility_mentions') }}
-              </BooleanSetting>
+              <h4> {{ $t('settings.notification_visibility_emoji_reactions') }}</h4>
+              <ul class="setting-list">
+                <li>
+                  <BooleanSetting path="notificationVisibility.emojiReactions">
+                    {{ $t('settings.notification_visibility_in_column') }}
+                  </BooleanSetting>
+                </li>
+                <li>
+                  <BooleanSetting path="notificationNative.emojiReactions" >
+                    {{ $t('settings.notification_visibility_native_notifications') }}
+                  </BooleanSetting>
+                </li>
+              </ul>
             </li>
             <li>
-              <BooleanSetting path="notificationVisibility.moves">
-                {{ $t('settings.notification_visibility_moves') }}
-              </BooleanSetting>
+              <h4> {{ $t('settings.notification_visibility_follows') }}</h4>
+              <ul class="setting-list">
+                <li>
+                  <BooleanSetting path="notificationVisibility.follows">
+                    {{ $t('settings.notification_visibility_in_column') }}
+                  </BooleanSetting>
+                </li>
+                <li>
+                  <BooleanSetting path="notificationNative.follows" >
+                    {{ $t('settings.notification_visibility_native_notifications') }}
+                  </BooleanSetting>
+                </li>
+              </ul>
             </li>
             <li>
-              <BooleanSetting path="notificationVisibility.emojiReactions">
-                {{ $t('settings.notification_visibility_emoji_reactions') }}
-              </BooleanSetting>
+              <h4> {{ $t('settings.notification_visibility_moves') }}</h4>
+              <ul class="setting-list">
+                <li>
+                  <BooleanSetting path="notificationVisibility.moves">
+                    {{ $t('settings.notification_visibility_in_column') }}
+                  </BooleanSetting>
+                </li>
+                <li>
+                  <BooleanSetting path="notificationNative.moves" >
+                    {{ $t('settings.notification_visibility_native_notifications') }}
+                  </BooleanSetting>
+                </li>
+              </ul>
             </li>
             <li>
-              <BooleanSetting path="notificationVisibility.polls">
-                {{ $t('settings.notification_visibility_polls') }}
-              </BooleanSetting>
+              <h4> {{ $t('settings.notification_visibility_polls') }}</h4>
+              <ul class="setting-list">
+                <li>
+                  <BooleanSetting path="notificationVisibility.polls">
+                    {{ $t('settings.notification_visibility_in_column') }}
+                  </BooleanSetting>
+                </li>
+                <li>
+                  <BooleanSetting path="notificationNative.polls" >
+                    {{ $t('settings.notification_visibility_native_notifications') }}
+                  </BooleanSetting>
+                </li>
+              </ul>
+            </li>
+            <li v-if="canReceiveReports">
+              <h4> {{ $t('settings.notification_visibility_reports') }}</h4>
+              <ul class="setting-list">
+                <li>
+                  <BooleanSetting path="notificationVisibility.reports">
+                    {{ $t('settings.notification_visibility_in_column') }}
+                  </BooleanSetting>
+                </li>
+                <li>
+                  <BooleanSetting path="notificationNative.reports" >
+                    {{ $t('settings.notification_visibility_native_notifications') }}
+                  </BooleanSetting>
+                </li>
+              </ul>
             </li>
           </ul>
         </li>

@@ -3,6 +3,10 @@
 .settings-modal {
   overflow: hidden;
 
+  h4 {
+    margin-bottom: 0.5em;
+  }
+
   .setting-list,
   .option-list {
     list-style-type: none;
@@ -14,6 +18,14 @@
 
     .suboptions {
       margin-top: 0.3em;
+    }
+
+    &.two-column {
+      column-count: 2;
+
+      > li {
+        break-inside: avoid;
+      }
     }
   }
 
