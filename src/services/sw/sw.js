@@ -88,7 +88,7 @@ export async function initServiceWorker (store) {
   navigator.serviceWorker.addEventListener('message', (event) => {
     const { dispatch } = store
     console.log('SW MESSAGE', event)
-    const { type, ...rest } = event
+    const { type, ...rest } = event.data
 
     switch (type) {
       case 'notificationClicked':
