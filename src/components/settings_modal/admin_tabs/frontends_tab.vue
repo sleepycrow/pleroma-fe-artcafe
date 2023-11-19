@@ -10,7 +10,6 @@
         <li>
           <h3>{{ $t('admin_dash.frontend.default_frontend') }}</h3>
           <p>{{ $t('admin_dash.frontend.default_frontend_tip') }}</p>
-          <p>{{ $t('admin_dash.frontend.default_frontend_tip2') }}</p>
           <ul class="setting-list">
             <li>
               <StringSetting path=":pleroma.:frontends.:primary.name" />
