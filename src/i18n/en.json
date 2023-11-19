@@ -495,6 +495,7 @@
     "hide_muted_posts": "Hide posts of muted users",
     "mute_bot_posts": "Mute bot posts",
     "hide_bot_indication": "Hide bot indication in posts",
+    "hide_scrobbles": "Hide scrobbles",
     "hide_all_muted_posts": "Hide muted posts",
     "max_thumbnails": "Maximum amount of thumbnails per post (empty = no limit)",
     "hide_isp": "Hide instance-specific panel",
@@ -1046,7 +1047,8 @@
     "reaction_count_label": "{num} person reacted | {num} people reacted",
     "hide_quote": "Hide the quoted status",
     "display_quote": "Display the quoted status",
-    "invisible_quote": "Quoted status unavailable: {link}"
+    "invisible_quote": "Quoted status unavailable: {link}",
+    "more_actions": "More actions on this status"
   },
   "user_card": {
     "approve": "Approve",

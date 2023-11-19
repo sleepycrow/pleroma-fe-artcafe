@@ -107,6 +107,7 @@ const PLEROMA_ANNOUNCEMENTS_URL = '/api/v1/pleroma/admin/announcements'
 const PLEROMA_POST_ANNOUNCEMENT_URL = '/api/v1/pleroma/admin/announcements'
 const PLEROMA_EDIT_ANNOUNCEMENT_URL = id => `/api/v1/pleroma/admin/announcements/${id}`
 const PLEROMA_DELETE_ANNOUNCEMENT_URL = id => `/api/v1/pleroma/admin/announcements/${id}`
+const PLEROMA_SCROBBLES_URL = id => `/api/v1/pleroma/accounts/${id}/scrobbles`
 
 const PLEROMA_ADMIN_CONFIG_URL = '/api/pleroma/admin/config'
 const PLEROMA_ADMIN_DESCRIPTIONS_URL = '/api/pleroma/admin/config/descriptions'
@@ -1765,6 +1766,23 @@ const installFrontend = ({ credentials, payload }) => {
     })
 }
 
+const fetchScrobbles = ({ accountId, limit = 1 }) => {
+  let url = PLEROMA_SCROBBLES_URL(accountId)
+  const params = [['limit', limit]]
+  const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
+  url += `?${queryString}`
+  return fetch(url, {})
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        return {
+          error: response
+        }
+      }
+    })
+}
+
 const apiService = {
   verifyCredentials,
   fetchTimeline,
@@ -1878,6 +1896,7 @@ const apiService = {
   postAnnouncement,
   editAnnouncement,
   deleteAnnouncement,
+  fetchScrobbles,
   adminFetchAnnouncements,
   fetchInstanceDBConfig,
   fetchInstanceConfigDescriptions,

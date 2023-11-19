@@ -11,6 +11,8 @@
     />
     <span
       class="button-unstyled popover-trigger"
+      role="button"
+      :tabindex="0"
       :title="$t('tool_tip.add_reaction')"
       @click.stop.prevent="show"
     >

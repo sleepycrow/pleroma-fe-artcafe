@@ -47,6 +47,7 @@ const emptyNotifications = () => ({
 
 export const defaultState = () => ({
   allStatuses: [],
+  scrobblesNextFetch: {},
   allStatusesObject: {},
   conversationsObject: {},
   maxId: 0,
@@ -120,8 +121,24 @@ const sortTimeline = (timeline) => {
   return timeline
 }
 
+const getLatestScrobble = (state, user) => {
+  if (state.scrobblesNextFetch[user.id] && state.scrobblesNextFetch[user.id] > Date.now()) {
+    return
+  }
+
+  state.scrobblesNextFetch[user.id] = Date.now() + 24 * 60 * 60 * 1000
+  apiService.fetchScrobbles({ accountId: user.id }).then((scrobbles) => {
+    if (scrobbles.length > 0) {
+      user.latestScrobble = scrobbles[0]
+
+      state.scrobblesNextFetch[user.id] = Date.now() + 60 * 1000
+    }
+  })
+}
+
 // Add status to the global storages (arrays and objects maintaining statuses) except timelines
 const addStatusToGlobalStorage = (state, data) => {
+  getLatestScrobble(state, data.user)
   const result = mergeOrAdd(state.allStatuses, state.allStatusesObject, data)
   if (result.new) {
     // Add to conversation
