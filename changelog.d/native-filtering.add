@@ -1,0 +1,1 @@
+Added option to toggle what notification types appear in native notifications, by default less important ones (likes, repeats, etc) will no longer show up in native notifications.

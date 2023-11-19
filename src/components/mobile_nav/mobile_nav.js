@@ -86,7 +86,7 @@ const MobileNav = {
         // make sure to mark notifs seen only when the notifs were open and not
         // from close-calls.
         this.notificationsOpen = false
-        if (markRead) {
+        if (markRead && this.closingDrawerMarksAsSeen) {
           this.markNotificationsAsSeen()
         }
       }
@@ -122,7 +122,6 @@ const MobileNav = {
       this.hideConfirmLogout()
     },
     markNotificationsAsSeen () {
-      // this.$refs.notifications.markAsSeen()
       this.$store.dispatch('markNotificationsAsSeen')
     },
     onScroll ({ target: { scrollTop, clientHeight, scrollHeight } }) {

@@ -1,0 +1,1 @@
+Native notifications now also have "badge" property that matches instance's favicon (visible in Android Chromium at least)
