@@ -91,6 +91,7 @@ export const prepareNotificationObject = (notification, i18n) => {
 
   const notifObj = {
     tag: notification.id,
+    type: notification.type,
     badge: cachedBadgeUrl
   }
   const status = notification.status

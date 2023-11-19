@@ -115,6 +115,21 @@
               </ul>
             </li>
             <li>
+              <h4> {{ $t('settings.notification_visibility_follow_requests') }}</h4>
+              <ul class="setting-list">
+                <li>
+                  <BooleanSetting path="notificationVisibility.follow_request">
+                    {{ $t('settings.notification_visibility_in_column') }}
+                  </BooleanSetting>
+                </li>
+                <li>
+                  <BooleanSetting path="notificationNative.follow_request" >
+                    {{ $t('settings.notification_visibility_native_notifications') }}
+                  </BooleanSetting>
+                </li>
+              </ul>
+            </li>
+            <li>
               <h4> {{ $t('settings.notification_visibility_moves') }}</h4>
               <ul class="setting-list">
                 <li>

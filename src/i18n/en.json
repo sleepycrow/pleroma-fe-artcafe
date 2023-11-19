@@ -564,6 +564,7 @@
     "notification_visibility_in_column": "Show in notifications column/drawer",
     "notification_visibility_native_notifications": "Show a native notification",
     "notification_visibility_follows": "Follows",
+    "notification_visibility_follow_requests": "Follow requests",
     "notification_visibility_likes": "Favorites",
     "notification_visibility_mentions": "Mentions",
     "notification_visibility_repeats": "Repeats",

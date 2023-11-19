@@ -15,7 +15,8 @@ const i18n = createI18n({
 
 const state = {
   lastFocused: null,
-  notificationIds: new Set()
+  notificationIds: new Set(),
+  allowedNotificationTypes: null
 }
 
 function getWindowClients () {
@@ -23,15 +24,43 @@ function getWindowClients () {
     .then((clientList) => clientList.filter(({ type }) => type === 'window'))
 }
 
-const setLocale = async () => {
-  const state = await localForage.getItem('vuex-lz')
-  const locale = state.config.interfaceLanguage || 'en'
+const setSettings = async () => {
+  const vuexState = await localForage.getItem('vuex-lz')
+  const locale = vuexState.config.interfaceLanguage || 'en'
   i18n.locale = locale
+  const notificationsNativeArray = Object.entries(vuexState.config.notificationNative)
+
+  state.allowedNotificationTypes = new Set(
+    notificationsNativeArray
+      .filter(([k, v]) => v)
+      .map(([k]) => {
+        switch (k) {
+          case 'mentions':
+            return 'mention'
+          case 'likes':
+            return 'like'
+          case 'repeats':
+            return 'repeat'
+          case 'emojiReactions':
+            return 'pleroma:emoji_reaction'
+          case 'reports':
+            return 'pleroma:report'
+          case 'followRequest':
+            return 'follow_request'
+          case 'follows':
+            return 'follow'
+          case 'polls':
+            return 'poll'
+          default:
+            return k
+        }
+      })
+  )
 }
 
 const showPushNotification = async (event) => {
   const activeClients = await getWindowClients()
-  await setLocale()
+  await setSettings()
   // Only show push notifications if all tabs/windows are closed
   if (activeClients.length === 0) {
     const data = event.data.json()
@@ -43,27 +72,31 @@ const showPushNotification = async (event) => {
 
     const res = prepareNotificationObject(parsedNotification, i18n)
 
-    self.registration.showNotification(res.title, res)
+    if (state.allowedNotificationTypes.has(parsedNotification.type)) {
+      self.registration.showNotification(res.title, res)
+    }
   }
 }
 
 self.addEventListener('push', async (event) => {
-  console.log(event)
   if (event.data) {
     event.waitUntil(showPushNotification(event))
   }
 })
 
 self.addEventListener('message', async (event) => {
+  await setSettings()
   const { type, content } = event.data
 
   if (type === 'desktopNotification') {
     const { title, ...rest } = content
-    const { tag } = rest
+    const { tag, type } = rest
     if (state.notificationIds.has(tag)) return
     state.notificationIds.add(tag)
     setTimeout(() => state.notificationIds.delete(tag), 10000)
-    self.registration.showNotification(title, rest)
+    if (state.allowedNotificationTypes.has(type)) {
+      self.registration.showNotification(title, rest)
+    }
   }
 
   if (type === 'desktopNotificationClose') {
