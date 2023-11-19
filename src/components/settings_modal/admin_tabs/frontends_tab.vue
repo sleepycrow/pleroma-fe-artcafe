@@ -135,8 +135,8 @@
                   class="button button-default btn"
                   type="button"
                   :disabled="
-                    adminDraft[':pleroma'][':frontends'][':primary'].name === frontend.name &&
-                      adminDraft[':pleroma'][':frontends'][':primary'].ref === frontend.refs[0]
+                    adminDraft[':pleroma'][':frontends'][':primary']?.name === frontend.name &&
+                      adminDraft[':pleroma'][':frontends'][':primary']?.ref === frontend.refs[0]
                   "
                   @click="setDefault(frontend)"
                 >
