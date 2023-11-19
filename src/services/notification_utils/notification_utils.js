@@ -1,8 +1,9 @@
-import { filter, includes } from 'lodash'
 import { muteWordHits } from '../status_parser/status_parser.js'
 import { showDesktopNotification } from '../desktop_notification_utils/desktop_notification_utils.js'
 
 import FaviconService from 'src/services/favicon_service/favicon_service.js'
+
+export const ACTIONABLE_NOTIFICATION_TYPES = new Set(['mention', 'pleroma:report', 'follow_request'])
 
 let cachedBadgeUrl = null
 
@@ -24,9 +25,9 @@ export const visibleTypes = store => {
   ].filter(_ => _))
 }
 
-const statusNotifications = ['like', 'mention', 'repeat', 'pleroma:emoji_reaction', 'poll']
+const statusNotifications = new Set(['like', 'mention', 'repeat', 'pleroma:emoji_reaction', 'poll'])
 
-export const isStatusNotification = (type) => includes(statusNotifications, type)
+export const isStatusNotification = (type) => statusNotifications.has(type)
 
 export const isValidNotification = (notification) => {
   if (isStatusNotification(notification.type) && !notification.status) {
@@ -76,8 +77,15 @@ export const filteredNotificationsFromStore = (store, types) => {
   )
 }
 
-export const unseenNotificationsFromStore = store =>
-  filter(filteredNotificationsFromStore(store), ({ seen }) => !seen)
+export const unseenNotificationsFromStore = store => {
+  const ignoreInactionableSeen = store.getters.mergedConfig.ignoreInactionableSeen
+
+  return filteredNotificationsFromStore(store).filter(({ seen, type }) => {
+    if (!ignoreInactionableSeen) return !seen
+    if (seen) return false
+    return ACTIONABLE_NOTIFICATION_TYPES.has(type)
+  })
+}
 
 export const prepareNotificationObject = (notification, i18n) => {
   if (cachedBadgeUrl === null) {

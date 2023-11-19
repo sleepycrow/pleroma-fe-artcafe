@@ -8,7 +8,8 @@ import {
   notificationsFromStore,
   filteredNotificationsFromStore,
   unseenNotificationsFromStore,
-  countExtraNotifications
+  countExtraNotifications,
+  ACTIONABLE_NOTIFICATION_TYPES
 } from '../../services/notification_utils/notification_utils.js'
 import FaviconService from '../../services/favicon_service/favicon_service.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -21,7 +22,6 @@ library.add(
 )
 
 const DEFAULT_SEEN_TO_DISPLAY_COUNT = 30
-const ACTIONABLE_NOTIFICATION_TYPES = new Set(['mention', 'pleroma:report', 'follow_request'])
 
 const Notifications = {
   components: {
@@ -85,11 +85,7 @@ const Notifications = {
       return `${this.unseenCount ? this.unseenCount : ''}${this.extraNotificationsCount ? '*' : ''}`
     },
     unseenCount () {
-      if (this.ignoreInactionableSeen) {
-        return this.unseenNotifications.filter(n => ACTIONABLE_NOTIFICATION_TYPES.has(n.type)).length
-      } else {
-        return this.unseenNotifications.length
-      }
+      return this.unseenNotifications.length
     },
     ignoreInactionableSeen () { return this.$store.getters.mergedConfig.ignoreInactionableSeen },
     extraNotificationsCount () {
