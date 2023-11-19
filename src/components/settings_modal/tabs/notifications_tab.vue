@@ -12,9 +12,11 @@
           <BooleanSetting path="ignoreInactionableSeen">
             {{ $t('settings.notification_setting_ignore_inactionable_seen') }}
           </BooleanSetting>
-          <p>
-            {{ $t('settings.notification_setting_ignore_inactionable_seen_tip') }}
-          </p>
+          <div>
+            <small>
+              {{ $t('settings.notification_setting_ignore_inactionable_seen_tip') }}
+            </small>
+          </div>
         </li>
         <li>
           <BooleanSetting path="unseenAtTop">
