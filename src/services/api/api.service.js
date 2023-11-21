@@ -671,6 +671,7 @@ const fetchTimeline = ({
   timeline,
   credentials,
   since = false,
+  minId = false,
   until = false,
   userId = false,
   listId = false,
@@ -705,6 +706,9 @@ const fetchTimeline = ({
     url = url(listId)
   }
 
+  if (minId) {
+    params.push(['min_id', minId])
+  }
   if (since) {
     params.push(['since_id', since])
   }

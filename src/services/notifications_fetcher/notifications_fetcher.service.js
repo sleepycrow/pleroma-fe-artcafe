@@ -49,9 +49,11 @@ const fetchAndUpdate = ({ store, credentials, older = false, since }) => {
     // The normal maxId-check does not tell if older notifications have changed
     const notifications = timelineData.data
     const readNotifsIds = notifications.filter(n => n.seen).map(n => n.id)
-    const numUnseenNotifs = notifications.length - readNotifsIds.length
-    if (numUnseenNotifs > 0 && readNotifsIds.length > 0) {
-      args.since = Math.max(...readNotifsIds)
+    const unreadNotifsIds = notifications.filter(n => !n.seen).map(n => n.id)
+    if (readNotifsIds.length > 0 && readNotifsIds.length > 0) {
+      const minId = Math.min(...unreadNotifsIds) // Oldest known unread notification
+      args.since = false // Don't use since_id since it sorta conflicts with min_id
+      args.minId = minId - 1 // go beyond
       fetchNotifications({ store, args, older })
     }
 
