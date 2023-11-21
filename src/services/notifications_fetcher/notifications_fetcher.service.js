@@ -52,9 +52,11 @@ const fetchAndUpdate = ({ store, credentials, older = false, since }) => {
     const unreadNotifsIds = notifications.filter(n => !n.seen).map(n => n.id)
     if (readNotifsIds.length > 0 && readNotifsIds.length > 0) {
       const minId = Math.min(...unreadNotifsIds) // Oldest known unread notification
-      args.since = false // Don't use since_id since it sorta conflicts with min_id
-      args.minId = minId - 1 // go beyond
-      fetchNotifications({ store, args, older })
+      if (minId !== Infinity) {
+        args.since = false // Don't use since_id since it sorta conflicts with min_id
+        args.minId = minId - 1 // go beyond
+        fetchNotifications({ store, args, older })
+      }
     }
 
     return result
