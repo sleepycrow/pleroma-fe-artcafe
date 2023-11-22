@@ -95,7 +95,8 @@ export const unseenNotificationsFromStore = store => {
 
 export const prepareNotificationObject = (notification, i18n) => {
   if (cachedBadgeUrl === null) {
-    const favicon = FaviconService.getOriginalFavicons()[0]
+    const favicons = FaviconService.getOriginalFavicons()
+    const favicon = favicons[favicons.length - 1]
     if (!favicon) {
       cachedBadgeUrl = 'about:blank'
     } else {
