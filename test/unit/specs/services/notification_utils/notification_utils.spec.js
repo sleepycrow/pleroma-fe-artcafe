@@ -23,8 +23,10 @@ describe('NotificationUtils', () => {
                 type: 'repeat'
               }
             ]
-          },
-          config: {
+          }
+        },
+        getters: {
+          mergedConfig: {
             notificationVisibility: {
               likes: true,
               repeats: true,
@@ -66,8 +68,10 @@ describe('NotificationUtils', () => {
                 seen: true
               }
             ]
-          },
-          config: {
+          }
+        },
+        getters: {
+          mergedConfig: {
             notificationVisibility: {
               likes: true,
               repeats: true,
