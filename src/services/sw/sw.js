@@ -98,12 +98,14 @@ export async function initServiceWorker (store) {
 }
 
 export async function showDesktopNotification (content) {
+  if (!isSWSupported) return
   const { active: sw } = await window.navigator.serviceWorker.getRegistration()
   if (!sw) return console.error('No serviceworker found!')
   sw.postMessage({ type: 'desktopNotification', content })
 }
 
 export async function closeDesktopNotification ({ id }) {
+  if (!isSWSupported) return
   const { active: sw } = await window.navigator.serviceWorker.getRegistration()
   if (!sw) return console.error('No serviceworker found!')
   if (id >= 0) {
@@ -114,6 +116,7 @@ export async function closeDesktopNotification ({ id }) {
 }
 
 export async function updateFocus () {
+  if (!isSWSupported) return
   const { active: sw } = await window.navigator.serviceWorker.getRegistration()
   if (!sw) return console.error('No serviceworker found!')
   sw.postMessage({ type: 'updateFocus' })
