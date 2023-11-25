@@ -205,7 +205,13 @@
     "migrated_to": "移民到",
     "reacted_with": "顯出{0} ê 反應",
     "submitted_report": "送出檢舉",
-    "poll_ended": "投票結束"
+    "poll_ended": "投票結束",
+    "unread_announcements": "{num} 篇公告iáu bē 讀",
+    "unread_chats": "{num} ê開講iáu bē讀",
+    "unread_follow_requests": "{num}ê新ê跟tuè請求",
+    "configuration_tip": "用{theSettings}，lí通自訂siánn物佇tsia顯示。{dismiss}",
+    "configuration_tip_settings": "設定",
+    "configuration_tip_dismiss": "Mài koh顯示"
   },
   "polls": {
     "add_poll": "開投票",
@@ -713,8 +719,8 @@
     "hide_all_muted_posts": "Khàm掉消音êPO文",
     "max_thumbnails": "PO文ê縮小圖ê khòo-tah（無寫=無限制）",
     "hide_isp": "Khàm 站臺特有ê面 pang",
-    "right_sidebar": "Kā 邊á liâu徙kah正手pîng",
-    "navbar_column_stretch": "伸導覽liâu，kah 欄平闊",
+    "right_sidebar": "Kā 邊á ê欄位徙kah正手pîng",
+    "navbar_column_stretch": "伸導覽liâu，kah 欄位平闊",
     "always_show_post_button": "一直顯示「新ê PO文」ê鈕仔",
     "hide_wallpaper": "Khàm站臺ê壁紙",
     "use_one_click_nsfw": "Tshi̍h chi̍t 下就ē當拍開敏感內容",
@@ -850,11 +856,11 @@
     "conversation_display": "顯示對話ê風格",
     "conversation_display_tree": "樹á ê形",
     "disable_sticky_headers": "Mài 予欄位ê頭牢佇螢幕頂懸",
-    "show_scrollbars": "展示邊á liâu ê giú-á",
+    "show_scrollbars": "展示邊á ê欄位 ê giú-á",
     "third_column_mode": "空間夠額ê時，展示第三ê欄位",
     "third_column_mode_none": "不管時mài顯示第三ê欄位",
     "third_column_mode_notifications": "通知ê欄位",
-    "third_column_mode_postform": "主要êPO文表kah導覽",
+    "third_column_mode_postform": "主要ê PO文表kah導覽",
     "show_admin_badge": "佇我ê個人資料顯示「行政員」證章",
     "pause_on_unfocused": "若是 Pleroma ê分頁無點開，tiō 暫停更新",
     "conversation_display_tree_quick": "樹á形ê展示",
@@ -922,7 +928,13 @@
     "hard_reset_value": "硬ê重頭設",
     "hard_reset_value_tooltip": "Suá掉儲存內底ê設定，強制用預設ê值",
     "reset_value": "重頭設",
-    "reset_value_tooltip": "重頭設草稿"
+    "reset_value_tooltip": "重頭設草稿",
+    "hide_scrobbles": "Tshàng scrobble（記錄）",
+    "notification_show_extra": "顯示koh khah tsē ê通知佇通知ê欄位",
+    "notification_extra_chats": "顯示bô讀ê開講",
+    "notification_extra_announcements": "顯示bô讀ê公告",
+    "notification_extra_follow_requests": "顯示新ê跟tuè請求",
+    "notification_extra_tip": "顯示自訂其他通知ê撇步"
   },
   "status": {
     "favorites": "收藏",
@@ -949,7 +961,7 @@
     "mentions": "提起",
     "move_down": "Kā附件suá kàu正pîng",
     "thread_show_full": "展示tsit 條討論線ê所有（lóng總有{numStatus}ê狀態，深度上限：{depth}）",
-    "thread_follow": "看討論線tshūn ê部份（lóng總有{numStatus}ê狀態）",
+    "thread_follow": "看討論線tshun ê部份（lóng總有{numStatus}ê狀態）",
     "replies_list_with_others": "回應（+其他{numReplies}ê）：",
     "mute_conversation": "Kā會話消音",
     "unmute_conversation": "Kā會話取消消音",
@@ -990,7 +1002,8 @@
     "reaction_count_label": "{num}ê lâng用表情反應",
     "hide_quote": "Khàm條引用ê狀態",
     "display_quote": "顯示引用ê狀態",
-    "invisible_quote": "引用ê狀態bē當用：{link}"
+    "invisible_quote": "引用ê狀態bē當用：{link}",
+    "more_actions": "佇tsit ê狀態ê其他動作"
   },
   "user_card": {
     "favorites": "收藏",
