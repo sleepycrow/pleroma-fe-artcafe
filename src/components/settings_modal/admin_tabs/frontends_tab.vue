@@ -10,7 +10,6 @@
         <li>
           <h3>{{ $t('admin_dash.frontend.default_frontend') }}</h3>
           <p>{{ $t('admin_dash.frontend.default_frontend_tip') }}</p>
-          <p>{{ $t('admin_dash.frontend.default_frontend_tip2') }}</p>
           <ul class="setting-list">
             <li>
               <StringSetting path=":pleroma.:frontends.:primary.name" />
@@ -24,7 +23,8 @@
           </ul>
         </li>
       </ul>
-      <div class="setting-list">
+      <div class="setting-list relative">
+        <PanelLoading class="overlay" v-if="working"/>
         <h3>{{ $t('admin_dash.frontend.available_frontends') }}</h3>
         <ul class="cards-list">
           <li
@@ -86,6 +86,11 @@
                       ? $t('admin_dash.frontend.reinstall')
                       : $t('admin_dash.frontend.install')
                   }}
+                  <code>
+                    {{
+                      getSuggestedRef(frontend)
+                    }}
+                  </code>
                 </button>
                 <Popover
                   v-if="frontend.refs.length > 1"
@@ -93,13 +98,14 @@
                   class="button-dropdown"
                   placement="bottom"
                 >
-                  <template #content>
+                  <template #content="{close}">
                     <div class="dropdown-menu">
                       <button
                         v-for="ref in frontend.refs"
                         :key="ref"
                         class="button-default dropdown-item"
-                        @click="update(frontend, ref)"
+                        @click.prevent="update(frontend, ref)"
+                        @click="close"
                       >
                         <i18n-t keypath="admin_dash.frontend.install_version">
                           <template #version>
@@ -128,14 +134,19 @@
                   class="button button-default btn"
                   type="button"
                   :disabled="
-                    adminDraft[':pleroma'][':frontends'][':primary'].name === frontend.name &&
-                      adminDraft[':pleroma'][':frontends'][':primary'].ref === frontend.refs[0]
+                    adminDraft[':pleroma'][':frontends'][':primary']?.name === frontend.name &&
+                      adminDraft[':pleroma'][':frontends'][':primary']?.ref === frontend.refs[0]
                   "
                   @click="setDefault(frontend)"
                 >
                   {{
                     $t('admin_dash.frontend.set_default')
                   }}
+                  <code>
+                    {{
+                      getSuggestedRef(frontend)
+                    }}
+                  </code>
                 </button>
                 {{ ' ' }}
                 <Popover
@@ -144,13 +155,14 @@
                   class="button-dropdown"
                   placement="bottom"
                 >
-                  <template #content>
+                  <template #content="{close}">
                     <div class="dropdown-menu">
                       <button
-                        v-for="ref in frontend.refs.slice(1)"
+                        v-for="ref in frontend.installedRefs || frontend.refs"
                         :key="ref"
                         class="button-default dropdown-item"
-                        @click="setDefault(frontend, ref)"
+                        @click.prevent="setDefault(frontend, ref)"
+                        @click="close"
                       >
                         <i18n-t keypath="admin_dash.frontend.set_default_version">
                           <template #version>

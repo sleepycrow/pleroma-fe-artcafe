@@ -6,6 +6,10 @@
         <li>
           <StringSetting path=":pleroma.:instance.:name" />
         </li>
+        <!-- See https://git.pleroma.social/pleroma/pleroma/-/merge_requests/3963 -->
+        <li v-if="adminDraft[':pleroma'][':instance'][':favicon'] !== undefined">
+          <AttachmentSetting compact path=":pleroma.:instance.:favicon" />
+        </li>
         <li>
           <StringSetting path=":pleroma.:instance.:email" />
         </li>
@@ -16,7 +20,7 @@
           <StringSetting path=":pleroma.:instance.:short_description" />
         </li>
         <li>
-          <AttachmentSetting path=":pleroma.:instance.:instance_thumbnail" />
+          <AttachmentSetting compact path=":pleroma.:instance.:instance_thumbnail" />
         </li>
         <li>
           <AttachmentSetting path=":pleroma.:instance.:background_image" />
