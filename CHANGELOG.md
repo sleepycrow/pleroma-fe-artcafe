@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## 2.6.1
+### Fixed
+- fix admin dashboard not having any feedback on frontend installation
+- Fix frontend admin tab crashing when no primary frontend is set
+- Add aria attributes to react and extra buttons
+
 ## 2.6.0
 ### Added
 - add the initial i18n translation file for Taiwanese (Hokkien), and modify some related files.
