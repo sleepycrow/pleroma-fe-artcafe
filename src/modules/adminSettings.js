@@ -26,6 +26,7 @@ const adminSettingsStorage = {
     },
     setAvailableFrontends (state, { frontends }) {
       state.frontends = frontends.map(f => {
+        f.installedRefs = f.installed_refs
         if (f.name === 'pleroma-fe') {
           f.refs = ['master', 'develop']
         } else {

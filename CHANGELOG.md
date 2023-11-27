@@ -3,6 +3,37 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## 2.6.1
+### Fixed
+- fix admin dashboard not having any feedback on frontend installation
+- Fix frontend admin tab crashing when no primary frontend is set
+- Add aria attributes to react and extra buttons
+
+## 2.6.0
+### Added
+- add the initial i18n translation file for Taiwanese (Hokkien), and modify some related files.
+- Implemented a very basic instance administration screen
+- Implement quoting
+
+### Fixed
+- Keep aspect ratio of custom emoji reaction in notification
+- Fix openSettingsModalTab so that it correctly opens Settings modal instead of Admin modal
+- Add alt text to emoji picker buttons
+- Use export-subst gitattribute to allow tarball builds
+- fix reports now showing reason/content
+- Fix HTML attribute parsing, discard attributes not strating with a letter
+- Make MentionsLine aware of line breaking by non-br elements
+- Fix a bug where mentioning a user twice will not fill the mention into the textarea
+- Fix parsing non-ascii tags
+- Fix OAuth2 token lingering after revocation
+- fix regex issue in HTML parser/renderer
+- don't display quoted status twice
+- fix typo in code that prevented cards from showing at all
+- Fix react button not working if reaction accounts are not loaded
+- Fix react button misalignment on safari ios
+- Fix pinned statuses gone when reloading user timeline
+- Fix scrolling emoji selector in modal in safari ios
+
 ## 2.5.1
 ### Fixed
 - Checkboxes in settings can now work with screenreaders
