@@ -1266,7 +1266,6 @@
       "wip_notice": "请注意，此部分是一个WIP，缺乏某些功能，因为前端管理的后台实现并不完整。",
       "default_frontend": "默认前端",
       "default_frontend_tip": "默认的前端将显示给所有用户。目前还没有办法让用户选择个人的前端。如果你不使用 PleromaFE，你很可能不得不使用旧的和有问题的 AdminFE 来进行实例配置，直到我们替换它。",
-      "default_frontend_tip2": "WIP: 由于 Pleroma 后端没有正确列出所有已安装的前端，你必须手动输入名称和引用。下面的列表提供了填写这些值的快捷方式。",
       "available_frontends": "可供安装"
     },
     "temp_overrides": {
