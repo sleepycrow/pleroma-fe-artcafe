@@ -258,10 +258,6 @@
                 :href="scrobble.externalLink"
                 target="_blank"
               >
-                <img
-                  :src="faviconUrl"
-                  class="status-rich-presence-favicon"
-                />
                 {{ scrobble.artist }} — {{ scrobble.title }}
                 <FAIcon
                   class="fa-scale-110 fa-old-padding"
