@@ -249,22 +249,45 @@
                 </button>
               </span>
             </div>
-            <div class="status-rich-presence" v-if="scrobblePresent">
-              <FAIcon
-                class="fa-scale-110 fa-old-padding"
-                icon="music"
-              />
-              {{ scrobble.artist }} — {{ scrobble.title }}
-              <FAIcon
-                class="fa-scale-110 fa-old-padding"
-                icon="play"
-              />
-              <span class="status-rich-presence-time">
-                <Timeago
-                  template-key="time.in_past"
-                  :time="scrobble.created_at"
-                  :auto-update="60"
+            <div
+              v-if="scrobblePresent"
+              class="status-rich-presence"
+            >
+              <a
+                v-if="scrobble.externalLink"
+                :href="scrobble.externalLink"
+                target="_blank"
+              >
+                {{ scrobble.artist }} — {{ scrobble.title }}
+                <FAIcon
+                  class="fa-scale-110 fa-old-padding"
+                  icon="play"
                 />
+                <span class="status-rich-presence-time">
+                  <Timeago
+                    template-key="time.in_past"
+                    :time="scrobble.created_at"
+                    :auto-update="60"
+                  />
+                </span>
+              </a>
+              <span v-if="!scrobble.externalLink">
+                <FAIcon
+                  class="fa-scale-110 fa-old-padding"
+                  icon="music"
+                />
+                {{ scrobble.artist }} — {{ scrobble.title }}
+                <FAIcon
+                  class="fa-scale-110 fa-old-padding"
+                  icon="play"
+                />
+                <span class="status-rich-presence-time">
+                  <Timeago
+                    template-key="time.in_past"
+                    :time="scrobble.created_at"
+                    :auto-update="60"
+                  />
+                </span>
               </span>
             </div>
             <div
