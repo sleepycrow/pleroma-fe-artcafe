@@ -26,7 +26,7 @@ export const fileType = mimetype => {
 }
 
 export const fileTypeExt = url => {
-  if (url.match(/\.(png|jpe?g|gif|webp|avif)$/)) {
+  if (url.match(/\.(a?png|jpe?g|gif|webp|avif)$/)) {
     return 'image'
   }
   if (url.match(/\.(ogv|mp4|webm|mov)$/)) {
