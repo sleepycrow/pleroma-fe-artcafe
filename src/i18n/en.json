@@ -699,12 +699,15 @@
     "notification_setting_ignore_inactionable_seen_tip": "This will not actually mark those notifications as read, and you'll still get desktop notifications about them if you chose so",
     "notification_setting_unseen_at_top": "Show unread notifications above others",
     "notification_setting_filters": "Filters",
+    "notification_setting_filters_chrome_push": "On some browsers (chrome) it might be impossible to completely filter out notifications by type when they arrive by Push",
     "notification_setting_block_from_strangers": "Block notifications from users who you do not follow",
     "notification_setting_privacy": "Privacy",
     "notification_setting_hide_notification_contents": "Hide the sender and contents of push notifications",
     "notification_mutes": "To stop receiving notifications from a specific user, use a mute.",
     "notification_blocks": "Blocking a user stops all notifications as well as unsubscribes them.",
     "enable_web_push_notifications": "Enable web push notifications",
+    "enable_web_push_always_show": "Always show web push notifications",
+    "enable_web_push_always_show_tip": "Some browsers (Chromium, Chrome) require that push messages always result in a notification, otherwise generic 'Website was updated in background' is shown, enable this to prevent this notification from showing. Can result in showing duplicate notifications on other browsers.",
     "more_settings": "More settings",
     "style": {
       "switcher": {

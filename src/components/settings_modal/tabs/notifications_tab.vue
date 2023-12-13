@@ -19,7 +19,7 @@
           </div>
         </li>
         <li>
-          <BooleanSetting path="unseenAtTop">
+          <BooleanSetting path="unseenAtTop" expert="1">
             {{ $t('settings.notification_setting_unseen_at_top') }}
           </BooleanSetting>
         </li>
@@ -38,6 +38,7 @@
         </li>
         <li>
           <h3> {{ $t('settings.notification_visibility') }}</h3>
+          <p v-if="expertLevel > 0">{{ $t('settings.notification_setting_filters_chrome_push') }}</p>
           <ul class="setting-list two-column">
             <li>
               <h4> {{ $t('settings.notification_visibility_mentions') }}</h4>
@@ -233,6 +234,21 @@
           >
             {{ $t('settings.enable_web_push_notifications') }}
           </BooleanSetting>
+          <ul class="setting-list suboptions">
+            <li>
+              <BooleanSetting
+                path="webPushAlwaysShowNotifications"
+                :disabled="!mergedConfig.webPushNotifications"
+              >
+                {{ $t('settings.enable_web_push_always_show') }}
+              </BooleanSetting>
+              <div :class="{ faint: !mergedConfig.webPushNotifications }">
+                <small>
+                  {{ $t('settings.enable_web_push_always_show_tip') }}
+                </small>
+              </div>
+            </li>
+          </ul>
         </li>
         <li>
           <BooleanSetting

@@ -29,6 +29,7 @@ const setSettings = async () => {
   const locale = vuexState.config.interfaceLanguage || 'en'
   i18n.locale = locale
   const notificationsNativeArray = Object.entries(vuexState.config.notificationNative)
+  state.webPushAlwaysShowNotifications = vuexState.config.webPushAlwaysShowNotifications
 
   state.allowedNotificationTypes = new Set(
     notificationsNativeArray
@@ -62,7 +63,7 @@ const showPushNotification = async (event) => {
   const activeClients = await getWindowClients()
   await setSettings()
   // Only show push notifications if all tabs/windows are closed
-  if (activeClients.length === 0) {
+  if (state.webPushAlwaysShowNotifications || activeClients.length === 0) {
     const data = event.data.json()
 
     const url = `${self.registration.scope}api/v1/notifications/${data.notification_id}`
@@ -72,7 +73,7 @@ const showPushNotification = async (event) => {
 
     const res = prepareNotificationObject(parsedNotification, i18n)
 
-    if (state.allowedNotificationTypes.has(parsedNotification.type)) {
+    if (state.webPushAlwaysShowNotifications || state.allowedNotificationTypes.has(parsedNotification.type)) {
       return self.registration.showNotification(res.title, res)
     }
   }

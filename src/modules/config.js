@@ -79,6 +79,7 @@ export const defaultState = {
     polls: true
   },
   webPushNotifications: false,
+  webPushAlwaysShowNotifications: false,
   muteWords: [],
   highlight: {},
   interfaceLanguage: browserLocale,
