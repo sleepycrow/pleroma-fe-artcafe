@@ -48,7 +48,7 @@
                   </BooleanSetting>
                 </li>
                 <li>
-                  <BooleanSetting path="notificationNative.mentions" >
+                  <BooleanSetting path="notificationNative.mentions">
                     {{ $t('settings.notification_visibility_native_notifications') }}
                   </BooleanSetting>
                 </li>
@@ -63,7 +63,7 @@
                   </BooleanSetting>
                 </li>
                 <li>
-                  <BooleanSetting path="notificationNative.likes" >
+                  <BooleanSetting path="notificationNative.likes">
                     {{ $t('settings.notification_visibility_native_notifications') }}
                   </BooleanSetting>
                 </li>
@@ -78,7 +78,7 @@
                   </BooleanSetting>
                 </li>
                 <li>
-                  <BooleanSetting path="notificationNative.repeats" >
+                  <BooleanSetting path="notificationNative.repeats">
                     {{ $t('settings.notification_visibility_native_notifications') }}
                   </BooleanSetting>
                 </li>
@@ -93,7 +93,7 @@
                   </BooleanSetting>
                 </li>
                 <li>
-                  <BooleanSetting path="notificationNative.emojiReactions" >
+                  <BooleanSetting path="notificationNative.emojiReactions">
                     {{ $t('settings.notification_visibility_native_notifications') }}
                   </BooleanSetting>
                 </li>
@@ -108,7 +108,7 @@
                   </BooleanSetting>
                 </li>
                 <li>
-                  <BooleanSetting path="notificationNative.follows" >
+                  <BooleanSetting path="notificationNative.follows">
                     {{ $t('settings.notification_visibility_native_notifications') }}
                   </BooleanSetting>
                 </li>
@@ -123,7 +123,7 @@
                   </BooleanSetting>
                 </li>
                 <li>
-                  <BooleanSetting path="notificationNative.follow_request" >
+                  <BooleanSetting path="notificationNative.follow_request">
                     {{ $t('settings.notification_visibility_native_notifications') }}
                   </BooleanSetting>
                 </li>
@@ -138,7 +138,7 @@
                   </BooleanSetting>
                 </li>
                 <li>
-                  <BooleanSetting path="notificationNative.moves" >
+                  <BooleanSetting path="notificationNative.moves">
                     {{ $t('settings.notification_visibility_native_notifications') }}
                   </BooleanSetting>
                 </li>
@@ -153,7 +153,7 @@
                   </BooleanSetting>
                 </li>
                 <li>
-                  <BooleanSetting path="notificationNative.polls" >
+                  <BooleanSetting path="notificationNative.polls">
                     {{ $t('settings.notification_visibility_native_notifications') }}
                   </BooleanSetting>
                 </li>
@@ -168,7 +168,7 @@
                   </BooleanSetting>
                 </li>
                 <li>
-                  <BooleanSetting path="notificationNative.reports" >
+                  <BooleanSetting path="notificationNative.reports">
                     {{ $t('settings.notification_visibility_native_notifications') }}
                   </BooleanSetting>
                 </li>
