@@ -28,7 +28,7 @@ function subscribePush (registration, isEnabled, vapidPublicKey) {
   if (!vapidPublicKey) return Promise.reject(new Error('VAPID public key is not found'))
 
   const subscribeOptions = {
-    userVisibleOnly: true,
+    userVisibleOnly: false,
     applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
   }
   return registration.pushManager.subscribe(subscribeOptions)
