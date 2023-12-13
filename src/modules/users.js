@@ -667,7 +667,7 @@ const users = {
             resolve()
           })
           .catch((error) => {
-            console.log(error)
+            console.error(error)
             commit('endLogin')
             reject(new Error('Failed to connect to server, try again'))
           })

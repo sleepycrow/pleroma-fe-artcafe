@@ -104,7 +104,6 @@ const adminSettingsStorage = {
         }
         set(config, path, convert(c.value))
       })
-      console.log(config[':pleroma'])
       commit('updateAdminSettings', { config, modifiedPaths })
       commit('resetAdminDraft')
     },
@@ -122,7 +121,6 @@ const adminSettingsStorage = {
 
       const descriptions = {}
       backendDescriptions.forEach(d => convert(d, '', descriptions))
-      console.log(descriptions[':pleroma']['Pleroma.Captcha'])
       commit('updateAdminDescriptions', { descriptions })
     },
 

@@ -16,7 +16,6 @@ const Report = {
   },
   computed: {
     report () {
-      console.log(this.$store.state.reports.reports[this.reportId] || {})
       return this.$store.state.reports.reports[this.reportId] || {}
     },
     state: {

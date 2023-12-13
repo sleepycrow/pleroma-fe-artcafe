@@ -419,7 +419,6 @@ const serverSideStorage = {
   actions: {
     pushServerSideStorage ({ state, rootState, commit }, { force = false } = {}) {
       const needPush = state.dirty || force
-      console.log(needPush)
       if (!needPush) return
       commit('updateCache', { username: rootState.users.currentUser.fqn })
       const params = { pleroma_settings_store: { 'pleroma-fe': state.cache } }
