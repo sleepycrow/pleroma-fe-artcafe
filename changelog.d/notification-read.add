@@ -1,0 +1,1 @@
+Interacting (opening reply box etc) or simply clicking on non-interactive notifications now marks them as read. Clicking on native notifications for non-interactive ones also marks them as seen.

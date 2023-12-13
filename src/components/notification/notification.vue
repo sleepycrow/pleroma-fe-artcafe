@@ -6,6 +6,7 @@
       class="Notification"
       :compact="true"
       :statusoid="notification.status"
+      @interacted="interacted"
     />
   </article>
   <article v-else>
@@ -248,7 +249,7 @@
           <StatusContent
             :class="{ faint: !statusExpanded }"
             :compact="!statusExpanded"
-            :status="notification.action"
+            :status="notification.status"
           />
         </template>
       </div>

@@ -13,9 +13,10 @@ const i18n = createI18n({
   messages
 })
 
-function isEnabled () {
-  return localForage.getItem('vuex-lz')
-    .then(data => data.config.webPushNotifications)
+const state = {
+  lastFocused: null,
+  notificationIds: new Set(),
+  allowedNotificationTypes: null
 }
 
 function getWindowClients () {
@@ -23,17 +24,46 @@ function getWindowClients () {
     .then((clientList) => clientList.filter(({ type }) => type === 'window'))
 }
 
-const setLocale = async () => {
-  const state = await localForage.getItem('vuex-lz')
-  const locale = state.config.interfaceLanguage || 'en'
+const setSettings = async () => {
+  const vuexState = await localForage.getItem('vuex-lz')
+  const locale = vuexState.config.interfaceLanguage || 'en'
   i18n.locale = locale
+  const notificationsNativeArray = Object.entries(vuexState.config.notificationNative)
+  state.webPushAlwaysShowNotifications = vuexState.config.webPushAlwaysShowNotifications
+
+  state.allowedNotificationTypes = new Set(
+    notificationsNativeArray
+      .filter(([k, v]) => v)
+      .map(([k]) => {
+        switch (k) {
+          case 'mentions':
+            return 'mention'
+          case 'likes':
+            return 'like'
+          case 'repeats':
+            return 'repeat'
+          case 'emojiReactions':
+            return 'pleroma:emoji_reaction'
+          case 'reports':
+            return 'pleroma:report'
+          case 'followRequest':
+            return 'follow_request'
+          case 'follows':
+            return 'follow'
+          case 'polls':
+            return 'poll'
+          default:
+            return k
+        }
+      })
+  )
 }
 
-const maybeShowNotification = async (event) => {
-  const enabled = await isEnabled()
+const showPushNotification = async (event) => {
   const activeClients = await getWindowClients()
-  await setLocale()
-  if (enabled && (activeClients.length === 0)) {
+  await setSettings()
+  // Only show push notifications if all tabs/windows are closed
+  if (state.webPushAlwaysShowNotifications || activeClients.length === 0) {
     const data = event.data.json()
 
     const url = `${self.registration.scope}api/v1/notifications/${data.notification_id}`
@@ -43,13 +73,48 @@ const maybeShowNotification = async (event) => {
 
     const res = prepareNotificationObject(parsedNotification, i18n)
 
-    self.registration.showNotification(res.title, res)
+    if (state.webPushAlwaysShowNotifications || state.allowedNotificationTypes.has(parsedNotification.type)) {
+      return self.registration.showNotification(res.title, res)
+    }
   }
+  return Promise.resolve()
 }
 
 self.addEventListener('push', async (event) => {
   if (event.data) {
-    event.waitUntil(maybeShowNotification(event))
+    // Supposedly, we HAVE to return a promise inside waitUntil otherwise it will
+    // show (extra) notification that website is updated in background
+    event.waitUntil(showPushNotification(event))
+  }
+})
+
+self.addEventListener('message', async (event) => {
+  await setSettings()
+  const { type, content } = event.data
+
+  if (type === 'desktopNotification') {
+    const { title, ...rest } = content
+    const { tag, type } = rest
+    if (state.notificationIds.has(tag)) return
+    state.notificationIds.add(tag)
+    setTimeout(() => state.notificationIds.delete(tag), 10000)
+    if (state.allowedNotificationTypes.has(type)) {
+      self.registration.showNotification(title, rest)
+    }
+  }
+
+  if (type === 'desktopNotificationClose') {
+    const { id, all } = content
+    const search = all ? null : { tag: id }
+    const notifications = await self.registration.getNotifications(search)
+    notifications.forEach(n => n.close())
+  }
+
+  if (type === 'updateFocus') {
+    state.lastFocused = event.source.id
+
+    const notifications = await self.registration.getNotifications()
+    notifications.forEach(n => n.close())
   }
 })
 
@@ -59,7 +124,14 @@ self.addEventListener('notificationclick', (event) => {
   event.waitUntil(getWindowClients().then((list) => {
     for (let i = 0; i < list.length; i++) {
       const client = list[i]
-      if (client.url === '/' && 'focus' in client) { return client.focus() }
+      client.postMessage({ type: 'notificationClicked', id: event.notification.tag })
+    }
+
+    for (let i = 0; i < list.length; i++) {
+      const client = list[i]
+      if (state.lastFocused === null || client.id === state.lastFocused) {
+        if ('focus' in client) return client.focus()
+      }
     }
 
     if (clients.openWindow) return clients.openWindow('/')

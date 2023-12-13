@@ -531,14 +531,17 @@
               :visibility="status.visibility"
               :logged-in="loggedIn"
               :status="status"
+              @click="$emit('interacted')"
             />
             <favorite-button
               :logged-in="loggedIn"
               :status="status"
+              @click="$emit('interacted')"
             />
             <ReactButton
               v-if="loggedIn"
               :status="status"
+              @click="$emit('interacted')"
             />
             <extra-buttons
               :status="status"

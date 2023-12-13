@@ -2,7 +2,7 @@ import backendInteractorService from '../services/backend_interactor_service/bac
 import { windowWidth, windowHeight } from '../services/window_utils/window_utils'
 import oauthApi from '../services/new_api/oauth.js'
 import { compact, map, each, mergeWith, last, concat, uniq, isArray } from 'lodash'
-import { registerPushNotifications, unregisterPushNotifications } from '../services/push/push.js'
+import { registerPushNotifications, unregisterPushNotifications } from '../services/sw/sw.js'
 
 // TODO: Unify with mergeOrAdd in statuses.js
 export const mergeOrAdd = (arr, obj, item) => {
@@ -498,7 +498,7 @@ const users = {
       store.commit('addNewUsers', users)
       store.commit('addNewUsers', targetUsers)
 
-      const notificationsObject = store.rootState.statuses.notifications.idStore
+      const notificationsObject = store.rootState.notifications.idStore
       const relevantNotifications = Object.entries(notificationsObject)
         .filter(([k, val]) => notificationIds.includes(k))
         .map(([k, val]) => val)
@@ -667,7 +667,7 @@ const users = {
             resolve()
           })
           .catch((error) => {
-            console.log(error)
+            console.error(error)
             commit('endLogin')
             reject(new Error('Failed to connect to server, try again'))
           })

@@ -1,28 +1,36 @@
-import { filter, sortBy, includes } from 'lodash'
 import { muteWordHits } from '../status_parser/status_parser.js'
 import { showDesktopNotification } from '../desktop_notification_utils/desktop_notification_utils.js'
 
-export const notificationsFromStore = store => store.state.statuses.notifications.data
+import FaviconService from 'src/services/favicon_service/favicon_service.js'
+
+export const ACTIONABLE_NOTIFICATION_TYPES = new Set(['mention', 'pleroma:report', 'follow_request'])
+
+let cachedBadgeUrl = null
+
+export const notificationsFromStore = store => store.state.notifications.data
 
 export const visibleTypes = store => {
-  const rootState = store.rootState || store.state
+  // When called from within a module we need rootGetters to access wider scope
+  // however when called from a component (i.e. this.$store) we already have wider scope
+  const rootGetters = store.rootGetters || store.getters
+  const { notificationVisibility } = rootGetters.mergedConfig
 
   return ([
-    rootState.config.notificationVisibility.likes && 'like',
-    rootState.config.notificationVisibility.mentions && 'mention',
-    rootState.config.notificationVisibility.repeats && 'repeat',
-    rootState.config.notificationVisibility.follows && 'follow',
-    rootState.config.notificationVisibility.followRequest && 'follow_request',
-    rootState.config.notificationVisibility.moves && 'move',
-    rootState.config.notificationVisibility.emojiReactions && 'pleroma:emoji_reaction',
-    rootState.config.notificationVisibility.reports && 'pleroma:report',
-    rootState.config.notificationVisibility.polls && 'poll'
+    notificationVisibility.likes && 'like',
+    notificationVisibility.mentions && 'mention',
+    notificationVisibility.repeats && 'repeat',
+    notificationVisibility.follows && 'follow',
+    notificationVisibility.followRequest && 'follow_request',
+    notificationVisibility.moves && 'move',
+    notificationVisibility.emojiReactions && 'pleroma:emoji_reaction',
+    notificationVisibility.reports && 'pleroma:report',
+    notificationVisibility.polls && 'poll'
   ].filter(_ => _))
 }
 
-const statusNotifications = ['like', 'mention', 'repeat', 'pleroma:emoji_reaction', 'poll']
+const statusNotifications = new Set(['like', 'mention', 'repeat', 'pleroma:emoji_reaction', 'poll'])
 
-export const isStatusNotification = (type) => includes(statusNotifications, type)
+export const isStatusNotification = (type) => statusNotifications.has(type)
 
 export const isValidNotification = (notification) => {
   if (isStatusNotification(notification.type) && !notification.status) {
@@ -49,35 +57,57 @@ const sortById = (a, b) => {
 
 const isMutedNotification = (store, notification) => {
   if (!notification.status) return
-  return notification.status.muted || muteWordHits(notification.status, store.rootGetters.mergedConfig.muteWords).length > 0
+  const rootGetters = store.rootGetters || store.getters
+  return notification.status.muted || muteWordHits(notification.status, rootGetters.mergedConfig.muteWords).length > 0
 }
 
 export const maybeShowNotification = (store, notification) => {
   const rootState = store.rootState || store.state
+  const rootGetters = store.rootGetters || store.getters
 
   if (notification.seen) return
   if (!visibleTypes(store).includes(notification.type)) return
   if (notification.type === 'mention' && isMutedNotification(store, notification)) return
 
-  const notificationObject = prepareNotificationObject(notification, store.rootGetters.i18n)
+  const notificationObject = prepareNotificationObject(notification, rootGetters.i18n)
   showDesktopNotification(rootState, notificationObject)
 }
 
 export const filteredNotificationsFromStore = (store, types) => {
   // map is just to clone the array since sort mutates it and it causes some issues
-  let sortedNotifications = notificationsFromStore(store).map(_ => _).sort(sortById)
-  sortedNotifications = sortBy(sortedNotifications, 'seen')
+  const sortedNotifications = notificationsFromStore(store).map(_ => _).sort(sortById)
+  // TODO implement sorting elsewhere and make it optional
   return sortedNotifications.filter(
     (notification) => (types || visibleTypes(store)).includes(notification.type)
   )
 }
 
-export const unseenNotificationsFromStore = store =>
-  filter(filteredNotificationsFromStore(store), ({ seen }) => !seen)
+export const unseenNotificationsFromStore = store => {
+  const rootGetters = store.rootGetters || store.getters
+  const ignoreInactionableSeen = rootGetters.mergedConfig.ignoreInactionableSeen
+
+  return filteredNotificationsFromStore(store).filter(({ seen, type }) => {
+    if (!ignoreInactionableSeen) return !seen
+    if (seen) return false
+    return ACTIONABLE_NOTIFICATION_TYPES.has(type)
+  })
+}
 
 export const prepareNotificationObject = (notification, i18n) => {
+  if (cachedBadgeUrl === null) {
+    const favicons = FaviconService.getOriginalFavicons()
+    const favicon = favicons[favicons.length - 1]
+    if (!favicon) {
+      cachedBadgeUrl = 'about:blank'
+    } else {
+      cachedBadgeUrl = favicon.favimg.src
+    }
+  }
+
   const notifObj = {
-    tag: notification.id
+    tag: notification.id,
+    type: notification.type,
+    badge: cachedBadgeUrl
   }
   const status = notification.status
   const title = notification.from_profile.name
@@ -126,15 +156,16 @@ export const prepareNotificationObject = (notification, i18n) => {
 }
 
 export const countExtraNotifications = (store) => {
-  const mergedConfig = store.getters.mergedConfig
+  const rootGetters = store.rootGetters || store.getters
+  const mergedConfig = rootGetters.mergedConfig
 
   if (!mergedConfig.showExtraNotifications) {
     return 0
   }
 
   return [
-    mergedConfig.showChatsInExtraNotifications ? store.getters.unreadChatCount : 0,
-    mergedConfig.showAnnouncementsInExtraNotifications ? store.getters.unreadAnnouncementCount : 0,
-    mergedConfig.showFollowRequestsInExtraNotifications ? store.getters.followRequestCount : 0
+    mergedConfig.showChatsInExtraNotifications ? rootGetters.unreadChatCount : 0,
+    mergedConfig.showAnnouncementsInExtraNotifications ? rootGetters.unreadAnnouncementCount : 0,
+    mergedConfig.showFollowRequestsInExtraNotifications ? rootGetters.followRequestCount : 0
   ].reduce((a, c) => a + c, 0)
 }

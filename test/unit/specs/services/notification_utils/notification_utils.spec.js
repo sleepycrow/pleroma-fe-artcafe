@@ -5,28 +5,28 @@ describe('NotificationUtils', () => {
     it('should return sorted notifications with configured types', () => {
       const store = {
         state: {
-          statuses: {
-            notifications: {
-              data: [
-                {
-                  id: 1,
-                  action: { id: '1' },
-                  type: 'like'
-                },
-                {
-                  id: 2,
-                  action: { id: '2' },
-                  type: 'mention'
-                },
-                {
-                  id: 3,
-                  action: { id: '3' },
-                  type: 'repeat'
-                }
-              ]
-            }
-          },
-          config: {
+          notifications: {
+            data: [
+              {
+                id: 1,
+                action: { id: '1' },
+                type: 'like'
+              },
+              {
+                id: 2,
+                action: { id: '2' },
+                type: 'mention'
+              },
+              {
+                id: 3,
+                action: { id: '3' },
+                type: 'repeat'
+              }
+            ]
+          }
+        },
+        getters: {
+          mergedConfig: {
             notificationVisibility: {
               likes: true,
               repeats: true,
@@ -55,23 +55,23 @@ describe('NotificationUtils', () => {
     it('should return only notifications not marked as seen', () => {
       const store = {
         state: {
-          statuses: {
-            notifications: {
-              data: [
-                {
-                  action: { id: '1' },
-                  type: 'like',
-                  seen: false
-                },
-                {
-                  action: { id: '2' },
-                  type: 'mention',
-                  seen: true
-                }
-              ]
-            }
-          },
-          config: {
+          notifications: {
+            data: [
+              {
+                action: { id: '1' },
+                type: 'like',
+                seen: false
+              },
+              {
+                action: { id: '2' },
+                type: 'mention',
+                seen: true
+              }
+            ]
+          }
+        },
+        getters: {
+          mergedConfig: {
             notificationVisibility: {
               likes: true,
               repeats: true,

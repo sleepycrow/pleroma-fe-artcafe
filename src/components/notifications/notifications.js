@@ -8,7 +8,8 @@ import {
   notificationsFromStore,
   filteredNotificationsFromStore,
   unseenNotificationsFromStore,
-  countExtraNotifications
+  countExtraNotifications,
+  ACTIONABLE_NOTIFICATION_TYPES
 } from '../../services/notification_utils/notification_utils.js'
 import FaviconService from '../../services/favicon_service/favicon_service.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -65,13 +66,20 @@ const Notifications = {
       return notificationsFromStore(this.$store)
     },
     error () {
-      return this.$store.state.statuses.notifications.error
+      return this.$store.state.notifications.error
     },
     unseenNotifications () {
       return unseenNotificationsFromStore(this.$store)
     },
     filteredNotifications () {
-      return filteredNotificationsFromStore(this.$store, this.filterMode)
+      if (this.unseenAtTop) {
+        return [
+          ...filteredNotificationsFromStore(this.$store).filter(n => this.shouldShowUnseen(n)),
+          ...filteredNotificationsFromStore(this.$store).filter(n => !this.shouldShowUnseen(n))
+        ]
+      } else {
+        return filteredNotificationsFromStore(this.$store, this.filterMode)
+      }
     },
     unseenCountBadgeText () {
       return `${this.unseenCount ? this.unseenCount : ''}${this.extraNotificationsCount ? '*' : ''}`
@@ -79,6 +87,7 @@ const Notifications = {
     unseenCount () {
       return this.unseenNotifications.length
     },
+    ignoreInactionableSeen () { return this.$store.getters.mergedConfig.ignoreInactionableSeen },
     extraNotificationsCount () {
       return countExtraNotifications(this.$store)
     },
@@ -86,7 +95,7 @@ const Notifications = {
       return this.unseenNotifications.length + (this.unreadChatCount) + this.unreadAnnouncementCount
     },
     loading () {
-      return this.$store.state.statuses.notifications.loading
+      return this.$store.state.notifications.loading
     },
     noHeading () {
       const { layoutType } = this.$store.state.interface
@@ -108,6 +117,7 @@ const Notifications = {
       return this.filteredNotifications.slice(0, this.unseenCount + this.seenToDisplayCount)
     },
     noSticky () { return this.$store.getters.mergedConfig.disableStickyHeaders },
+    unseenAtTop () { return this.$store.getters.mergedConfig.unseenAtTop },
     showExtraNotifications () {
       return !this.noExtra
     },
@@ -154,10 +164,27 @@ const Notifications = {
     scrollToTop () {
       const scrollable = this.scrollerRef
       scrollable.scrollTo({ top: this.$refs.root.offsetTop })
-      // this.$refs.root.scrollIntoView({ behavior: 'smooth', block: 'start' })
     },
     updateScrollPosition () {
       this.showScrollTop = this.$refs.root.offsetTop < this.scrollerRef.scrollTop
+    },
+    shouldShowUnseen (notification) {
+      if (notification.seen) return false
+
+      const actionable = ACTIONABLE_NOTIFICATION_TYPES.has(notification.type)
+      return this.ignoreInactionableSeen ? actionable : true
+    },
+    /* "Interacted" really refers to "actionable" notifications that require user input,
+     * everything else (likes/repeats/reacts) cannot be acted and therefore we just clear
+     * the "seen" status upon any clicks on them
+     */
+    notificationClicked (notification) {
+      const { id } = notification
+      this.$store.dispatch('notificationClicked', { id })
+    },
+    notificationInteracted (notification) {
+      const { id } = notification
+      this.$store.dispatch('markSingleNotificationAsSeen', { id })
     },
     markAsSeen () {
       this.$store.dispatch('markNotificationsAsSeen')

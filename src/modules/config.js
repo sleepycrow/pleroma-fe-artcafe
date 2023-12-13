@@ -66,7 +66,20 @@ export const defaultState = {
     chatMention: true,
     polls: true
   },
+  notificationNative: {
+    follows: true,
+    mentions: true,
+    likes: false,
+    repeats: false,
+    moves: false,
+    emojiReactions: false,
+    followRequest: true,
+    reports: true,
+    chatMention: true,
+    polls: true
+  },
   webPushNotifications: false,
+  webPushAlwaysShowNotifications: false,
   muteWords: [],
   highlight: {},
   interfaceLanguage: browserLocale,
@@ -124,7 +137,10 @@ export const defaultState = {
   showAnnouncementsInExtraNotifications: undefined, // instance default
   showFollowRequestsInExtraNotifications: undefined, // instance default
   maxDepthInThread: undefined, // instance default
-  autocompleteSelect: undefined // instance default
+  autocompleteSelect: undefined, // instance default
+  closingDrawerMarksAsSeen: undefined, // instance default
+  unseenAtTop: undefined, // instance default
+  ignoreInactionableSeen: undefined // instance default
 }
 
 // caching the instance default properties

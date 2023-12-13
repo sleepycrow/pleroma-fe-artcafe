@@ -50,7 +50,13 @@
       @touchmove.stop="notificationsTouchMove"
     >
       <div class="mobile-notifications-header">
-        <span class="title">{{ $t('notifications.notifications') }}</span>
+        <span class="title">
+          {{ $t('notifications.notifications') }}
+          <span
+            v-if="unseenCountBadgeText"
+            class="badge badge-notification unseen-count"
+          >{{ unseenCountBadgeText }}</span>
+        </span>
         <span class="spacer" />
         <button
           v-if="notificationsAtTop"
@@ -65,6 +71,17 @@
               transform="up-7"
             />
           </FALayers>
+        </button>
+        <button
+          v-if="!closingDrawerMarksAsSeen"
+          class="button-unstyled mobile-nav-button"
+          :title="$t('nav.mobile_notifications_mark_as_seen')"
+          @click.stop.prevent="markNotificationsAsSeen()"
+        >
+          <FAIcon
+            class="fa-scale-110 fa-old-padding"
+            icon="check-double"
+          />
         </button>
         <button
           class="button-unstyled mobile-nav-button"

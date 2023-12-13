@@ -66,10 +66,14 @@
             :key="notification.id"
             role="listitem"
             class="notification"
-            :class="{unseen: !minimalMode && !notification.seen}"
+            :class="{unseen: !minimalMode && shouldShowUnseen(notification)}"
+            @click="e => notificationClicked(notification)"
           >
             <div class="notification-overlay" />
-            <notification :notification="notification" />
+            <notification
+              :notification="notification"
+              @interacted="e => notificationInteracted(notification)"
+            />
           </div>
         </div>
         <div class="panel-footer">
