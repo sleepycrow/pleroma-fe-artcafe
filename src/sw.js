@@ -73,13 +73,16 @@ const showPushNotification = async (event) => {
     const res = prepareNotificationObject(parsedNotification, i18n)
 
     if (state.allowedNotificationTypes.has(parsedNotification.type)) {
-      self.registration.showNotification(res.title, res)
+      return self.registration.showNotification(res.title, res)
     }
   }
+  return Promise.resolve()
 }
 
 self.addEventListener('push', async (event) => {
   if (event.data) {
+    // Supposedly, we HAVE to return a promise inside waitUntil otherwise it will
+    // show (extra) notification that website is updated in background
     event.waitUntil(showPushNotification(event))
   }
 })
