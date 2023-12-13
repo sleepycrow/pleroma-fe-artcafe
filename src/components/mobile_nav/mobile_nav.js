@@ -57,6 +57,12 @@ const MobileNav = {
     unseenNotificationsCount () {
       return this.unseenNotifications.length + countExtraNotifications(this.$store)
     },
+    unseenCount () {
+      return this.unseenNotifications.length
+    },
+    unseenCountBadgeText () {
+      return `${this.unseenCount ? this.unseenCount : ''}${this.extraNotificationsCount ? '*' : ''}`
+    },
     hideSitename () { return this.$store.state.instance.hideSitename },
     sitename () { return this.$store.state.instance.name },
     isChat () {

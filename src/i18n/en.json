@@ -189,6 +189,7 @@
     "mobile_notifications": "Open notifications",
     "mobile_notifications": "Open notifications (there are unread ones)",
     "mobile_notifications_close": "Close notifications",
+    "mobile_notifications_mark_as_seen": "Mark all as seen",
     "announcements": "Announcements"
   },
   "notifications": {
