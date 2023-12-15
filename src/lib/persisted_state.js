@@ -38,7 +38,7 @@ export default function createPersistedState ({
   },
   setState = (key, state, storage) => {
     if (!loaded) {
-      console.log('waiting for old state to be loaded...')
+      console.info('waiting for old state to be loaded...')
       return Promise.resolve()
     } else {
       return storage.setItem(key, state)
@@ -65,7 +65,7 @@ export default function createPersistedState ({
         }
         loaded = true
       } catch (e) {
-        console.log("Couldn't load state")
+        console.error("Couldn't load state")
         console.error(e)
         loaded = true
       }
@@ -86,8 +86,8 @@ export default function createPersistedState ({
               })
           }
         } catch (e) {
-          console.log("Couldn't persist state:")
-          console.log(e)
+          console.error("Couldn't persist state:")
+          console.error(e)
         }
       })
     }

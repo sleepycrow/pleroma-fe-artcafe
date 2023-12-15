@@ -16,6 +16,10 @@ const NotificationsTab = {
     user () {
       return this.$store.state.users.currentUser
     },
+    canReceiveReports () {
+      if (!this.user) { return false }
+      return this.user.privileges.includes('reports_manage_reports')
+    },
     ...SharedComputedObject()
   },
   methods: {

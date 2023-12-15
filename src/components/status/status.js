@@ -39,7 +39,8 @@ import {
   faThumbtack,
   faChevronUp,
   faChevronDown,
-  faAngleDoubleRight
+  faAngleDoubleRight,
+  faPlay
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -59,7 +60,8 @@ library.add(
   faThumbtack,
   faChevronUp,
   faChevronDown,
-  faAngleDoubleRight
+  faAngleDoubleRight,
+  faPlay
 )
 
 const camelCase = name => name.charAt(0).toUpperCase() + name.slice(1)
@@ -152,6 +154,7 @@ const Status = {
     'controlledSetMediaPlaying',
     'dive'
   ],
+  emits: ['interacted'],
   data () {
     return {
       uncontrolledReplying: false,
@@ -415,6 +418,12 @@ const Status = {
     },
     shouldDisplayQuote () {
       return this.quotedStatus && this.displayQuote
+    },
+    scrobblePresent () {
+      return !this.mergedConfig.hideScrobbles && this.status.user.latestScrobble && this.status.user.latestScrobble.artist
+    },
+    scrobble () {
+      return this.status.user.latestScrobble
     }
   },
   methods: {
@@ -434,9 +443,11 @@ const Status = {
       this.error = error
     },
     clearError () {
+      this.$emit('interacted')
       this.error = undefined
     },
     toggleReplying () {
+      this.$emit('interacted')
       controlledOrUncontrolledToggle(this, 'replying')
     },
     gotoOriginal (id) {

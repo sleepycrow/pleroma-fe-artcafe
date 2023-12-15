@@ -112,6 +112,7 @@ const ARTCAFE_ALBUM_URL = id => `/api/v1/artcafe/albums/${id}`
 const ARTCAFE_ALBUM_TIMELINE_URL = id => `/api/v1/artcafe/albums/${id}/content`
 const ARTCAFE_PUBLIC_USER_ALBUMS_URL = id => `/api/v1/artcafe/accounts/${id}/albums`
 const ARTCAFE_ALBUMS_FOR_STATUS_URL = id => `/api/v1/artcafe/statuses/${id}/albums`
+const PLEROMA_SCROBBLES_URL = id => `/api/v1/pleroma/accounts/${id}/scrobbles`
 
 const PLEROMA_ADMIN_CONFIG_URL = '/api/pleroma/admin/config'
 const PLEROMA_ADMIN_DESCRIPTIONS_URL = '/api/pleroma/admin/config/descriptions'
@@ -677,6 +678,7 @@ const fetchTimeline = ({
   timeline,
   credentials,
   since = false,
+  minId = false,
   until = false,
   userId = false,
   listId = false,
@@ -716,6 +718,9 @@ const fetchTimeline = ({
     url = url(albumId)
   }
 
+  if (minId) {
+    params.push(['min_id', minId])
+  }
   if (since) {
     params.push(['since_id', since])
   }
@@ -1861,6 +1866,23 @@ const removeStatusFromAlbum = ({ credentials, albumId, statusId }) => {
     .then(data => data.json())
 }
 
+const fetchScrobbles = ({ accountId, limit = 1 }) => {
+  let url = PLEROMA_SCROBBLES_URL(accountId)
+  const params = [['limit', limit]]
+  const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
+  url += `?${queryString}`
+  return fetch(url, {})
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        return {
+          error: response
+        }
+      }
+    })
+}
+
 const apiService = {
   verifyCredentials,
   fetchTimeline,
@@ -1974,6 +1996,7 @@ const apiService = {
   postAnnouncement,
   editAnnouncement,
   deleteAnnouncement,
+  fetchScrobbles,
   adminFetchAnnouncements,
   fetchInstanceDBConfig,
   fetchInstanceConfigDescriptions,

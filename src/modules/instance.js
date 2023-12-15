@@ -110,6 +110,9 @@ const defaultState = {
   showFollowRequestsInExtraNotifications: true,
   maxDepthInThread: 6,
   autocompleteSelect: false,
+  closingDrawerMarksAsSeen: true,
+  unseenAtTop: false,
+  ignoreInactionableSeen: false,
 
   // Nasty stuff
   customEmoji: [],

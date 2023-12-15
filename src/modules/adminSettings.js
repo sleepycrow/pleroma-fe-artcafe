@@ -26,6 +26,7 @@ const adminSettingsStorage = {
     },
     setAvailableFrontends (state, { frontends }) {
       state.frontends = frontends.map(f => {
+        f.installedRefs = f.installed_refs
         if (f.name === 'pleroma-fe') {
           f.refs = ['master', 'develop']
         } else {
@@ -104,7 +105,6 @@ const adminSettingsStorage = {
         }
         set(config, path, convert(c.value))
       })
-      console.log(config[':pleroma'])
       commit('updateAdminSettings', { config, modifiedPaths })
       commit('resetAdminDraft')
     },
@@ -122,7 +122,6 @@ const adminSettingsStorage = {
 
       const descriptions = {}
       backendDescriptions.forEach(d => convert(d, '', descriptions))
-      console.log(descriptions[':pleroma']['Pleroma.Captcha'])
       commit('updateAdminDescriptions', { descriptions })
     },
 

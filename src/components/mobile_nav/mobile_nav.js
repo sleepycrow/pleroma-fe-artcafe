@@ -14,7 +14,8 @@ import {
   faBell,
   faBars,
   faArrowUp,
-  faMinus
+  faMinus,
+  faCheckDouble
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -22,7 +23,8 @@ library.add(
   faBell,
   faBars,
   faArrowUp,
-  faMinus
+  faMinus,
+  faCheckDouble
 )
 
 const MobileNav = {
@@ -55,6 +57,12 @@ const MobileNav = {
     unseenNotificationsCount () {
       return this.unseenNotifications.length + countExtraNotifications(this.$store)
     },
+    unseenCount () {
+      return this.unseenNotifications.length
+    },
+    unseenCountBadgeText () {
+      return `${this.unseenCount ? this.unseenCount : ''}`
+    },
     hideSitename () { return this.$store.state.instance.hideSitename },
     sitename () { return this.$store.state.instance.name },
     isChat () {
@@ -66,6 +74,9 @@ const MobileNav = {
     },
     shouldConfirmLogout () {
       return this.$store.getters.mergedConfig.modalOnLogout
+    },
+    closingDrawerMarksAsSeen () {
+      return this.$store.getters.mergedConfig.closingDrawerMarksAsSeen
     },
     ...mapGetters(['unreadChatCount'])
   },
@@ -81,7 +92,7 @@ const MobileNav = {
         // make sure to mark notifs seen only when the notifs were open and not
         // from close-calls.
         this.notificationsOpen = false
-        if (markRead) {
+        if (markRead && this.closingDrawerMarksAsSeen) {
           this.markNotificationsAsSeen()
         }
       }
@@ -117,7 +128,6 @@ const MobileNav = {
       this.hideConfirmLogout()
     },
     markNotificationsAsSeen () {
-      // this.$refs.notifications.markAsSeen()
       this.$store.dispatch('markNotificationsAsSeen')
     },
     onScroll ({ target: { scrollTop, clientHeight, scrollHeight } }) {

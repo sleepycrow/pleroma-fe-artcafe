@@ -250,6 +250,47 @@
               </span>
             </div>
             <div
+              v-if="scrobblePresent"
+              class="status-rich-presence"
+            >
+              <a
+                v-if="scrobble.externalLink"
+                :href="scrobble.externalLink"
+                target="_blank"
+              >
+                {{ scrobble.artist }} — {{ scrobble.title }}
+                <FAIcon
+                  class="fa-scale-110 fa-old-padding"
+                  icon="play"
+                />
+                <span class="status-rich-presence-time">
+                  <Timeago
+                    template-key="time.in_past"
+                    :time="scrobble.created_at"
+                    :auto-update="60"
+                  />
+                </span>
+              </a>
+              <span v-if="!scrobble.externalLink">
+                <FAIcon
+                  class="fa-scale-110 fa-old-padding"
+                  icon="music"
+                />
+                {{ scrobble.artist }} — {{ scrobble.title }}
+                <FAIcon
+                  class="fa-scale-110 fa-old-padding"
+                  icon="play"
+                />
+                <span class="status-rich-presence-time">
+                  <Timeago
+                    template-key="time.in_past"
+                    :time="scrobble.created_at"
+                    :auto-update="60"
+                  />
+                </span>
+              </span>
+            </div>
+            <div
               v-if="isReply || hasMentionsLine"
               class="heading-reply-row"
             >
@@ -490,14 +531,17 @@
               :visibility="status.visibility"
               :logged-in="loggedIn"
               :status="status"
+              @click="$emit('interacted')"
             />
             <favorite-button
               :logged-in="loggedIn"
               :status="status"
+              @click="$emit('interacted')"
             />
             <ReactButton
               v-if="loggedIn"
               :status="status"
+              @click="$emit('interacted')"
             />
             <extra-buttons
               :status="status"

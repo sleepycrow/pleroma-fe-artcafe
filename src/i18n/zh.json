@@ -146,7 +146,13 @@
     "follow_request": "想要关注你",
     "error": "取得通知时发生错误：{0}",
     "poll_ended": "投票结束了",
-    "submitted_report": "提交举报"
+    "submitted_report": "提交举报",
+    "unread_announcements": "{num} 条未读公告",
+    "unread_chats": "{num} 条未读聊天讯息",
+    "unread_follow_requests": "{num} 个新关注请求",
+    "configuration_tip": "可以在 {theSettings} 里定制什么会显示在这里。{dismiss}",
+    "configuration_tip_settings": "设置",
+    "configuration_tip_dismiss": "不再显示"
   },
   "polls": {
     "add_poll": "增加投票",
@@ -212,7 +218,9 @@
     "edit_unsupported_warning": "Pleroma 不支持对提及或投票进行编辑。",
     "edit_status": "编辑状态",
     "content_type_selection": "发帖格式",
-    "scope_notice_dismiss": "关闭此提示"
+    "scope_notice_dismiss": "关闭此提示",
+    "reply_option": "回复这条状态",
+    "quote_option": "引用这条状态"
   },
   "registration": {
     "bio": "简介",
@@ -747,7 +755,12 @@
     "reset_value_tooltip": "重置草稿",
     "hard_reset_value": "硬重置",
     "hard_reset_value_tooltip": "从存储中移除设置，强制使用默认值",
-    "emoji_reactions_scale": "表情回应比例系数"
+    "emoji_reactions_scale": "表情回应比例系数",
+    "notification_show_extra": "在通知栏里显示额外通知",
+    "notification_extra_chats": "显示未读聊天",
+    "notification_extra_announcements": "显示未读公告",
+    "notification_extra_follow_requests": "显示新的关注请求",
+    "notification_extra_tip": "显示额外通知的定制提示"
   },
   "time": {
     "day": "{0} 天",
@@ -880,7 +893,10 @@
     "show_attachment_in_modal": "在媒体模式中显示",
     "status_history": "状态历史",
     "delete_error": "删除状态时出错：{0}",
-    "reaction_count_label": "{num} 人作出了表情回应"
+    "reaction_count_label": "{num} 人作出了表情回应",
+    "invisible_quote": "引用的状态不可用：{link}",
+    "hide_quote": "隐藏引用的状态",
+    "display_quote": "显示引用的状态"
   },
   "user_card": {
     "approve": "核准",
@@ -1184,7 +1200,7 @@
     "big_update_title": "请忍耐一下",
     "big_update_content": "我们已经有一段时间没有发布发行版，所以事情的外观和感觉可能与你习惯的不一样。",
     "update_bugs": "请在 {pleromaGitlab} 上报告任何问题和bug，因为我们已经改变了很多，虽然我们进行了彻底的测试，并且自己使用了开发版本，但我们可能错过了一些东西。我们欢迎你对你可能遇到的问题或如何改进Pleroma和Pleroma-FE提出反馈和建议。",
-    "art_by": "Art by {linkToArtist}"
+    "art_by": "{linkToArtist} 的作品"
   },
   "lists": {
     "search": "搜索用户",
@@ -1266,7 +1282,6 @@
       "wip_notice": "请注意，此部分是一个WIP，缺乏某些功能，因为前端管理的后台实现并不完整。",
       "default_frontend": "默认前端",
       "default_frontend_tip": "默认的前端将显示给所有用户。目前还没有办法让用户选择个人的前端。如果你不使用 PleromaFE，你很可能不得不使用旧的和有问题的 AdminFE 来进行实例配置，直到我们替换它。",
-      "default_frontend_tip2": "WIP: 由于 Pleroma 后端没有正确列出所有已安装的前端，你必须手动输入名称和引用。下面的列表提供了填写这些值的快捷方式。",
       "available_frontends": "可供安装"
     },
     "temp_overrides": {

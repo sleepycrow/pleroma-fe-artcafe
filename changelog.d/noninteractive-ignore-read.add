@@ -1,0 +1,1 @@
+Added option to treat non-interactive notifications (likes, repeats et all) as seen for visual purposes (no read mark, ignored in counters, still can show in native notifications)

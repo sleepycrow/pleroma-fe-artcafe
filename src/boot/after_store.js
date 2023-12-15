@@ -16,6 +16,7 @@ import backendInteractorService from '../services/backend_interactor_service/bac
 import { CURRENT_VERSION } from '../services/theme_data/theme_data.service.js'
 import { applyTheme, applyConfig } from '../services/style_setter/style_setter.js'
 import FaviconService from '../services/favicon_service/favicon_service.js'
+import { initServiceWorker, updateFocus } from '../services/sw/sw.js'
 
 let staticInitialResults = null
 
@@ -347,6 +348,9 @@ const afterStoreSetup = async ({ store, i18n }) => {
   store.dispatch('setLayoutHeight', windowHeight())
 
   FaviconService.initFaviconService()
+  initServiceWorker(store)
+
+  window.addEventListener('focus', () => updateFocus())
 
   const overrides = window.___pleromafe_dev_overrides || {}
   const server = (typeof overrides.target !== 'undefined') ? overrides.target : window.location.origin

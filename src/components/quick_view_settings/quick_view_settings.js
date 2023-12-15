@@ -52,7 +52,6 @@ const QuickViewSettings = {
       get () { return this.mergedConfig.mentionLinkShowAvatar },
       set () {
         const value = !this.showUserAvatars
-        console.log(value)
         this.$store.dispatch('setOption', { name: 'mentionLinkShowAvatar', value })
       }
     },

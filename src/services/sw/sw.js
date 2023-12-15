@@ -10,8 +10,12 @@ function urlBase64ToUint8Array (base64String) {
   return Uint8Array.from([...rawData].map((char) => char.charCodeAt(0)))
 }
 
+export function isSWSupported () {
+  return 'serviceWorker' in navigator
+}
+
 function isPushSupported () {
-  return 'serviceWorker' in navigator && 'PushManager' in window
+  return 'PushManager' in window
 }
 
 function getOrCreateServiceWorker () {
@@ -24,7 +28,7 @@ function subscribePush (registration, isEnabled, vapidPublicKey) {
   if (!vapidPublicKey) return Promise.reject(new Error('VAPID public key is not found'))
 
   const subscribeOptions = {
-    userVisibleOnly: true,
+    userVisibleOnly: false,
     applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
   }
   return registration.pushManager.subscribe(subscribeOptions)
@@ -39,7 +43,7 @@ function unsubscribePush (registration) {
 }
 
 function deleteSubscriptionFromBackEnd (token) {
-  return window.fetch('/api/v1/push/subscription/', {
+  return fetch('/api/v1/push/subscription/', {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -78,6 +82,44 @@ function sendSubscriptionToBackEnd (subscription, token, notificationVisibility)
     return responseData
   })
 }
+export async function initServiceWorker (store) {
+  if (!isSWSupported()) return
+  await getOrCreateServiceWorker()
+  navigator.serviceWorker.addEventListener('message', (event) => {
+    const { dispatch } = store
+    const { type, ...rest } = event.data
+
+    switch (type) {
+      case 'notificationClicked':
+        dispatch('notificationClicked', { id: rest.id })
+    }
+  })
+}
+
+export async function showDesktopNotification (content) {
+  if (!isSWSupported) return
+  const { active: sw } = await window.navigator.serviceWorker.getRegistration()
+  if (!sw) return console.error('No serviceworker found!')
+  sw.postMessage({ type: 'desktopNotification', content })
+}
+
+export async function closeDesktopNotification ({ id }) {
+  if (!isSWSupported) return
+  const { active: sw } = await window.navigator.serviceWorker.getRegistration()
+  if (!sw) return console.error('No serviceworker found!')
+  if (id >= 0) {
+    sw.postMessage({ type: 'desktopNotificationClose', content: { id } })
+  } else {
+    sw.postMessage({ type: 'desktopNotificationClose', content: { all: true } })
+  }
+}
+
+export async function updateFocus () {
+  if (!isSWSupported) return
+  const { active: sw } = await window.navigator.serviceWorker.getRegistration()
+  if (!sw) return console.error('No serviceworker found!')
+  sw.postMessage({ type: 'updateFocus' })
+}
 
 export function registerPushNotifications (isEnabled, vapidPublicKey, token, notificationVisibility) {
   if (isPushSupported()) {
@@ -98,13 +140,8 @@ export function unregisterPushNotifications (token) {
         })
         .then(([registration, unsubResult]) => {
           if (!unsubResult) {
-            console.warn('Push subscription cancellation wasn\'t successful, killing SW anyway...')
+            console.warn('Push subscription cancellation wasn\'t successful')
           }
-          return registration.unregister().then((result) => {
-            if (!result) {
-              console.warn('Failed to kill SW')
-            }
-          })
         })
     ]).catch((e) => console.warn(`Failed to disable Web Push Notifications: ${e.message}`))
   }

@@ -194,8 +194,9 @@
     "mobile_notifications": "Open notifications",
     "mobile_notifications": "Open notifications (there are unread ones)",
     "mobile_notifications_close": "Close notifications",
-    "announcements": "Announcements",
-    "albums": "Albums"
+    "mobile_notifications_mark_as_seen": "Mark all as seen",
+    "albums": "Albums",
+    "announcements": "Announcements"
   },
   "notifications": {
     "broken_favorite": "Unknown status, searching for it…",
@@ -501,6 +502,7 @@
     "hide_muted_posts": "Hide posts of muted users",
     "mute_bot_posts": "Mute bot posts",
     "hide_bot_indication": "Hide bot indication in posts",
+    "hide_scrobbles": "Hide scrobbles",
     "hide_all_muted_posts": "Hide muted posts",
     "max_thumbnails": "Maximum amount of thumbnails per post (empty = no limit)",
     "hide_isp": "Hide instance-specific panel",
@@ -566,10 +568,14 @@
     "posts": "Posts",
     "user_profiles": "User Profiles",
     "notification_visibility": "Types of notifications to show",
+    "notification_visibility_in_column": "Show in notifications column/drawer",
+    "notification_visibility_native_notifications": "Show a native notification",
     "notification_visibility_follows": "Follows",
+    "notification_visibility_follow_requests": "Follow requests",
     "notification_visibility_likes": "Favorites",
     "notification_visibility_mentions": "Mentions",
     "notification_visibility_repeats": "Repeats",
+    "notification_visibility_reports": "Reports",
     "notification_visibility_moves": "User Migrates",
     "notification_visibility_emoji_reactions": "Reactions",
     "notification_visibility_polls": "Ends of polls you voted in",
@@ -693,13 +699,21 @@
     "greentext": "Meme arrows",
     "show_yous": "Show (You)s",
     "notifications": "Notifications",
+    "notification_setting_annoyance": "Annoyance",
+    "notification_setting_drawer_marks_as_seen": "Closing drawer (mobile) marks all notifications as read",
+    "notification_setting_ignore_inactionable_seen": "Ignore read state of inactionable notifications (likes, repeats etc)",
+    "notification_setting_ignore_inactionable_seen_tip": "This will not actually mark those notifications as read, and you'll still get desktop notifications about them if you chose so",
+    "notification_setting_unseen_at_top": "Show unread notifications above others",
     "notification_setting_filters": "Filters",
+    "notification_setting_filters_chrome_push": "On some browsers (chrome) it might be impossible to completely filter out notifications by type when they arrive by Push",
     "notification_setting_block_from_strangers": "Block notifications from users who you do not follow",
     "notification_setting_privacy": "Privacy",
     "notification_setting_hide_notification_contents": "Hide the sender and contents of push notifications",
     "notification_mutes": "To stop receiving notifications from a specific user, use a mute.",
     "notification_blocks": "Blocking a user stops all notifications as well as unsubscribes them.",
     "enable_web_push_notifications": "Enable web push notifications",
+    "enable_web_push_always_show": "Always show web push notifications",
+    "enable_web_push_always_show_tip": "Some browsers (Chromium, Chrome) require that push messages always result in a notification, otherwise generic 'Website was updated in background' is shown, enable this to prevent this notification from showing, as Chrome seem to hide push notifications if tab is in focus. Can result in showing duplicate notifications on other browsers.",
     "more_settings": "More settings",
     "style": {
       "switcher": {
@@ -919,8 +933,9 @@
       "wip_notice": "Please note that this section is a WIP and lacks certain features as backend implementation of front-end management is incomplete.",
       "default_frontend": "Default front-end",
       "default_frontend_tip": "Default front-end will be shown to all users. Currently there's no way to for a user to select personal front-end. If you switch away from PleromaFE you'll most likely have to use old and buggy AdminFE to do instance configuration until we replace it.",
-      "default_frontend_tip2": "WIP: Since Pleroma backend doesn't properly list all installed frontends you'll have to enter name and reference manually. List below provides shortcuts to fill the values.",
-      "available_frontends": "Available for install"
+      "available_frontends": "Available for install",
+      "failure_installing_frontend": "Failed to install frontend {version}: {reason}",
+      "success_installing_frontend": "Frontend {version} successfully installed"
     },
     "temp_overrides": {
       ":pleroma": {
@@ -1051,7 +1066,8 @@
     "hide_quote": "Hide the quoted status",
     "display_quote": "Display the quoted status",
     "invisible_quote": "Quoted status unavailable: {link}",
-    "add_to_album": "Add to album"
+    "add_to_album": "Add to album",
+    "more_actions": "More actions on this status"
   },
   "user_card": {
     "approve": "Approve",
